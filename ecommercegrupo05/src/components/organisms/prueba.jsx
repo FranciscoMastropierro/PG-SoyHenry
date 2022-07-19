@@ -6,31 +6,31 @@ import axios from "axios";
 const Prueba = () => {
 
     const products = useSelector((state) => state.data)
-    console.log("🚀 ~ file: prueba.jsx ~ line 8 ~ Prueba ~ products", products)
+    // console.log("🚀 ~ file: prueba.jsx ~ line 8 ~ Prueba ~ products", products)
 
-    // const [call, setCall] = useState(null)
+    const [call, setCall] = useState(null)
 
-    // const url = 'https://dummyjson.com/products'
+    const url = 'https://dummyjson.com/products'
 
-    // const callApi = async () => {
-    //     const rest = await axios(url)
-    //     const data = await rest.data
-    //     const info = await data.products
-    //     setCall(info)
-    // }
-
-    // useEffect(() => {
-    //     callApi()
-    // }, [])
+    const callApi = async () => {
+        const rest = await axios(url)
+        const data = await rest.data
+        const info = await data.products
+        setCall(info)
+    }
 
     useEffect(() => {
-        getProducts()
-    }, [products])
+        callApi()
+    }, [])
+
+    // useEffect(() => {
+    //     getProducts()
+    // }, [products])
 
     return (
         <div>
             {
-                products && products.map(({id, title, price, rating, category, stock}, index) => (
+                call && call.map(({id, title, price, rating, category, stock, images}, index) => (
                     <ul key={index}>
                         <li>id: {id}</li>
                         <li>titulo: {title}</li>
@@ -38,6 +38,7 @@ const Prueba = () => {
                         <li>precio: {price}</li>
                         <li>reting: {rating}</li>
                         <li>categoria: {category}</li>
+                        <img src={images} />
                     </ul>
                 ))
             }
