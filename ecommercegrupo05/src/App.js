@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import AOS from 'aos';
 import "aos/dist/aos.css";
+import Prueba from './components/organisms/prueba'
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
 
   return (
     <div>
-      
+      <Prueba />
     </div>
   );
 }
