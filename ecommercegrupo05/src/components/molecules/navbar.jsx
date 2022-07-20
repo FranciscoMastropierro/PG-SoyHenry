@@ -1,13 +1,18 @@
 import React from 'react';
-import SearchBar from '../atoms/seacrbar'
-import SidebarOptions from '../atoms/sidebaroptions';
+import logo from '../../assets/coder.png'
+import SearchBar from '../atoms/seacrbar.jsx'
+import SidebarOptions from '../atoms/sidebaroptions.jsx'
+import style from '../../styles/navbar.module.css'
+import { Switch } from '@chakra-ui/react'
 
-export default function NavBar () {
+export default function Navbar () {
     return (
-        <div>
-            {/* imagen de marca */}
-            {/* switch */}
-            <SearchBar/>
+        <div className={style.navbarContainer}>
+            <img src={logo} alt='logo'/>
+            <div className={style.switchSearch}>
+                <Switch colorScheme='gray' size='lg'/>
+                <SearchBar/>
+            </div>
             <SidebarOptions/>
         </div>
     )
