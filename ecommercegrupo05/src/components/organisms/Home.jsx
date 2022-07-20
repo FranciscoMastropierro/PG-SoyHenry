@@ -1,11 +1,10 @@
 import React from 'react';
-import { Carrousel } from '../molecules/carrousel';
+import { Slider } from '../molecules/slider';
 import style from '../../styles/carrousel.module.css'
 
 export default function Home () {
     return (
-        <div className={style.carrousel}>
-            <Carrousel />
+        <div>
         </div>
     )
 }
