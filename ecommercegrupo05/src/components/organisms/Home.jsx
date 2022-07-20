@@ -6,8 +6,6 @@ import { Slider } from '../molecules/slider';
 import style from '../../styles/carrousel.module.css'
 import NavBar from '../molecules/navbar'
 
-
-
 export default function Home () {
     const dispatch = useDispatch();
     const infoData = useSelector(state => state.data);
@@ -22,7 +20,8 @@ export default function Home () {
             <h1>Hello Word!</h1>            
             <div>
                 <Cards infoData = {infoData}/>                
-            </div>           
-        </div>        
-    )    
+            </div>        
+        </div>
+    )
+    
 }
