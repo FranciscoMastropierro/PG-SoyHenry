@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import AOS from 'aos';
 import "aos/dist/aos.css";
-import Prueba from './components/organisms/prueba'
+// import Prueba from './components/organisms/prueba'
+import Home from './components/organisms/Home'
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
 
   return (
     <div>
-      <Prueba />
+      {/* <Prueba /> */}
+      <Home/>
     </div>
   );
 }
