@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/coder.png'
+import logo from '../../assets/coder2.png'
 import SearchBar from '../atoms/seacrbar.jsx'
 import SidebarOptions from '../atoms/sidebaroptions.jsx'
 import style from '../../styles/navbar.module.css'
@@ -10,7 +10,7 @@ export default function Navbar () {
         <div className={style.navbarContainer}>
             <img src={logo} alt='logo'/>
             <div className={style.switchSearch}>
-                <Switch colorScheme='gray' size='lg'/>
+                <Switch colorScheme='blackAlpha' size='lg'/>
                 <SearchBar/>
             </div>
             <SidebarOptions/>
