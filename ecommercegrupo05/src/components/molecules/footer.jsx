@@ -1,6 +1,7 @@
 import React from "react";
 import style from '../../styles/footer.module.css';
 import whatsapp from '../../assets/whatsapp.png';
+import { NavLink } from "react-router-dom";
 
 export default function Footer () {
 
@@ -30,7 +31,7 @@ export default function Footer () {
             </div>
         </div>
             <div className={style.after}>
-                <img src={whatsapp} alt='whatsapp'/>
+                <NavLink to='/'><img src={whatsapp} alt='whatsapp'/></NavLink>                
             </div>
         </div>
     )
