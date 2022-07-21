@@ -27,5 +27,6 @@
     color: #ACACAC;
 }
 .searchbarContainer input::placeholder {
-    color: #ACACAC
+    color: #ACACAC;
+    font-family: 'Share Tech', sans-serif;
 }
