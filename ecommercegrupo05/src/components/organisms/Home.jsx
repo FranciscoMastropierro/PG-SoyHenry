@@ -18,15 +18,10 @@ export default function Home () {
 
     return (
         <div>            
-<<<<<<< HEAD
             <NavBar/>
-            <SliderNews />       
-            <SlidePopularProducts infoData = {infoData}/>                      
-=======
-            <NavBar/>            
+            <SliderNews />
             <SlidePopularProducts infoData = {infoData}/>
             <SlideBestNotebooks infoData = {infoData}/>                      
->>>>>>> 76100463b6308523963e984491be3d1658a41e84
             <Slider/>                    
         </div>
     )
