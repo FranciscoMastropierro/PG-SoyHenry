@@ -1,11 +1,21 @@
+.searchbarGeneralContainer {
+    position: absolute;
+    max-height: 200px;
+    width: 289px;
+    margin-top: 60px;
+    background-color: #181A1B;
+    color: #ACACAC;
+    border-radius: 3px;
+    font-family: 'Share Tech', sans-serif;
+}
 .searchbarContainer {
+    overflow: auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 289px;
-    background-color: #181A1B;
     padding: 5px 0;
-    margin-top: 30px;
+    background-color: #181A1B;
     border-radius: 3px;
 }
 .searchbarContainer button {
@@ -26,7 +36,24 @@
     background-color: #181A1B;
     color: #ACACAC;
 }
+.searchbarContainer input:focus {
+    outline: none;
+}
 .searchbarContainer input::placeholder {
     color: #ACACAC;
     font-family: 'Share Tech', sans-serif;
+}
+.productsBox {
+    padding: 0 8px;
+    max-height: 152px;
+    overflow: auto;
+}
+.productsBox li {
+    margin: 3px;
+    padding: 3px;
+    list-style: none;
+    border-radius: 4px;
+}
+.productsBox li:hover {
+    background: #131313df
 }

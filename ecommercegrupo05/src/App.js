@@ -13,6 +13,7 @@ import NotFound from './components/organisms/notFound';
 import PaymentGateway from './components/organisms/paymentGateway';
 import News from './components/organisms/news';
 import Favorites from './components/organisms/favorites';
+import NavBar from './components/molecules/navbar';
 
 
 
@@ -25,7 +26,8 @@ function App() {
 
   return (
     <div>
-      <Routes>
+        <NavBar/>
+        <Routes>
         <Route exact path = '/' element={<Home />} />
         <Route exact path = '/allProducts' element={<AllProducts />} />
         <Route exact path = '/details/:id' element={<Details />} />
