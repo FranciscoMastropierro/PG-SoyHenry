@@ -5,6 +5,7 @@ import SlidePopularProducts from '../molecules/SlidePopularProducts';
 import { Slider } from '../molecules/slider';
 import style from '../../styles/carrousel.module.css'
 import NavBar from '../molecules/navbar'
+import { SliderNews } from '../molecules/sliderNews';
 
 export default function Home () {
     const dispatch = useDispatch();
@@ -16,7 +17,8 @@ export default function Home () {
 
     return (
         <div>            
-            <NavBar/>            
+            <NavBar/>
+            <SliderNews />       
             <SlidePopularProducts infoData = {infoData}/>                      
             <Slider/>                    
         </div>
