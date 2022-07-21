@@ -10,7 +10,7 @@ export default function Navbar () {
         <div className={style.navbarContainer}>
             <img src={logo} alt='logo'/>
             <div className={style.switchSearch}>
-                <Switch colorScheme='gray' size='lg'/>
+                <Switch colorScheme='blackAlpha' size='lg'/>
                 <SearchBar/>
             </div>
             <SidebarOptions/>

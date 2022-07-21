@@ -7,6 +7,7 @@ import { Slider } from '../molecules/slider';
 import style from '../../styles/carrousel.module.css'
 import NavBar from '../molecules/navbar'
 import { SliderNews } from '../molecules/sliderNews';
+import Footer from '../molecules/footer'
 
 export default function Home () {
     const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Home () {
             <SlidePopularProducts infoData = {infoData}/>
             <SlideBestNotebooks infoData = {infoData}/>                      
             <Slider/>                    
+            <Footer/>
         </div>
     )
     
