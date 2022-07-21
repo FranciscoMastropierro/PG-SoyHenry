@@ -22,10 +22,18 @@ export function SearchBar ({searchedProducts, getProductByName}) {
                 <input key='searchbar' placeholder='search...' value={value} onChange={e => setValue(e.target.value)}/>
                 <button type='submit'><img src={search} alt='search-button'/></button>
             </div>
-            <div>
+            <div className={style.productsBox}>
                 {value && searchedProducts.map(p => { return (
                     <li>{p}</li>
                 )})}
+                {/* <li>Compu</li>
+                <li>Mouse</li>
+                <li>Teclado</li>
+                <li>Placa de video</li>
+                <li>Compu</li>
+                <li>Mouse</li>
+                <li>Teclado</li>
+                <li>Placa de video</li> */}
             </div>
         </div>
     )
