@@ -27,13 +27,13 @@ function SlideBestNotebooks({infoData}) {
         infoData ? infoData.map(({id, thumbnail, title, price}) =>{
             return(
                       <SwiperSlide key={id}>
-                       <div>
+                      <div>
                           <Card 
                           image={thumbnail} 
                           name={title}
                           price={price}
                           />
-                       </div>
+                      </div>
                       </SwiperSlide>
                   )
               }) : null }
