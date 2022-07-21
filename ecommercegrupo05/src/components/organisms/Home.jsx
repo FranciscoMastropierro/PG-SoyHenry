@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {getProducts} from '../../redux/actions';
-import Cards from '../atoms/Cards';
+import SlidePopularProducts from '../molecules/SlidePopularProducts';
 import { Slider } from '../molecules/slider';
 import style from '../../styles/carrousel.module.css'
 import NavBar from '../molecules/navbar'
@@ -16,11 +16,9 @@ export default function Home () {
 
     return (
         <div>            
-            <NavBar/>
-            <h1>Hello Word!</h1>            
-            <div>
-                <Cards infoData = {infoData}/>                
-            </div>        
+            <NavBar/>            
+            <SlidePopularProducts infoData = {infoData}/>                
+            <Slider/>                    
         </div>
     )
     
