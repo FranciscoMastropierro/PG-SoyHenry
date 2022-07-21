@@ -17,7 +17,7 @@ export default function Home () {
     return (
         <div>            
             <NavBar/>            
-            <SlidePopularProducts infoData = {infoData}/>                
+            <SlidePopularProducts infoData = {infoData}/>                      
             <Slider/>                    
         </div>
     )
