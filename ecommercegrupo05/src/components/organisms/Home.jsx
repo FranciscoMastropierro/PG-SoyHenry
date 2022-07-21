@@ -15,7 +15,7 @@ export default function Home () {
 
     useEffect(()=>{
         dispatch(getProducts())
-    },[dispatch])
+    },[]) //eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>

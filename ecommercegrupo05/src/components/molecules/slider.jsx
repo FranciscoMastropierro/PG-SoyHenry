@@ -23,7 +23,7 @@ const getAssets = (name, format = 'png') => require(`../../assets/${name}.${form
     useEffect(() => {
     const timer = setTimeout(() => handleNext(), 3000);
     return () => clearTimeout(timer)
-    }, [handleNext])
+    }, [handleNext]) //eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={style.sliderContainer}>

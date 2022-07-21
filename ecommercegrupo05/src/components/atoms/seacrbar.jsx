@@ -14,7 +14,7 @@ export function SearchBar ({searchedProducts, getProductByName}) {
     useEffect(() => {
         getProductByName(value)
         setProducts(searchedProducts)
-    }, [value])
+    }, [value]) //eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={style.searchbarGeneralContainer}>

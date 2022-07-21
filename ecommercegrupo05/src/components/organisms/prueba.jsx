@@ -21,7 +21,7 @@ const Prueba = () => {
 
     useEffect(() => {
         callApi()
-    }, [])
+    }, []) //eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {
     //     getProducts()

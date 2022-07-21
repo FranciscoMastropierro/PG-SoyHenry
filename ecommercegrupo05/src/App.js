@@ -27,7 +27,7 @@ function App() {
   return (
     <div>
         <NavBar/>
-      <Routes>
+        <Routes>
         <Route exact path = '/' element={<Home />} />
         <Route exact path = '/allProducts' element={<AllProducts />} />
         <Route exact path = '/details/:id' element={<Details />} />
