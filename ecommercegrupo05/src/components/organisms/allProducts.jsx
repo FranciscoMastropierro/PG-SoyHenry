@@ -19,7 +19,7 @@ export default function AllProducts() {
         <div className={style.container}>
             {
                 products && products.map(({id, image, name, price}) => (
-                    <div className={style.card_container}>
+                    <div className={style.card_container} key={id}>
                         <Link to={`/details/${id}`}>
                             <div className={style.card}>
                                 <Card 

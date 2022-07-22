@@ -3,7 +3,8 @@ import { GET_PRODUCTS, GET_PRODUCT_BY_NAME, GET_DETAIL, CLEANER  } from './actio
 const initialState = {
     data: [],
     searchedProducts: [],
-    detail: []
+    detail: [],
+    clean: []
 }
 
 function rootReducer(state = initialState, {type, payload}) {
@@ -18,16 +19,16 @@ function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 searchedProducts: payload
             }
-            case GET_DETAIL:
-                return {
-                  ...state,
-                  detail: payload
-                }
-                // case CLEANER:
-                // return {
-                //   ...state,
-                //   detail: []
-                // }
+        case GET_DETAIL:
+            return {
+                ...state,
+                detail: payload
+            }
+        case CLEANER:
+            return {
+                ...state,
+                clean: []
+        }
             default: return state;
     }
 }

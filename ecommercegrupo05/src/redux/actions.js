@@ -1,49 +1,49 @@
 import axios from 'axios';
 
-import {jsonProducts} from '../JSONproducts.js'
-
-
-export const GET_PRODUCTS = 'GET_USERS'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
 export const GET_DETAIL = 'GET_DETAIL'
 export const CLEANER = 'CLEANER'
 
 
-
-export const getProducts = () => (dispatch) => {
-    let json = jsonProducts    
-    // return async function(dispatch) {
-    //     const json = await axios('https://dummyjson.com/products')
-    //     const data = await json.data
-    //     const info = await data.products
+export function getProducts() {
+    return async function(dispatch) {
+        const json = await axios('http://localhost:3001/products')
+        const data = await json.data
         return dispatch({
             type: GET_PRODUCTS,
-            payload: json
+            payload: data
         })
     }
-
-
-export const getProductByName = (name) => (dispatch) => {
-    let toName = jsonProducts.map(p => p.name);
-    let filtered = toName.filter(p => p.toLocaleLowerCase().startsWith(name))
-    return dispatch({type: GET_PRODUCT_BY_NAME, payload: filtered})
 }
 
-export const getDetail = (id) => (dispatch) => {
-    let json = jsonProducts[id]     
-// export function getDetail(id) {
-//     return async function(dispatch) {
-//         const json = await axios(`https://dummyjson.com/products/${id}`)
-//         const data = await json.data   
+export function getProductByName(name) {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/products?name=${name}`)
+        const data = json.data
+        let toName = data.map(p => p.name);
+        let filtered = toName.filter(p => p.toLocaleLowerCase().startsWith(name))
+        return dispatch({
+            type: GET_PRODUCT_BY_NAME,
+            payload: filtered
+        })
+    }
+}
+    
+export function getDetail(id) {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/product/${id}`)
+        const data = await json.data   
         return dispatch({
             type: GET_DETAIL,
-            payload: json
+            payload: data
         })
-    }    
+    }   
+} 
 
 
-// export function cleaner(){
-//     return {
-//         type: CLEANER
-//     }
-// }
+export function cleaner(){
+    return {
+        type: CLEANER
+    }
+}
