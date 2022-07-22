@@ -14,6 +14,7 @@ import PaymentGateway from './components/organisms/paymentGateway';
 import News from './components/organisms/news';
 import Favorites from './components/organisms/favorites';
 import NavBar from './components/molecules/navbar';
+import Categories from './components/organisms/categories';
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route exact path = '/aboutUs' element={<AboutUs />} />
         <Route exact path = '/faq' element={<Faq />} />
         <Route exact path = '/news' element={<News />} />
+        <Route exact path ='/categories' element={<Categories/>}/>
         <Route exact path = '*' element={<NotFound />} />
       </Routes>
     </div>
