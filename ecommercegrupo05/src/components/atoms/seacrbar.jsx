@@ -26,14 +26,6 @@ export function SearchBar ({searchedProducts, getProductByName}) {
                 {value && searchedProducts.map(p => { return (
                     <li>{p}</li>
                 )})}
-                {/* <li>Compu</li>
-                <li>Mouse</li>
-                <li>Teclado</li>
-                <li>Placa de video</li>
-                <li>Compu</li>
-                <li>Mouse</li>
-                <li>Teclado</li>
-                <li>Placa de video</li> */}
             </div>
         </div>
     )

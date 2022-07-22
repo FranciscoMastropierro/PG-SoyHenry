@@ -1,0 +1,8 @@
+.App {
+    overflow-y: hidden;
+    background: #333333;
+    background-size: cover;
+    position: relative;
+    min-height:100%;
+    min-width:100%;
+}

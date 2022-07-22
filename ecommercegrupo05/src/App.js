@@ -16,6 +16,7 @@ import Favorites from './components/organisms/favorites';
 import NavBar from './components/molecules/navbar';
 import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
+import style from './App.module.css';
 
 
 
@@ -27,7 +28,7 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <div className={style.App}>
         <NavBar/>
         <Routes>
         <Route exact path = '/' element={<Home />} />

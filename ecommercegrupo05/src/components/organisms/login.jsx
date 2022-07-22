@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import style from '../../styles/login.module.css'
+import logo from '../../assets/coder2.png'
 
 export default function Login() {
 
@@ -15,16 +16,19 @@ export default function Login() {
     }
     
     return (
+        <div className={style.loginContainerGeneral}>
         <div className={style.loginContainer}>
+            <img src={logo} alt='logo'/>
             <h1>LOG IN</h1>
             <div className={style.divHr}></div>
             <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
-                <input key='username' placeholder='username' type='text' value={user.username} onChange={(e) => setUser({...user, username: e.target.value})}/>
-                <input key='password' placeholder='password' type='password' value={user.password} onChange={(e) => setUser({...user, password: e.target.value})}/>
+                <input key='username' placeholder='username...' type='text' value={user.username} onChange={(e) => setUser({...user, username: e.target.value})}/>
+                <input key='password' placeholder='password...' type='password' value={user.password} onChange={(e) => setUser({...user, password: e.target.value})}/>
                 <button key='submit' type='submit'>Submit</button>
             </form>
             <h3>Don't you have an account?</h3>
             <button>Sing up here</button>
+        </div>
         </div>
     )
 }
