@@ -13,6 +13,8 @@ import NotFound from './components/organisms/notFound';
 import PaymentGateway from './components/organisms/paymentGateway';
 import News from './components/organisms/news';
 import Favorites from './components/organisms/favorites';
+import NavBar from './components/molecules/navbar';
+import Categories from './components/organisms/categories';
 
 
 
@@ -25,10 +27,11 @@ function App() {
 
   return (
     <div>
-      <Routes>
+        <NavBar/>
+        <Routes>
         <Route exact path = '/' element={<Home />} />
         <Route exact path = '/allProducts' element={<AllProducts />} />
-        <Route exact path = '/details/:id' element={<Details />} />
+        <Route  path = '/details/:id' element={<Details />} />
         <Route exact path = '/login' element={<Login />} />
         <Route exact path = '/favorites' element={<Favorites />} />
         <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
@@ -36,6 +39,7 @@ function App() {
         <Route exact path = '/aboutUs' element={<AboutUs />} />
         <Route exact path = '/faq' element={<Faq />} />
         <Route exact path = '/news' element={<News />} />
+        <Route exact path ='/categories' element={<Categories/>}/>
         <Route exact path = '*' element={<NotFound />} />
       </Routes>
     </div>

@@ -5,11 +5,14 @@ import SearchBar from '../atoms/seacrbar.jsx'
 import SidebarOptions from '../atoms/sidebaroptions.jsx'
 import style from '../../styles/navbar.module.css'
 import { Switch } from '@chakra-ui/react'
+import { Link } from 'react-router-dom';
 
 export default function Navbar () {
     return (
         <div className={style.navbarContainer}>
-            <img src={logo} alt='logo'/>
+            <Link to='/'>
+                <img src={logo} alt='logo'/>
+            </Link>
             <div className={style.switchSearch}>
                 <Switch colorScheme='blackAlpha' size='lg'/>
                 <SearchBar/>
