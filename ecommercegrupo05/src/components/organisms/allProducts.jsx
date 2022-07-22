@@ -13,7 +13,7 @@ export default function AllProducts() {
 
     useEffect(() => {
         dispatch(getProducts())
-    }, [dispatch])
+    }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <div className={style.container}>
