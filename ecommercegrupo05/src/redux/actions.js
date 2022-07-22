@@ -22,7 +22,7 @@ export function getProductByName(name) {
         const json = await axios(`http://localhost:3001/products?name=${name}`)
         const data = json.data
         let toName = data.map(p => p.name);
-        let filtered = toName.filter(p => p.toLocaleLowerCase().startsWith(name))
+        let filtered = toName.filter(p => p.toLocaleLowerCase().includes(name))
         return dispatch({
             type: GET_PRODUCT_BY_NAME,
             payload: filtered

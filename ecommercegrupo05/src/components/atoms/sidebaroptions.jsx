@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 export default function SidebarOptions () {
     return (
         <div className={style.options}>
+            <Link to='/'>
+                <span>Home</span>
+            </Link>
             <Link to='/allProducts'>
                 <span>All products</span>
             </Link>
