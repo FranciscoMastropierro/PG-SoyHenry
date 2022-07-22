@@ -11,7 +11,9 @@ export default function Details() {
     
     useEffect(() => {
         dispatch(getDetail(id))
-        // return dispatch(cleaner())
+        // return (
+        //     dispatch(cleaner())
+        // )
     }, [dispatch, id]) 
     //eslint-disable-line react-hooks/exhaustive-deps
     
@@ -31,7 +33,7 @@ export default function Details() {
                                     <p >{product.description}</p>
                                     <h3 >Brand: {product.brand}.</h3>
                                     <h4 >Category: {product.categories}.</h4>
-                                    <h5 >Stock:   {product.quantity} products</h5>
+                                    <h5 >Stock:   {product.stock} products</h5>
                                     <button >Añadir a Carrito </button>                            
                                 </div>                                                  
                         : <p>No se encuentra detalles del Producto.</p>
