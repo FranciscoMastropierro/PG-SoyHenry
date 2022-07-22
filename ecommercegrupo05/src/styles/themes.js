@@ -7,8 +7,8 @@ export const themes = extendTheme({
     global: {
       // styles for the `body`
       body: {
-        bg: "gray.500",
-        color: "white",
+     //   bg: "gray.500",
+        
       },
       colors: {
         brand: {
