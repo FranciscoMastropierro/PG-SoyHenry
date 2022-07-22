@@ -15,6 +15,7 @@ import News from './components/organisms/news';
 import Favorites from './components/organisms/favorites';
 import NavBar from './components/molecules/navbar';
 import Categories from './components/organisms/categories';
+import CreateForm from './components/organisms/createForm';
 
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route exact path = '/news' element={<News />} />
         <Route exact path ='/categories' element={<Categories/>}/>
         <Route exact path = '*' element={<NotFound />} />
+        <Route exact path = '/create' element={<CreateForm />} />
       </Routes>
     </div>
   );
