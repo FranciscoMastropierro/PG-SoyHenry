@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCT_BY_NAME, GET_DETAIL, CLEANER  } from './actions'
+import { GET_PRODUCTS, GET_PRODUCT_BY_NAME, GET_DETAIL, CLEANER, CREATE_PRODUCT } from './actions'
 
 const initialState = {
     data: [],
@@ -18,6 +18,10 @@ function rootReducer(state = initialState, {type, payload}) {
             return {
                 ...state,
                 searchedProducts: payload
+            }
+        case CREATE_PRODUCT:
+            return {
+                ...state,
             }
         case GET_DETAIL:
             return {

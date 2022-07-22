@@ -4,6 +4,7 @@ export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
 export const GET_DETAIL = 'GET_DETAIL'
 export const CLEANER = 'CLEANER'
+export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 
 
 export function getProducts() {
@@ -47,3 +48,17 @@ export function cleaner(){
         type: CLEANER
     }
 }
+
+
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
+
+export function createProduct(payload) {
+    return async function(dispatch) {
+        const json = await axios.post(`http://localhost:3001/products/`, payload)
+        const data = await json.data   
+        return dispatch({
+            type: CREATE_PRODUCT,
+            payload: data
+        })
+    }   
+} 

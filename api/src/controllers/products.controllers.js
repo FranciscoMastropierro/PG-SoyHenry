@@ -33,7 +33,7 @@ module.exports = {
   },
 
   postProduct: async (req, res) => {
-    const { products } = req.body;
+    const products = req.body;
     console.log(req.body)
 
     //name image price stock brand rating description 
