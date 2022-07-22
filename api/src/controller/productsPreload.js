@@ -1,5 +1,5 @@
 const productList = require('../asset/productList');
-const {Products, Categories} = require('../db');
+const {Products, Categories_Products, Categories} = require('../db');
 
 
 const preload = () => {
@@ -13,10 +13,13 @@ const preload = () => {
                 brand: el.brand,
                 rating: el.calification,
                 description: el.description.trim(),
+                categories: el.categories.toString()
             },
            
         });
     })
+
+
 }
 
 

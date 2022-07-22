@@ -2,23 +2,34 @@ const axios = require("axios");
 require("dotenv").config();
 const { conn } = require("../db.js");
 const { Products, Categories_Products, Categories } = conn.models;
+const { Op } = require("sequelize");
+const productList = require('../asset/productList');
 
 
 module.exports = {
   getProducts: async (req, res) => {
     const { name } = req.query;
 
-    if (name) {
+    if (!name) {
       const productsBd = await Products.findAll({
         include: { model: Categories },
       });
     
 
       if (productsBd.length > 0) return res.send(productsBd);
+      else return res.status(404).send('Products not found');
+
+
+    } else {
+      const productsBd = await Products.findAll({
+        where: {name: { [Op.substring]: name }},
+        include: { model: Categories },
+        limit : 15
+      });
+    
+      if (productsBd.length > 0) return res.send(productsBd);
       else return res.status(404).send('Product not found');
-
-
-    } else return res.status(400).send('Please insert a name product');
+    }
   },
 
   postProduct: async (req, res) => {
@@ -45,4 +56,22 @@ module.exports = {
       console.error(error);
     }
   },
+
+  preLoadProducts : async () =>{
+    const upToDb = productList.map( async(el) => {
+      const categories = await Categories.findAll();
+      const { id } = categories.find(elemt => elemt.name == el.categories.toString())
+      const product = await Products.create({
+              name: el.name,
+              image: el.image,
+              price: el.price,
+              stock: el.quantity,
+              brand: el.brand,
+              rating: el.calification,
+              description: el.description.trim(),
+      });
+      //console.log(Products.__proto__)
+      await product.addCategories(id, { through: Categories_Products })
+    })
+  }
 };
