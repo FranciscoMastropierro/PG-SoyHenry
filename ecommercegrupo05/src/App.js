@@ -31,7 +31,7 @@ function App() {
         <Routes>
         <Route exact path = '/' element={<Home />} />
         <Route exact path = '/allProducts' element={<AllProducts />} />
-        <Route exact path = '/details/:id' element={<Details />} />
+        <Route  path = '/details/:id' element={<Details />} />
         <Route exact path = '/login' element={<Login />} />
         <Route exact path = '/favorites' element={<Favorites />} />
         <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
