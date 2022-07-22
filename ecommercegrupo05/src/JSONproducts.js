@@ -1,5 +1,6 @@
 export const jsonProducts = [
   {
+    "id": "1",
     "name": "Teclado Mecanico ASUS ROG Strix Scope TKL RGB Cherry Red",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31482_Teclado_Mecanico_ASUS_ROG_Strix_Scope_TKL_RGB_Cherry_Red_ac577937-grn.jpg",
     "price": "18500",
@@ -10,6 +11,7 @@ export const jsonProducts = [
     "categories": ["Keyboards"]
   },
   {
+    "id": "2",
     "name": "Teclado Mecanico HP HyperX Alloy Origins 60 HX Switch Aqua",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31469_Teclado_Mecanico_HP_HyperX_Alloy_Origins_60_HX_Switch_Aqua_d7ac3439-grn.jpg",
     "price": "9960",
@@ -20,6 +22,7 @@ export const jsonProducts = [
     "categories": ["Keyboards"]
   },
   {
+    "id": "3",
     "name": "Teclado Mecanico HP HyperX Alloy Origins 65 Switch Red",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31758_Teclado_Mecanico_HP_HyperX_Alloy_Origins_65_Switch_Red_0d348a5e-grn.jpg",
     "price": "9900",
@@ -30,6 +33,7 @@ export const jsonProducts = [
     "categories": ["Keyboards"]
   },
   {
+    "id": "4",
     "name": "Teclado Mecanico Glorious GMMK Compact RGB (Pre-Built) White",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31346_Teclado_Mecanico_Glorious_GMMK_Compact_RGB__Pre-Built__White_3f4279f8-grn.jpg",
     "price": "13000",
@@ -40,6 +44,7 @@ export const jsonProducts = [
     "categories": ["Keyboards"]
   },
   {
+    "id": "5",
     "name": "Monitor Gamer ASUS ROG SWIFT 24' PG259QNR 360Hz 1Ms G-Sync",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_30014_Monitor_Gamer_ASUS_ROG_SWIFT_24__PG259QNR_360Hz_1Ms_G-Sync_c37ea8f1-grn.jpg",
     "price": "180000",
@@ -50,6 +55,7 @@ export const jsonProducts = [
     "categories": ["Monitors"]
   },
   {
+    "id": "6",
     "name": "Monitor LG Curvo UltraWide 34' 34WL85C-B QHD IPS 21:9",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27446_Monitor_LG_Curvo_UltraWide_34__34WL85C-B__QHD_IPS_21_9_868148e1-grn.jpg",
     "price": "172000",
@@ -60,6 +66,7 @@ export const jsonProducts = [
     "categories": ["Monitors"]
   },
   {
+    "id": "7",
     "name": "Monitor Gamer Viewsonic 32' XG3220 4K UHD HDR10 FreeSync",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25532_Monitor_Gamer_Viewsonic_32__XG3220_4K_UHD_HDR10_FreeSync_c6623fb8-grn.jpg",
     "price": "130000",
@@ -70,6 +77,7 @@ export const jsonProducts = [
     "categories": ["Monitors"]
   },
   {
+    "id": "8",
     "name": "Monitor Gamer LG 34' UltraGear 34GL750 Ultra Wide Curvo 144Hz 1ms",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_17179_Monitor_Gamer_LG_34__UltraGear_34GL750_Ultra_Wide_Curvo_144Hz_1ms_2859a4b1-grn.jpg",
     "price": "141000",
@@ -80,6 +88,7 @@ export const jsonProducts = [
     "categories": ["Monitors"]
   },
   {
+    "id": "9",
     "name": "Mouse HP HyperX Pulsefire Haste Black-Red",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31458_Mouse_HP_HyperX_Pulsefire_Haste_Black-Red_1f5d0e1d-grn.jpg",
     "price": "8000",
@@ -90,6 +99,7 @@ export const jsonProducts = [
     "categories": ["Mouses"]
   },
   {
+    "id": "10",
     "name": "Mouse Redragon Griffin White M607W",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31371_Mouse_Redragon_Griffin_White_M607W__e64623f9-grn.jpg",
     "price": "1990",
@@ -100,6 +110,7 @@ export const jsonProducts = [
     "categories": ["Mouses"]
   },
   {
+    "id": "11",
     "name": "Mouse MSI Clutch GM41 Lightweight",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31384_Mouse_MSI_Clutch_GM41_Lightweight_b770c392-grn.jpg",
     "price": "6010",
@@ -110,6 +121,7 @@ export const jsonProducts = [
     "categories": ["Mouses"]
   },
   {
+    "id": "12",
     "name": "Mouse ASUS ROG Strix Gladius III RGB Bluetooth Wireless 26.000DPI",
     "image": "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_31096_Mouse_ASUS_ROG_Strix_Gladius_III_RGB_Bluetooth_Wireless_26.000DPI_1f4896da-grn.jpg",
     "price": "18420",
@@ -120,6 +132,7 @@ export const jsonProducts = [
     "categories": ["Mouses"]
   },
   {
+    "id": "13",
     "name": "Notebook Lenovo IdeaPad 15ITL6 arctic gray táctil 15.6\", Intel Core i5 1135G7 12GB de RAM 256GB SSD, Intel Iris Xe Graphics",
     "image": "https://http2.mlstatic.com/D_NQ_NP_645141-MLA48708038233_122021-V.webp",
     "price": "118999",
@@ -133,6 +146,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "14",
     "name": "Notebook Banghó Max L4 i1 gris oscura 14\", Intel Celeron N4000 4GB de RAM 120GB SSD, Intel UHD Graphics 600 1366x768px Windows 10 ",
     "image": "https://http2.mlstatic.com/D_NQ_NP_925102-MLA44939831146_022021-V.webp",
     "price": "46999",
@@ -146,6 +160,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "15",
     "name": "Notebook Dell Inspiron 3505 gris 15.6\", AMD Ryzen 5 3450U 16GB de RAM 1TB HDD 256GB SSD, AMD Radeon RX Vega 8 60 Hz 1366x768px",
     "image": "https://http2.mlstatic.com/D_NQ_NP_921052-MLA47215256520_082021-V.webp",
     "price": "134999",
@@ -159,6 +174,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "16",
     "name": "Notebook iQual Nq3x negra 14\", Intel Core i3 1005G1 8GB de RAM 1TB HDD, Intel UHD Graphics G1 1920x1080px Windows 10 Home",
     "image": "https://http2.mlstatic.com/D_NQ_NP_725815-MLA48010401031_102021-V.webp",
     "price": "84999",
@@ -172,6 +188,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "17",
     "name": "Notebook Asus ZenBook UX425EA gris 14\", Intel Core i5 1135G7 8GB de RAM 512GB SSD, Intel Iris Xe Graphics G7 80EUs 1920x1080px ",
     "image": "https://http2.mlstatic.com/D_NQ_NP_622883-MLA48011304859_102021-V.webp",
     "price": "164872",
@@ -185,6 +202,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "18",
     "name": "Notebook Dell Latitude 3190 11 Hd Intel Celeron N4120 4 Gb Ddr4-sdram 128 Gb Ssd Wi-fi 5 (802.11ac) Windows 10 Home Negro",
     "image": "https://http2.mlstatic.com/D_NQ_NP_822865-MLA47932613301_102021-V.webp",
     "price": "48699",
@@ -198,6 +216,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "19",
     "name": "Notebook Samsung Chromebook XE310XBA plata 11.6\", Intel Celeron N4000 4GB de RAM 32GB SSD, Intel UHD Graphics 600 1366x768px",
     "image": "https://http2.mlstatic.com/D_NQ_NP_860605-MLA49211284992_022022-V.webp",
     "price": "35000",
@@ -211,6 +230,7 @@ export const jsonProducts = [
     "calification": "0"
   },
   {
+    "id": "20",
     "name": "Notebook Asus X515EA slate gray 15.6\", Intel Core i5 1135G7 8GB de RAM 256GB SSD, Intel Iris Xe Graphics G7 80EUs 1920x1080px ",
     "image": "https://http2.mlstatic.com/D_NQ_NP_908593-MLA49420869607_032022-V.webp",
     "price": "107999",

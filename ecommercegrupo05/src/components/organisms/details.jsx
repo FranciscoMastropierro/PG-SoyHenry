@@ -20,18 +20,18 @@ export default function Details() {
         <div>      
             <div >               
                     <Link to='/'>
-                        <button >Home</button>
+                        <button >Volver al inicio</button>
                     </Link>
                 <div>
                     {product ?                            
                                 <div>
-                                    <img src={product.thumbnail} alt='Imag no Found' width='250' height='250' />
-                                    <h1> {product.title}</h1>
+                                    <img src={product.image} alt='Imag no Found' width='250' height='250' />
+                                    <h1> {product.name}</h1>
                                     <h2 >$ {product.price}.</h2>
                                     <p >{product.description}</p>
-                                    <h3 >Brand:  {product.brand}.</h3>
-                                    <h4 >Category:   {product.category}.</h4>
-                                    <h5 >Stock:   {product.stock} products</h5>
+                                    <h3 >Brand: {product.brand}.</h3>
+                                    <h4 >Category: {product.categories}.</h4>
+                                    <h5 >Stock:   {product.quantity} products</h5>
                                     <button >Añadir a Carrito </button>                            
                                 </div>                                                  
                         : <p>No se encuentra detalles del Producto.</p>
