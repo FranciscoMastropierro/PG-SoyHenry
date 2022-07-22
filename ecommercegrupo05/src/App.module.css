@@ -1,4 +1,5 @@
 .App {
+    overflow-y: hidden;
     background: #333333;
     background-size: cover;
     position: relative;
