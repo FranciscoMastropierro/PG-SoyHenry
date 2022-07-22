@@ -1,7 +1,7 @@
 import React from 'react'
 import style from '../../styles/favcard.module.css';
 
-function Card({image, name, price}) {
+function Card({image, name, price, brand}) {
   return (
     <div className={style.container}>
         <img className={style.img} src={image} alt="Flag" width='130' height='100' />
