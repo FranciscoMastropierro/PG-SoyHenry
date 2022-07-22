@@ -6,13 +6,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards'
-
+import style from '../../styles/slidepopularproducts.module.css'
 
 
 function SlidePopularProducts({infoData}) {
     return (
         <div> 
-            <h3> Popular Products </h3>
+            <h3 className={style.title}> Popular Products </h3>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={150}
@@ -27,7 +27,7 @@ function SlidePopularProducts({infoData}) {
         infoData ? infoData.map(({id, thumbnail, title, price}) =>{
             return(
                       <SwiperSlide key={id}>
-                      <div>
+                      <div className={style.sliderbg}>
                           <Card 
                           image={thumbnail} 
                           name={title}
