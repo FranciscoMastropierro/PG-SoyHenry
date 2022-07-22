@@ -8,6 +8,14 @@ module.exports = {
   getProducts: async (req, res) => {
     const { name } = req.query;
 
+    const productsBd2 = await Products.findAll({
+      include: { model: Categories },
+    });
+
+    // se creo variable improvisada para poder recibir todos los productos y no necesite un name de manera obligatoria
+    // se requeria el name a fuerza para poder enviar todos los productos, con esta variable ya no sucede eso
+    // esto totalmente provisional
+
     if (name) {
       const productsBd = await Products.findAll({
         include: { model: Categories },
@@ -18,7 +26,7 @@ module.exports = {
       else return res.status(404).send('Product not found');
 
 
-    } else return res.status(400).send('Please insert a name product');
+    } else return res.status(200).send(productsBd2);
   },
 
   postProduct: async (req, res) => {

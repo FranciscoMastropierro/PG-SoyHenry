@@ -1,10 +1,10 @@
 .container{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .card_container{
-    width: 300px;
+    width: 400px;
     height: 400px;
     margin: 0 auto;
     padding-top: 5rem;
@@ -13,10 +13,9 @@
 .card{
     display: flex;
     justify-content: center;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 350px;
     padding-top: 1rem;
     margin: 0 auto;
-    border: 1px solid red;
-    background-color: aqua;
+    background-color: #18f0f040;
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import { getProducts } from "../../redux/actions";
 import Card from "../atoms/Card";
@@ -17,15 +18,17 @@ export default function AllProducts() {
     return (
         <div className={style.container}>
             {
-                products && products.map(({thumbnail, title, price}) => (
+                products && products.map(({id, image, name, price}) => (
                     <div className={style.card_container}>
-                        <div className={style.card}>
-                            <Card 
-                            image={thumbnail} 
-                            name={title}
-                            price={price}
-                        />
-                        </div>
+                        <Link to={`/details/${id}`}>
+                            <div className={style.card}>
+                                <Card 
+                                image={image} 
+                                name={name}
+                                price={price}
+                            />
+                            </div>
+                        </Link>
                     </div>
                 ))
             }
