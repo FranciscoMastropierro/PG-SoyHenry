@@ -4,6 +4,7 @@ export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
 export const GET_DETAIL = 'GET_DETAIL'
 export const CLEANER = 'CLEANER'
+export const PAGINACION = 'PAGINACION'
 
 
 export function getProducts() {
@@ -45,5 +46,14 @@ export function getDetail(id) {
 export function cleaner(){
     return {
         type: CLEANER
+    }
+}
+
+export function paginacion(payload) {
+    return async function(dispatch) {
+        return dispatch({
+            type: PAGINACION,
+            payload: payload
+        })
     }
 }
