@@ -18,5 +18,9 @@ module.exports = {
         }
 
     },
+    preLoadCategories : () => {
+        const categories = ['Keyboards', 'Mouses', 'Laptops', 'Headsets', 'Monitors'];  
 
+        categories.forEach(async (e) => await Categories.Create(e))
+    }
 };
