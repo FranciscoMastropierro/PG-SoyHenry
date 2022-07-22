@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../atoms/Card';
+import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -27,12 +28,14 @@ function SlidePopularProducts({infoData}) {
         infoData ? infoData.map(({id, thumbnail, title, price}) =>{
             return(
                       <SwiperSlide key={id}>
-                      <div className={style.sliderbg}>
+                      <div className={style.sliderbg}>                      
+                      <Link to={`/details/${id}`}>
                           <Card 
                           image={thumbnail} 
                           name={title}
                           price={price}
                           />
+                      </Link>
                       </div>
                       </SwiperSlide>
                   )
