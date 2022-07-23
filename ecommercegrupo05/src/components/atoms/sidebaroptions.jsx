@@ -14,10 +14,6 @@ export default function SidebarOptions () {
                 <span className={loc === '/allProducts'? style.onPath : null}>All products</span>
             </Link>
 
-            <Link to='/categories'>
-                <span className={loc === '/categories'? style.onPath : null}>Categories</span>
-            </Link>
-
             <Link to="/favorites">
                 <span className={loc === '/favorites'? style.onPath : null}>Favorites</span>
             </Link>
