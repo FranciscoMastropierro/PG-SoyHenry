@@ -24,9 +24,9 @@
 
 .btn:hover
 {
-    background: #d400d4;
-    color: #d400d4;
-    box-shadow: 0 0 35px #d400d4;
+    background: #01F603;
+    color: #01F603;
+    box-shadow: 0 0 35px #01F603;
 }
 
 .btn::before
