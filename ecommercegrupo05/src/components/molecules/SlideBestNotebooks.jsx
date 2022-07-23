@@ -10,12 +10,12 @@ import 'swiper/css/effect-cards'
 import style from '../../styles/slidepopularproducts.module.css'
 
 
-
 function SlideBestNotebooks({infoData}) {
   const productsToSee = infoData.slice(0,11)
     return (
-        <div> 
+        <div className={style.slideContainer}> 
             <h3 className={style.title}> The Best Notebooks </h3>
+        <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={150}
@@ -44,6 +44,7 @@ function SlideBestNotebooks({infoData}) {
               }) : null }
         
       </Swiper>
+      </div>
       </div>
     )
   }

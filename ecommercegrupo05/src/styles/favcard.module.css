@@ -4,19 +4,19 @@
     height: 300px;
     margin: 2rem;
     background-color: rgb(61, 180, 87);
-    
 }
 .img{
     height: 200px;
     width: 200px;
-    
-    
 }
 .name{
-    margin-top: 1rem;
     text-align: center;
     font-size: 18px;
     font-family: 'Share Tech', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 .price{
     text-align: center;
@@ -24,6 +24,11 @@
     font-weight: bold;
     font-family: 'Share Tech', sans-serif;
 }
+
+.textContainer {
+    margin: 10px;
+}
+
 .star{
     color: rgb(218, 200, 42); 
     position: absolute;
