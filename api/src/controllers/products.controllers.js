@@ -104,6 +104,26 @@ module.exports = {
     else   return res.status(404).send("Ingrese una Query permitida: Order=Asc ||Order=Asc , Min, Max");
   },
 
+  filterByCategories : async ( req, res) => {
+    try {
+        
+      const productsBd = await Products.findAll({
+        include: { model: Categories },
+      });
+
+      const categoryQuery = req.query.cat
+
+      const filterCategory = productsBd.filter(el => el.Categories?.map(el => el.name.toLowerCase()) == categoryQuery.toLowerCase() )
+
+      if(categoryQuery){
+        res.status(202).send(filterCategory)
+      }else res.status(200).send(productsBd)
+    
+    } catch (error) {
+       console.log('Flag log filterByCategory', error) 
+    }
+  },
+
   postProduct: async (req, res) => {
     const products = req.body;
     console.log(req.body)
