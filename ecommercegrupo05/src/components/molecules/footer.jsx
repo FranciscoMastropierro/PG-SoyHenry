@@ -12,26 +12,23 @@ export default function Footer () {
 
     return (
         <div className={style.footerGeneralContainer}>
-        <div className={style.footerContainer}>
-            <div className={style.innerContainer}>
-                <h3 className={style.title}>Categorias</h3>
-                {categorias.map(cat => { return ( <h3 className={style.subCategories} key={cat}>{cat}</h3> )})}
-            </div>
-            <div className={style.innerContainer}>
-                <h3 className={style.title}>Marcas</h3>
-                {marcas.map(m => { return ( <h3 className={style.subCategories} key={m}>{m}</h3> )})}
-            </div>
-            <div className={style.innerContainer}>
-                <h3 className={style.title}>Lo mas buscado</h3>
-                {loMasBuscado.map(p => { return ( <h3 className={style.subCategories} key={p}>{p}</h3> )})}
-            </div>
-            <div className={style.innerContainer}>
-                <h3 className={style.title}>Ayuda</h3>
-                {ayuda.map(a => { return ( <h3 className={style.subCategories} key={a}>{a}</h3> )})}
-            </div>
-        </div>
-            <div className={style.after}>
-                <NavLink to='/'><img src={whatsapp} alt='whatsapp'/></NavLink>                
+            <div className={style.footerContainer}>
+                <div className={style.innerContainer}>
+                    <h3 className={style.title}>Categorias</h3>
+                    {categorias.map(cat => { return ( <h3 className={style.subCategories} key={cat}>{cat}</h3> )})}
+                </div>
+                <div className={style.innerContainer}>
+                    <h3 className={style.title}>Marcas</h3>
+                    {marcas.map(m => { return ( <h3 className={style.subCategories} key={m}>{m}</h3> )})}
+                </div>
+                <div className={style.innerContainer}>
+                    <h3 className={style.title}>Lo mas buscado</h3>
+                    {loMasBuscado.map(p => { return ( <h3 className={style.subCategories} key={p}>{p}</h3> )})}
+                </div>
+                <div className={style.innerContainer}>
+                    <h3 className={style.title}>Ayuda</h3>
+                    {ayuda.map(a => { return ( <h3 className={style.subCategories} key={a}>{a}</h3> )})}
+                </div>
             </div>
         </div>
     )
