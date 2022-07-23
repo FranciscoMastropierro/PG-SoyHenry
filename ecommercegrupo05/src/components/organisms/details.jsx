@@ -12,11 +12,8 @@ export default function Details() {
     
     useEffect(() => {
         dispatch(getDetail(id));
-        // return (
-            //     dispatch(cleaner())
-            // )
-        }, [dispatch]);
-        //eslint-disable-line react-hooks/exhaustive-deps
+        return () => dispatch(cleaner())
+        }, [id]) //eslint-disable-line react-hooks/exhaustive-deps
         
 
 
