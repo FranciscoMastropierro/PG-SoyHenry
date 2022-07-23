@@ -165,5 +165,31 @@ module.exports = {
       //console.log(Products.__proto__)
       await product.addCategories(id, { through: Categories_Products })
     })
+  },
+
+  getProductsByBrand : async (req, res) => {
+    try {
+      const { name } = req.query;
+      const products = await Products.findAll({
+        where: {
+          name: { [Op.iLike]: `%${name}%`}
+        },
+        include: {
+          model: Categories,
+        },
+      });
+      if (!products.length) return res.send(' Product not found');
+
+      else return res.send(products);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  
+
+
+
+
 };
