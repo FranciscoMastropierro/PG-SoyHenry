@@ -29,9 +29,6 @@ export default function Login() {
             <h3>Don't you have an account?</h3>
             <button>Sing up here</button>
         </div>
-        <div>
-            <hr/>
-        </div>
         </div>
     )
 }

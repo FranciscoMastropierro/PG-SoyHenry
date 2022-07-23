@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
    import {
-    getProducts
-//     createProduct,
+    getProducts,
+    createProduct,
 //     getAllCategories,
 //     getAllProducts,
    } from "../../redux/actions";
@@ -44,6 +44,8 @@ export default function CreateForm() {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const products = useSelector((state) => state.data);
+  console.log(products)
+ 
 //  const category = useSelector((state) => state.category);
 
     
@@ -54,7 +56,7 @@ export default function CreateForm() {
     brand: "",
     image: "",
     price: "",        
-    category: "",
+    categories: "",
     stock:"",
     rating:"",
     description:"",
@@ -66,9 +68,11 @@ export default function CreateForm() {
   products.map((e) =>setBrand.push(e.brand));
   let newDatas = [...new Set(setBrand)];
 
-  const category = []
-  products.map((e) =>category.push(e.categories[0]))
+  const category = ['Laptops', 'keyboards', 'monitors']
+
+  //products.map((e) =>category.push(e.Categories.name))
   let setCat = [...new Set(category)]
+  console.log(setCat)
   
   //cambia el estado
   function handleChange(e) {
@@ -89,11 +93,11 @@ export default function CreateForm() {
     //
     setEstado({
       ...estado,
-      category: [ e.target.value]
+      categories: [e.target.value]
     });
     SetErr(inputValidate({
       ...estado,
-      category: [ e.target.value]
+      categories: [e.target.value]
     }));
     //} else {
     //  swal("you cant do that")
@@ -116,7 +120,7 @@ export default function CreateForm() {
   function handleSelectBrand(e) {
     setEstado({
       ...estado,
-      brand: [e.target.value],
+      brand: e.target.value,
     });
     console.log(estado.brand)
     SetErr(inputValidate({
@@ -129,21 +133,21 @@ export default function CreateForm() {
     e.preventDefault();
     if (Object.keys(err).length)
 {return alert("fields missing")}
-//    dispatch(createProduct(estado));
+    dispatch(createProduct(estado));
     
     setEstado({
         name: "",
         brand: "",
         image: "",
         price: "",        
-        category: "",
+        categories: "",
         stock:"",
         rating:"",
         description:"",
     });
     alert("created")
     setTimeout(() => {
-      nav(-1)
+     // nav(-1)
       }, 1000);
 
   }

@@ -4,7 +4,6 @@ import {getProducts} from '../../redux/actions';
 import SlidePopularProducts from '../molecules/SlidePopularProducts';
 import SlideBestNotebooks from '../molecules/SlideBestNotebooks';
 import { Slider } from '../molecules/slider';
-import style from '../../styles/carrousel.module.css'
 import BrandBar from '../molecules/brandbar'
 import { SliderNews } from '../molecules/sliderNews';
 import Footer from '../molecules/footer'
@@ -23,7 +22,7 @@ export default function Home () {
             <SlidePopularProducts infoData = {infoData}/>
             <SlideBestNotebooks infoData = {infoData}/>                      
             <BrandBar/>
-            <Slider/>                    
+            <Slider/>
             <Footer/>
         </div>
     )

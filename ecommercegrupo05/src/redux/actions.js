@@ -4,6 +4,8 @@ export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
 export const GET_DETAIL = 'GET_DETAIL'
 export const CLEANER = 'CLEANER'
+export const CREATE_PRODUCT = 'CREATE_PRODUCT'
+export const PAGINACION = 'PAGINACION'
 
 
 export function getProducts() {
@@ -21,11 +23,9 @@ export function getProductByName(name) {
     return async function(dispatch) {
         const json = await axios(`http://localhost:3001/products?name=${name}`)
         const data = json.data
-        let toName = data.map(p => p.name);
-        let filtered = toName.filter(p => p.toLocaleLowerCase().includes(name))
         return dispatch({
             type: GET_PRODUCT_BY_NAME,
-            payload: filtered
+            payload: data
         })
     }
 }
@@ -45,5 +45,29 @@ export function getDetail(id) {
 export function cleaner(){
     return {
         type: CLEANER
+    }
+}
+
+
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
+
+export function createProduct(payload) {
+    return async function(dispatch) {
+        const json = await axios.post(`http://localhost:3001/products/`, payload)
+        const data = await json.data   
+        return dispatch({
+            type: CREATE_PRODUCT,
+            payload: data
+        })
+    }   
+} 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+export function paginacion(payload) {
+    return async function(dispatch) {
+        return dispatch({
+            type: PAGINACION,
+            payload: payload
+        })
     }
 }

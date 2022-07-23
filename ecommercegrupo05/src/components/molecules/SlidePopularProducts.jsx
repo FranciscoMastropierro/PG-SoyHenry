@@ -13,14 +13,15 @@ import style from '../../styles/slidepopularproducts.module.css'
 function SlidePopularProducts({infoData}) {
   const productsToSee = infoData.slice(0,11)
     return (
-        <div> 
+        <div className={style.slideContainer}> 
             <h3 className={style.title}> Popular Products </h3>
+        <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={150}
-        slidesPerView={5}
+        spaceBetween={100}
+        slidesPerView={6}
         navigation
-        pagination={{ clickable: true }}
+        // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
@@ -43,6 +44,7 @@ function SlidePopularProducts({infoData}) {
               }) : null }
         
       </Swiper>
+      </div>
       </div>
     )
   }

@@ -1,9 +1,14 @@
+.swiperContainer {
+    background-color: #333333;
+    height: 267px !important
+}
 .title{
+    margin: 80px 0 10px;
     font-size: 30px;
     font-family: 'Share Tech', sans-serif;
-    
-    font-weight: bolder;
+    color: #dcdcdc;
 }
 .sliderbg{
-    background-color: rgb(123, 196, 196);
+    color: white;
+    background-color: #0e0f0fd8;
 }
