@@ -37,7 +37,7 @@ module.exports = {
     const productsBd = await Products.findAll({
       include: { model: Categories },
     });
-    if(!!req.query.Order && req.query.Order=="Asc"){
+    if(!!req.query.order && req.query.order=="Asc"){
     productsBd.sort(function(a, b) {
       if (Number(a.price) > Number(b.price)) {
         return 1;
@@ -47,23 +47,23 @@ module.exports = {
       }
       return 0;
     });
-      if(!!req.query.Min &&!!req.query.Max && Number(req.query.Min)<Number(req.query.Max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
+        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
+        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
         return res.send(result);
       }
-      if(!!req.query.Min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+      else if(!!req.query.min){
+        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
         return res.send(result);
       }
-      if(!!req.query.Max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+      else if(!!req.query.max){
+        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
         return res.send(result);
       }
       else 
         return res.send(productsBd);
     }
-    if(!!req.query.Order && req.query.Order=="Desc"){
+    if(!!req.query.order && req.query.order=="Desc"){
       productsBd.sort(function(a, b) {
         if (Number(a.price) < Number(b.price)) {
           return 1;
@@ -73,37 +73,38 @@ module.exports = {
         }
         return 0;
       });
-      if(!!req.query.Min &&!!req.query.Max && Number(req.query.Min)<Number(req.query.Max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
+        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
+        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
         return res.send(result);
       }
-      if(!!req.query.Min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+      else if(!!req.query.min){
+        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
         return res.send(result);
       }
-      if(!!req.query.Max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+      else if(!!req.query.max){
+        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
         return res.send(result);
       }
-      
+      else 
+        return res.send(productsBd);
     }
-    else if(!!req.query.Min || !!req.query.Max ){
-      if(!!req.query.Min &&!!req.query.Max && Number(req.query.Min)<Number(req.query.Max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+    else if(!!req.query.min || !!req.query.max ){
+      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
+        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
+        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
         return res.send(result);
       }
-      if(!!req.query.Min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+      else if(!!req.query.min){
+        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
         return res.send(result);
       }
-      if(!!req.query.Max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+      else if(!!req.query.max){
+        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
         return res.send(result);
       }
     }
-    else   return res.status(404).send("Ingrese una Query permitida: Order=Asc ||Order=Asc , Min, Max");
+    else   return res.status(404).send("Ingrese una Query permitida");
   },
 
   filterByCategories : async ( req, res) => {
@@ -194,5 +195,31 @@ module.exports = {
       //console.log(Products.__proto__)
       await product.addCategories(id, { through: Categories_Products })
     })
+  },
+
+  getProductsByBrand : async (req, res) => {
+    try {
+      const { name } = req.query;
+      const products = await Products.findAll({
+        where: {
+          name: { [Op.iLike]: `%${name}%`}
+        },
+        include: {
+          model: Categories,
+        },
+      });
+      if (!products.length) return res.send(' Product not found');
+
+      else return res.send(products);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  
+
+
+
+
 };
