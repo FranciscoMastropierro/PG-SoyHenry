@@ -6,6 +6,7 @@ import style from '../../styles/searchbar.module.css'
 import {connect} from 'react-redux'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export function SearchBar ({searchedProducts, getProductByName}) {
 
@@ -32,7 +33,9 @@ export function SearchBar ({searchedProducts, getProductByName}) {
             </div>
             <div className={style.productsBox}>
                 {value && searchedProducts.map(p => { return (
-                    <li>{p}</li>
+                    <Link to={`/details/${p.id}`}>
+                        <li>{p.name}</li>
+                    </Link>
                 )})}
             </div>
         </div>

@@ -18,10 +18,10 @@ function SlideBestNotebooks({infoData}) {
         <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={150}
-        slidesPerView={5}
+        spaceBetween={100}
+        slidesPerView={6}
         navigation
-        pagination={{ clickable: true }}
+        // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}

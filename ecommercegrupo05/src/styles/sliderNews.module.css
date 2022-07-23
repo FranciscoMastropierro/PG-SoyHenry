@@ -4,13 +4,10 @@
 }
 
 .sliderContainer{
-    padding: 2rem;
     background-color: #333333ea;
 }
 
 .img{
-    width: 2000px;
+    width: 100vw;
     height: 300px;
-    
-    border-radius: 8px;
 }
