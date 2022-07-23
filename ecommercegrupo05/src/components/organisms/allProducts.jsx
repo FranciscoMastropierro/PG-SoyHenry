@@ -1,30 +1,32 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts, paginacion } from "../../redux/actions";
-import style from '../../styles/allProducts.module.css'
+import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
+import FilterPrice from "../atoms/filterPrice";
 
 export default function AllProducts() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  const pages = useSelector((state) => state.pages);
+  const products = useSelector((state) => state.data);
+  
 
-    const pages = useSelector((state) => state.pages)
-    const products = useSelector((state) => state.data)
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getProducts())
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(paginacion(pages));
+  }, [dispatch, products, pages]);
 
-    useEffect(() => {
-        dispatch(paginacion(pages))
-    }, [dispatch, products, pages])
-    
-    return (
-        <>
-            <Pagination />
-            <CardProducts />
-        </>
-    )
+  return (
+    <>
+      <FilterPrice />
+      <Pagination />
+      <CardProducts />
+    </>
+  );
 }

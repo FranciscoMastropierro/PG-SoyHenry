@@ -6,6 +6,8 @@ export const GET_DETAIL = 'GET_DETAIL'
 export const CLEANER = 'CLEANER'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
+export const GET_FILTER_PRICE = 'GET_FILTER_PRICE' 
+
 
 
 export function getProducts() {
@@ -36,6 +38,17 @@ export function getDetail(id) {
         const data = await json.data   
         return dispatch({
             type: GET_DETAIL,
+            payload: data
+        })
+    }   
+} 
+
+export function getFilterPrice(order, min, max) {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/products/price?order=${order}&min=${min}&max=${max}`)
+        const data = await json.data  
+        return dispatch({
+            type: GET_FILTER_PRICE,
             payload: data
         })
     }   
