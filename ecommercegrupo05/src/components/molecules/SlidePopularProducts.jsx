@@ -13,8 +13,9 @@ import style from '../../styles/slidepopularproducts.module.css'
 function SlidePopularProducts({infoData}) {
   const productsToSee = infoData.slice(0,11)
     return (
-        <div> 
+        <div className={style.slideContainer}> 
             <h3 className={style.title}> Popular Products </h3>
+        <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={150}
@@ -43,6 +44,7 @@ function SlidePopularProducts({infoData}) {
               }) : null }
         
       </Swiper>
+      </div>
       </div>
     )
   }
