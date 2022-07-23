@@ -1,10 +1,13 @@
-import { GET_PRODUCTS, GET_PRODUCT_BY_NAME, GET_DETAIL, CLEANER, CREATE_PRODUCT } from './actions'
+import { GET_PRODUCTS, GET_PRODUCT_BY_NAME, GET_DETAIL, CLEANER, CREATE_PRODUCT, PAGINACION  } from './actions'
 
 const initialState = {
     data: [],
     searchedProducts: [],
     detail: [],
-    clean: []
+    clean: [],
+    productsPerPage: 15,
+    pages: 0,
+    productsToRender: []
 }
 
 function rootReducer(state = initialState, {type, payload}) {
@@ -23,16 +26,22 @@ function rootReducer(state = initialState, {type, payload}) {
             return {
                 ...state,
             }
+            
         case GET_DETAIL:
             return {
                 ...state,
                 detail: payload
-            }
+            };
         case CLEANER:
             return {
                 ...state,
                 clean: []
-        }
+            };
+        case PAGINACION:
+            return {
+                ...state,
+                productsToRender: state.data.slice(payload, payload + state.productsPerPage)
+            };
             default: return state;
     }
 }
