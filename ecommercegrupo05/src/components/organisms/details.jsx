@@ -1,45 +1,59 @@
 import React from "react";
-import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getDetail, cleaner } from '../../redux/actions'
+import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getDetail, cleaner } from "../../redux/actions";
+import style from "../../styles/details.module.css";
 
 export default function Details() {
-    const product = useSelector(state => state.detail)
     const dispatch = useDispatch();
     const {id} = useParams();
+    const product = useSelector((state) => state.detail);
     
     useEffect(() => {
-        dispatch(getDetail(id))
+        dispatch(getDetail(id));
         // return (
-        //     dispatch(cleaner())
-        // )
-    }, [dispatch, id]) 
-    //eslint-disable-line react-hooks/exhaustive-deps
-    
-    
-    return (
-        <div>      
-            <div >               
-                    <Link to='/'>
-                        <button >Volver al inicio</button>
-                    </Link>
-                <div>
-                    {product ?                            
-                                <div>
-                                    <img src={product.image} alt='Imag no Found' width='250' height='250' />
-                                    <h1> {product.name}</h1>
-                                    <h2 >$ {product.price}.</h2>
-                                    <p >{product.description}</p>
-                                    <h3 >Brand: {product.brand}.</h3>
-                                    <h4 >Category: {product.categories}.</h4>
-                                    <h5 >Stock:   {product.stock} products</h5>
-                                    <button >Añadir a Carrito </button>                            
-                                </div>                                                  
-                        : <p>No se encuentra detalles del Producto.</p>
-                    }
-                </div>
-            </div>       
+            //     dispatch(cleaner())
+            // )
+        }, [dispatch]);
+        //eslint-disable-line react-hooks/exhaustive-deps
+        
+
+
+  return (
+    <div>
+      <div>
+        
+
+        <div>
+          {product ? (
+            <div className={style.containerG}>
+              <div  className={style.containerDet}>
+               
+                
+                <h1 className={style.title}> {product.name}</h1>
+                <h3 className={style.brand}> {product.brand}</h3>
+                <h2 className={style.title}> ${product.price}</h2>
+                <button className={style.btn}>Add to Cart</button>
+                <p className={style.description}>{product.description}</p>
+                <h5 className={style.stock}> {product.stock} Units In Stock</h5>
+              </div>
+              <div className={style.containerImg}>
+                <img
+                 className={style.img}
+                  src={product.image}
+                  alt="Imag no Found"
+                  width="250"
+                  height="250"
+                />
+              </div>
+            </div>
+          ) : (
+            <p>No se encuentra detalles del Producto.</p>
+          )}
         </div>
-    )
+        <div></div>
+      </div>
+    </div>
+  );
 }
