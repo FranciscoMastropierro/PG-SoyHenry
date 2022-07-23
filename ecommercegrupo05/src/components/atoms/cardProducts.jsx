@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function CardProducts() {
 
     const productsToRender = useSelector((state) => state.productsToRender)
-    console.log("🚀 ~ file: cardProducts.jsx ~ line 9 ~ CardProducts ~ productsToRender", productsToRender)
+    // console.log("🚀 ~ file: cardProducts.jsx ~ line 9 ~ CardProducts ~ productsToRender", productsToRender)
 
     if (!productsToRender.length) return <div className={style.loader}></div>
 

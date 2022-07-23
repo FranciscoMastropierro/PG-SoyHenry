@@ -10,14 +10,14 @@ export const PAGINACION = 'PAGINACION'
 
 export function getProducts() {
     return async function(dispatch) {
-        const json = await axios('http://localhost:3001/products')
-        const data = await json.data
+        const json = await axios('http://localhost:3001/products');
+        const data = await json.data;
         return dispatch({
             type: GET_PRODUCTS,
             payload: data
         })
-    }
-}
+    };
+};
 
 export function getProductByName(name) {
     return async function(dispatch) {
