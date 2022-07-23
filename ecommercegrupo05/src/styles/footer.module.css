@@ -25,6 +25,7 @@
     justify-content: flex-end;
     background-color: #33333300;
     height: 70px;
+    object-fit: contain;
     
 }
 .after img {    

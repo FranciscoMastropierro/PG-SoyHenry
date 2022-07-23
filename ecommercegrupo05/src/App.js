@@ -16,6 +16,7 @@ import Favorites from './components/organisms/favorites';
 import NavBar from './components/molecules/navbar';
 import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
+import { Whatsapp } from './components/atoms/whatsapp';
 
 
 
@@ -44,6 +45,7 @@ function App() {
         <Route exact path = '*' element={<NotFound />} />
         <Route exact path = '/create' element={<CreateForm />} />
       </Routes>
+      <Whatsapp />
     </div>
   );
 }
