@@ -31,6 +31,78 @@ module.exports = {
       else return res.status(404).send('Product not found');
     }
   },
+  getPrice: async(req,res)=>{
+    const productsBd = await Products.findAll({
+      include: { model: Categories },
+    });
+    if(!!req.query.Order && req.query.Order=="Asc"){
+    productsBd.sort(function(a, b) {
+      if (Number(a.price) > Number(b.price)) {
+        return 1;
+      }
+      if (Number(a.price)  < Number(b.price)) {
+        return -1;
+      }
+      return 0;
+    });
+      if(!!req.query.Min &&!!req.query.Max && Number(req.query.Min)<Number(req.query.Max)){
+        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+        return res.send(result);
+      }
+      if(!!req.query.Min){
+        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+        return res.send(result);
+      }
+      if(!!req.query.Max){
+        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+        return res.send(result);
+      }
+      else 
+        return res.send(productsBd);
+    }
+    if(!!req.query.Order && req.query.Order=="Desc"){
+      productsBd.sort(function(a, b) {
+        if (Number(a.price) < Number(b.price)) {
+          return 1;
+        }
+        if (Number(a.price)  > Number(b.price)) {
+          return -1;
+        }
+        return 0;
+      });
+      if(!!req.query.Min &&!!req.query.Max && Number(req.query.Min)<Number(req.query.Max)){
+        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+        return res.send(result);
+      }
+      if(!!req.query.Min){
+        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+        return res.send(result);
+      }
+      if(!!req.query.Max){
+        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+        return res.send(result);
+      }
+      
+    }
+    else if(!!req.query.Min || !!req.query.Max ){
+      if(!!req.query.Min &&!!req.query.Max && Number(req.query.Min)<Number(req.query.Max)){
+        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+        return res.send(result);
+      }
+      if(!!req.query.Min){
+        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.Min));
+        return res.send(result);
+      }
+      if(!!req.query.Max){
+        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.Max));
+        return res.send(result);
+      }
+    }
+    else   return res.status(404).send("Ingrese una Query permitida: Order=Asc ||Order=Asc , Min, Max");
+  },
 
   postProduct: async (req, res) => {
     const products = req.body;
