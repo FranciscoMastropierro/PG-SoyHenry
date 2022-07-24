@@ -8,8 +8,8 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
 export const GET_FILTER_PRICE = 'GET_FILTER_PRICE' 
 export const GET_FILTER_BRAND = 'GET_FILTER_BRAND' 
-export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME' 
-
+export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME'
+export const GET_BEST_NOTEBOOKS = 'GET_BEST_NOTEBOOKS' 
 
 
 export function getProducts() {
@@ -76,7 +76,16 @@ export function getFilterPrice(order, min, max) {
             payload: data
         })
     }   
-} 
+} export function getBestNotebooks() {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/products/categories?cat=Laptops`)
+        const data = json.data
+        return dispatch({
+            type: GET_BEST_NOTEBOOKS,
+            payload: data
+        })
+    }
+}
 
 
 export function cleaner(){

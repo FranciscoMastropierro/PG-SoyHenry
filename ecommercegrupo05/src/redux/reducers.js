@@ -7,7 +7,8 @@ import {
     PAGINACION,
     GET_FILTER_PRICE,
     GET_FILTER_BRAND,
-    GET_ORDER_BY_NAME
+    GET_ORDER_BY_NAME,
+    GET_BEST_NOTEBOOKS
 } from './actions'
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
     productsPerPage: 15,
     pages: 0,
     productsToRender: [],
-    filterPrice: []  
+    filterPrice: [],
+    bestNoteboooks: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -70,6 +72,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 data: payload
+            }
+        case GET_BEST_NOTEBOOKS:
+            return {
+                ...state,
+                bestNoteboooks: payload
             }
         default: return state;
     }
