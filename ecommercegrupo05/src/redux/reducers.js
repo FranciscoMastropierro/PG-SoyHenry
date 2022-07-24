@@ -1,4 +1,12 @@
-import { GET_PRODUCTS, GET_PRODUCT_BY_NAME, GET_DETAIL, CLEANER, CREATE_PRODUCT, PAGINACION  } from './actions'
+import {
+    GET_PRODUCTS,
+    GET_PRODUCT_BY_NAME,
+    GET_DETAIL,
+    CLEANER,
+    CREATE_PRODUCT,
+    PAGINACION,
+    GET_FILTER_PRICE
+} from './actions'
 
 const initialState = {
     data: [],
@@ -7,11 +15,11 @@ const initialState = {
     clean: [],
     productsPerPage: 15,
     pages: 0,
-    productsToRender: []
+    productsToRender: [],   
 }
 
-function rootReducer(state = initialState, {type, payload}) {
-    switch(type) {
+function rootReducer(state = initialState, { type, payload }) {
+    switch (type) {
         case GET_PRODUCTS:
             return {
                 ...state,
@@ -26,7 +34,7 @@ function rootReducer(state = initialState, {type, payload}) {
             return {
                 ...state,
             }
-            
+
         case GET_DETAIL:
             return {
                 ...state,
@@ -42,7 +50,12 @@ function rootReducer(state = initialState, {type, payload}) {
                 ...state,
                 productsToRender: state.data.slice(payload, payload + state.productsPerPage)
             };
-            default: return state;
+        case GET_FILTER_PRICE:
+            return {
+                ...state,
+                data: payload
+            }
+        default: return state;
     }
 }
 

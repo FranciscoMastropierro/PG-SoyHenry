@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import { getProducts, paginacion } from "../../redux/actions";
-import style from '../../styles/allProducts.module.css'
+import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
+import FilterPrice from "../atoms/filterPrice";
 
 export default function AllProducts() {
     const dispatch = useDispatch()
@@ -13,16 +13,17 @@ export default function AllProducts() {
 
     useEffect(() => {
         dispatch(getProducts())
-    }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
+    }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps  
 
-    useEffect(() => {
-        dispatch(paginacion(pages))
-    }, [dispatch, products, pages])
-    
-    return (
-        <>
-            <Pagination />
-            <CardProducts />
-        </>
-    )
+  useEffect(() => {
+    dispatch(paginacion(pages));
+  }, [dispatch, products, pages]);
+
+  return (
+    <>
+      <FilterPrice />
+      <Pagination />
+      <CardProducts />
+    </>
+  );
 }
