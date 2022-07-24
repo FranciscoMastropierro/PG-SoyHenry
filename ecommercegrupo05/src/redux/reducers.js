@@ -8,7 +8,7 @@ import {
     GET_FILTER_PRICE,
     GET_FILTER_BRAND,
     GET_ORDER_BY_NAME,
-    GET_BEST_NOTEBOOKS
+    GET_CATEGORIES
 } from './actions'
 
 const initialState = {
@@ -21,7 +21,7 @@ const initialState = {
     pages: 0,
     productsToRender: [],
     filterPrice: [],
-    bestNoteboooks: []
+    categories: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -73,10 +73,11 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 data: payload
             }
-        case GET_BEST_NOTEBOOKS:
+        case GET_CATEGORIES:
             return {
                 ...state,
-                bestNoteboooks: payload
+                data: payload,
+                categories: payload                
             }
         default: return state;
     }

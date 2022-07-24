@@ -20,7 +20,7 @@ export default function Home () {
         <div>
             <SliderNews />
             <SlidePopularProducts infoData = {infoData}/>
-            <SlideBestNotebooks infoData = {infoData}/>                      
+            <SlideBestNotebooks />                      
             <BrandBar/>
             <Slider/>
             <Footer/>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Card from '../atoms/Card';
 import { useDispatch, useSelector } from 'react-redux';
-import {getBestNotebooks} from '../../redux/actions';
+import {getCategories} from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,12 +14,12 @@ import style from '../../styles/slidepopularproducts.module.css'
 
 function SlideBestNotebooks() {
   const dispatch = useDispatch();
-    const infoBestNotebooks = useSelector(state => state.bestNoteboooks);
+    const infoBestNotebooks = useSelector(state => state.categories);
     console.log(infoBestNotebooks)
 
     useEffect(()=>{
-        dispatch(getBestNotebooks())
-    },[])
+        dispatch(getCategories('Laptops'))
+    },[dispatch])
   const productsToSee = infoBestNotebooks.slice(0,10)
     return (
         <div className={style.slideContainer}> 
