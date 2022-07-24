@@ -7,6 +7,8 @@ export const CLEANER = 'CLEANER'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
 export const GET_FILTER_PRICE = 'GET_FILTER_PRICE' 
+export const GET_FILTER_BRAND = 'GET_FILTER_BRAND' 
+export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME' 
 
 
 
@@ -41,7 +43,29 @@ export function getDetail(id) {
             payload: data
         })
     }   
-} 
+}
+
+export function getOrderByName(order) {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/products/orderByName?order=${order}`)
+        const data = await json.data   
+        return dispatch({
+            type: GET_ORDER_BY_NAME,
+            payload: data
+        })
+    }
+}
+
+export function getFilterBrand(brand) {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/products/brand?name=${brand}`)
+        const data = await json.data  
+        return dispatch({
+            type: GET_FILTER_BRAND,
+            payload: data
+        })
+    }
+}
 
 export function getFilterPrice(order, min, max) {
     return async function(dispatch) {

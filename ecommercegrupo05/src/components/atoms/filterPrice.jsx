@@ -1,13 +1,12 @@
 import React, { useState } from "react";
+import ButtonFilter from "./buttonFilter";
 import { useDispatch } from "react-redux";
 import { getFilterPrice } from "../../redux/actions";
 
 function FilterPrice() {
   const dispatch = useDispatch();
-  // const [order, setName] = useState('')
-  // const [min, setName] = useState('')
-  // const [max, setName] = useState('')
-  const [input, setInput] = useState({
+
+  const [price, setPrice] = useState({
     order: "",
     min: "",
     max: "",
@@ -15,31 +14,36 @@ function FilterPrice() {
 
   function handleOrderPrice(e) {
     e.preventDefault(e);
-    setInput({
-      ...input,
+    setPrice({
+      ...price,
       order: e.target.value,
     });
   }
 
   function handleFilterMIn(e) {
     e.preventDefault(e);
-    setInput({
-      ...input,
+    setPrice({
+      ...price,
       min: e.target.value,
     });
   }
   function handleFilterMax(e) {
     e.preventDefault(e);
-    setInput({
-      ...input,
+    setPrice({
+      ...price,
       max: e.target.value,
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault(e);
-    dispatch(getFilterPrice(input.order, input.min, input.max));
-  }
+    dispatch(getFilterPrice(price.order, price.min, price.max));
+    setPrice({
+      order: "",
+      min: "",
+      max: "",
+    })
+}
 
   return (
     <div>
@@ -61,7 +65,7 @@ function FilterPrice() {
             <option value=""> --- </option>
             <option value="500">$ 500</option>
             <option value="100000">$ 100.000</option>
-            <option value="200000">$ 200.000</option>
+            <option value="196900">$ 200.000</option>
           </select>
         </label>
         <br />
@@ -71,11 +75,11 @@ function FilterPrice() {
             <option value=""> --- </option>
             <option value="500">$ 500</option>
             <option value="100000">$ 100.000</option>
-            <option value="200000">$ 200.000</option>
+            <option value="196900">$ 200.000</option>
           </select>
         </label>
         <br />
-        <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
+        <button onClick={(e) => handleSubmit(e)}>Filtrar By Price</button>
       </label>
     </div>
   );

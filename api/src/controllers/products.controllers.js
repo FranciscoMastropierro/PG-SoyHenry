@@ -123,7 +123,7 @@ module.exports = {
       }else res.status(200).send(productsBd)
     
     } catch (error) {
-       console.log('Flag log filterByCategory', error) 
+      console.log('Flag log filterByCategory', error) 
     }
   },
 
@@ -165,7 +165,7 @@ module.exports = {
           .status(400)
           .send({ error: "Not all fields are required, but..." });
 
-     const product = await Products.create(products);
+    const product = await Products.create(products);
 
       // console.log(videogame)
 
