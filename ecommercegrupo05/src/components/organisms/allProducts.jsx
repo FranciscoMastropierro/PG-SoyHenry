@@ -5,6 +5,8 @@ import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
 import FilterPrice from "../atoms/filterPrice";
+import FilterBrand from "../atoms/filterBrand";
+import FilterByOrder from "../atoms/filterByOrder";
 
 export default function AllProducts() {
     const dispatch = useDispatch()
@@ -22,6 +24,8 @@ export default function AllProducts() {
   return (
     <>
       <FilterPrice />
+      <FilterBrand />
+      <FilterByOrder />
       <Pagination />
       <CardProducts />
     </>
