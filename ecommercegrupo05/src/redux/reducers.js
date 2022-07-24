@@ -7,7 +7,8 @@ import {
     PAGINACION,
     GET_FILTER_PRICE,
     GET_FILTER_BRAND,
-    GET_ORDER_BY_NAME
+    GET_ORDER_BY_NAME,
+    GET_CATEGORIES
 } from './actions'
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
     productsPerPage: 15,
     pages: 0,
     productsToRender: [],
-    filterPrice: []  
+    filterPrice: [],
+    categories: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -70,6 +72,12 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 data: payload
+            }
+        case GET_CATEGORIES:
+            return {
+                ...state,
+                data: payload,
+                categories: payload                
             }
         default: return state;
     }

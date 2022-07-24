@@ -11,7 +11,7 @@ import style from '../../styles/slidepopularproducts.module.css'
 
 
 function SlidePopularProducts({infoData}) {
-  const productsToSee = infoData.slice(0,11)
+  const productsToSee = infoData.slice(0,10)
     return (
         <div className={style.slideContainer}> 
             <h3 className={style.title}> Popular Products </h3>
