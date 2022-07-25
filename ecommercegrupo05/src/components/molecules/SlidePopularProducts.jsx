@@ -25,7 +25,7 @@ function SlidePopularProducts() {
   const productsToSee = infoData.slice(0,10)
     return (
         <div className={style.slideContainer}> 
-            <h3 className={style.title}> Popular Products </h3>
+            <h3 className={style.title}> Productos Populares </h3>
         <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}

@@ -13,9 +13,11 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const FILTER_CATEGORIES = 'FILTER_CATEGORIES' 
 
 
-export function getProducts() {
+export function getProducts(loc) {
     return async function(dispatch) {
-        const json = await axios('http://localhost:3001/products');
+        let json ='';
+        loc? json = await axios(`http://localhost:3001/products?name=${loc}`) :
+        json = await axios('http://localhost:3001/products');
         const data = await json.data;
         return dispatch({
             type: GET_PRODUCTS,

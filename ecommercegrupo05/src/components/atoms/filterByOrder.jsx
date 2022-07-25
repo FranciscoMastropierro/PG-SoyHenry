@@ -23,14 +23,14 @@ export default function FilterByOrder() {
     return (
         <div>
             <label className={style.row}> 
-            <p className={style.title}>Alphabetically</p>
+            <p className={style.title}>Orden Alfabetico</p>
             <select onChange={e => handleOrderByOrder(e)} className={style.select}>
                 <option value='All'>---</option>
                 <option value='A-Z'> A a Z  </option>
                 <option value=''> Z a A  </option>
             </select>
             </label>
-            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar by Order</button>
+            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar Ordenamiento</button>
         </div>
     )
 }

@@ -28,9 +28,9 @@ export default function Details() {
                 <h1 className={style.title}> {product.name}</h1>
                 <h3 className={style.brand}> {product.brand}</h3>
                 <h2 className={style.title}> ${product.price}</h2>
-                <button className={style.btn}>Add to Cart</button>
+                <button className={style.btn}>Añadir al Carrito 🛒</button>
                 <p className={style.description}>{product.description}</p>
-                <h5 className={style.stock}> {product.stock} Units In Stock</h5>
+                <h5 className={style.stock}> {product.stock} unidades disponibles</h5>
               </div>
               <div className={style.containerImg}>
                 <img
