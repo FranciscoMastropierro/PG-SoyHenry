@@ -47,7 +47,7 @@ export default function FilterBrand() {
                         ))
                     }
                 </select>
-                    <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar by Brand</button>
+                    <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar Marca</button>
             </label>
         </>
     )

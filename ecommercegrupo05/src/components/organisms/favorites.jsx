@@ -16,7 +16,7 @@ export default function Favorites() {
         <div className={style.container}>
             <div className={style.wrapper}>
 
-                <h1 className={style.title}>Favorites</h1>
+                <h1 className={style.title}>Favoritos</h1>
 
                 {/*hardcoded        */}
 
