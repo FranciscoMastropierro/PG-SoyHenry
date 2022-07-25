@@ -76,7 +76,8 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 copyData: payload,
-                categories: payload     
+                categories: payload,
+                data: payload
             }
         default: return state;
     }
