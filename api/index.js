@@ -9,11 +9,10 @@ const { Categories, Products, Categories_Products } = conn.models;
 
 const port= process.env.PORT || 3001;
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(port, async () => {
     try {
-      const categories = [{name: 'Keyboards'}, {name:'Mouses'}, {name:'Laptops'}, {name:'Headsets'}, {name:'Monitors'}];  
-      await Categories.bulkCreate(categories);
+      preLoadCategories()
 
     } finally{
       preLoadProducts();
