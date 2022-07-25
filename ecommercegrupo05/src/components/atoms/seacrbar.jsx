@@ -35,7 +35,7 @@ export function SearchBar ({searchedProducts, getProductByName}) {
             <div className={style.productsBox}>
                 {value && searchedProducts.map(p => { return (
                     <Link to={`/details/${p.id}`}>
-                        <li>{p.name}</li>
+                        <li onClick={() => setValue('')}>{p.name}</li>
                     </Link>
                 )})}
             </div>

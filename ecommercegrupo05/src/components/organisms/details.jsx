@@ -1,11 +1,12 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetail, cleaner } from "../../redux/actions";
 import style from "../../styles/details.module.css";
 
 export default function Details() {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const {id} = useParams();
     const product = useSelector((state) => state.detail);
@@ -13,13 +14,13 @@ export default function Details() {
     useEffect(() => {
         dispatch(getDetail(id));
         return () => dispatch(cleaner())
-        }, [ dispatch, id ]) //eslint-disable-line react-hooks/exhaustive-deps
+        }, [ id ]) //eslint-disable-line react-hooks/exhaustive-deps
         
 
   return (
     <div>
       <div>
-        <Link to='/' className={style.btnBack}>atras</Link>
+        <button className={style.btnBack} onClick={() => navigate(-1)}>atras</button>
         <div>
           {product.length === 0 ? (<div className={style.loader}></div>) 
           : (
