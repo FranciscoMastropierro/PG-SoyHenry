@@ -29,7 +29,7 @@ export function SearchBar ({searchedProducts, getProductByName}) {
     return (
         <div className={style.searchbarGeneralContainer}>
             <form className={style.searchbarContainer} onSubmit={(e)=>handleClick(e)}>
-                <input key='searchbar' placeholder='search...' value={value} onChange={e => setValue(e.target.value)}/>
+                <input key='searchbar' placeholder='buscar...' value={value} onChange={e => setValue(e.target.value)}/>
                 <button type='submit'><img src={search} alt='search-button'/></button>
             </form>
             <div className={style.productsBox}>
