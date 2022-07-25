@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { getCategories } from "../../redux/actions";
+import { filterCategories, getCategories } from "../../redux/actions";
 import ButtonFilter from "./buttonFilter";
 import { useDispatch } from "react-redux";
 import style from "../../styles/allProducts.module.css";
@@ -17,7 +17,7 @@ function FilterCategories() {
 
     function handleSubmit(e) {
         e.preventDefault(e);
-        dispatch(getCategories(category));
+        dispatch(filterCategories(category));
         setCategory('')
     }
 
@@ -34,7 +34,7 @@ function FilterCategories() {
                     <option value="Keyboards">Teclados</option>
                 </select>
             </label>
-            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar por Categoria</button>
+            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar Categoria</button>
 
         </div>
     )

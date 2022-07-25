@@ -80,7 +80,7 @@ function FilterPrice() {
           </select>
         </label>
         <br />
-        <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar By Price</button>
+        <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar Precio</button>
       </label>
     </div>
   );
