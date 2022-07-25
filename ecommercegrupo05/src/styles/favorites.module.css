@@ -1,0 +1,27 @@
+.container{
+    background-color: gray;
+
+}
+.wrapper{ 
+    margin:  0 8rem 0rem 8rem;    
+    padding-top: 4rem;
+    background-color: rgb(197, 197, 197);
+    
+
+
+}
+.title{
+    text-align: center;
+    font-size: 40px;
+    margin:  0  0 4rem 0;
+    font-weight: bold;
+    font-family: 'Share Tech', sans-serif;
+    border-bottom: 5px solid gray;
+
+}
+.cardgrid{
+    display: grid;
+    grid-template-columns: 400px 400px 400px ;
+    
+    
+}
