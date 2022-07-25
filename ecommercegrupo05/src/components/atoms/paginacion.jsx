@@ -7,6 +7,7 @@ export default function Pagination() {
     const dispatch = useDispatch()
 
     const data = useSelector((state) => state.data)
+    const filter = useSelector((state) => state.filterPrice)
     const productsPerPage = useSelector((state) => state.productsPerPage)
     
 

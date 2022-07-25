@@ -76,7 +76,9 @@ export function getFilterPrice(order, min, max) {
             payload: data
         })
     }   
-} export function getCategories(categories) {
+} 
+
+export function getCategories(categories) {
     return async function(dispatch) {
         const json = await axios(`http://localhost:3001/products/categories?cat=${categories}`)
         const data = json.data
@@ -86,7 +88,6 @@ export function getFilterPrice(order, min, max) {
         })
     }
 }
-
 
 export function cleaner(){
     return {

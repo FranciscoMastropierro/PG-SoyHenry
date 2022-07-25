@@ -31,7 +31,6 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 data: payload,
                 copyData: payload,
-                filterPrice: payload
             };
         case GET_PRODUCT_BY_NAME:
             return {
@@ -51,7 +50,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case CLEANER:
             return {
                 ...state,
-                clean: []
+                detail: []
             };
         case PAGINACION:
             return {
@@ -76,8 +75,8 @@ function rootReducer(state = initialState, { type, payload }) {
         case GET_CATEGORIES:
             return {
                 ...state,
-                data: payload,
-                categories: payload                
+                copyData: payload,
+                categories: payload     
             }
         default: return state;
     }

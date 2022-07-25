@@ -33,7 +33,7 @@ function App() {
         <Routes>
         <Route exact path = '/' element={<Home />} />
         <Route exact path = '/allProducts' element={<AllProducts />} />
-        <Route path = '/details/:id' element={<Details />} />
+        <Route exact path = '/details/:id' element={<Details />} />
         <Route exact path = '/login' element={<Login />} />
         <Route exact path = '/favorites' element={<Favorites />} />
         <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
@@ -42,8 +42,8 @@ function App() {
         <Route exact path = '/faq' element={<Faq />} />
         <Route exact path = '/news' element={<News />} />
         <Route exact path ='/categories' element={<Categories/>}/>
-        <Route exact path = '*' element={<NotFound />} />
         <Route exact path = '/create' element={<CreateForm />} />
+        <Route exact path = '*' element={<NotFound />} />
       </Routes>
       <Whatsapp />
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getFilterBrand } from "../../redux/actions";
 import ButtonFilter from "./buttonFilter";
 import { useDispatch } from "react-redux";
+import style from "../../styles/allProducts.module.css";
 
 export default function FilterBrand() {
     const [brand, setBrand] = useState('')
@@ -34,9 +35,9 @@ export default function FilterBrand() {
 
     return (
         <>
-            <label>
-                Marca
-                <select onChange={(e) => handleOrderBrand(e)}>
+            <label className={style.row}>
+                <p className={style.title}>Marca</p>
+                <select onChange={(e) => handleOrderBrand(e)} className={style.select}>
                     <option value="">---</option>
                     {
                         marcas && marcas.map((item, index) => (
@@ -46,8 +47,8 @@ export default function FilterBrand() {
                         ))
                     }
                 </select>
+                    <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar by Brand</button>
             </label>
-            <button onClick={(e) => handleSubmit(e)}>Filtrar by Brand</button>
         </>
     )
 }
