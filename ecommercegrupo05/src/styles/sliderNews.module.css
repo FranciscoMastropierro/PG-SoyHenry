@@ -8,7 +8,10 @@
 }
 
 .img{
-    width: 100vw;
-    height: 300px;
+    width: 1150px;
+    height: 320px;
     object-fit: contain;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

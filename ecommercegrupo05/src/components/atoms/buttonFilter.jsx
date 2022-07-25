@@ -9,11 +9,14 @@ const dispatch = useDispatch();
 
 function handleSubmit(e) {
     e.preventDefault(e);
-    dispatch(getFilterPrice(price.order, price.min, price.max), getFilterBrand(brand), getOrderByName(order) );
+    dispatch(getFilterPrice(price.order, price.min, price.max), getFilterBrand(brand), getOrderByName(order));
     dispatch(getFilterBrand(brand));
     dispatch(getOrderByName(order));
 }
 
+// useEffect(()=> {
+//     dispatch(getFilterPrice(price.order, price.min, price.max), getFilterBrand(brand), getOrderByName(order));
+// }, [dispatch, price, brand, order])
 
 return(
     <div>

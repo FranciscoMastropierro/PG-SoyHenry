@@ -9,12 +9,10 @@ const [index, setIndex] = useState(0)
 const getAssets = (name, format = 'png') => require(`../../assets/${name}.${format}`)
 
     const carruselImages = [
-    getAssets('news1', 'jpeg'),
-    getAssets('news2', 'jpeg'),
-    getAssets('news3', 'jpg'),
-    getAssets('news4', 'jpg'),
-    getAssets('news5', 'jpg'),
-    getAssets('news6', 'jpg')
+    getAssets('news13', 'jpg'),
+    getAssets('news8', 'png'),
+    getAssets('news10', 'jpg'),
+    getAssets('news11', 'jpg')
     ]
 
     const spritesLength = carruselImages.length;

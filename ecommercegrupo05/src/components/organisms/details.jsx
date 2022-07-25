@@ -13,21 +13,17 @@ export default function Details() {
     useEffect(() => {
         dispatch(getDetail(id));
         return () => dispatch(cleaner())
-        }, [id]) //eslint-disable-line react-hooks/exhaustive-deps
+        }, [ dispatch, id ]) //eslint-disable-line react-hooks/exhaustive-deps
         
-
 
   return (
     <div>
       <div>
-        
-
         <div>
-          {product ? (
+          {product.length === 0 ? (<div className={style.loader}></div>) 
+          : (
             <div className={style.containerG}>
               <div  className={style.containerDet}>
-               
-                
                 <h1 className={style.title}> {product.name}</h1>
                 <h3 className={style.brand}> {product.brand}</h3>
                 <h2 className={style.title}> ${product.price}</h2>
@@ -37,7 +33,7 @@ export default function Details() {
               </div>
               <div className={style.containerImg}>
                 <img
-                 className={style.img}
+                className={style.img}
                   src={product.image}
                   alt="Imag no Found"
                   width="250"
@@ -45,8 +41,6 @@ export default function Details() {
                 />
               </div>
             </div>
-          ) : (
-            <p>No se encuentra detalles del Producto.</p>
           )}
         </div>
         <div></div>

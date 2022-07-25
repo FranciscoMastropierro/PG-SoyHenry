@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { getOrderByName } from '../../redux/actions';
 import ButtonFilter from "./buttonFilter";
 import { useDispatch } from "react-redux";
+import style from "../../styles/allProducts.module.css";
 
 export default function FilterByOrder() {
 
@@ -21,14 +22,15 @@ export default function FilterByOrder() {
 
     return (
         <div>
-            <label>
-            <select onChange={e => handleOrderByOrder(e)}>
-                <option value='All'>Alphabetically</option>
+            <label className={style.row}> 
+            <p className={style.title}>Alphabetically</p>
+            <select onChange={e => handleOrderByOrder(e)} className={style.select}>
+                <option value='All'>---</option>
                 <option value='A-Z'> A a Z  </option>
                 <option value=''> Z a A  </option>
             </select>
             </label>
-            <button onClick={(e) => handleSubmit(e)}>Filtrar by Order</button>
+            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar by Order</button>
         </div>
     )
 }

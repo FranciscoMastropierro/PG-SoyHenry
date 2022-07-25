@@ -15,11 +15,11 @@ import style from '../../styles/slidepopularproducts.module.css'
 function SlideBestNotebooks() {
   const dispatch = useDispatch();
     const infoBestNotebooks = useSelector(state => state.categories);
-    console.log(infoBestNotebooks)
 
     useEffect(()=>{
         dispatch(getCategories('Laptops'))
     },[dispatch])
+    
   const productsToSee = infoBestNotebooks.slice(0,10)
     return (
         <div className={style.slideContainer}> 
@@ -28,12 +28,12 @@ function SlideBestNotebooks() {
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={100}
-        slidesPerView={6}
+        slidesPerView={5}
         navigation
         // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         {
         infoBestNotebooks ? productsToSee.map(({id, image, name, price}) =>{

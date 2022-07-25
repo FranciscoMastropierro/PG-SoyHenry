@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { getCategories } from "../../redux/actions";
 import ButtonFilter from "./buttonFilter";
 import { useDispatch } from "react-redux";
+import style from "../../styles/allProducts.module.css";
 
 
 function FilterCategories() {
@@ -22,9 +23,9 @@ function FilterCategories() {
 
     return (
         <div>
-            <label>
-                Categoria
-                <select onChange={(e) => handleCategory(e)}>
+            <label className={style.row}>
+            <p className={style.title}>Categoria</p>
+                <select onChange={(e) => handleCategory(e)} className={style.select}>
                     <option value="">---</option>
                     <option value="Headsets">Auriculares</option>
                     <option value="Monitors">Monitores</option>
@@ -33,7 +34,7 @@ function FilterCategories() {
                     <option value="Keyboards">Teclados</option>
                 </select>
             </label>
-            <button onClick={(e) => handleSubmit(e)}>Filtrar por Categoria</button>
+            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar por Categoria</button>
 
         </div>
     )

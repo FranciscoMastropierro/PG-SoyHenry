@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '../atoms/Card';
 import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -8,9 +8,20 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards'
 import style from '../../styles/slidepopularproducts.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../redux/actions';
 
 
-function SlidePopularProducts({infoData}) {
+function SlidePopularProducts() {
+
+  const dispatch = useDispatch();
+  const infoData = useSelector(state => state.data);
+  console.log("🚀 ~ file: SlidePopularProducts.jsx ~ line 19 ~ SlidePopularProducts ~ infoData", infoData)
+
+  useEffect(()=>{
+      dispatch(getProducts())
+  },[]) //eslint-disable-line react-hooks/exhaustive-deps
+
   const productsToSee = infoData.slice(0,10)
     return (
         <div className={style.slideContainer}> 
@@ -19,12 +30,12 @@ function SlidePopularProducts({infoData}) {
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={100}
-        slidesPerView={6}
+        slidesPerView={5}
         navigation
         // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         {
         infoData ? productsToSee.map(({id, image, name, price}) =>{

@@ -24,10 +24,12 @@ export default function AllProducts() {
 
   return (
     <>
-      <FilterPrice />
-      <FilterBrand />
-      <FilterByOrder />
-      <FilterCategories />
+      <div className={style.filters}>
+        <div className={style.div}><FilterPrice /></div>
+        <div className={style.div}><FilterBrand /></div>
+        <div className={style.div}><FilterCategories /></div>
+        <div className={style.div}><FilterByOrder /></div>
+      </div>
       <Pagination />
       <CardProducts />
     </>

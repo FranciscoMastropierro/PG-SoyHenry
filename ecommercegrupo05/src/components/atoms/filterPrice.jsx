@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ButtonFilter from "./buttonFilter";
 import { useDispatch } from "react-redux";
 import { getFilterPrice } from "../../redux/actions";
+import style from "../../styles/allProducts.module.css";
 
 function FilterPrice() {
   const dispatch = useDispatch();
@@ -47,21 +48,21 @@ function FilterPrice() {
 
   return (
     <div>
-      <label>
+      <label className={style.titleColor}>
         Precio:
         <br />
-        <label>
+        <label className={style.row}>
           Por Valor
-          <select onChange={(e) => handleOrderPrice(e)}>
+          <select onChange={(e) => handleOrderPrice(e)} className={style.select}>
             <option value=""> --- </option>
             <option value="Asc">Menor a Mayor Precio</option>
             <option value="Desc">Mayor a Menor Precio</option>
           </select>
         </label>
         <br />
-        <label>
+        <label className={style.row}>
           Minimo:
-          <select onChange={(e) => handleFilterMIn(e)}>
+          <select onChange={(e) => handleFilterMIn(e)} className={style.select}>
             <option value=""> --- </option>
             <option value="500">$ 500</option>
             <option value="100000">$ 100.000</option>
@@ -69,9 +70,9 @@ function FilterPrice() {
           </select>
         </label>
         <br />
-        <label>
+        <label className={style.row}>
           Maximo:
-          <select onChange={(e) => handleFilterMax(e)}>
+          <select onChange={(e) => handleFilterMax(e)} className={style.select}>
             <option value=""> --- </option>
             <option value="500">$ 500</option>
             <option value="100000">$ 100.000</option>
@@ -79,7 +80,7 @@ function FilterPrice() {
           </select>
         </label>
         <br />
-        <button onClick={(e) => handleSubmit(e)}>Filtrar By Price</button>
+        <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar By Price</button>
       </label>
     </div>
   );
