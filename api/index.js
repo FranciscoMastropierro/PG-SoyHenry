@@ -12,8 +12,7 @@ const port= process.env.PORT || 3001;
 conn.sync({ force: true }).then(() => {
   server.listen(port, async () => {
     try {
-      const categories = [{name: 'Keyboards'}, {name:'Mouses'}, {name:'Laptops'}, {name:'Headsets'}, {name:'Monitors'}];  
-      await Categories.bulkCreate(categories);
+      preLoadCategories()
 
     } finally{
       preLoadProducts();

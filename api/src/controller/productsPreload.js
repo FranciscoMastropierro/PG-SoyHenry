@@ -28,7 +28,7 @@ const preloadCate = () => {
     
         let cateArr = [];
         let cateMap = productList.map((el) => {
-            let cate = el.categories;
+            let cate = el.categories; 
             
             cateArr.push(cate)
         });
