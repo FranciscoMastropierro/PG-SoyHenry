@@ -51,6 +51,27 @@
     margin: 0 0 2rem 0;
 }
 
+.btnBack
+{   width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 5px 5px;
+    background-color: rgb(0, 0, 0, 0.6);
+    color: #01f603;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: 0.8s;
+}
+
+.btnBack:hover
+{
+    color: rgb(0, 0, 0, 0.6);
+    background-color: #01f603;
+    width: 11%;
+}
+
 .loader {
     color: #01f603;
     font-size: 90px;

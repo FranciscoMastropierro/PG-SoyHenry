@@ -34,7 +34,7 @@ function FilterCategories() {
                     <option value="Keyboards">Teclados</option>
                 </select>
             </label>
-            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar por Categoria</button>
+            <button onClick={(e) => handleSubmit(e)} className={style.btn}>Filtrar Categoria</button>
 
         </div>
     )
