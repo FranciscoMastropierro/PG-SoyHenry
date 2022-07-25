@@ -11,6 +11,7 @@ export const GET_FILTER_BRAND = 'GET_FILTER_BRAND'
 export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME'
 export const GET_CATEGORIES = 'GET_CATEGORIES' 
 export const FILTER_CATEGORIES = 'FILTER_CATEGORIES' 
+export const GET_PRODUCT_ALL_BRANDS = 'GET_PRODUCT_ALL_BRANDS' 
 
 
 export function getProducts(loc) {
@@ -36,11 +37,22 @@ export function getProductByName(name) {
         })
     }
 }
+
+export function getProductAllBrands() {
+    return async function(dispatch) {
+        const json = await axios(`http://localhost:3001/products/brand/all`)
+        const data = json.data
+        return dispatch({
+            type: GET_PRODUCT_ALL_BRANDS,
+            payload: data
+        })
+    }
+}
     
 export function getDetail(id) {
     return async function(dispatch) {
         const json = await axios(`http://localhost:3001/product/${id}`)
-        const data = await json.data   
+        const data = json.data   
         return dispatch({
             type: GET_DETAIL,
             payload: data

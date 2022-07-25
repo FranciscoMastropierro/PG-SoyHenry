@@ -1,26 +1,18 @@
-import React, { useState } from "react";
-import { getFilterBrand } from "../../redux/actions";
+import React, { useEffect, useState } from "react";
+import { getFilterBrand, getProductAllBrands } from "../../redux/actions";
 import ButtonFilter from "./buttonFilter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import style from "../../styles/allProducts.module.css";
 
 export default function FilterBrand() {
     const [brand, setBrand] = useState('')
     const dispatch = useDispatch();
 
-    const marcas = [
-        'Asus', 'Hp', 'Glorious',
-        'Viewsonic', 'Lg', 'HyperX',
-        'Redragon', 'Msi', 'Lenovo',
-        'Banghó', 'Dell', 'IQual',
-        'Samsung', 'Philips', 'Gadnic',
-        'ViewSonic', 'Logitech', 'Yindiao',
-        'Apple', 'Soundpeats', 'Sony',
-        'JBL', 'Soul', 'Noga',
-        'M40x', 'AKG', 'Senheiser',
-        'Nisuta', 'Enova', 'Norwin',
-        'Intel', 'Exo', 'Razer'
-    ]
+    const brands = useSelector((state) => state.allBrands)
+
+    useEffect(() => {
+        dispatch(getProductAllBrands())
+    }, [dispatch])
 
     function handleOrderBrand(e) {
         e.preventDefault(e);
@@ -40,7 +32,7 @@ export default function FilterBrand() {
                 <select onChange={(e) => handleOrderBrand(e)} className={style.select}>
                     <option value="">---</option>
                     {
-                        marcas && marcas.map((item, index) => (
+                        brands && brands.map((item, index) => (
                             <option key={index} value={item}>
                                 {item}
                             </option>
