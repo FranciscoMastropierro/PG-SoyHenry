@@ -215,11 +215,22 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  getAllBrand : (req, res) => {
+    let brandArr = [];
+    let brandMap = productList.map((el) => {
+        let brand = el.brand;
+        
+        brandArr.push(brand)
+    });
+
+    let brandFlat = brandArr.flat();
+
+    const brandSet = new Set(brandFlat);
+    const brandResult = Array.from(brandSet)
+
+    res.send(brandResult)
   }
-
-  
-
-
-
 
 };
