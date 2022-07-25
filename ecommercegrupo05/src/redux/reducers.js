@@ -21,7 +21,7 @@ const initialState = {
     pages: 0,
     productsToRender: [],
     filterPrice: [],
-    categories: []
+    categories: [],
 }
 
 function rootReducer(state = initialState, { type, payload }) {

@@ -8,15 +8,19 @@ import FilterPrice from "../atoms/filterPrice";
 import FilterBrand from "../atoms/filterBrand";
 import FilterByOrder from "../atoms/filterByOrder";
 import FilterCategories from "../atoms/filterCategories";
+import { useLocation } from "react-router-dom";
 
 export default function AllProducts() {
   const dispatch = useDispatch()
   const pages = useSelector((state) => state.pages)
   const products = useSelector((state) => state.data)
 
+  const loc = useLocation()
+  let loc2 = loc.search.slice(6)
+
   useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps  
+    dispatch(getProducts(loc2))
+  }, [loc]) //eslint-disable-line react-hooks/exhaustive-deps  
 
   useEffect(() => {
     dispatch(paginacion(pages));

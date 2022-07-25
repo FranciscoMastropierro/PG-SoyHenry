@@ -7,7 +7,8 @@ export default function CardProducts() {
 
     const productsToRender = useSelector((state) => state.productsToRender)
 
-    if (!productsToRender.length) return <div className={style.loader}></div>
+    // if (!productsToRender.length) return <div className={style.loader}></div>
+    if (!productsToRender.length) return <h1>no hemos encontrado los productos que buscaste</h1>
 
     return (
         <div className={style.cardWrapper}>
@@ -24,7 +25,7 @@ export default function CardProducts() {
                             <Link to={`/cart`}>Añadir al Carrito 🛒</Link>
                         </button>
                     </div>
-                ))
+                )) 
             }
         </div>
     )
