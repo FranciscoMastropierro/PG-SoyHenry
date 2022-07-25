@@ -19,6 +19,7 @@ export default function Details() {
   return (
     <div>
       <div>
+        <Link to='/' className={style.btnBack}>atras</Link>
         <div>
           {product.length === 0 ? (<div className={style.loader}></div>) 
           : (
