@@ -33,12 +33,26 @@ module.exports = {
       else return res.status(404).send('Product not found');
     }
   },
-  getPrice: async(req,res)=>{
+  getFilter: async(req,res)=>{
+    console.log(req.body)
+    if(!req.body){
+      return res.status(404).send('Products not found');
+    }
+    const {praice,brand,order,categorie}=req.body
+    let min = 0;
+    let max = 0;
+    if(!!praice.min){
+      min=praice.min
+    }
+    if(!!praice.max){
+      max=praice.max
+    }
     const productsBd = await Products.findAll({
       include: { model: Categories },
     });
-    if(!!req.query.order && req.query.order=="Asc"){
-    productsBd.sort(function(a, b) {
+    let auxproductsBd=productsBd
+    if(!!order && order=="minor"){
+      auxproductsBd.sort(function(a, b) {
       if (Number(a.price) > Number(b.price)) {
         return 1;
       }
@@ -47,24 +61,9 @@ module.exports = {
       }
       return 0;
     });
-      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else if(!!req.query.min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        return res.send(result);
-      }
-      else if(!!req.query.max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else 
-        return res.send(productsBd);
-    }
-    if(!!req.query.order && req.query.order=="Desc"){
-      productsBd.sort(function(a, b) {
+     }
+    else if(!!order && order=="higher"){
+      auxproductsBd.sort(function(a, b) {
         if (Number(a.price) < Number(b.price)) {
           return 1;
         }
@@ -73,38 +72,47 @@ module.exports = {
         }
         return 0;
       });
-      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else if(!!req.query.min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        return res.send(result);
-      }
-      else if(!!req.query.max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else 
-        return res.send(productsBd);
     }
-    else if(!!req.query.min || !!req.query.max ){
-      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
+    else if(!!order && order=="Asc"){
+      auxproductsBd.sort(function(a,b){
+        if(a.name > b.name){
+          return 1;
+        };
+        if (a.name < b.name){
+          return -1
+        };
+        return 0
+      })
+    }
+    else if (!!order && order=="Desc") {
+      auxproductsBd.sort(function (a,b){
+        if(a.name> b.name){
+          return -1;
+        };
+        if(a.name < b.name){
+          return 1;
+        };
+        return 0
+      })
+    }
+    if(!!min && !!max ){
+      if(!!min){
+        auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
       }
-      else if(!!req.query.min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        return res.send(result);
-      }
-      else if(!!req.query.max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
+      if(!!max){
+        auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) < Number(max));
       }
     }
-    else   return res.status(404).send("Ingrese una Query permitida");
+    if(!!categorie){
+      auxproductsBd = auxproductsBd.filter(elemt => elemt.Categories?.map(elemt => elemt.name.toLowerCase()) == categorie.toLowerCase() )
+    }
+    if(!!brand){
+      auxproductsBd = auxproductsBd.filter(elemt => elemt.brand== brand )
+    }
+    if(!auxproductsBd.length){
+      return res.status(404).send('Product not found');
+    }
+    else return res.send(auxproductsBd);
   },
 
   filterByCategories : async ( req, res) => {
@@ -182,7 +190,7 @@ module.exports = {
   preLoadProducts : async () =>{
     const upToDb = productList.map( async(el) => {
       const categories = await Categories.findAll();
-      const { id } = categories.find(elemt => elemt.name == el.categories.toString())
+      const { id } = categories?.find(elemt => elemt.name == el.categories.toString())
       const product = await Products.create({
               name: el.name,
               image: el.image,
