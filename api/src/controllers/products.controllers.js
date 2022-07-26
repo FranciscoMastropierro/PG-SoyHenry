@@ -34,6 +34,10 @@ module.exports = {
     }
   },
   getFilter: async(req,res)=>{
+    console.log(req.body)
+    if(!req.body){
+      return res.status(404).send('Products not found');
+    }
     const {praice,brand,order,categorie}=req.body
     let min = 0;
     let max = 0;
@@ -41,7 +45,7 @@ module.exports = {
       min=praice.min
     }
     if(!!praice.max){
-      min=praice.max
+      max=praice.max
     }
     const productsBd = await Products.findAll({
       include: { model: Categories },
@@ -91,7 +95,7 @@ module.exports = {
         return 0
       })
     }
-    if(!!min || !!max ){
+    if(!!min && !!max ){
       if(!!min){
         auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
       }
@@ -186,7 +190,7 @@ module.exports = {
   preLoadProducts : async () =>{
     const upToDb = productList.map( async(el) => {
       const categories = await Categories.findAll();
-      const { id } = categories.find(elemt => elemt.name == el.categories.toString())
+      const { id } = categories?.find(elemt => elemt.name == el.categories.toString())
       const product = await Products.create({
               name: el.name,
               image: el.image,
