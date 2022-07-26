@@ -4,13 +4,10 @@ import {
     GET_DETAIL,
     CLEANER,
     CREATE_PRODUCT,
-    PAGINACION,
-    GET_FILTER_PRICE,
-    GET_FILTER_BRAND,
-    GET_ORDER_BY_NAME,
-    GET_CATEGORIES,
-    FILTER_CATEGORIES,
-    GET_PRODUCT_ALL_BRANDS
+    PAGINACION,    
+    GET_CATEGORIES,    
+    GET_FILTERS,
+    GET_CATE
 } from './actions'
 
 const initialState = {
@@ -21,11 +18,11 @@ const initialState = {
     clean: [],
     productsPerPage: 15,
     pages: 0,
-    productsToRender: [],
-    filterPrice: [],
-    categories: [],
-    allBrands: []
-}
+    productsToRender: [],    
+    laptos: [],    
+    filters: [],
+    cate: []
+    }
 
 function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
@@ -34,7 +31,7 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 data: payload,
                 copyData: payload,
-            };
+            }
         case GET_PRODUCT_BY_NAME:
             return {
                 ...state,
@@ -49,47 +46,27 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 detail: payload
-            };
+            }
         case CLEANER:
             return {
                 ...state,
                 detail: []
-            };
+            }
         case PAGINACION:
             return {
                 ...state,
                 productsToRender: state.data.slice(payload, payload + state.productsPerPage)
-            };
-        case GET_FILTER_PRICE:
-            return {
-                ...state,
-                data: payload
             }
-        case GET_FILTER_BRAND:
+        case GET_FILTERS:
             return {
                 ...state,
-                data: payload
+                filters: payload,
+                laptos: payload,
             }
-        case GET_ORDER_BY_NAME:
+        case GET_CATE:
             return {
-                ...state,
-                data: payload
-            }
-        case GET_CATEGORIES:
-            return {
-                ...state,
-                copyData: payload,
-                categories: payload
-            }
-        case FILTER_CATEGORIES:
-            return {
-                ...state,
-                data: payload
-            }
-        case GET_PRODUCT_ALL_BRANDS:
-            return {
-                ...state,
-                allBrands: payload
+                ...state,               
+                cate: payload
             }
         default: return state;
     }

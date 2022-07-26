@@ -4,11 +4,8 @@ import { getProducts, paginacion } from "../../redux/actions";
 import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
-import FilterPrice from "../atoms/filterPrice";
-import FilterBrand from "../atoms/filterBrand";
-import FilterByOrder from "../atoms/filterByOrder";
-import FilterCategories from "../atoms/filterCategories";
 import { useLocation } from "react-router-dom";
+import Filters from "../atoms/Filters";
 
 export default function AllProducts() {
   const dispatch = useDispatch()
@@ -29,10 +26,7 @@ export default function AllProducts() {
   return (
     <>
       <div className={style.filters}>
-        <div className={style.div}><FilterPrice /></div>
-        <div className={style.div}><FilterBrand /></div>
-        <div className={style.div}><FilterCategories /></div>
-        <div className={style.div}><FilterByOrder /></div>
+        <div className={style.div}><Filters /></div>
       </div>
       <Pagination />
       <CardProducts />
