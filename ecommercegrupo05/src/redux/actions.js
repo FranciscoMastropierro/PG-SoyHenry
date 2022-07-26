@@ -45,15 +45,15 @@ export function getDetail(id) {
     }
 }
 
-export function getFilters() {
-    return async function (dispatch) {
-        const json = await axios('http://localhost:3001/products/filter')
-        const data = json.data
-        return dispatch({
-            type: GET_FILTERS,
-            payload: data
-        })
-    }
+export function getFilters(category) {
+    return async function (dispatch){
+      const {data} = await axios.post('http://localhost:3001/products/filter',(category))
+      console.log(data)
+      return dispatch({
+        type: GET_FILTERS,
+        payload: data
+    })
+  }
 }
 
 export function getCate() {

@@ -15,19 +15,18 @@ import style from '../../styles/slidepopularproducts.module.css'
 function SlideBestNotebooks() {
   const dispatch = useDispatch();
   const [category, setCategory] = useState({
-    "brand": "",
-    "categorie": "Laptops",
-    "order": "",
-    "praice": {
-      "min": 0,
-      "max": 0
+    brand: "",
+    categorie: "Laptops",
+    order: "",
+    praice: {
+      min: 0,
+      max: 0
     }
   })
   const infoBestNotebooks = useSelector(state => state.laptos);
-  // console.log(infoBestNotebooks)
+   console.log(infoBestNotebooks)
 
   useEffect(() => {
-    console.log(category)
     dispatch(getFilters(category))
   }, [dispatch])
 

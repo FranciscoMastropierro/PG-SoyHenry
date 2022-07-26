@@ -34,6 +34,10 @@ module.exports = {
     }
   },
   getFilter: async(req,res)=>{
+    console.log(req.body)
+    if(!req.body){
+      return res.status(404).send('Products not found');
+    }
     const {praice,brand,order,categorie}=req.body
     let min = 0;
     let max = 0;
