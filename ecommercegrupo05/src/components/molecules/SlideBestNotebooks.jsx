@@ -23,11 +23,11 @@ function SlideBestNotebooks() {
   const productsToSee = infoBestNotebooks.slice(0,10)
     return (
         <div className={style.slideContainer}> 
-            <h3 className={style.title}> Mejores Computadoras </h3>
+            <h3 className={style.title}> Las Mejores Computadoras </h3>
         <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={100}
+        spaceBetween={80}
         slidesPerView={5}
         navigation
         // pagination={{ clickable: true }}
@@ -45,6 +45,7 @@ function SlideBestNotebooks() {
                           image={image} 
                           name={name}
                           price={price}
+                          id={id}
                           />
                       </Link>
                       </div>

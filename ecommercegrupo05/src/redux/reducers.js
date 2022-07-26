@@ -9,7 +9,8 @@ import {
     GET_FILTER_BRAND,
     GET_ORDER_BY_NAME,
     GET_CATEGORIES,
-    FILTER_CATEGORIES
+    FILTER_CATEGORIES,
+    GET_PRODUCT_ALL_BRANDS
 } from './actions'
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
     productsToRender: [],
     filterPrice: [],
     categories: [],
+    allBrands: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -83,6 +85,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 data: payload
+            }
+        case GET_PRODUCT_ALL_BRANDS:
+            return {
+                ...state,
+                allBrands: payload
             }
         default: return state;
     }
