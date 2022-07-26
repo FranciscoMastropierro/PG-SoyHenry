@@ -15,7 +15,9 @@ export default function CardProducts() {
             {
                 productsToRender?.map(({ id, image, name, price }, index) => (
                     <div className={style.card} key={index}>
-                        <img className={style.img} src={image} alt="imagen de producto" />
+                        <div className={style.imgDiv}>
+                            <img className={style.img} src={image} alt="imagen de producto" />
+                        </div>
                         <h2 className={style.h2}>{name}</h2>
                         <div className={style.price}>${price}</div>
                         <button className={style.btn}>

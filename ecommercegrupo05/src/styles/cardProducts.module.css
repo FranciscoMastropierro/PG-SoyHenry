@@ -9,6 +9,9 @@
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 2rem auto;
     width: 400px;
     text-align: center;
@@ -24,11 +27,21 @@
 }
 
 .card .img {
-    width: 300px;
-    border-radius: 8px;
+    max-height: 15vw;
+    max-width: 20vw;
     margin: 0 auto;
+}
+
+.card .imgDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22.5vw;
+    height: 15vw;
     margin-bottom: 30px;
+    border-radius: 8px;
     box-shadow: 1px 1px 10px #111;
+    background: white;
 }
 
 .card>.btn {
