@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getProducts, getCate } from "../../redux/actions";
+import { getCate, getFilters, getProducts } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../../styles/allProducts.module.css";
 
+
 export default function Filters() {
     const dispatch = useDispatch();
+    const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
         "brand": "",
         "categorie": "",
         "order": "",
         "praice": {
-            "min": "",
+            "min": "0",
             "max": ""
         }
     })
@@ -26,6 +28,21 @@ export default function Filters() {
         dispatch(getCate())
     }, [dispatch])
 
+    function handleCLickRecharge(e) {
+        e.preventDefault()
+        dispatch(getProducts())
+        dispatch(getCate())
+        setInput({
+            "brand": "",
+            "categorie": "",
+            "order": "",
+            "praice": {
+                "min": "0",
+                "max": ""
+            }
+        })
+    }
+
     function handleOrderByOrder(e) {
         e.preventDefault(e);
         setInput({
@@ -34,16 +51,58 @@ export default function Filters() {
         });
     }
 
-    function handleOrderBrand(e) {
+    function handleCategory(e) {
         e.preventDefault(e);
-        setInput(e.target.value);
+        setInput({
+            ...input,
+            categorie: e.target.value
+        });
     }
 
-    // function handleSubmit(e) {
-    //     e.preventDefault(e);
-    //     dispatch(getFilterBrand(brand));
-    //     setBrand('')
-    // }
+    function handleOrderBrand(e) {
+        e.preventDefault(e);
+        setInput({
+            ...input,
+            brand: e.target.value
+        });
+    }
+
+    function handleFilterMin(e) {
+        e.preventDefault(e);
+        setInput({
+            ...input,
+            praice: {
+                min: e.target.value,
+                max: input.praice.max
+            }
+        });
+    }
+
+    function handleFilterMax(e) {
+        e.preventDefault(e);
+        setInput({
+            ...input,
+            praice: {
+                min: input.praice.min,
+                max: e.target.value
+            }
+        });
+    }
+
+
+    function handleSubmit(e) {
+        e.preventDefault(e);
+        dispatch(getFilters(input));
+        setInput({
+            "brand": "",
+            "categorie": "",
+            "order": "",
+            "praice": {
+                "min": "0",
+                "max": ""
+            }
+        })
+    }
 
     return (
         <div>
@@ -51,8 +110,8 @@ export default function Filters() {
             {/* ----------- filtro de alfabetico ---------- */}
             <label className={style.row}>
                 <p className={style.title}>Orden Alfabetico</p>
-                <select className={style.select}  onChange={e => handleOrderByOrder(e)}>       {/* onChange={e => handleOrderByOrder(e)} */}
-                    <option value='All'>---</option>
+                <select className={style.select} onChange={e => handleOrderByOrder(e)}>       {/* onChange={e => handleOrderByOrder(e)} */}
+                    <option value=''  >---</option>
                     <option value='Asc'> A a Z  </option>
                     <option value='Desc'> Z a A  </option>
                 </select>
@@ -62,11 +121,11 @@ export default function Filters() {
             {/* ----------- filtro de categorias---------- */}
             <label className={style.row}>
                 <p className={style.title}>Categoria</p>
-                <select className={style.select}>       {/* onChange={(e) => handleCategory(e)} */}
-                    <option value="">---</option>
+                <select className={style.select} onChange={(e) => handleCategory(e)}>       {/* onChange={(e) => handleCategory(e)} */}
+                    <option value="" >---</option>
                     {
                         allCategories && allCategories.map((item, index) => (
-                            <option key={index} value={item}>
+                            <option key={index} value={item} >
                                 {item}
                             </option>
                         ))
@@ -79,7 +138,7 @@ export default function Filters() {
 
             <label className={style.row}>
                 <p className={style.title}>Marca</p>
-                <select className={style.select}>    {/* onChange={(e) => handleOrderBrand(e)} */}
+                <select className={style.select} onChange={(e) => handleOrderBrand(e)}>    {/* onChange={(e) => handleOrderBrand(e)} */}
                     <option value="">---</option>
                     {
                         brands && brands.map((item, index) => (
@@ -92,44 +151,45 @@ export default function Filters() {
             </label>
             <br />
 
-            {/* ----------- filtro de marcas ---------- */}
+            {/* ----------- filtro de precio ---------- */}
             <label className={style.titleColor}>
                 Precio:
                 <br />
                 <label className={style.row}>
                     Por Orden
-                    <select className={style.select}>
+                    <select className={style.select} onChange={e => handleOrderByOrder(e)}>
                         <option value=""> --- </option>
                         <option value="minor">Menor a Mayor Precio</option>
                         <option value="higher">Mayor a Menor Precio</option>
                     </select>
                 </label>
-                <label className={style.row}>
+                <label for="min" className={style.row}>
                     Min $
-                    <input
-                        type="number"
-                        name="min"
-                        min="0"
-                        // value={price.max}
-                        placeholder='0'
-                    // onChange={(e) => handleFilterMax(e)} 
-                    />
                 </label>
+                <input
+                    type="number"
+                    name="min"
+                    min="0"
+                    value= {input.praice.min}
+                    placeholder='0'
+                    onChange={(e) => handleFilterMin(e)}
+                />
+
                 <label for="max" className={style.row}>
                     Max $
-                    <input
-                        type="number"
-                        name="max"
-                        max="200000"
-                        // value={price.max}
-                        placeholder='200000'
-                    // onChange={(e) => handleFilterMax(e)} 
-                    />
                 </label>
+                <input
+                    type="number"
+                    name="max"
+                    max="200000"
+                    value={input.praice.max}
+                    placeholder='200000'
+                    onChange={(e) => handleFilterMax(e)}
+                />
 
                 <br />
-
-                <button className={style.btn}>Filtrar </button>    {/* onClick={(e) => handleSubmit(e)} */}
+                <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>    {/* onClick={(e) => handleSubmit(e)} */}
+                <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Recargar Todos Los Productos</button>
             </label>
 
         </div>

@@ -60,6 +60,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case GET_FILTERS:
             return {
                 ...state,
+                data: payload,
                 filters: payload,
                 laptos: payload,
             }

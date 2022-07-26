@@ -45,10 +45,9 @@ export function getDetail(id) {
     }
 }
 
-export function getFilters() {
+export function getFilters(category) {
     return async function (dispatch) {
-        const json = await axios('http://localhost:3001/products/filter')
-        const data = json.data
+        const { data } = await axios.post('http://localhost:3001/products/filter', (category))
         return dispatch({
             type: GET_FILTERS,
             payload: data

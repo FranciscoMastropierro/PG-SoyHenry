@@ -5,7 +5,7 @@ const {getProducts, postProduct,getFilter, filterByCategories, getOrderByName, g
 
 router.get('/', getProducts)
 
-router.get('/filter', getFilter)
+router.post('/filter', getFilter)
 
 // router.get('/brand', getProductsByBrand)
 
