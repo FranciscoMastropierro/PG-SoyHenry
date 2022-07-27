@@ -16,7 +16,7 @@ function SlidePopularProducts() {
 
   const dispatch = useDispatch();
   const infoData = useSelector(state => state.data);
-  console.log("🚀 ~ file: SlidePopularProducts.jsx ~ line 19 ~ SlidePopularProducts ~ infoData", infoData)
+  // console.log("🚀 ~ file: SlidePopularProducts.jsx ~ line 19 ~ SlidePopularProducts ~ infoData", infoData)
 
   useEffect(()=>{
       dispatch(getProducts())
@@ -25,11 +25,11 @@ function SlidePopularProducts() {
   const productsToSee = infoData.slice(0,10)
     return (
         <div className={style.slideContainer}> 
-            <h3 className={style.title}> Popular Products </h3>
+            <h3 className={style.title}> Productos Populares</h3>
         <div className={style.swiperContainer}>
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={100}
+        spaceBetween={80}
         slidesPerView={5}
         navigation
         // pagination={{ clickable: true }}
@@ -47,6 +47,7 @@ function SlidePopularProducts() {
                           image={image} 
                           name={name}
                           price={price}
+                          id={id}
                           />
                       </Link>
                       </div>

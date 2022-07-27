@@ -1,9 +1,12 @@
 .navbarContainer {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #333333ea;
+    align-items: center;
+    background-color: #333333;
     padding: 10px 30px;
+    z-index: 3;
 }
 .navbarContainer img {
     width: 90px;
@@ -13,4 +16,5 @@
     flex-direction: column;
     align-items: center;
     margin-left: 21%;
+    margin-bottom: 28px;
 }

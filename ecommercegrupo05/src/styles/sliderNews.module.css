@@ -1,17 +1,18 @@
-.slider{
+.slider {
     display: flex;
     justify-content: center;
 }
 
-.sliderContainer{
+.sliderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #333333ea;
 }
 
-.img{
-    width: 1150px;
-    height: 320px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.sliderContainer img {
+    width: 100vw;
+    height: auto;
+    border-top: 5px solid #01F603;
+    border-bottom: 5px solid #01F603
 }
