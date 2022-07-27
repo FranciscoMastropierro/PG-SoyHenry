@@ -29,7 +29,8 @@ export default function Filters() {
     }, [dispatch])
 
     function handleCLickRecharge(e) {
-        e.preventDefault()
+        // e.preventDefault()
+        window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
         setInput({
@@ -91,7 +92,7 @@ export default function Filters() {
 
 
     function handleSubmit(e) {
-        // e.preventDefault(e);
+        e.preventDefault(e);
         dispatch(getFilters(input));
         // setInput({
         //     "brand": "",
