@@ -6,6 +6,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 1rem;
+    font-family: 'Share Tech', sans-serif;
 }
 
 .card {
@@ -23,9 +24,15 @@
 }
 
 .card>.price {
-    font-weight: 800;
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 27px;
+    color: #01F603;
+}
+
+.price h3 {
+    color: rgb(220, 220, 220)
 }
 
 .card .img {
@@ -68,6 +75,7 @@
 .card .h2 {
     /* color: rgba(1, 246, 3, 0.8); */
     color: white;
+    font-size: 20px;
 }
 
 .loader {

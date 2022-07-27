@@ -1,5 +1,5 @@
 import React from 'react'
-import style from '../../styles/favcard.module.css';
+import style from '../../styles/slide.module.css';
 import { useNavigate } from 'react-router-dom';
 import favourites from '../../assets/favourites.png'
 import click from '../../assets/favourites-click.png'
