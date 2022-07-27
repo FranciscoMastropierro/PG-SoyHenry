@@ -1,11 +1,12 @@
 .searchbarGeneralContainer {
-    position: absolute;
+    position: relative;
     max-height: 200px;
     width: 289px;
     background-color: #181A1B;
     color: #ACACAC;
     border-radius: 3px;
     font-family: 'Share Tech', sans-serif;
+    /* margin-top: 28px; */
     z-index: 5;
 }
 .searchbarContainer {
