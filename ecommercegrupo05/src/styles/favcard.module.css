@@ -19,9 +19,17 @@
     border-radius: 4px;
     background-color: #01f601dc;
 }
-.img{
-    height: 200px;
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 170px;
     width: 200px;
+    background: white;
+}
+.img{
+    width: 200px;
+    max-height: 170px;
 }
 .name{
     text-align: center;
