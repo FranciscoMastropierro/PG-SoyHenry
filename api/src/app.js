@@ -4,6 +4,27 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
+//Auth
+const {
+  SECRET,
+  BASEURL,
+  CLIENTID,
+  ISSUER
+} = process.env
+
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: SECRET,
+  baseURL: BASEURL,
+  clientID: CLIENTID,
+  issuerBaseURL: ISSUER
+};
+
+
+
 require('./db.js');
 const cors = require('cors')
 const server = express();
@@ -21,6 +42,17 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+//AUTH
+server.use(auth(config))
+
+
+// server.get('/', (req, res) => {
+//   console.log('Flag App Auth0', req.oidc.isAuthenticated());
+//   console.log('Flag app Auth0 USR', req.oidc.user)
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+// });
+
 
 server.use('/', routes);
 
