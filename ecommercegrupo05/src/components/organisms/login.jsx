@@ -19,15 +19,15 @@ export default function Login() {
         <div className={style.loginContainerGeneral}>
         <div className={style.loginContainer}>
             <img src={logo} alt='logo'/>
-            <h1>LOG IN</h1>
+            <h1>INICIAR SESION</h1>
             <div className={style.divHr}></div>
             <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
-                <input key='username' placeholder='username...' type='text' value={user.username} onChange={(e) => setUser({...user, username: e.target.value})}/>
-                <input key='password' placeholder='password...' type='password' value={user.password} onChange={(e) => setUser({...user, password: e.target.value})}/>
+                <input key='username' placeholder='usuario...' type='text' value={user.username} onChange={(e) => setUser({...user, username: e.target.value})}/>
+                <input key='password' placeholder='contraseña...' type='password' value={user.password} onChange={(e) => setUser({...user, password: e.target.value})}/>
                 <button key='submit' type='submit'>Submit</button>
             </form>
-            <h3>Don't you have an account?</h3>
-            <button>Sing up here</button>
+            <h3>No tienes cuenta?</h3>
+            <button>Regístrate aquí</button>
         </div>
         </div>
     )

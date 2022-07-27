@@ -1,6 +1,8 @@
 const axios = require('axios');
+const { preloadCate } = require('../controller/productsPreload.js');
 require('dotenv').config();
 const { Categories } = require('../db.js');
+
 
 
 
@@ -18,9 +20,9 @@ module.exports = {
         }
 
     },
+    
     preLoadCategories : () => {
-        const categories = ['Keyboards', 'Mouses', 'Laptops', 'Headsets', 'Monitors'];  
-
-        categories.forEach(async (e) => await Categories.Create(e))
+        preloadCate()
+    
     }
 };
