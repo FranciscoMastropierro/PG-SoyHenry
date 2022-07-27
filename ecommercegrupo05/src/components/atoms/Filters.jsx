@@ -91,7 +91,7 @@ export default function Filters() {
 
 
     function handleSubmit(e) {
-        e.preventDefault(e);
+        // e.preventDefault(e);
         dispatch(getFilters(input));
         // setInput({
         //     "brand": "",
