@@ -20,7 +20,7 @@ export default function Details() {
   return (
     <div>
       <div>
-        <button className={style.btnBack} onClick={() => navigate(-1)}>atras</button>
+          <button className={style.btnBack} onClick={() => navigate(-1)}>atras</button>
         <div>
           {product.length === 0 ? (<div className={style.loader}></div>) 
           : (

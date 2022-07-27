@@ -7,12 +7,14 @@ function Card({image, name, price, id}) {
 
   return (
     <div className={style.container}>
+      <div className={style.imgContainer}>
         <img className={style.img} src={image} alt="Flag" width='130' height='100' />
-        <div className={style.textContainer}>
-          <h4 className={style.name}>{name}</h4>
-          <h5 className={style.price}>$ {price}</h5>
-          <button onClick={() => navigate(`/details/${id}`)}>Ver producto</button>
-        </div>
+      </div>
+      <div className={style.textContainer}>
+        <h4 className={style.name}>{name}</h4>
+        <h5 className={style.price}>$ {price}</h5>
+        <button onClick={() => navigate(`/details/${id}`)}>Ver producto</button>
+      </div>
     </div>
   )
 }

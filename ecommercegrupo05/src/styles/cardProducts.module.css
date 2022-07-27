@@ -16,7 +16,9 @@
     width: 400px;
     text-align: center;
     border-radius: 0.5em;
-    box-shadow: 1px 1px 10px #111;
+    background-color: #555555;
+    /* box-shadow: 1px 1px 10px #111; */
+    box-shadow: 1px 1px 15px#01F603;
     padding: 1em 1.5em;
 }
 
@@ -64,7 +66,8 @@
 }
 
 .card .h2 {
-    color: rgba(1, 246, 3, 0.8);
+    /* color: rgba(1, 246, 3, 0.8); */
+    color: white;
 }
 
 .loader {
