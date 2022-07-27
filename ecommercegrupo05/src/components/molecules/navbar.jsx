@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom';
 export default function Navbar () {
     return (
         <div className={style.navbarContainer}>
-            <Link to='/'>
-                <img src={logo} alt='logo'/>
-            </Link>
             <div className={style.switchSearch}>
-                {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
+            <Link to='/'>
+                <img src={logo} alt='logo'className={style.logo}/>
+            </Link>
                 <SearchBar/>
+                {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
             <SidebarOptions/>
         </div>
