@@ -1,23 +1,50 @@
-import React from "react";
-import style from '../../styles/cardProducts.module.css'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import style from '../../styles/cart.module.css'
 import { useCartContext } from '../../context/CartItem';
 
-export default function NotFound () {
+export default function NotFound() {
 
     const superState = useCartContext()
 
-    const {addItemToCart, deleteItemToCart} = superState.effects
+    const navigate = useNavigate()
 
-    const {total, products} = superState.state
+    const [precio, setPrecio] = useState(true)
+
+    const { addItemToCart, deleteItemToCart } = superState.effects
+
+    const { products } = superState.state
+
+    const totalPricePerProducts = products.map(({ amount, price }) => amount * price)
+
+    const totalPrice = totalPricePerProducts.reduce((accum, current) => accum = accum + current, 0)
 
     const handleItemToCart = (product) => () => addItemToCart(product)
 
     const handleItemToDelete = (product) => () => deleteItemToCart(product)
 
+    useEffect(() => {
+        if(totalPrice !== 0){
+            setPrecio(totalPrice)
+        }else {
+            navigate('/allProducts')
+        }
+    }, [totalPrice])
+
     return (
         <div>
+            <div>
+                <div className={style.wrapperTotal}>
+                    <div className={style.space}>
+                        <p className={style.total}>Precio Total: ${precio}</p>
+                    </div>
+                    <div className={style.space}>
+                        <button className={style.total}>COMPRAR</button>
+                    </div>
+                </div>
+            </div>
             {
-                products?.map( product => {
+                products?.map(product => {
                     const { id, image, name, price, amount } = product
                     let amountOfProduct = price * amount
                     return (
@@ -26,7 +53,7 @@ export default function NotFound () {
                                 <img className={style.img} src={image} alt="imagen de producto" />
                             </div>
                             <h2 className={style.h2}>{name}</h2>
-                            <br/>
+                            <br />
                             <button className={style.btn} onClick={handleItemToCart(product)}> + </button>
                             <p>{amount}</p>
                             <button className={style.btn} onClick={handleItemToDelete(product)}> - </button>
@@ -35,15 +62,6 @@ export default function NotFound () {
                     )
                 })
             }
-            <div>
-                <h1>
-                    {
-                        <p>total</p>
-                    }
-                </h1>
-            </div>
         </div>
     )
 }
-
-// onClick={handleItemToDelete(product)}

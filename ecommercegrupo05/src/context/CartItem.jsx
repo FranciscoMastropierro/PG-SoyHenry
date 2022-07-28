@@ -30,8 +30,12 @@ export const CartProvider = ({ children }) => {
 
     const cachearNumber = state.products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
-    const totalAmount = state.products.reduce((accum, current) => accum = Number(accum) + Number(current?.price), 0)
-    // console.log("🚀 ~ file: CartItem.jsx ~ line 34 ~ CartProvider ~ totalAmount", totalAmount)
+    // const totalAmount = state.products.reduce((accum, current) => accum = Number(accum) + Number(current?.price), 0)
+
+    // const totalPricePerProducts = state.products.map(({amount, price}) => amount * price)
+
+    // const totalPrice = totalPricePerProducts.reduce((accum, current) => accum = accum + current, 0)
+
 
     const updateState = (props) => {
         setState({
@@ -39,13 +43,6 @@ export const CartProvider = ({ children }) => {
             ...props
         })
     }
-    
-    // const cantidadTotal = () => {
-
-    //     updateState({
-    //         total: state.total + 1
-    //     })
-    // }
 
     const addItemToCart = itemToAdd => {
         const cartItems = state.products
@@ -56,7 +53,7 @@ export const CartProvider = ({ children }) => {
         if (inCart) {
             newItems = cartItems.map((productInCart) => {
                 if (productInCart.id === itemToAdd.id) {
-                    return { ...inCart, amount: inCart.amount + 1, nombre: 'perro'};
+                    return { ...inCart, amount: inCart.amount + 1};
                 } else return productInCart;
             })
 
@@ -113,8 +110,6 @@ export const CartProvider = ({ children }) => {
             updateState({ products: itemDelete });
         }
     }
-
-
 
     const storage = {
         state,
