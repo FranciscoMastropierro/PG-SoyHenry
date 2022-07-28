@@ -6,6 +6,7 @@ import Home from './components/organisms/Home'
 import AllProducts from './components/organisms/allProducts';
 import Details from './components/organisms/details';
 import Login from './components/organisms/login';
+import Profile from './components/organisms/Profile.jsx';
 import Cart from './components/organisms/cart';
 import AboutUs from './components/organisms/aboutUs';
 import Faq from './components/organisms/FAQ';
@@ -35,6 +36,7 @@ function App() {
         <Route exact path = '/allProducts' element={<AllProducts />} />
         <Route exact path = '/details/:id' element={<Details />} />
         <Route exact path = '/login' element={<Login />} />
+        <Route exact path = '/profile' element={<Profile />} />
         <Route exact path = '/favorites' element={<Favorites />} />
         <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
         <Route exact path = '/cart' element={<Cart />} />
