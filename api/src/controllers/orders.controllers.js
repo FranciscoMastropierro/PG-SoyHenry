@@ -22,38 +22,31 @@ module.exports = {
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
     const { UserId, products, address, postalCode } = req.body;
-
+    
     try {
       if (!UserId || !Object.keys(products))
         res.status(403).send({ msj: "Invalid params" });
-
-      const user = await Users.findOne({ where: { id : UserId } });
-      const aux = {
+      Users.findOne({ where: { id : UserId } }).then(user=>{
+        const aux = {
         UserId,
         amount: products
           .map((e) => e.quantity * e.price)
           .reduce((prev, next) => prev + next),
         shipmentAddress: address ? address : user.address,
         postalCode: postalCode ? postalCode : user.postalCode,
-      };
-      console.log(aux)
-
-      const order = await Order.create(aux);
-      
-      products.forEach(async (p) => {
-        try {
-        const aux2 = {
-          ProductId: p.id,
-          quantity: p.quantity,
-          unitPrice: p.price,
-        };
-        console.log(aux2)
-        await order.addProducts(aux2, { through: Products_Orders });
-        res.send({msj: 'Order Created', order})
-      } catch (error) {
-       console.log(error);   
-      }
+         };
+        Order.create(aux).then(order=>{
+          products.forEach(async (p) => {
+          try {
+          order.addProducts(p.id, { through: { unitPrice: p.price,quantity: p.quantity}}).then(respuesta=>{
+            res.send({msj: 'Order Created', respuesta})
+          });
+        } catch (error) {
+         console.log(error);   
+        }
+        });
       });
+      })
     } catch (error) {
       console.log(error);
       res.status(403).send('Fail create order')
