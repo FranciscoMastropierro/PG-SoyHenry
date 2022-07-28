@@ -38,6 +38,8 @@
 .menudiv:hover{
         
     background-color: aliceblue;
+    transform: scale(1.1) ;
+    animation-duration: 1s;
 }
 .modal{
     background-color: black;
