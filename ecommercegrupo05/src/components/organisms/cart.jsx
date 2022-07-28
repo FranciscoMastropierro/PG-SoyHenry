@@ -19,6 +19,7 @@ export default function NotFound () {
             {
                 products?.map( product => {
                     const { id, image, name, price, amount } = product
+                    let amountOfProduct = price * amount
                     return (
                         <div className={style.card} key={id}>
                             <div className={style.imgDiv}>
@@ -29,12 +30,18 @@ export default function NotFound () {
                             <button className={style.btn} onClick={handleItemToCart(product)}> + </button>
                             <p>{amount}</p>
                             <button className={style.btn} onClick={handleItemToDelete(product)}> - </button>
-                            <div className={style.price}>$<h3>{price}</h3></div>
+                            <div className={style.price}>$<h3>{amountOfProduct}</h3></div>
                         </div>
                     )
                 })
             }
-            
+            <div>
+                <h1>
+                    {
+                        <p>total</p>
+                    }
+                </h1>
+            </div>
         </div>
     )
 }
