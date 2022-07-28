@@ -4,9 +4,16 @@ import { Link, useLocation } from 'react-router-dom';
 import {BsHeadset, BsFillMouseFill, BsKeyboardFill, BsLaptop } from "react-icons/bs"
 import {GiReturnArrow} from "react-icons/gi"
 import {FiMonitor} from "react-icons/fi"
-
-
-
+import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
+  } from '@chakra-ui/react'
 import {
     Modal,
     ModalOverlay,
@@ -30,6 +37,8 @@ export default function SidebarOptions () {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    
+
     return (
         <div className={style.options}>
             <Link to='/' className={style.link}>
@@ -37,8 +46,39 @@ export default function SidebarOptions () {
                 <span className={loc === '/'? style.onPath : null}>Inicio</span>
             </Link>
 
-            <Button bg="green" color="black" onClick={onOpen} _hover={{
-                background: "black",
+           
+            
+            
+            <Link to='/allProducts' className={style.link}>
+                <img src={keyboard} alt='keyboard'/>
+                <span className={loc === '/allProducts'? style.onPath : null}>Productos</span>
+            </Link>
+
+            <Link to="/favorites" className={style.link}>
+                <img src={loc === '/favorites'? click : fav} alt='favourites'/>
+                <span className={loc === '/favorites'? favourites : click}>Favoritos</span>
+            </Link>
+
+            <Link to='/cart' className={style.link}>
+                <img src={cart} alt='cart'/>
+                <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
+            </Link>
+
+            <Link to='/login' className={style.link}>
+                <img src={user} alt='user'/>
+                <span className={loc === '/login'? style.onPath : null}>Iniciar sesión</span>
+            </Link>
+
+            <div className={style.link}>
+                <img src={user} alt='user'/>
+                <span className={loc === '/profile'? style.onPath : null}>Mi Perfil</span>
+            </div>
+
+            <Button bg="none" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" onClick={onOpen} _hover={{
+                background: "none",
+               color: "green",
+              }} _focus={{
+                background: "none",
                color: "white",
               }}
                 >Categorias</Button>
@@ -46,7 +86,7 @@ export default function SidebarOptions () {
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay />
                 <ModalContent>
-                <ModalHeader>Productos</ModalHeader>
+                <ModalHeader>Categorias</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     
@@ -81,29 +121,6 @@ export default function SidebarOptions () {
               
                 </ModalContent>
             </Modal>
-            
-            
-            <Link to='/allProducts' className={style.link}>
-                <img src={keyboard} alt='keyboard'/>
-                <span className={loc === '/allProducts'? style.onPath : null}>Productos</span>
-            </Link>
-
-            <Link to="/favorites" className={style.link}>
-                <img src={loc === '/favorites'? click : fav} alt='favourites'/>
-                <span className={loc === '/favorites'? favourites : click}>Favoritos</span>
-            </Link>
-
-            <Link to='/cart' className={style.link}>
-                <img src={cart} alt='cart'/>
-                <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
-            </Link>
-
-            <Link to='/login' className={style.link}>
-                <img src={user} alt='user'/>
-                <span className={loc === '/login'? style.onPath : null}>Iniciar sesión</span>
-            </Link>
-
-            
 
 
 
