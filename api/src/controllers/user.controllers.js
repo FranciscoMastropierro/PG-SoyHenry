@@ -64,6 +64,29 @@ updateUsers : async (req, res) =>{
         res.status(404).json({ error: "Update failed", error})
 
     }
+},
+postUser : async (req, res) =>{
+ const {email ,firstname , lastname, address, postalCode, username, password} = req.body;
+
+ try {
+    const user = await Users.create({
+        email,
+        firstname,
+        lastname,
+        address,
+        postalCode,
+        username,
+        password
+    })
+
+
+    res.send({msg: "User Created", user})
+
+ } catch (error) {
+    console.log(error)
+    res.status(404).send({ error: "Can not post user", error})
+ }
+
 }
 
 

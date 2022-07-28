@@ -189,19 +189,25 @@ module.exports = {
 
   preLoadProducts : async () =>{
     const upToDb = productList.map( async(el) => {
+      try {
+
       const categories = await Categories.findAll();
       const { id } = categories?.find(elemt => elemt.name == el.categories.toString())
       const product = await Products.create({
+        
               name: el.name,
               image: el.image,
               price: el.price,
-              stock: el.quantity,
+              stock: 300,
               brand: el.brand,
               rating: el.calification,
               description: el.description.trim(),
       });
-      //console.log(Products.__proto__)
+      // console.log(conn.models)
       await product.addCategories(id, { through: Categories_Products })
+    } catch (error) {
+        console.log(error)
+    }
     })
   },
 
