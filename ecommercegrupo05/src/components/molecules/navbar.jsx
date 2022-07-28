@@ -3,18 +3,18 @@ import logo from '../../assets/coder2.png'
 import SearchBar from '../atoms/seacrbar.jsx'
 import SidebarOptions from '../atoms/sidebaroptions.jsx'
 import style from '../../styles/navbar.module.css'
-import { Switch } from '@chakra-ui/react'
+// import { Switch } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 
 export default function Navbar () {
     return (
         <div className={style.navbarContainer}>
-            <Link to='/'>
-                <img src={logo} alt='logo'/>
-            </Link>
             <div className={style.switchSearch}>
-                <Switch colorScheme='blackAlpha' size='lg'/>
+            <Link to='/'>
+                <img src={logo} alt='logo'className={style.logo}/>
+            </Link>
                 <SearchBar/>
+                {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
             <SidebarOptions/>
         </div>

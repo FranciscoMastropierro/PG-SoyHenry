@@ -1,6 +1,9 @@
 .options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     color:#efefef;
-    margin-top: 30px
 }
 .options span {
     font-size: 1.2rem;
@@ -9,6 +12,16 @@
 }
 .options span:hover {
     color: #01F603;
+}
+.options img {
+    height: 24px !important;
+    width: auto !important;
+}
+.link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
 }
 .onPath {
     color: #01F603;

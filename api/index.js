@@ -9,17 +9,17 @@ const { Categories, Products, Categories_Products } = conn.models;
 
 const port= process.env.PORT || 3001;
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(port, async () => {
     const products = await Products.findAll()
-    if(!products.length){
-      try {
-        preLoadCategories()
+    if(!products.length){ 
+    try {
+      preLoadCategories();
 
-      } finally{
-        preLoadProducts();
-      }  
-      console.log('%s listening at 3001'); // eslint-disable-line no-console
+    } finally{
+      preLoadProducts();
     }
+  }  
+    console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

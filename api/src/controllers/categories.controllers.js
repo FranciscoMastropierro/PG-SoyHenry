@@ -1,6 +1,6 @@
 const axios = require('axios');
-const { preloadCate } = require('../controller/productsPreload.js');
 require('dotenv').config();
+const productList = require('../asset/productList');
 const { Categories } = require('../db.js');
 
 
@@ -21,8 +21,32 @@ module.exports = {
 
     },
     
-    preLoadCategories : () => {
-        preloadCate()
+    preLoadCategories : async (req, res) => {
+        try {
+    
+            let cateArr = [];
+            let cateMap = productList.map((el) => {
+                let cate = el.categories; 
+                
+                cateArr.push(cate)
+            });
+    
+            let cateFlat = cateArr.flat();
+    
+            const cateSet = new Set(cateFlat);
+            const cateResult = Array.from(cateSet)
+    
+            const cateUpToDb = cateResult.map(async el => {
+                await Categories.findOrCreate({
+                    where:{name: el}
+                })
+            })
+    
+    
+    
+        } catch (error) {
+            console.log(error)
+        }
     
     }
 };

@@ -5,7 +5,8 @@ const { requiresAuth } = require('express-openid-connect');
 const categories = require('./categories.route.js')
 const product = require('./product.route.js')
 const products = require('./products.route.js')
-const auth0 = require('./auth0.route.js')
+const users = require('./user.route.js')
+const orders = require('./orders.route.js')
 
 const router = Router();
 
@@ -18,7 +19,9 @@ router.use('/product', product);
 
 router.use('/products', products)
 
-router.use('/', auth0)
+router.use('/users', users)
+
+router.use('/orders', orders)
 
 
 module.exports = router;
