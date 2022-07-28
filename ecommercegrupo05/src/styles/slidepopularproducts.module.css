@@ -9,6 +9,7 @@
     /* text-shadow:  1px 1px 10px blueviolet; */
 }
 .sliderbg {
+    width:200px;
     color: white;
     background-color: #1e2020d8;
     margin: 20px 20px 20px 20px;
