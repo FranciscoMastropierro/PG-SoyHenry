@@ -11,7 +11,7 @@ import { useCartContext } from '../../context/CartItem';
 export default function Home () {
 
     const superState = useCartContext()
-    console.log("🚀 ~ file: Home.jsx ~ line 14 ~ Home ~ superState", superState)
+    // console.log("🚀 ~ file: Home.jsx ~ line 14 ~ Home ~ superState", superState)
 
     return (
         <div>
