@@ -23,16 +23,18 @@ module.exports = (sequelize) => {
     },
     address:{
       type :DataTypes.STRING,
-      allowNull: false,
+     
+    },
+    postalCode : {
+      type: DataTypes.INTEGER,
+     
     },
     username: {
       type :DataTypes.STRING,
-      allowNull: false,
       unique: true,
     },
     password:{
       type: DataTypes.STRING,
-      allowNull: false,
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
