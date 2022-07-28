@@ -19,7 +19,8 @@ export default function CardProducts() {
                             <img className={style.img} src={image} alt="imagen de producto" />
                         </div>
                         <h2 className={style.h2}>{name}</h2>
-                        <div className={style.price}>${price}</div>
+                        <br/>
+                        <div className={style.price}>$<h3>{price}</h3></div>
                         <button className={style.btn}>
                             <Link to={`/details/${id}`}>Detalles</Link>
                         </button>
