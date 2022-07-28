@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 
     const user = req.oidc.user
 
-    //    const admin = user.email === userAdmin.email ? true: false ---> Para generar administradores NOTA: Necesitamos un JSON con los email permitidos 
+    //    const admin = user.email === userAdminJSON.email ? true: false ---> Para generar administradores NOTA: Necesitamos un JSON con los email permitidos 
     if(user) { 
         await Users.findOrCreate({
             where:{
