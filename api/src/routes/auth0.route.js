@@ -32,6 +32,8 @@ router.get('/', async (req, res) => {
 });
 
 
+
+
 router.get("/profile", requiresAuth(),(req, res) => {
     
     let arrUserInfo =  []
