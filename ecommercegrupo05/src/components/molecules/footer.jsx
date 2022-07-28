@@ -9,7 +9,7 @@ export default function Footer () {
     const marcas = ['Intel', 'AMD', 'Asus', 'Nvidia', 'Genesis', 'Asrock', 'Pny', 'Oloy'];
     const loMasBuscado = ['Placas de Video Nvidia', 'Placas de Video AMD', 'Gabinetes', 'Monitores', 'Teclado Mecánico', 'Mouse Gamer'];
     const ayuda = ['Whatsapp', 'FAQ', 'Trámite Garantía', 'Boton de Arrepentimiento']
-
+    
     return (
         <div className={style.footerGeneralContainer}>
             <div className={style.footerContainer}>
