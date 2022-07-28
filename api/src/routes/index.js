@@ -7,6 +7,7 @@ const product = require('./product.route.js')
 const products = require('./products.route.js')
 const users = require('./user.route.js')
 const orders = require('./orders.route.js')
+const routeAuth = require('./auth0.route.js')
 
 const router = Router();
 
@@ -15,9 +16,11 @@ const router = Router();
 
 router.use('/categories', categories);
 
-router.use('/product', product);
+router.use('/product', product);  
 
 router.use('/products', products)
+
+router.use("/login", routeAuth)
 
 router.use('/users', users)
 
