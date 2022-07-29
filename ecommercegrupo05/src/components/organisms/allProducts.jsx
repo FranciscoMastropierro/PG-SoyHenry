@@ -6,8 +6,11 @@ import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
 import { useLocation } from "react-router-dom";
 import Filters from "../atoms/Filters";
+import { useCartContext } from '../../context/CartItem';
 
 export default function AllProducts() {
+
+  const superState = useCartContext()
   const dispatch = useDispatch()
   const pages = useSelector((state) => state.pages)
   const products = useSelector((state) => state.data)
@@ -26,6 +29,7 @@ export default function AllProducts() {
   return (
     <>
       <div className={style.filters}>
+      {/* <h1>{superState.state.total}</h1> */}
         <div className={style.div}><Filters /></div>
       </div>
       <Pagination />

@@ -11,6 +11,7 @@ import click from '../../assets/favourites-click.png'
 import { loginUser } from '../../redux/actions'
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import { useCartContext } from '../../context/CartItem';
 
 export function SidebarOptions ({logged, loginUser}) {
     let loc = useLocation().pathname
@@ -18,6 +19,10 @@ export function SidebarOptions ({logged, loginUser}) {
     useEffect(() => {
         loginUser()
     },[])
+    const superState = useCartContext()
+
+    const { products } = superState.state
+    const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
     return (
         <div className={style.options}>
@@ -37,7 +42,10 @@ export function SidebarOptions ({logged, loginUser}) {
             </Link>
 
             <Link to='/cart' className={style.link}>
-                <img src={cart} alt='cart'/>
+                <div className={style.linkCart}>
+                    <img src={cart} alt='cart'/>
+                    <p className={style.cartItems}>{cachearNumber}</p>
+                </div>
                 <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
             </Link>
 
