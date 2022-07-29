@@ -6,6 +6,8 @@ const product = require('./product.route.js')
 const products = require('./products.route.js')
 const users = require('./user.route.js')
 const orders = require('./orders.route.js')
+const admin = require('./admin.route.js')
+const commentary = require('./commentary.route.js')
 
 const router = Router();
 
@@ -21,6 +23,10 @@ router.use('/products', products)
 router.use('/users', users)
 
 router.use('/orders', orders)
+
+router.use('/admin', admin)
+
+router.use('/commentary', commentary)
 
 
 module.exports = router;

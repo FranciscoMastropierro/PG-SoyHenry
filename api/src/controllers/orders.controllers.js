@@ -52,4 +52,14 @@ module.exports = {
       res.status(403).send('Fail create order')
     }
   },
+
+  updateStateOrder : async (req, res) => {
+    let { state , id } = req.params;
+
+    await Order.udate({state}, {where:{id}})
+
+    res.send('State Updated to ' +state)
+  }
+
+  
 };

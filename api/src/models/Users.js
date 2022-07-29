@@ -36,6 +36,11 @@ module.exports = (sequelize) => {
     password:{
       type: DataTypes.STRING,
     },
+    membership: {
+      type: DataTypes.ENUM,
+      values: ['Basic', 'Banned', 'Admin'],
+      defaultValue: 'Basic',
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
