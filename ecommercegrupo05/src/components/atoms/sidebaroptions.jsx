@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {BsHeadset, BsFillMouseFill, BsKeyboardFill, BsLaptop } from "react-icons/bs"
 import {GiReturnArrow} from "react-icons/gi"
 import {FiMonitor} from "react-icons/fi"
+import {BsList} from "react-icons/bs"
 import {
     Menu,
     MenuButton,
@@ -71,8 +72,38 @@ export default function SidebarOptions () {
 
             <div className={style.link}>
                 <img src={user} alt='user'/>
-                <span className={loc === '/profile'? style.onPath : null}>Mi Perfil</span>
+                      
+
+            <Menu isLazy>
+            <MenuButton as={Button} 
+            bg="none" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem"_hover={{
+                background: "none",
+               color: "green",
+              }} _active={{
+                background: "none",
+               color: "white",
+              }} >
+                 Mi Perfil
+            </MenuButton>
+            <MenuList bg="black">
+                <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
+                background: "green",
+               color: "black",}} >My Cart</MenuItem>
+                <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
+                background: "green",
+               color: "black",}}>My Favorites</MenuItem>
+                <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
+                background: "green",
+               color: "black",}}>My Orders</MenuItem>
+                <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
+                background: "green",
+               color: "black",}}>Settings</MenuItem>
+            </MenuList>
+            </Menu>
             </div>
+
+
+
 
             <Button bg="none" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" onClick={onOpen} _hover={{
                 background: "none",
@@ -81,12 +112,12 @@ export default function SidebarOptions () {
                 background: "none",
                color: "white",
               }}
-                >Categorias</Button>
+                >Categorias <BsList/> </Button>
 
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay />
                 <ModalContent>
-                <ModalHeader>Categorias</ModalHeader>
+                <ModalHeader>Categorias </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     
