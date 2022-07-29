@@ -7,7 +7,8 @@ import {
     PAGINACION,    
     GET_CATEGORIES,    
     GET_FILTERS,
-    GET_CATE
+    GET_CATE,
+    LOGIN_USER
 } from './actions'
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
     productsToRender: [],    
     laptos: [],    
     filters: [],
-    cate: []
+    cate: [],
+    logged: []
     }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -68,6 +70,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,               
                 cate: payload
+            }
+        case LOGIN_USER:
+            return {
+                ...state,
+                logged: payload
             }
         default: return state;
     }

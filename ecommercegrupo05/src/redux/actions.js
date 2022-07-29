@@ -73,11 +73,16 @@ export function cleaner() {
     }
 }
 
-export let loginUser = async () => {
-    const json = await axios('http://localhost:3001/');
-    const data = json.data
-    console.log(data)
-    return data
+export function loginUser () {
+    return async function (dispatch) {
+        const json = await axios('http://localhost:3001/',);
+        const data = json.data
+        console.log(data)
+        // return dispatch({
+        //     type: LOGIN_USER,
+        //     payload: data
+        // })
+    }
 }
 
 
