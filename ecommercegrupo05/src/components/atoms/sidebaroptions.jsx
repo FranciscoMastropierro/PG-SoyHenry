@@ -1,30 +1,52 @@
 import React from 'react';
 import style from '../../styles/sidebaroptions.module.css'
 import { Link, useLocation } from 'react-router-dom';
+import keyboard from '../../assets/keyboard.png';
+import favourites from '../../assets/favourites.png';
+import cart from '../../assets/cart.png';
+import user from '../../assets/user.png';
+import home from '../../assets/home.png';
+import fav from '../../assets/favourites.png';
+import click from '../../assets/favourites-click.png'
+import { useEffect } from 'react';
+import {loginUser} from '../../redux/actions'
 
 export default function SidebarOptions () {
     let loc = useLocation().pathname
+    // let auth0 = 'https://dev-rc0v97zv.us.auth0.com/u/signup?state=hKFo2SBNMDlmdHIwbzVQRXZ2UklDUzVZUmFQSFJZX0sxeElnc6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHBlbGZQeE1qSVVhYmYxMW13eE1ZaTFYOTZudkxVMzBQo2NpZNkgaVdJZk9VclJ3TDg4ZjZnaHVsWkNlNmoxSDdJTXYyQzk'
 
+    useEffect(() => {
+        loginUser()
+    },[])
+    
     return (
         <div className={style.options}>
-            <Link to='/'>
+            <Link to='/' className={style.link}>
+                <img src={home} alt='home'/>
                 <span className={loc === '/'? style.onPath : null}>Inicio</span>
             </Link>
-            <Link to='/allProducts'>
+            
+            <Link to='/allProducts' className={style.link}>
+                <img src={keyboard} alt='keyboard'/>
                 <span className={loc === '/allProducts'? style.onPath : null}>Productos</span>
             </Link>
 
-            <Link to="/favorites">
-                <span className={loc === '/favorites'? style.onPath : null}>Favoritos</span>
+            <Link to="/favorites" className={style.link}>
+                <img src={loc === '/favorites'? click : fav} alt='favourites'/>
+                <span className={loc === '/favorites'? favourites : click}>Favoritos</span>
             </Link>
 
-            <Link to='/cart'>
-                <span className={loc === '/cart'? style.onPath : null}>Carrito 🛒</span>
+            <Link to='/cart' className={style.link}>
+                <img src={cart} alt='cart'/>
+                <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
             </Link>
 
-            <Link to='/login'>
+            {/* <a className={style.link} href={auth0} alt='auth0'> */}
+            <div className={style.link}>
+                <img src={user} alt='user'/>
                 <span className={loc === '/login'? style.onPath : null}>Iniciar sesión</span>
-            </Link>
+            </div>
+            {/* </a> */}
         </div>
     )
 }

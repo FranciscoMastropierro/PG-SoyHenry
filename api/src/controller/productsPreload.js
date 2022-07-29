@@ -44,7 +44,6 @@ const preloadCate = () => {
             })
         })
 
-        console.log(cateResult)
 
 
     } catch (error) {
