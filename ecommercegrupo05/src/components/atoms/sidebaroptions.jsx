@@ -54,8 +54,8 @@ export function SidebarOptions({ logged, loginUser }) {
             </Link>
 
             <a
-                href={logged === 'Logged out' ? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
-                className={style.link} target='_blank' rel='noopener'>
+                href={'http://localhost:3001/login'}
+                className={style.link} rel='noopener'>
                 <img src={user} alt='user' />
                 <span>Iniciar sesión</span>
             </a>
@@ -88,3 +88,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(SidebarOptions)
             //     <img src={user} alt='user' />
             //     <span>Iniciar sesión</span>
             // </a>
+
+            // href={logged === 'Logged out' ? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
