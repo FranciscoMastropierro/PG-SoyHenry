@@ -4,7 +4,7 @@ const {Users} = require('../db')
 
 
 module.exports = {
-    authenthincateUser: async (req, res) => {
+    authenthincateUser: async (req, res, next ) => {
         console.log('Flag App Auth0', req.oidc.isAuthenticated());
         console.log('Flag app Auth0 USR', req.oidc.user);
     
@@ -23,7 +23,7 @@ module.exports = {
                 },
             }).then(user => {
                 const aux = user[0]
-                res.send(aux);
+                res.send(aux).redirect("/")
             });
            
         } else {
