@@ -74,7 +74,7 @@ export function cleaner() {
 }
 
 export let loginUser = async () => {
-    const json = await axios('http://localhost:3001/login');
+    const json = await axios('http://localhost:3001/');
     const data = json.data
     console.log(data)
     return data
