@@ -22,6 +22,8 @@ import Admin from './Admin/Admin';
 import { CartProvider } from './context/CartItem';
 import UserProfile from './components/organisms/userProfile';
 
+//import { CartProvider } from './context/CartItem';
+// import UserProfile from './components/organisms/userProfile';
 
 
 
@@ -51,29 +53,10 @@ function App() {
             <Route exact path='/categories' element={<Categories />} />
             <Route exact path='/create' element={<CreateForm />} />
             <Route exact path='*' element={<NotFound />} />
+            <Route exact path = '/admin/*' element={<Admin />} />
+            <Route exact path = '/profile' element={<Profile />} />
           </Routes>
         </CartProvider>
-
-        <NavBar/>
-        <Routes>
-        <Route exact path = '/' element={<Home />} />
-        <Route exact path = '/allProducts' element={<AllProducts />} />
-        <Route exact path = '/details/:id' element={<Details />} />
-        
-        <Route exact path = '/profile' element={<Profile />} />
-        {/* <Route exact path = '/login' element={<Login />} /> */}
-        <Route exact path = '/favorites' element={<Favorites />} />
-        <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
-        <Route exact path = '/cart' element={<Cart />} />
-        <Route exact path = '/aboutUs' element={<AboutUs />} />
-        <Route exact path = '/faq' element={<Faq />} />
-        <Route exact path = '/news' element={<News />} />
-        <Route exact path ='/categories' element={<Categories/>}/>
-        <Route exact path = '/profile' element={<UserProfile/>} />
-        <Route exact path = '/create' element={<CreateForm />} />
-        <Route exact path = '*' element={<NotFound />} />
-        <Route exact path = '/admin/*' element={<Admin />} />
-      </Routes>
       <Whatsapp />
     </div>
   );
