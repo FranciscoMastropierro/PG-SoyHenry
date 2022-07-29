@@ -7,6 +7,6 @@ router.get('/:id', getOrderById)
 
 router.post('/', postOrder)
 
-router.post('/state/:id', updateStateOrder)
+router.delete('/state/:id', updateStateOrder)
 
 module.exports = router;

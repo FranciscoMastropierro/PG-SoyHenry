@@ -56,7 +56,7 @@ module.exports = {
   updateStateOrder : async (req, res) => {
     let { state , id } = req.params;
 
-    await Order.udate({state}, {where:{id}})
+    await Order.update({state}, {where:{id}})
 
     res.send('State Updated to ' +state)
   }
