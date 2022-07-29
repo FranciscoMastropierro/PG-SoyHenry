@@ -8,9 +8,15 @@ import user from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
+import { useCartContext } from '../../context/CartItem';
 
 export default function SidebarOptions () {
     let loc = useLocation().pathname
+
+    const superState = useCartContext()
+
+    const { products } = superState.state
+    const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
     return (
         <div className={style.options}>
@@ -29,7 +35,10 @@ export default function SidebarOptions () {
             </Link>
 
             <Link to='/cart' className={style.link}>
-                <img src={cart} alt='cart'/>
+                <div className={style.linkCart}>
+                    <img src={cart} alt='cart'/>
+                    <p className={style.cartItems}>{cachearNumber}</p>
+                </div>
                 <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
             </Link>
 

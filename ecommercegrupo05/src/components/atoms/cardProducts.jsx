@@ -10,6 +10,8 @@ export default function CardProducts() {
 
     const {addItemToCart} = superState.effects
 
+    const { products } = superState.state
+
     const productsToRender = useSelector((state) => state.productsToRender)
 
     // if (!productsToRender.length) return <div className={style.loader}></div>

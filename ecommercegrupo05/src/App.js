@@ -30,8 +30,8 @@ function App() {
 
   return (
     <div>
-      <NavBar />
         <CartProvider>
+          <NavBar />
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/allProducts' element={<AllProducts />} />
