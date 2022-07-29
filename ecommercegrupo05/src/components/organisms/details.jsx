@@ -4,17 +4,27 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetail, cleaner } from "../../redux/actions";
 import style from "../../styles/details.module.css";
+import { useCartContext } from '../../context/CartItem';
 
 export default function Details() {
+
+    const superState = useCartContext()
+
+    const {addItemToCart} = superState.effects
+
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const {id} = useParams();
     const product = useSelector((state) => state.detail);
+
+    const { image, name, price, brand, description, stock } = product
     
     useEffect(() => {
         dispatch(getDetail(id));
         return () => dispatch(cleaner())
         }, [ id ]) //eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleItemToCart = (product) => () => addItemToCart(product)
         
 
   return (
@@ -26,17 +36,17 @@ export default function Details() {
           : (
             <div className={style.containerG}>
               <div  className={style.containerDet}>
-                <h1 className={style.title}> {product.name}</h1>
-                <h3 className={style.brand}> {product.brand}</h3>
-                <h2 className={style.title}> ${product.price}</h2>
-                <button className={style.btn}>Añadir al Carrito 🛒</button>
-                <p className={style.description}>{product.description}</p>
-                <h5 className={style.stock}> {product.stock} unidades disponibles</h5>
+                <h1 className={style.title}> {name}</h1>
+                <h3 className={style.brand}> {brand}</h3>
+                <h2 className={style.title}> ${price}</h2>
+                <button className={style.btn} onClick={handleItemToCart(product)}>Añadir al Carrito 🛒</button>
+                <p className={style.description}>{description}</p>
+                <h5 className={style.stock}> {stock} unidades disponibles</h5>
               </div>
               <div className={style.containerImg}>
                 <img
                 className={style.img}
-                  src={product.image}
+                  src={image}
                   alt="Imag no Found"
                   width="250"
                   height="250"

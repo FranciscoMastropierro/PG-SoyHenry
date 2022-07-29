@@ -164,7 +164,7 @@ export default function Filters() {
                         <option value="higher">Mayor a Menor Precio</option>
                     </select>
                 </label> */}
-                <label for="min" className={style.row}>
+                <label className={style.row}>
                     Min $
                 </label>
                 <input
@@ -176,7 +176,7 @@ export default function Filters() {
                     onChange={(e) => handleFilterMin(e)}
                 />
 
-                <label for="max" className={style.row}>
+                <label className={style.row}>
                     Max $
                 </label>
                 <input

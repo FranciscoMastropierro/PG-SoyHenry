@@ -1,6 +1,7 @@
 .container {
     padding: 0 0 10px;
     width: 200px;
+    border-radius: 5px;
 }
 .textContainer {
     display: flex;
@@ -10,19 +11,23 @@
 .textContainer button{
     margin: 7px;
     padding: 7px;
+    border-radius: 4px;
     background-color: #01f601dc;
+    transition: background-color 0.5s ease;
+}
+.textContainer button:hover {
+    background-color: #00a000dc
 }
 .imgContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 170px;
-    width: inherit;
     background: white;
     border-radius: 4px 4px 0 0;
 }
 .img{
-    width: inherit;
+    width: 194px;
     max-height: 170px;
     border-radius: 4px 4px 0 0;
     position: absolute;
