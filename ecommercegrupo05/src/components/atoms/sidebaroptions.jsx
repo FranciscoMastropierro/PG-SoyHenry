@@ -13,7 +13,7 @@ import { connect, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useCartContext } from '../../context/CartItem';
 
-export function SidebarOptions ({logged, loginUser}) {
+export function SidebarOptions({ logged, loginUser }) {
 
     // const dispatch = useDispatch()
 
@@ -21,7 +21,7 @@ export function SidebarOptions ({logged, loginUser}) {
 
     useEffect(() => {
         loginUser()
-    },[])
+    }, [])
 
     const superState = useCartContext()
 
@@ -31,32 +31,32 @@ export function SidebarOptions ({logged, loginUser}) {
     return (
         <div className={style.options}>
             <Link to='/' className={style.link}>
-                <img src={home} alt='home'/>
-                <span className={loc === '/'? style.onPath : null}>Inicio</span>
+                <img src={home} alt='home' />
+                <span className={loc === '/' ? style.onPath : null}>Inicio</span>
             </Link>
-            
+
             <Link to='/allProducts' className={style.link}>
-                <img src={keyboard} alt='keyboard'/>
-                <span className={loc === '/allProducts'? style.onPath : null}>Productos</span>
+                <img src={keyboard} alt='keyboard' />
+                <span className={loc === '/allProducts' ? style.onPath : null}>Productos</span>
             </Link>
 
             <Link to="/favorites" className={style.link}>
-                <img src={loc === '/favorites'? click : fav} alt='favourites'/>
-                <span className={loc === '/favorites'? favourites : click}>Favoritos</span>
+                <img src={loc === '/favorites' ? click : fav} alt='favourites' />
+                <span className={loc === '/favorites' ? favourites : click}>Favoritos</span>
             </Link>
 
             <Link to='/cart' className={style.link}>
                 <div className={style.linkCart}>
-                    <img src={cart} alt='cart'/>
+                    <img src={cart} alt='cart' />
                     <p className={style.cartItems}>{cachearNumber}</p>
                 </div>
-                <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
+                <span className={loc === '/cart' ? style.onPath : null}>Carrito</span>
             </Link>
-            
+
             <a
-            href={logged === 'Logged out'? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
-            className={style.link} target='_blank' rel='noopener'>
-                <img src={user} alt='user'/>
+                href={logged === 'Logged out' ? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
+                className={style.link} target='_blank' rel='noopener'>
+                <img src={user} alt='user' />
                 <span>Iniciar sesión</span>
             </a>
         </div>
@@ -75,4 +75,16 @@ export const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps)(SidebarOptions)
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarOptions)
+
+
+
+
+
+
+            // <a
+            //     href={logged === 'Logged out' ? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
+            //     className={style.link} target='_blank' rel='noopener'>
+            //     <img src={user} alt='user' />
+            //     <span>Iniciar sesión</span>
+            // </a>
