@@ -25,9 +25,9 @@ module.exports = {
                 const aux = user[0]
                 res.send(aux).redirect("/")
             });
-           
+        
         } else {
-            res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+            res.redirect("/");
         }
     },
     
