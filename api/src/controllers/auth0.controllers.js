@@ -23,7 +23,7 @@ module.exports = {
                 },
             }).then(user => {
                 const aux = user[0]
-                res.send(aux).next()
+                res.send(aux).redirect("/")
             });
            
         } else {
