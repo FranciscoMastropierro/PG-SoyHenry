@@ -20,7 +20,7 @@ router.use('/product', product);
 
 router.use('/products', products)
 
-router.use("/login", routeAuth)
+router.use("/", routeAuth)
 
 router.use('/users', users)
 
