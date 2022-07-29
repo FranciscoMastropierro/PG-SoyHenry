@@ -8,6 +8,7 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
+export const LOGIN_USER = 'LOGIN_USER'
 
 
 export function getProducts(loc) {
@@ -70,6 +71,13 @@ export function cleaner() {
     return {
         type: CLEANER
     }
+}
+
+export let loginUser = async () => {
+    const json = await axios('http://localhost:3001/login');
+    const data = json.data
+    console.log(data)
+    return data
 }
 
 

@@ -17,6 +17,7 @@ import NavBar from './components/molecules/navbar';
 import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
 import { Whatsapp } from './components/atoms/whatsapp';
+import UserProfile from './components/organisms/userProfile';
 
 
 
@@ -34,7 +35,7 @@ function App() {
         <Route exact path = '/' element={<Home />} />
         <Route exact path = '/allProducts' element={<AllProducts />} />
         <Route exact path = '/details/:id' element={<Details />} />
-        <Route exact path = '/login' element={<Login />} />
+        {/* <Route exact path = '/login' element={<Login />} /> */}
         <Route exact path = '/favorites' element={<Favorites />} />
         <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
         <Route exact path = '/cart' element={<Cart />} />
@@ -42,6 +43,7 @@ function App() {
         <Route exact path = '/faq' element={<Faq />} />
         <Route exact path = '/news' element={<News />} />
         <Route exact path ='/categories' element={<Categories/>}/>
+        <Route exact path = '/profile' element={<UserProfile/>} />
         <Route exact path = '/create' element={<CreateForm />} />
         <Route exact path = '*' element={<NotFound />} />
       </Routes>
