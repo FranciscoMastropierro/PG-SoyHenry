@@ -9,11 +9,14 @@ import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
 import { loginUser } from '../../redux/actions'
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useCartContext } from '../../context/CartItem';
 
 export function SidebarOptions ({logged, loginUser}) {
+
+    // const dispatch = useDispatch()
+
     let loc = useLocation().pathname
 
     useEffect(() => {
