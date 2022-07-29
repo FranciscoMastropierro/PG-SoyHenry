@@ -33,8 +33,8 @@ module.exports = (sequelize) => {
       type :DataTypes.STRING,
       unique: true,
     },
-    password:{
-      type: DataTypes.STRING,
+    profileImage:{
+      type: DataTypes.TEXT,
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
