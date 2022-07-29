@@ -19,6 +19,7 @@ export function SidebarOptions ({logged, loginUser}) {
     useEffect(() => {
         loginUser()
     },[])
+
     const superState = useCartContext()
 
     const { products } = superState.state
@@ -48,8 +49,10 @@ export function SidebarOptions ({logged, loginUser}) {
                 </div>
                 <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
             </Link>
-
-            <a href={logged === 'Logged out'? 'http://localhost:3001/login' : 'http://localhost:3001/logout'} className={style.link}>
+            
+            <a
+            href={logged === 'Logged out'? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
+            className={style.link} target='_blank' rel='noopener'>
                 <img src={user} alt='user'/>
                 <span>Iniciar sesión</span>
             </a>
