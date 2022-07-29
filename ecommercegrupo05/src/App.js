@@ -46,6 +46,7 @@ function App() {
         <Route exact path ='/categories' element={<Categories/>}/>
         <Route exact path = '/create' element={<CreateForm />} />
         <Route exact path = '*' element={<NotFound />} />
+        <Route exact path = '/admin/*' element={<Admin />} />
       </Routes>
       <Whatsapp />
     </div>
