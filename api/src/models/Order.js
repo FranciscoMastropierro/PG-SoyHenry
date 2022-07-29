@@ -14,28 +14,34 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: NOW
     },
-    payment: {
-        type: DataTypes.STRING,
-        allowNull: false,
+    paymentMethod: {
+      type: DataTypes.ENUM("creditCard"),
+      allowNull: false,
+      defaultValue: "creditCard"
+      
     },
-    subtotal: {
+    amount: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
     state: {
-        type: DataTypes.STRING,
+      type: DataTypes.ENUM("created", "processing", "completed", "canceled"),
+      defaultValue: "created",
+      allowNull: false,
     },
-    pay: {
+    paid: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+        allowNull: false,
     },
     shipmentAddress: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    postalCode : {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
-
-    
-
   },
   {
     timestamps: false ,

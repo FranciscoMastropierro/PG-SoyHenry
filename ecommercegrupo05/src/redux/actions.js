@@ -15,6 +15,7 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES' 
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
+export const LOGIN_USER = 'LOGIN_USER'
 
 
 export function getProducts(loc) {
@@ -87,6 +88,13 @@ export function cleaner() {
     return {
         type: CLEANER
     }
+}
+
+export let loginUser = async () => {
+    const json = await axios('http://localhost:3001/');
+    const data = json.data
+    console.log(data)
+    return data
 }
 
 

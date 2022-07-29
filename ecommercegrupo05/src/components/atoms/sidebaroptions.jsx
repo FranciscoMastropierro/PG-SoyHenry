@@ -32,12 +32,27 @@ import user from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
+import { useCartContext } from '../../context/CartItem';
+import { useEffect } from 'react';
+import {loginUser} from '../../redux/actions'
 
 export default function SidebarOptions () {
     let loc = useLocation().pathname
+    // let auth0 = 'https://dev-rc0v97zv.us.auth0.com/u/signup?state=hKFo2SBNMDlmdHIwbzVQRXZ2UklDUzVZUmFQSFJZX0sxeElnc6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHBlbGZQeE1qSVVhYmYxMW13eE1ZaTFYOTZudkxVMzBQo2NpZNkgaVdJZk9VclJ3TDg4ZjZnaHVsWkNlNmoxSDdJTXYyQzk'
+
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    
+
+    const superState = useCartContext()
+
+    const { products } = superState.state
+    const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
+
+    useEffect(() => {
+        loginUser()
+    },[])
     
 
     return (
@@ -61,14 +76,22 @@ export default function SidebarOptions () {
             </Link>
 
             <Link to='/cart' className={style.link}>
-                <img src={cart} alt='cart'/>
+                <div className={style.linkCart}>
+                    <img src={cart} alt='cart'/>
+                    <p className={style.cartItems}>{cachearNumber}</p>
+                </div>
                 <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
             </Link>
 
-            <Link to='/login' className={style.link}>
+            {/* <a className={style.link} href={auth0} alt='auth0'> 
+            <Link to>
+            <div className={style.link}>
                 <img src={user} alt='user'/>
                 <span className={loc === '/login'? style.onPath : null}>Iniciar sesión</span>
-            </Link>
+                </div>
+                </Link>*/}
+                
+            
 
             <div className={style.link}>
                 <img src={user} alt='user'/>

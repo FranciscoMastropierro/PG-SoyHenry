@@ -44,3 +44,18 @@
 .modal{
     background-color: black;
 }
+
+.linkCart {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cartItems {
+    margin-left: 5px;
+}
+
+
+
+
+
+
