@@ -8,22 +8,36 @@ import user from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
+<<<<<<< HEAD
 import { useCartContext } from '../../context/CartItem';
+=======
+import { useEffect } from 'react';
+import {loginUser} from '../../redux/actions'
+>>>>>>> 2f2a6563fb1ad5e965748e9771c274702ac3abf2
 
 export default function SidebarOptions () {
     let loc = useLocation().pathname
+    // let auth0 = 'https://dev-rc0v97zv.us.auth0.com/u/signup?state=hKFo2SBNMDlmdHIwbzVQRXZ2UklDUzVZUmFQSFJZX0sxeElnc6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHBlbGZQeE1qSVVhYmYxMW13eE1ZaTFYOTZudkxVMzBQo2NpZNkgaVdJZk9VclJ3TDg4ZjZnaHVsWkNlNmoxSDdJTXYyQzk'
 
+<<<<<<< HEAD
     const superState = useCartContext()
 
     const { products } = superState.state
     const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
+=======
+    useEffect(() => {
+        loginUser()
+    },[])
+    
+>>>>>>> 2f2a6563fb1ad5e965748e9771c274702ac3abf2
     return (
         <div className={style.options}>
             <Link to='/' className={style.link}>
                 <img src={home} alt='home'/>
                 <span className={loc === '/'? style.onPath : null}>Inicio</span>
             </Link>
+            
             <Link to='/allProducts' className={style.link}>
                 <img src={keyboard} alt='keyboard'/>
                 <span className={loc === '/allProducts'? style.onPath : null}>Productos</span>
@@ -42,10 +56,12 @@ export default function SidebarOptions () {
                 <span className={loc === '/cart'? style.onPath : null}>Carrito</span>
             </Link>
 
-            <Link to='/login' className={style.link}>
+            {/* <a className={style.link} href={auth0} alt='auth0'> */}
+            <div className={style.link}>
                 <img src={user} alt='user'/>
                 <span className={loc === '/login'? style.onPath : null}>Iniciar sesión</span>
-            </Link>
+            </div>
+            {/* </a> */}
         </div>
     )
 }
