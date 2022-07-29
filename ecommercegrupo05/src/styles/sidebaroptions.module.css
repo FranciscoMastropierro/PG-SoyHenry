@@ -26,3 +26,18 @@
 .onPath {
     color: #01F603;
 }
+
+.linkCart {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cartItems {
+    margin-left: 5px;
+}
+
+
+
+
+
+
