@@ -6,8 +6,8 @@ const url = require('url')
 
 module.exports = {
     authenthincateUser: async (req, res, next) => {
-        console.log('Flag App Auth0', req.oidc.isAuthenticated());
-        console.log('Flag app Auth0 USR', req.oidc.user);
+        // console.log('Flag App Auth0', req.oidc.isAuthenticated());
+        // console.log('Flag app Auth0 USR', req.oidc.user);
 
         const user = req.oidc.user
 
@@ -26,7 +26,7 @@ module.exports = {
             }).then(user => {
                 const aux = user[0]
                 res.send(aux)
-            }).then(() => res.redirect('http://localhost:3000'));
+            })
         } else {
             res.send(req.oidc.isAuthenticated());
         }
