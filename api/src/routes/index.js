@@ -15,7 +15,7 @@ const router = Router();
 
 router.use('/categories', categories);
 
-router.use('/product', product);
+router.use('/product', product);  
 
 router.use('/products', products)
 
