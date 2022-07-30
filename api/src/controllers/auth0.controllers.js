@@ -21,7 +21,6 @@ module.exports = {
                     username: user.nickname,
                     email: user.email,
                     profileImage: user.picture,
-                    isAdmin: false
                 },
             }).then(user => {
                 const aux = user[0]
