@@ -68,7 +68,6 @@
     color: #01F603;
     transition: 0.5s;
     margin: 5px;  
-    border-radius: 7px;
     width: auto;
     height: auto;
     
@@ -80,9 +79,10 @@
     border: transparent;
     color: black;
     border-radius: 5px;
-    padding: auto;    
+    margin-left: 10px;
 }
 
 .botnX:hover {
     background-color: red;
+    border-radius: 7px;
 }

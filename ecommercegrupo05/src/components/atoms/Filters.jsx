@@ -165,8 +165,8 @@ export default function Filters() {
                     {input.brand.map(c => {
 
                         return (
-                            <div className={style.brands2} key={c} >
-                                <div>
+                            <div key={c} >
+                                <div className={style.brands2}>
                                     <p >{c}</p>
                                     <button className={style.botnX }onClick={() => handleDelete(c)} >x</button>
                                 </div>
