@@ -25,10 +25,6 @@ router.get('/', async (req, res) => {
     } else {
         res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
     }
-   
-
-    
-
 });
 
 

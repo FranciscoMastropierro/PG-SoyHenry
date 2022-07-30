@@ -32,13 +32,19 @@ import user from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
+import { loginUser } from '../../redux/actions'
+import { connect } from 'react-redux';
+import { useEffect } from 'react';
 import { useCartContext } from '../../context/CartItem';
 import { useEffect } from 'react';
 import {loginUser} from '../../redux/actions'
 
-export default function SidebarOptions () {
+export function SidebarOptions ({logged, loginUser}) {
     let loc = useLocation().pathname
-    // let auth0 = 'https://dev-rc0v97zv.us.auth0.com/u/signup?state=hKFo2SBNMDlmdHIwbzVQRXZ2UklDUzVZUmFQSFJZX0sxeElnc6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHBlbGZQeE1qSVVhYmYxMW13eE1ZaTFYOTZudkxVMzBQo2NpZNkgaVdJZk9VclJ3TDg4ZjZnaHVsWkNlNmoxSDdJTXYyQzk'
+
+    useEffect(() => {
+        loginUser()
+    },[])
 
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -178,6 +184,27 @@ export default function SidebarOptions () {
 
 
 
+            
+            <a
+            href={logged === 'Logged out'? 'http://localhost:3001/login' : 'http://localhost:3001/logout'}
+            className={style.link} target='_blank' rel='noopener'>
+                <img src={user} alt='user'/>
+                <span>Iniciar sesión</span>
+            </a>
         </div>
     )
 }
+
+export const mapStateToProps = (state) => {
+    return {
+        logged: state.logged
+    }
+}
+
+export const mapDispatchToProps = (dispatch) => {
+    return {
+        loginUser: () => dispatch(loginUser())
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(SidebarOptions)

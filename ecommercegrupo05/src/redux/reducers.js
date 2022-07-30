@@ -11,7 +11,8 @@ import {
     GET_CATEGORIES,
     GET_ALL_CATEGORIES,    
     GET_FILTERS,
-    GET_CATE
+    GET_CATE,
+    LOGIN_USER
 } from './actions'
 
 const initialState = {
@@ -29,10 +30,9 @@ const initialState = {
  
     laptos: [],    
     filters: [],
-    cate: []
-
-
-}
+    cate: [],
+    logged: []
+    }
 
 function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
@@ -83,6 +83,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 allCategories: payload,
+            }
+        case LOGIN_USER:
+            return {
+                ...state,
+                logged: payload
             }
         default: return state;
     }
