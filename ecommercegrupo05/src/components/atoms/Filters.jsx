@@ -8,11 +8,11 @@ export default function Filters() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
-        "brand": "",
+        "brand": [],
         "categorie": "",
         "order": "minor",
         "praice": {
-            "min": "0",
+            "min": "",
             "max": ""
         }
     })
@@ -28,29 +28,20 @@ export default function Filters() {
         dispatch(getCate())
     }, [dispatch])
 
-    function handleCLickRecharge(e) {
-        // e.preventDefault()
+    function handleCLickRecharge(e) {  
         window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
         setInput({
-            "brand": "",
+            "brand": [],
             "categorie": "",
             "order": "minor",
             "praice": {
-                "min": "0",
+                "min": "",
                 "max": ""
             }
         })
     }
-
-    // function handleOrderByOrder(e) {
-    //     e.preventDefault(e);
-    //     setInput({
-    //         ...input,
-    //         order: e.target.value
-    //     });
-    // }
 
     function handleCategory(e) {
         e.preventDefault(e);
@@ -62,10 +53,21 @@ export default function Filters() {
 
     function handleOrderBrand(e) {
         e.preventDefault(e);
+        if (input.brand.includes(e.target.value)) {
+            return
+        } else {
+            setInput({
+                ...input,
+                brand: [...input.brand, e.target.value]
+            })
+        }
+    }
+
+    function handleDelete(e) {
         setInput({
             ...input,
-            brand: e.target.value
-        });
+            brand: input.brand.filter(c => c !== e)
+        })
     }
 
     function handleFilterMin(e) {
@@ -93,36 +95,15 @@ export default function Filters() {
 
     function handleSubmit(e) {
         e.preventDefault(e);
-        dispatch(getFilters(input));
-        // setInput({
-        //     "brand": "",
-        //     "categorie": "",
-        //     "order": "",
-        //     "praice": {
-        //         "min": "0",
-        //         "max": ""
-        //     }
-        // })
+        dispatch(getFilters(input));        
     }
 
     return (
         <div>
-
-            {/* ----------- filtro de alfabetico ---------- */}
-            {/* <label className={style.row}>
-                <p className={style.title}>Orden Alfabetico</p>
-                <select className={style.select} onChange={e => handleOrderByOrder(e)}>       
-                    <option value=''  >---</option>
-                    <option value='Asc'> A a Z  </option>
-                    <option value='Desc'> Z a A  </option>
-                </select>
-            </label>
-            <br /> */}
-
             {/* ----------- filtro de categorias---------- */}
             <label className={style.row}>
                 <p className={style.title}>Categoria</p>
-                <select className={style.select} onChange={(e) => handleCategory(e)}>   
+                <select className={style.select} onChange={(e) => handleCategory(e)}>
                     <option value="" >---</option>
                     {
                         allCategories && allCategories.map((item, index) => (
@@ -139,31 +120,23 @@ export default function Filters() {
 
             <label className={style.row}>
                 <p className={style.title}>Marca</p>
-                <select className={style.select} onChange={(e) => handleOrderBrand(e)}>    
-                    <option value="">---</option>
-                    {
-                        brands && brands.map((item, index) => (
-                            <option key={index} value={item}>
-                                {item}
-                            </option>
-                        ))
-                    }
-                </select>
             </label>
+            <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
+                <option value="" active>---</option>
+                {
+                    brands && brands.map((item, index) => (
+                        <option key={index} value={item}>
+                            {item}
+                        </option>
+                    ))
+                }
+            </select>
             <br />
 
             {/* ----------- filtro de precio ---------- */}
             <label className={style.titleColor}>
                 Precio:
                 <br />
-                {/* <label className={style.row}>
-                    Por Orden
-                    <select className={style.select} onChange={e => handleOrderByOrder(e)}>
-                        <option value=""> --- </option>
-                        <option value="minor">Menor a Mayor Precio</option>
-                        <option value="higher">Mayor a Menor Precio</option>
-                    </select>
-                </label> */}
                 <label className={style.row}>
                     Min $
                 </label>
@@ -171,7 +144,7 @@ export default function Filters() {
                     type="number"
                     name="min"
                     min="0"
-                    value= {input.praice.min}
+                    value={input.praice.min}
                     placeholder='0'
                     onChange={(e) => handleFilterMin(e)}
                 />
@@ -187,10 +160,24 @@ export default function Filters() {
                     placeholder='200000'
                     onChange={(e) => handleFilterMax(e)}
                 />
-
                 <br />
-                <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>   
-                <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Recargar productos</button>
+                <div className={style.brandss}>
+                    {input.brand.map(c => {
+
+                        return (
+                            <div key={c} >
+                                <div className={style.brands2}>
+                                    <p >{c}</p>
+                                    <button className={style.botnX }onClick={() => handleDelete(c)} >x</button>
+                                </div>
+                            </div>
+                        )
+                    }
+                    )}
+                </div>
+
+                <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>
+                <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
             </label>
 
         </div>
