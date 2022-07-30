@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import style from '../../styles/sidebaroptions.module.css'
 import { Link, useLocation } from 'react-router-dom';
 import keyboard from '../../assets/keyboard.png';
@@ -12,16 +13,18 @@ import { loginUser } from '../../redux/actions'
 import { connect, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useCartContext } from '../../context/CartItem';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function SidebarOptions({ logged, loginUser }) {
 
     // const dispatch = useDispatch()
+    const { loginWithRedirect} = useAuth0();
 
     let loc = useLocation().pathname
 
-    useEffect(() => {
-        loginUser()
-    }, [])
+    // useEffect(() => {
+    //     loginUser()
+    // }, [])
 
     const superState = useCartContext()
 
@@ -53,11 +56,15 @@ export function SidebarOptions({ logged, loginUser }) {
                 <span className={loc === '/cart' ? style.onPath : null}>Carrito</span>
             </Link>
 
-            <a
-                href={'http://localhost:3001/login'}
-                className={style.link} rel='noopener'>
+            <button onClick={() => loginWithRedirect()}>
                 <img src={user} alt='user' />
                 <span>Iniciar sesión</span>
+            </button>
+            <a
+                href={'http://localhost:3001/logout'}
+                className={style.link} rel='noopener'>
+                <img src={user} alt='user' />
+                <span>Cerrar sesión</span>
             </a>
         </div>
     )

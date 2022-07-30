@@ -23,7 +23,7 @@ const initialState = {
     laptos: [],    
     filters: [],
     cate: [],
-    logged: []
+    logged: {}
     }
 
 function rootReducer(state = initialState, { type, payload }) {
