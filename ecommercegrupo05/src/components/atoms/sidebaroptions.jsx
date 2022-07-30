@@ -34,10 +34,8 @@ import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
 import { loginUser } from '../../redux/actions'
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
 import { useCartContext } from '../../context/CartItem';
 import { useEffect } from 'react';
-import {loginUser} from '../../redux/actions'
 
 export function SidebarOptions ({logged, loginUser}) {
     let loc = useLocation().pathname
@@ -117,16 +115,32 @@ export function SidebarOptions ({logged, loginUser}) {
             <MenuList bg="black">
                 <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
                 background: "green",
-               color: "black",}} >My Cart</MenuItem>
+               color: "black",}} >
+                <Link to="/cart">
+                My Cart
+                </Link>                    
+                </MenuItem>
                 <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
                 background: "green",
-               color: "black",}}>My Favorites</MenuItem>
+               color: "black",}}>
+                <Link to="/favorites">
+                My Favorites
+                </Link>
+                </MenuItem>
                 <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
                 background: "green",
-               color: "black",}}>My Orders</MenuItem>
+               color: "black",}}>
+                <Link to="/OrdersMock">
+                My Orders
+                </Link>
+                </MenuItem>
                 <MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
                 background: "green",
-               color: "black",}}>Settings</MenuItem>
+               color: "black",}}>
+                <Link to="/Settings">
+                Settings
+                </Link>
+                </MenuItem>
             </MenuList>
             </Menu>
             </div>

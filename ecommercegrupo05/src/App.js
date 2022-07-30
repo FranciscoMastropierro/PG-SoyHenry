@@ -15,6 +15,8 @@ import PaymentGateway from './components/organisms/paymentGateway';
 import News from './components/organisms/news';
 import Favorites from './components/organisms/favorites';
 import NavBar from './components/molecules/navbar';
+import SettingsMock from './components/molecules/SettingsMock';
+import OrdersMock from './components/molecules/OrdersMock';
 import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
 import { Whatsapp } from './components/atoms/whatsapp';
@@ -55,6 +57,8 @@ function App() {
             <Route exact path='*' element={<NotFound />} />
             <Route exact path = '/admin/*' element={<Admin />} />
             <Route exact path = '/profile' element={<Profile />} />
+            <Route exact path = '/OrdersMock' element={<OrdersMock />} />
+            <Route exact path = '/Settings' element={<SettingsMock />} />
           </Routes>
         </CartProvider>
       <Whatsapp />
