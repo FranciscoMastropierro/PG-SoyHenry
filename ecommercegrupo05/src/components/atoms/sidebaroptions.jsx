@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from '../../styles/sidebaroptions.module.css'
 import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -20,9 +20,9 @@ export function SidebarOptions({ profile, setProfile }) {
     const auth = useAuth0()
     const { loginWithRedirect, logout, user, isAuthenticated } = auth;
     const handleSubmit = () => user ? logout() : loginWithRedirect()
-    const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
+    const log = isAuthenticated ? 'Salir' : 'Iniciar sesion'
 
-    const photo = isAuthenticated? logoutt : loginn
+    const photo = isAuthenticated ? logoutt : loginn
 
     let loc = useLocation().pathname
 
@@ -31,6 +31,19 @@ export function SidebarOptions({ profile, setProfile }) {
     const { products } = superState.state
     const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
+
+    const { getAccessTokenSilently } = auth
+
+    useEffect(() => {
+        if(isAuthenticated ){
+            const getToken = async () => {
+               const token = await getAccessTokenSilently()
+               console.log("token ;)", token)
+           }
+           getToken()
+        } 
+        console.log('no hay token :(')
+    }, [isAuthenticated])
 
     const links = [
         {
@@ -82,12 +95,12 @@ export function SidebarOptions({ profile, setProfile }) {
             </button>
 
             {isAuthenticated && (<Link to='/userprofile' className={style.link}>
-                <img src={userPic} alt='user'/>
+                <img src={userPic} alt='user' />
                 <span>Mi Perfil</span>
             </Link>
             )}
         </div>
-            
+
     )
 }
 
@@ -108,4 +121,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(SidebarOptions)
 
 
 
-           
+
