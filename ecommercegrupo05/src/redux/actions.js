@@ -3,11 +3,13 @@ import axios from 'axios';
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
 export const GET_DETAIL = 'GET_DETAIL'
+export const BAN_USER = 'BAN_USER'
+export const UPGRADE_USER = 'UPGRADE_USER'
+export const GET_ALL_USERS = 'GET_ALL_USERS'
 export const CLEANER = 'CLEANER'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
-
-////////////////////////////
+export const GET_USER_BY_EMAIL = 'GET_USER_BY_EMAIL'
 export const GET_FILTER_PRICE = 'GET_FILTER_PRICE' 
 export const GET_FILTER_BRAND = 'GET_FILTER_BRAND' 
 export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME'
@@ -52,12 +54,50 @@ export function getDetail(id) {
         })
     }
 }
+export function getUsers() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/user/`)
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_USERS,
+            payload: data
+        })
+    }
+}
+export function getUserByEmail(email) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/user/${email}`)
+        const data = json.data
+        return dispatch({
+            type: GET_USER_BY_EMAIL,
+            payload: data
+        })
+    }
+}
 
 export function getFilters(category) {
     return async function (dispatch) {
         const { data } = await axios.post('http://localhost:3001/products/filter', (category))
         return dispatch({
             type: GET_FILTERS,
+            payload: data
+        })
+    }
+}
+export function banUser(body) {
+    return async function (dispatch) {
+        const { data } = await axios.get('http://localhost:3001/admin/ban', (body))
+        return dispatch({
+            type: BAN_USER,
+            payload: data
+        })
+    }
+}
+export function upgradeToAdmin(body) {
+    return async function (dispatch) {
+        const { data } = await axios.get('http://localhost:3001/admin/upgrade', (body))
+        return dispatch({
+            type: UPGRADE_USER,
             payload: data
         })
     }
