@@ -5,7 +5,6 @@ const { Products, Categories_Products, Categories } = conn.models;
 const { Op } = require('sequelize');
 const productList = require('../asset/productList');
 
-
 module.exports = {
   getProducts: async (req, res) => {
     const { name } = req.query;
@@ -34,7 +33,6 @@ module.exports = {
     }
   },
   getFilter: async(req,res)=>{
-    console.log(req.body)
     if(!req.body){
       return res.status(404).send('Products not found');
     }
@@ -163,25 +161,30 @@ module.exports = {
   },
 
   postProduct: async (req, res) => {
-    const products = req.body;
-    console.log(req.body)
-
+    const {categories, ...products} = req.body;
     //name image price stock brand rating description 
     try {
-      if (!products.name || !products.price || !products.brand)
+      if (!products.name || !products.price || !products.brand||!products.image ||!products.stock||!products.description ||!categories){
+        
         return res
-          .status(400)
-          .send({ error: "Not all fields are required, but..." });
+        .status(400)
+        .send({ error: "Not all fields are required, but..." });
+      }
 
-    const product = await Products.create(products);
+    const product = await Products.create({...products});
+       categories.forEach(async (e) => {
+        const newCat = await Categories.findAll({ 
+          where:{
+            name: e
+          }
 
-      // console.log(videogame)
+        })
+        await product.addCategories(newCat, { through: Categories_Products })
+    });
+   
+    
 
-      products.categories.forEach(
-        async (e) => await product.addCategories(e, { through: Categories_Products })
-      );
-
-      res.send({ msj: `Product added`, data: product.dataValues });
+      res.send({ msj: `Product added`, data: product });
     } catch (error) {
       console.error(error);
     }
@@ -245,6 +248,5 @@ module.exports = {
     const brandResult = Array.from(brandSet)
 
     res.send(brandResult)
-  }
-
+  },
 };

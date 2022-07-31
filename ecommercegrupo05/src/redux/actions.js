@@ -56,6 +56,7 @@ export function getFilters(category) {
     }
 }
 
+
 export function getCate() {
     return async function (dispatch) {
         const json = await axios('http://localhost:3001/categories')
