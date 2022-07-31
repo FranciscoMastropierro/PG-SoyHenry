@@ -11,7 +11,6 @@ import {
     GET_USER_BY_EMAIL,    
     GET_FILTERS,
     GET_CATE,
-    LOGIN_USER,
     GET_ALL_USERS,
     SET_PROFILE
 } from './actions'
@@ -33,7 +32,7 @@ const initialState = {
     laptos: [],    
     filters: [],
     cate: [],
-    profile: [],
+    profile: []
     }
 
 function rootReducer(state = initialState, { type, payload }) {

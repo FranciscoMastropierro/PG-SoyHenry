@@ -12,16 +12,15 @@ import click from '../../assets/favourites-click.png'
 import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
-import { setProfile } from '../../redux/actions'
+import { setProf } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
+import { useEffect } from 'react';
 
-export function SidebarOptions({ profile, setProfile }) {
-
+export function SidebarOptions() {
     const auth = useAuth0()
     const { loginWithRedirect, logout, user, isAuthenticated } = auth;
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
-
     const photo = isAuthenticated? logoutt : loginn
 
     let loc = useLocation().pathname
@@ -30,7 +29,6 @@ export function SidebarOptions({ profile, setProfile }) {
 
     const { products } = superState.state
     const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
-
 
     const links = [
         {
@@ -93,17 +91,17 @@ export function SidebarOptions({ profile, setProfile }) {
 
 export const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        cate: state.cate
     }
 }
 
 export const mapDispatchToProps = (dispatch) => {
     return {
-        setProfile: (u) => dispatch(setProfile(u))
+        setProf: (u) => dispatch(setProf(u))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarOptions)
+export default connect (mapStateToProps, mapDispatchToProps)(SidebarOptions)
 
 
 

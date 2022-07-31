@@ -3,28 +3,28 @@ import { useState } from 'react';
 import style from '../../styles/userProfile.module.css'
 
 export default function UserProfile () {
-    let [user, setUser] = useState({
-        name: '',
-        lastname: '',
-        email: '',
-        telephone: 0,
-        direction: '',
-        postalCode: 0,
-        identification: 0,
-    })
+    // let [user, setUser] = useState({
+    //     name: '',
+    //     lastname: '',
+    //     email: '',
+    //     telephone: 0,
+    //     direction: '',
+    //     postalCode: 0,
+    //     identification: 0,
+    // })
 
-    function handleChange (e) {
-        setUser({ ...user, [e.target.name]: e.target.value })
-    }
+    // function handleChange (e) {
+    //     setUser({ ...user, [e.target.name]: e.target.value })
+    // }
 
-    function handleSubmit () {
-        console.log(user)
-    }
+    // function handleSubmit () {
+    //     console.log(user)
+    // }
 
     return (
         <div>
             <h1>Tu Perfil</h1>
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <label>Nombre</label>
                 <input key='name' value={user.name} type='text' name='name' onChange={(e) => handleChange(e)} />
                 <label>Apellido</label>
@@ -40,7 +40,8 @@ export default function UserProfile () {
                 <label>DNI</label>
                 <input key='identification' value={user.identification} type='number' name='identification' onChange={(e) => handleChange(e)} />
                 <button type='submit'>Aceptar</button>
-            </form>
+            </form> */}
+
         </div>
     )
 }
