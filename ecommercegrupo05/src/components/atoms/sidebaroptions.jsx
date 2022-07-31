@@ -14,7 +14,7 @@ import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
 import { setProf } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
-import { useEffect } from 'react';
+
 
 export function SidebarOptions() {
     const auth = useAuth0()
