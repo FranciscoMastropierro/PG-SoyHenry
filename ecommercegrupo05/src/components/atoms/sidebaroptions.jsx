@@ -18,12 +18,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 export function SidebarOptions({ logged, loginUser }) {
 
     // const dispatch = useDispatch()
-    const { loginWithRedirect} = useAuth0();
+    const { loginWithRedirect, logout } = useAuth0();
 
     let loc = useLocation().pathname
 
     // useEffect(() => {
-    //     loginUser()
+    //     loginWithRedirect()
     // }, [])
 
     const superState = useCartContext()
@@ -56,16 +56,14 @@ export function SidebarOptions({ logged, loginUser }) {
                 <span className={loc === '/cart' ? style.onPath : null}>Carrito</span>
             </Link>
 
-            <button onClick={() => loginWithRedirect()}>
+            <button onClick={() => loginWithRedirect()} className={style.link}>
                 <img src={user} alt='user' />
                 <span>Iniciar sesión</span>
             </button>
-            <a
-                href={'http://localhost:3001/logout'}
-                className={style.link} rel='noopener'>
+            <button onClick={() => logout()} className={style.link}>
                 <img src={user} alt='user' />
                 <span>Cerrar sesión</span>
-            </a>
+            </button>
         </div>
     )
 }
