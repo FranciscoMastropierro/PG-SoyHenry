@@ -142,11 +142,11 @@ export function cleaner() {
     }
 }
 
-export function setProfile (user) {
-    return ({
+export function setProf (u) {
+    return {
         type: SET_PROFILE,
-        payload: user
-    })
+        payload: u
+    }
 }
 
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////

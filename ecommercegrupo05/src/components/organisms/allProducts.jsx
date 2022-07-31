@@ -29,7 +29,6 @@ export default function AllProducts() {
   return (
     <>
       <div className={style.filters}>
-      {/* <h1>{superState.state.total}</h1> */}
         <div className={style.div}><Filters /></div>
       </div>
       <Pagination />
