@@ -9,6 +9,8 @@ import userPic from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
+import logoutt from '../../assets/logout.png';
+import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
 import { setProfile } from '../../redux/actions'
 import { useCartContext } from '../../context/CartItem';
@@ -16,8 +18,11 @@ import { useCartContext } from '../../context/CartItem';
 export function SidebarOptions({ profile, setProfile }) {
 
     const auth = useAuth0()
-
     const { loginWithRedirect, logout, user, isAuthenticated } = auth;
+    const handleSubmit = () => user ? logout() : loginWithRedirect()
+    const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
+
+    const photo = isAuthenticated? logoutt : loginn
 
     let loc = useLocation().pathname
 
@@ -26,7 +31,6 @@ export function SidebarOptions({ profile, setProfile }) {
     const { products } = superState.state
     const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
-    // const handleSubmit = () => user ? logout() : loginWithRedirect()
 
     const links = [
         {
@@ -72,17 +76,12 @@ export function SidebarOptions({ profile, setProfile }) {
                 </Link>
             ))}
 
-            <button onClick={loginWithRedirect} className={style.link}>
-                <img src={userPic} alt='user' />
-                <span>Login</span>
+            <button onClick={handleSubmit} className={style.link}>
+                <img src={photo} />
+                <span>{log}</span>
             </button>
 
-            <button onClick={logout} className={style.link}>
-                <img src={userPic} alt='user' />
-                <span>Logout</span>
-            </button>
-
-            {auth.isAuthenticated && (<Link to='/userprofile' className={style.link}>
+            {isAuthenticated && (<Link to='/userprofile' className={style.link}>
                 <img src={userPic} alt='user'/>
                 <span>Mi Perfil</span>
             </Link>
