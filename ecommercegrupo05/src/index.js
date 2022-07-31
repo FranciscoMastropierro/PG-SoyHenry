@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store';
 import { ChakraProvider } from '@chakra-ui/react'
 import {themes} from './styles/themes.js'
-import Auth0Provider from './Auth0provider'
+import Auth0Provider from './Auth0provider.jsx'
 
 
 

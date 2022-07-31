@@ -79,10 +79,6 @@ export function SidebarOptions({profile, setProfile}) {
                 </div>
                 <span className={loc === '/cart' ? style.onPath : null}>Carrito</span>
             </Link>
-
-            {/* <button onClick={() => loginWithRedirect()} className={style.link}>
-                <img src={userPic} alt='user' />
-            </button> */}
     
             <div className={style.link}>
                 <img src={userPic} alt='user'/>
@@ -192,6 +188,10 @@ export function SidebarOptions({profile, setProfile}) {
                     </ModalContent>
                 </Modal>
             </div>
+
+            <button onClick={() => loginWithRedirect()} className={style.link}>
+                <img src={userPic} alt='user' />
+            </button>
 
             <button onClick={() => logout()} className={style.link}>
                 <img src={userPic} alt='user' />
