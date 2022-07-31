@@ -24,7 +24,6 @@ import Admin from './Admin/Admin';
 import { CartProvider } from './context/CartItem';
 import style from "./styles/details.module.css";
 import UserProfile from './components/organisms/userProfile';
-import UserProfile from './components/organisms/userProfile';
 
 //import { CartProvider } from './context/CartItem';
 // import UserProfile from './components/organisms/userProfile';

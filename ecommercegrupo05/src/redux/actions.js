@@ -18,7 +18,7 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES' 
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
-export const SET_USER = 'SET_USER'
+export const SET_PROFILE = 'SET_PROFILE'
 
 
 export function getProducts(loc) {
@@ -144,7 +144,7 @@ export function cleaner() {
 
 export function setProfile(user) {
     return ({
-        type: SET_USER,
+        type: SET_PROFILE,
         payload: user
     })
 }

@@ -6,18 +6,14 @@ import {
     CREATE_PRODUCT,
     PAGINACION,
     BAN_USER,
-    GET_FILTER_PRICE,
-    GET_FILTER_BRAND,
-    GET_ORDER_BY_NAME,
     UPGRADE_USER,
-    GET_CATEGORIES,
     GET_ALL_CATEGORIES,
     GET_USER_BY_EMAIL,    
     GET_FILTERS,
     GET_CATE,
-    SET_USER,
     LOGIN_USER,
-    GET_ALL_USERS
+    GET_ALL_USERS,
+    SET_PROFILE
 } from './actions'
 
 const initialState = {
@@ -103,13 +99,12 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,               
                 cate: payload
             }
-        // case SET_USER:
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
                 allCategories: payload,
             }
-        case LOGIN_USER:
+        case SET_PROFILE:
             return {
                 ...state,
                 profile: payload
