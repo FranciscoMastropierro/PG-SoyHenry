@@ -22,6 +22,7 @@ import CreateForm from './components/organisms/createForm';
 import { Whatsapp } from './components/atoms/whatsapp';
 import Admin from './Admin/Admin';
 import { CartProvider } from './context/CartItem';
+import style from "./styles/details.module.css";
 import UserProfile from './components/organisms/userProfile';
 
 //import { CartProvider } from './context/CartItem';
@@ -47,14 +48,9 @@ function App() {
             <Route exact path='/allProducts' element={<AllProducts />} />
             <Route exact path='/details/:id' element={<Details />} />
             <Route exact path='/login' element={<Login />} />
-            <Route exact path='/favorites' element={<Favorites />} />
+            <Route exact path='/favorites' element={<PrivateRoute component={Favorites} />} />
+            <Route exact path='/userprofile' element={<PrivateRoute component={UserProfile} />} />
             <Route exact path='/paymentGateway' element={<PaymentGateway />} />
-            {/* <Route 
-              exact path='/paymentGateway'
-              element={withAuthenticationRequired( <PaymentGateway/>,{
-              onRedirecting: () => (<h1>Prueba</h1>)
-            })}
-            /> */}
             <Route exact path='/cart' element={<Cart />} />
             <Route exact path='/aboutUs' element={<AboutUs />} />
             <Route exact path='/faq' element={<Faq />} />
@@ -73,15 +69,15 @@ function App() {
   );
 }
 
-// function PrivateRoute ({element,...args}) {
-//   return(
-//     <Route 
-//       component={withAuthenticationRequired(element,{
-//         onRedirecting: () => (<h1>Prueba</h1>)
-//       })}
-//     />
-//   )
+function PrivateRoute ({component}) {
 
-// }
+  const Verifier = withAuthenticationRequired(component, {
+    onRedirecting: () => (<div className={style.loader}></div>)
+  })
+  
+  return (
+    <Verifier/>
+  )
+}
 
 export default App;
