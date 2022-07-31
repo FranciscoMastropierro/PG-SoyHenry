@@ -13,7 +13,7 @@ import { useCartContext } from '../../context/CartItem';
 import { useAuth0 } from "@auth0/auth0-react";
 import { setProfile } from '../../redux/actions'
 
-export function SidebarOptions({profile, setProfile}) {
+export function SidebarOptions({ profile, setProfile }) {
 
     // const dispatch = useDispatch()
     const { loginWithRedirect, logout, user } = useAuth0();
@@ -27,45 +27,58 @@ export function SidebarOptions({profile, setProfile}) {
     const { products } = superState.state
     const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
-    const auth = useAuth0()
-    // useAuth0().isAuthenticated? setProfile(auth.user) : null
+    const auth = useAuth0().user
 
+    const handleSubmit = () => auth ? logout() : loginWithRedirect()
 
-    console.log(profile)
+    const links = [
+        {
+            to: '/',
+            name: 'inicio',
+            src: home,
+            styleClass: loc === '/' ? style.onPath : ''
+        },
+        {
+            to: '/allProducts',
+            name: 'Productos',
+            src: keyboard,
+            styleClass: loc === '/allProducts' ? style.onPath : ''
+        },
+        {
+            to: '/favorites',
+            name: 'Favoritos',
+            src: loc === '/favorites' ? click : fav,
+            styleClass: loc === '/favorites' ? favourites : click
+        },
+        {
+            to: '/cart',
+            name: 'Carrito',
+            src: cart,
+            styleClass: style.cartItems,
+            cartNumber: cachearNumber
+        }
+    ]
+
+    const btnText = auth ? 'Cerrar sesión' : 'Iniciar sesión'
 
     return (
         <div className={style.options}>
-            <Link to='/' className={style.link}>
-                <img src={home} alt='home' />
-                <span className={loc === '/' ? style.onPath : null}>Inicio</span>
-            </Link>
-
-            <Link to='/allProducts' className={style.link}>
-                <img src={keyboard} alt='keyboard' />
-                <span className={loc === '/allProducts' ? style.onPath : null}>Productos</span>
-            </Link>
-
-            <Link to="/favorites" className={style.link}>
-                <img src={loc === '/favorites' ? click : fav} alt='favourites' />
-                <span className={loc === '/favorites' ? favourites : click}>Favoritos</span>
-            </Link>
-
-            <Link to='/cart' className={style.link}>
-                <div className={style.linkCart}>
-                    <img src={cart} alt='cart' />
-                    <p className={style.cartItems}>{cachearNumber}</p>
-                </div>
-                <span className={loc === '/cart' ? style.onPath : null}>Carrito</span>
-            </Link>
-
-            <button onClick={() => loginWithRedirect()} className={style.link}>
+            {links.map(({ to, name, src, styleClass, cartNumber }) => (
+                <Link to={to} className={style.link} key={name}>
+                    <div className={style.linkWrapper}>
+                        <img src={src} alt={name} />
+                        <span className={styleClass}>
+                            {name === 'Carrito' ? cartNumber : name}
+                        </span>
+                    </div>
+                    {name === 'Carrito' && (
+                        <span className={loc === '/cart' ? style.onPath : ''}>Carrito</span>
+                    )}
+                </Link>
+            ))}
+            <button onClick={handleSubmit} className={style.link}>
                 <img src={userPic} alt='user' />
-                <span>Iniciar sesión</span>
-            </button>
-
-            <button onClick={() => logout()} className={style.link}>
-                <img src={userPic} alt='user' />
-                <span>Cerrar sesión</span>
+                <span>{btnText}</span>
             </button>
         </div>
     )
@@ -83,7 +96,7 @@ export const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (SidebarOptions)
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarOptions)
 
 
 
