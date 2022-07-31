@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
     createProduct,
     getAllCategories,
 
-   } from "../../redux/actions";
+   } from "../../../../redux/actions";
 
-import style from '../../styles/createForm.module.css'
+import style from './ProductCreateAdmin.module.css'
 
 
 const inputValidate = (estado) => {
@@ -282,7 +282,7 @@ export default function CreateForm() {
               <button type="submit" className={style.btn}  onClick={handleSubmit}>
                 Create
               </button>
-              <Link to="/">
+              <Link to="/admin/products">
                 <button className={style.btn}>Go Back</button>
               </Link>
             </div>

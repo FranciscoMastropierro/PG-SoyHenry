@@ -1,15 +1,83 @@
-import React from "react";
-import style from '../../styles/news.module.css'
+import React, { useEffect, useState } from "react";
+import trash from '../../assets/trash3.png';
+import style from '../../styles/cart.module.css'
+import { useCartContext } from '../../context/CartItem';
 
-export default function NotFound () {
+export default function NotFound() {
+
+    const superState = useCartContext()
+
+    const [precio, setPrecio] = useState(true)
+
+    const { addItemToCart, deleteItemToCart, deleteAll } = superState.effects
+
+    const { products } = superState.state
+
+    const totalPricePerProducts = products.map(({ amount, price }) => amount * price)
+
+    const totalPrice = totalPricePerProducts.reduce((accum, current) => accum = accum + current, 0)
+
+    const handleItemToCart = (product) => () => addItemToCart(product)
+
+    const handleItemToDelete = (product) => () => deleteItemToCart(product)
+
+    const handleItemToDeleteAll = (product) => () => deleteAll(product)
+
+    useEffect(() => {
+        if (totalPrice !== 0) {
+            setPrecio(totalPrice)
+        } else {
+            setPrecio(false)
+        }
+    }, [totalPrice])
 
     return (
-        <div className={style.container}>
-            <h2 className={style.h2}>
-                <span className={style.span}>Carrito </span>
-
-                <span className={style.span}>En Desarrollo</span>
-            </h2>
-        </div>
-    )
+        <div>
+            {
+                totalPrice === 0
+                    ?
+                    <div className={style.container}>
+                        <h2 className={style.h9}>
+                            <span className={style.span}>CARRITO </span>
+                            <span className={style.span}>VACIO</span>
+                        </h2>
+                    </div>
+                    :
+                    <div>
+                        <div>
+                            <div className={style.wrapperTotal}>
+                                <div className={style.space}>
+                                    <p className={style.total}>Precio Total: ${precio}</p>
+                                </div>
+                                <div className={style.space}>
+                                    <button className={style.total}>COMPRAR</button>
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            products?.map(product => {
+                                const { id, image, name, price, amount } = product
+                                let amountOfProduct = price * amount
+                                return (
+                                    <div className={style.card} key={id}>
+                                        <div className={style.imgDiv}>
+                                            <img className={style.img} src={image} alt="imagen de producto" />
+                                        </div>
+                                        <h2 className={style.h2}>{name}</h2>
+                                        <br />
+                                        <button className={style.btn} onClick={handleItemToCart(product)}> + </button>
+                                        <p>{amount}</p>
+                                        <button className={style.btn} onClick={handleItemToDelete(product)}> - </button>
+                                        <div className={style.price}>$<h3>{amountOfProduct}</h3></div>
+                                        <div className={style.btnTrash}>
+                                            <button onClick={handleItemToDeleteAll(product)}>
+                                                <img src={trash} className={style.trash} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>}
+        </div>)
 }

@@ -4,10 +4,19 @@ import {
     GET_DETAIL,
     CLEANER,
     CREATE_PRODUCT,
-    PAGINACION,    
-    GET_CATEGORIES,    
+    PAGINACION,
+    BAN_USER,
+    GET_FILTER_PRICE,
+    GET_FILTER_BRAND,
+    GET_ORDER_BY_NAME,
+    UPGRADE_USER,
+    GET_CATEGORIES,
+    GET_ALL_CATEGORIES,
+    GET_USER_BY_EMAIL,    
     GET_FILTERS,
-    GET_CATE
+    GET_CATE,
+    LOGIN_USER,
+    GET_ALL_USERS
 } from './actions'
 
 const initialState = {
@@ -18,10 +27,16 @@ const initialState = {
     clean: [],
     productsPerPage: 15,
     pages: 0,
-    productsToRender: [],    
+    productsToRender: [],
+    filterPrice: [],
+    categories: [],
+    allCategories:[],
+    allUsers:[],
+    searchedUser:[],
     laptos: [],    
     filters: [],
-    cate: []
+    cate: [],
+    logged: []
     }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -41,11 +56,29 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
+        case BAN_USER:
+            return {
+                ...state,
+            }
+        case UPGRADE_USER:
+            return {
+                ...state,
+            }
 
         case GET_DETAIL:
             return {
                 ...state,
                 detail: payload
+            }
+        case GET_USER_BY_EMAIL:
+             return {
+            ...state,
+            searchedUser: payload,
+            };
+        case GET_ALL_USERS:
+            return {
+                ...state,
+                allUsers: payload
             }
         case CLEANER:
             return {
@@ -68,6 +101,16 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,               
                 cate: payload
+            }
+        case GET_ALL_CATEGORIES:
+            return {
+                ...state,
+                allCategories: payload,
+            }
+        case LOGIN_USER:
+            return {
+                ...state,
+                logged: payload
             }
         default: return state;
     }

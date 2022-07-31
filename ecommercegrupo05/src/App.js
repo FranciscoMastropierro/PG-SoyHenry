@@ -6,6 +6,7 @@ import Home from './components/organisms/Home'
 import AllProducts from './components/organisms/allProducts';
 import Details from './components/organisms/details';
 import Login from './components/organisms/login';
+import Profile from './components/organisms/Profile.jsx';
 import Cart from './components/organisms/cart';
 import AboutUs from './components/organisms/aboutUs';
 import Faq from './components/organisms/FAQ';
@@ -14,10 +15,17 @@ import PaymentGateway from './components/organisms/paymentGateway';
 import News from './components/organisms/news';
 import Favorites from './components/organisms/favorites';
 import NavBar from './components/molecules/navbar';
+import SettingsMock from './components/molecules/SettingsMock';
+import OrdersMock from './components/molecules/OrdersMock';
 import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
 import { Whatsapp } from './components/atoms/whatsapp';
+import Admin from './Admin/Admin';
+import { CartProvider } from './context/CartItem';
 import UserProfile from './components/organisms/userProfile';
+
+//import { CartProvider } from './context/CartItem';
+// import UserProfile from './components/organisms/userProfile';
 
 
 
@@ -30,23 +38,29 @@ function App() {
 
   return (
     <div>
-        <NavBar/>
-        <Routes>
-        <Route exact path = '/' element={<Home />} />
-        <Route exact path = '/allProducts' element={<AllProducts />} />
-        <Route exact path = '/details/:id' element={<Details />} />
-        {/* <Route exact path = '/login' element={<Login />} /> */}
-        <Route exact path = '/favorites' element={<Favorites />} />
-        <Route exact path = '/paymentGateway' element={<PaymentGateway />} />
-        <Route exact path = '/cart' element={<Cart />} />
-        <Route exact path = '/aboutUs' element={<AboutUs />} />
-        <Route exact path = '/faq' element={<Faq />} />
-        <Route exact path = '/news' element={<News />} />
-        <Route exact path ='/categories' element={<Categories/>}/>
-        <Route exact path = '/profile' element={<UserProfile/>} />
-        <Route exact path = '/create' element={<CreateForm />} />
-        <Route exact path = '*' element={<NotFound />} />
-      </Routes>
+
+        <CartProvider>
+          <NavBar />
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/allProducts' element={<AllProducts />} />
+            <Route exact path='/details/:id' element={<Details />} />
+            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/favorites' element={<Favorites />} />
+            <Route exact path='/paymentGateway' element={<PaymentGateway />} />
+            <Route exact path='/cart' element={<Cart />} />
+            <Route exact path='/aboutUs' element={<AboutUs />} />
+            <Route exact path='/faq' element={<Faq />} />
+            <Route exact path='/news' element={<News />} />
+            <Route exact path='/categories' element={<Categories />} />
+            <Route exact path='/create' element={<CreateForm />} />
+            <Route exact path='*' element={<NotFound />} />
+            <Route exact path = '/admin/*' element={<Admin />} />
+            <Route exact path = '/profile' element={<Profile />} />
+            <Route exact path = '/OrdersMock' element={<OrdersMock />} />
+            <Route exact path = '/Settings' element={<SettingsMock />} />
+          </Routes>
+        </CartProvider>
       <Whatsapp />
     </div>
   );
