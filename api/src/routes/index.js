@@ -8,6 +8,7 @@ const products = require('./products.route.js')
 const users = require('./user.route.js')
 const orders = require('./orders.route.js')
 const routeAuth = require('./auth0.route.js')
+
 const router = Router();
 
 // Configurar los routers

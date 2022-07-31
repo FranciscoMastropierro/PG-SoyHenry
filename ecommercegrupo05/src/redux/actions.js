@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
@@ -8,7 +9,7 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
-export const LOGIN_USER = 'LOGIN_USER'
+export const SET_USER = 'SET_USER'
 
 
 export function getProducts(loc) {
@@ -48,11 +49,22 @@ export function getDetail(id) {
 
 export function getFilters(category) {
     return async function (dispatch) {
-        const { data } = await axios.post('http://localhost:3001/products/filter', (category))
-        return dispatch({
-            type: GET_FILTERS,
-            payload: data
-        })
+        try {
+            const { data } = await axios.post('http://localhost:3001/products/filter', (category))
+            return dispatch({ type: GET_FILTERS, payload: data })
+        }
+        catch (error) {
+            return swal({
+                title: "No existen resultados para este filtro.",
+                input: "text",
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                cancelButtonText: "Cancelar",
+                buttons: {
+                    cancel: 'ok'
+                }
+            })
+        }
     }
 }
 
@@ -73,16 +85,11 @@ export function cleaner() {
     }
 }
 
-export function loginUser () {
-    return async function (dispatch) {
-        const json = await axios('http://localhost:3001/',);
-        const data = json.data
-        console.log(data)
-        return dispatch({
-            type: LOGIN_USER,
-            payload: data
-        })
-    }
+export function setProfile(user) {
+    return ({
+        type: SET_USER,
+        payload: user
+    })
 }
 
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////

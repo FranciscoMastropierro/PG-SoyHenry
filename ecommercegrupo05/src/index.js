@@ -7,17 +7,22 @@ import { Provider } from 'react-redux'
 import store from './redux/store';
 import { ChakraProvider } from '@chakra-ui/react'
 import {themes} from './styles/themes.js'
+import Auth0Provider from './Auth0provider'
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <ChakraProvider theme={themes}>
-        <App/>
-        </ChakraProvider>
-      </BrowserRouter>
-    </React.StrictMode>
-  </Provider>
+  <Auth0Provider>
+    <Provider store={store}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <ChakraProvider theme={themes}>
+            <App/>
+          </ChakraProvider>
+        </BrowserRouter>
+      </React.StrictMode>
+    </Provider>
+  </Auth0Provider>
 );
 

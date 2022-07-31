@@ -9,7 +9,8 @@ const {
   SECRET,
   BASEURL,
   CLIENTID,
-  ISSUER
+  ISSUER,
+  CLIENTSECRET
 } = process.env
 
 const { auth } = require('express-openid-connect');
@@ -20,7 +21,13 @@ const config = {
   secret: SECRET,
   baseURL: BASEURL,
   clientID: CLIENTID,
-  issuerBaseURL: ISSUER
+  issuerBaseURL: ISSUER,
+  clientSecret : CLIENTSECRET,
+  authorizationParams: {
+    response_type : 'code',
+    audience : 'https://dev-rc0v97zv.us.auth0.com/api/v2/',
+    scope : 'openid profile email'
+  }
 };
 
 
@@ -37,7 +44,7 @@ server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Credentials', 'false');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();

@@ -19,6 +19,7 @@ import CreateForm from './components/organisms/createForm';
 import { Whatsapp } from './components/atoms/whatsapp';
 import { CartProvider } from './context/CartItem';
 // import UserProfile from './components/organisms/userProfile';
+import { withAuthenticationRequired } from '@auth0/auth0-react'
 
 
 
@@ -40,6 +41,12 @@ function App() {
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/favorites' element={<Favorites />} />
             <Route exact path='/paymentGateway' element={<PaymentGateway />} />
+            {/* <Route 
+              exact path='/paymentGateway'
+              element={withAuthenticationRequired( <PaymentGateway/>,{
+              onRedirecting: () => (<h1>Prueba</h1>)
+            })}
+            /> */}
             <Route exact path='/cart' element={<Cart />} />
             <Route exact path='/aboutUs' element={<AboutUs />} />
             <Route exact path='/faq' element={<Faq />} />
@@ -53,5 +60,16 @@ function App() {
     </div>
   );
 }
+
+// function PrivateRoute ({element,...args}) {
+//   return(
+//     <Route 
+//       component={withAuthenticationRequired(element,{
+//         onRedirecting: () => (<h1>Prueba</h1>)
+//       })}
+//     />
+//   )
+
+// }
 
 export default App;
