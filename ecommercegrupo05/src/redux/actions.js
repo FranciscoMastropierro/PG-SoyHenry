@@ -52,6 +52,26 @@ export function getDetail(id) {
         })
     }
 }
+export function getUsers() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/users/`)
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_USERS,
+            payload: data
+        })
+    }
+}
+export function getUserByEmail(email) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/user/${email}`)
+        const data = json.data
+        return dispatch({
+            type: GET_USER_BY_EMAIL,
+            payload: data
+        })
+    }
+}
 
 export function getFilters(category) {
     return async function (dispatch) {
