@@ -1,15 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import {
   getProducts,
   createProduct
 } from "../../redux/actions";
+=======
+   import {
+    getProducts,
+    createProduct,
+    getAllCategories,
+
+   } from "../../redux/actions";
+>>>>>>> features
 
 import style from '../../styles/createForm.module.css'
 import Axios from 'axios';
 export function validate(newProduct) {
   let errors = {};
+<<<<<<< HEAD
+=======
+  if(!isNaN(Number(estado.name))) {
+  errors.name = 'The name cannot contain only numbers';
+} if(estado.name === "") {
+  errors.name = 'The name is required';
+} if(estado.name.length <4) {
+  errors.name = 'Name must contain at least four (4) characters';
+} if(!estado.price.length) {
+  errors.price = `price is required`;
+} if(estado.brand.length === 0) {
+  errors.brand = 'You must select a brand';
+} if(estado.category) {
+  errors.category = 'You must select a category';
+} if(estado.image === "") {
+    errors.image = 'put a valid image';
+} if(estado.stock <0) {
+    errors.stock = 'invalid stock number';
+} if(estado.stock >1000) {
+    errors.stock = 'stock cannot surpass 1000';
+} if(estado.rating === "" || estado.rating > 5 || estado.rating < 1) {
+    errors.rating = 'insert a valid rating number (1-5)';
+} if(estado.description === "") {
+    errors.description = 'description is required';
+} 
+console.log("error", errors)
+return errors;
+};
+>>>>>>> features
 
   if (!newProduct.name) {
     errors.name = 'Nombre requerido';
@@ -42,11 +80,19 @@ function redirect() {
 export default function CreateForm() {
   const dispatch = useDispatch();
   const nav = useNavigate();
+<<<<<<< HEAD
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.data);
   const [errors, setErrors] = React.useState({});
+=======
+
+
+  const products = useSelector((state) => state.data);
+
+  const category = useSelector((state) => state.allCategories);
+>>>>>>> features
 
   const [newProduct, setProduct] = useState({
     name:"",
@@ -67,10 +113,23 @@ export default function CreateForm() {
   products.map((e) => category.push(e.Categories[0]?.name))
   let setCat = [...new Set(category)]
 
+<<<<<<< HEAD
   const handleInputChange = function (e) {
 
     setProduct({
       ...newProduct, [e.target.name]: e.target.value
+=======
+  
+
+  
+  
+  //cambia el estado
+  function handleChange(e) {
+    e.preventDefault();
+    setEstado({
+      ...estado,
+      [e.target.name]: e.target.value,
+>>>>>>> features
     });
     let objError = validate({ ...newProduct, [e.target.name]: e.target.value });
     setErrors(objError)
@@ -130,6 +189,7 @@ export default function CreateForm() {
     }
     else if (!e.target.value) {
 
+<<<<<<< HEAD
     }
     else {
       setProduct({
@@ -170,6 +230,12 @@ export default function CreateForm() {
         });
         setErrors(validate(setProduct))
       });
+=======
+    useEffect(() => {
+      dispatch(getProducts());
+      dispatch(getAllCategories());
+     }, []);
+>>>>>>> features
 
   }
 
@@ -212,6 +278,7 @@ export default function CreateForm() {
               />
               {errors.description}
             </div>
+<<<<<<< HEAD
             <div className={style.divcell}>
               <label className={style.label1}>Price: </label>
               <input
@@ -275,6 +342,21 @@ export default function CreateForm() {
                   </div>
                 }
               {errors.image}
+=======
+
+            <div>
+              <label className={style.label1}>Category: </label>
+
+              <select className={style.input1} onChange={(e) => handleSelectCat(e)}>
+                <option value="none" selected disabled > Select Category</option>
+                {category?.map((e) => (
+                  <option className={style.input1} key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                ))}
+                {err.category}
+              </select>
+>>>>>>> features
             </div>
             <div>
               <div>
