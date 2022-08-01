@@ -122,7 +122,7 @@ export default function Filters() {
                 <p className={style.title}>Marca</p>
             </label>
             <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
-                <option value="" active>---</option>
+                <option value="">---</option>
                 {
                     brands && brands.map((item, index) => (
                         <option key={index} value={item}>

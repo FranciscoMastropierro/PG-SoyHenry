@@ -34,12 +34,8 @@ const initialState = {
     filters: [],
     cate: [],
     profile: [],
-<<<<<<< HEAD
-    }
-=======
     token: []
 }
->>>>>>> token
 
 function rootReducer(state = initialState, { type, payload }) {
     switch (type) {

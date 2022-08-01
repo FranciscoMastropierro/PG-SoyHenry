@@ -146,11 +146,7 @@ export function cleaner() {
     }
 }
 
-<<<<<<< HEAD
 export function setProfile (u) {
-=======
-export function setProf(u) {
->>>>>>> token
     return {
         type: SET_PROFILE,
         payload: u
