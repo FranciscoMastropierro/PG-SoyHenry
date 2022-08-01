@@ -1,6 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
-import style from '../../styles/userProfile.module.css'
+// import React from 'react';
+// import { useState } from 'react';
+// import style from '../../styles/userProfile.module.css'
 
 export default function UserProfile () {
     // let [user, setUser] = useState({
