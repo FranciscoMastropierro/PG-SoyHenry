@@ -25,7 +25,7 @@ router.use("/", routeAuth)
 
 router.use('/users', users)
 
-router.use('/admin', admin)
+// router.use('/admin', admin)
 
 router.use('/orders', orders)
 
