@@ -41,11 +41,13 @@ module.exports = {
     const {praice,brand,order,categorie}=req.body
     let min = 0;
     let max = 0;
-    if(!!praice.min){
-      min=praice.min
-    }
-    if(!!praice.max){
-      max=praice.max
+    if(!!praice){
+      if(!!praice.min){
+        min=praice.min
+      }
+      if(!!praice.max){
+        max=praice.max
+      }
     }
 
     const productsBd = await Products.findAll({
@@ -102,14 +104,15 @@ module.exports = {
         return 0
       })
     }
-    if(min || max ){
-      if(!!min){
-        auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
+      if(min || max ){
+        if(!!min){
+          auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
+        }
+        if(!!max){
+          auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) < Number(max));
+        }
       }
-      if(!!max){
-        auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) < Number(max));
-      }
-    }
+    
     if(!!categorie){
       auxproductsBd = auxproductsBd.filter(elemt => elemt.Categories?.map(elemt => elemt.name.toLowerCase()) == categorie.toLowerCase() )
     }
