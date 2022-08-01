@@ -1,6 +1,11 @@
 import React, {useEffect} from 'react';
 import style from '../../styles/sidebaroptions.module.css'
+<<<<<<< HEAD
 import { useLocation, Link } from 'react-router-dom';
+=======
+import { Link, useLocation } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
+>>>>>>> token
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
 import cart from '../../assets/cart.png';
@@ -11,9 +16,14 @@ import click from '../../assets/favourites-click.png'
 import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
+<<<<<<< HEAD
+=======
+import { setProf, token } from '../../redux/actions.js'
+>>>>>>> token
 import { useCartContext } from '../../context/CartItem';
 
 export function SidebarOptions() {
+    const dispatch = useDispatch()
     const auth = useAuth0()
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = auth;
     const handleSubmit = () => user ? logout() : loginWithRedirect()
@@ -24,10 +34,16 @@ export function SidebarOptions() {
     useEffect(() => {
         if(isAuthenticated ){
             const getToken = async () => {
+<<<<<<< HEAD
                const token = await getAccessTokenSilently()
             //    console.log("token ;)", token)
+=======
+               const tok = await getAccessTokenSilently()
+               console.log("token ;)", tok)
+>>>>>>> token
            }
            getToken()
+           dispatch(token(getToken()))
         } 
         // console.log('no hay token :(')
     }, [isAuthenticated])

@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfile } from '../../redux/actions'
 import style from '../../styles/userProfile.module.css'
+=======
+// import React from 'react';
+// import { useState } from 'react';
+// import style from '../../styles/userProfile.module.css'
+>>>>>>> token
 
 export default function UserProfile () {
     const dispatch = useDispatch()
