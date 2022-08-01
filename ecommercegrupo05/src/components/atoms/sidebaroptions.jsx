@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import style from '../../styles/sidebaroptions.module.css'
-import { Link, useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useLocation, Link } from 'react-router-dom';
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
 import cart from '../../assets/cart.png';
@@ -12,37 +11,34 @@ import click from '../../assets/favourites-click.png'
 import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
-import { setProf } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
-import { useEffect } from 'react';
 
 export function SidebarOptions() {
     const auth = useAuth0()
-    const { loginWithRedirect, logout, user, isAuthenticated } = auth;
+    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = auth;
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
 
-    let loc = useLocation().pathname
-
-    const superState = useCartContext()
-
-    const { products } = superState.state
-    const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
-
-
-    const { getAccessTokenSilently } = auth
 
     useEffect(() => {
         if(isAuthenticated ){
             const getToken = async () => {
                const token = await getAccessTokenSilently()
-               console.log("token ;)", token)
+            //    console.log("token ;)", token)
            }
            getToken()
         } 
-        console.log('no hay token :(')
+        // console.log('no hay token :(')
     }, [isAuthenticated])
+
+
+    let loc = useLocation().pathname
+
+
+    const superState = useCartContext()
+    const { products } = superState.state
+    const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
     const links = [
         {
@@ -102,20 +98,6 @@ export function SidebarOptions() {
 
     )
 }
-
-export const mapStateToProps = (state) => {
-    return {
-        cate: state.cate
-    }
-}
-
-export const mapDispatchToProps = (dispatch) => {
-    return {
-        setProf: (u) => dispatch(setProf(u))
-    }
-}
-
-export default connect (mapStateToProps, mapDispatchToProps)(SidebarOptions)
 
 
 

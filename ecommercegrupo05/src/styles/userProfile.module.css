@@ -1,0 +1,66 @@
+.userProfileContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    color: white;
+    font-family: 'Share Tech', sans-serif;
+}
+h2 {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px 2px #181818;
+    background: #242424dc;
+    color: #01F603;
+}
+.userProfileContainer h1 {
+    font-size: 2rem;
+}
+.profilePhoto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px;
+    box-shadow: 1px 1px 5px 3px #242424dc;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.infoContainer {
+    display: flex;
+    flex-direction: row;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 20px
+}
+.info input{
+    padding: 6px;
+    width: 250px;
+    border-radius: 4px;
+    background: #333333;
+}
+.info input:focus {
+    outline: none;
+}
+.info input::placeholder {
+    margin: 10px
+}
+.userProfileContainer button {
+    margin: 20px;
+    padding: 7px;
+    border-radius: 4px;
+    font-size: 18px;
+    background: black;
+    color: #01F603;
+    box-shadow: 1px 1px 3px 2px #242424dc;
+}
+

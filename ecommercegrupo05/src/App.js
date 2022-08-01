@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import AOS from 'aos';
 import "aos/dist/aos.css";
-import Home from './components/organisms/Home'
+import {Home} from './components/organisms/Home'
 import AllProducts from './components/organisms/allProducts';
 import Details from './components/organisms/details';
 import Login from './components/organisms/login';
@@ -50,18 +50,17 @@ function App() {
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/favorites' element={<PrivateRoute component={Favorites} />} />
             <Route exact path='/userprofile' element={<PrivateRoute component={UserProfile} />} />
-            <Route exact path='/paymentGateway' element={<PaymentGateway />} />
+            <Route exact path = '/profile' element={<PrivateRoute component={Profile} />} />
+            <Route exact path = '/OrdersMock' element={<PrivateRoute component={OrdersMock}  />} />
+            <Route exact path = '/Settings' element={<PrivateRoute component={SettingsMock}  />} />
+            <Route exact path='/paymentGateway' element={<PrivateRoute component={PaymentGateway}/>} />
             <Route exact path='/cart' element={<Cart />} />
             <Route exact path='/aboutUs' element={<AboutUs />} />
             <Route exact path='/faq' element={<Faq />} />
             <Route exact path='/news' element={<News />} />
-            <Route exact path='/categories' element={<Categories />} />
-            <Route exact path='/create' element={<CreateForm />} />
+            <Route exact path='/categories' element={<Categories />} />            
             <Route exact path='*' element={<NotFound />} />
-            <Route exact path = '/admin/*' element={<Admin />} />
-            <Route exact path = '/profile' element={<Profile />} />
-            <Route exact path = '/OrdersMock' element={<OrdersMock />} />
-            <Route exact path = '/Settings' element={<SettingsMock />} />
+            <Route exact path = '/admin/*' element={<PrivateRoute component={Admin}/>} />
           </Routes>
         </CartProvider>
       <Whatsapp />

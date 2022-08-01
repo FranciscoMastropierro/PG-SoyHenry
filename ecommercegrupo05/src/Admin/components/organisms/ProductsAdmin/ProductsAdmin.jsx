@@ -141,8 +141,7 @@ function deleteHandler(e){
                 <p>Brand</p>
                 <p>Image</p>
                 <p>Price</p>
-                <p>Rating</p>
-                <p>Categories</p>
+                <p>Rating</p>                
                 <p>Stock</p>
                 
             </div>
@@ -178,7 +177,7 @@ function deleteHandler(e){
                             <p className={style.element}><img className={style.img} src={e.image} alt={e.id} /></p>
                             <p className={style.element}>${e.price}</p>
                             <p className={style.element}>{e.rating}</p>
-                            <p className={style.element}>{e.Categories[0].name}</p>
+                            
                             <p className={style.element}>{e.stock}</p>                       
                         </div>
 
@@ -192,7 +191,7 @@ function deleteHandler(e){
 
 export default ProductsAdmin;
 
-
+//<p className={style.element}>{e.Categories[0].name}</p>
                           //  <div className={style.stockdiv}>
                           //    <button className={style.stockBtn} id={e.id} onClick={()=>DiscountHandler(e)}>                              
                           //       Discount                              
