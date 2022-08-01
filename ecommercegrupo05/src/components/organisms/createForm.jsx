@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import {
-  getProducts,
-  createProduct
-} from "../../redux/actions";
-=======
    import {
     getProducts,
     createProduct,
     getAllCategories,
 
    } from "../../redux/actions";
->>>>>>> features
 
 import style from '../../styles/createForm.module.css'
-import Axios from 'axios';
-export function validate(newProduct) {
+
+
+const inputValidate = (estado) => {
   let errors = {};
-<<<<<<< HEAD
-=======
   if(!isNaN(Number(estado.name))) {
   errors.name = 'The name cannot contain only numbers';
 } if(estado.name === "") {
@@ -47,78 +39,36 @@ export function validate(newProduct) {
 console.log("error", errors)
 return errors;
 };
->>>>>>> features
 
-  if (!newProduct.name) {
-    errors.name = 'Nombre requerido';
-  } if (newProduct.name.length < 4) {
-    errors.name = 'Nombre mayor a 4 caracteres';
-  } if (!newProduct.price) {
-    errors.price = `Precio requerido`;
-  } if (newProduct.price <= 0) {
-    errors.price = `El precio no puede ser nulo`;
-  } if (!newProduct.brand) {
-    errors.brand = 'Seleccione un brand';
-  } if (!newProduct.categories) {
-    errors.categories = 'Seleccione una categoria';
-  } if (newProduct.image === "") {
-    errors.image = 'Inserte imagen';
-  } if (newProduct.stock < 0) {
-    errors.stock = 'El stock no puede ser nulo';
-  } if (!newProduct.stock) {
-    errors.stock = 'Ingresar stock';
-  } if (newProduct.rating === "" || newProduct.rating > 5 || newProduct.rating < 0) {
-    errors.rating = 'Ingresar un rango entre 1 y 5';
-  } if (newProduct.description === "") {
-    errors.description = 'Descripcion es requerida';
-  }
-  return errors;
-};
-function redirect() {
-  window.location.href = "/";
-}
 export default function CreateForm() {
   const dispatch = useDispatch();
   const nav = useNavigate();
-<<<<<<< HEAD
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-  const products = useSelector((state) => state.data);
-  const [errors, setErrors] = React.useState({});
-=======
 
 
   const products = useSelector((state) => state.data);
 
   const category = useSelector((state) => state.allCategories);
->>>>>>> features
 
-  const [newProduct, setProduct] = useState({
-    name:"",
-    brand:"",
-    image:"",
-    price:"",
-    categories:[],
+    
+  
+  const [err, SetErr] = useState({});
+  const [estado, setEstado] = useState({
+    name: "",
+    brand: "",
+    image: "",
+    price: "",        
+    categories: "",
     stock:"",
     rating:"",
     description:"",
   });
+  console.log("estado",estado);
+  
   // crea un set de brands para el select 
   const setBrand = [];
-  products.map((e) => setBrand.push(e.brand));
-  let allBrand = [...new Set(setBrand)];
-  const category = []
-  
-  products.map((e) => category.push(e.Categories[0]?.name))
-  let setCat = [...new Set(category)]
+  products.map((e) =>setBrand.push(e.brand));
+  let newDatas = [...new Set(setBrand)];
 
-<<<<<<< HEAD
-  const handleInputChange = function (e) {
-
-    setProduct({
-      ...newProduct, [e.target.name]: e.target.value
-=======
   
 
   
@@ -129,220 +79,190 @@ export default function CreateForm() {
     setEstado({
       ...estado,
       [e.target.name]: e.target.value,
->>>>>>> features
     });
-    let objError = validate({ ...newProduct, [e.target.name]: e.target.value });
-    setErrors(objError)
+    SetErr(inputValidate({ ...estado, [e.target.name]: e.target.value }));
   }
 
+  //
   function handleSelectCat(e) {
-    if (Object.values(newProduct.categories).includes(e.target.value)) {
-      alert("Esta categoria ya se encuentra en la lista")
-    }
-    else if (!e.target.value) {
+    
+    //let result  = estado.category.includes(e.target.value)
+    //console.log("resultado", result)
+    //if(!result){ 
+    //
+    setEstado({
+      ...estado,
+      categories: [e.target.value]
+    });
+    SetErr(inputValidate({
+      ...estado,
+      categories: [e.target.value]
+    }));
+    //} else {
+    //  swal("you cant do that")
+    //}
 
-    }
-    else {
-      setProduct({
-        ...newProduct,
-        categories: [...newProduct.categories, e.target.value]
-      });
-      setErrors(validate({
-        ...newProduct,
-        categories: [e.target.value]
-      }));
-    }
   }
 
+ //function Handledelete(e){
+ //  
+ //  
+ //  setEstado({
+ //      ...estado,
+ //      category: estado.category.filter(el=>el !== e.target.value)
+ //  })
+ //  console.log( "this", e.target.value)
 
-  const handleSubmit = function (e) {
+ //}
+
+
+  function handleSelectBrand(e) {
+    setEstado({
+      ...estado,
+      brand: e.target.value,
+    });
+    console.log(estado.brand)
+    SetErr(inputValidate({
+      ...estado,
+      brand: [e.target.value]
+    }));
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
-    setErrors(validate(setProduct))
-    if (Object.keys(errors).length === 0 && newProduct.categories.length > 0) {
-      dispatch(createProduct(newProduct));
-      setProduct({
+    if (Object.keys(err).length)
+{return alert("fields missing")}
+    dispatch(createProduct(estado));
+    
+    setEstado({
         name: "",
         brand: "",
         image: "",
-        price: "",
-        categories: [],
-        stock: "",
-        rating: "",
-        description: "",
-      })
-      redirect()
-    }
-    else {
-      alert("Rellene todos los campos del formulario")
-    }
+        price: "",        
+        categories: "",
+        stock:"",
+        rating:"",
+        description:"",
+    });
+    alert("created")
+    setTimeout(() => {
+     // nav(-1)
+      }, 1000);
+
   }
-  //useEffect(() => {
+//useEffect(() => {
   //  dispatch(getAllProducts());
   // }, [dispatch]);
   // useEffect(() => {
   //   dispatch(getAllCategories());
   // }, [dispatch]);
-  const handleInputBrand = function (e) {
-    e.preventDefault();
-    if (Object.values(newProduct.brand).includes(e.target.value)) {
-      alert("Esta marca ya se encuentra en la lista")
-    }
-    else if (!e.target.value) {
 
-<<<<<<< HEAD
-    }
-    else {
-      setProduct({
-        ...newProduct, brand: [...newProduct.brand, e.target.value]
-      });
-      let objError = validate({ ...newProduct, [e.target.name]: e.target.value });
-      setErrors(objError)
-    }
-  }
-  const handleDeleteBrand = function (e) {
-    if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
-      setProduct({
-        ...newProduct,
-        brand: newProduct.brand.filter(k => k !== e)
-      })
-    }
-  }
-  const handleDeleteCategories = function (e) {
-    if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
-      setProduct({
-        ...newProduct,
-        categories: newProduct.categories.filter(k => k !== e)
-      })
-    }
-  }
-  const uploadImage = (files) => {
-    const formData = new FormData();
-    formData.append('file', files[0]);
-    formData.append('upload_preset', 'ecommercegrupo05');
-    const newAxios = Axios.create();
-    newAxios
-      .post('https://api.cloudinary.com/v1_1/deaf0qceq/image/upload', formData)
-      // eslint-disable-next-line no-loop-func
-      .then((res) => {
-        setProduct({
-          ...newProduct,
-          image: res.data.secure_url,
-        });
-        setErrors(validate(setProduct))
-      });
-=======
     useEffect(() => {
       dispatch(getProducts());
       dispatch(getAllCategories());
      }, []);
->>>>>>> features
 
-  }
+     
 
-  function handleDeleteImage(e) {
-    e.preventDefault();
-    setProduct({
-      ...newProduct,
-      image: "",
-    });
-  }
   return (
     <div className={style.backg}>
-      <div className={style.wrapper}>
-        <form onSubmit={(e) => handleSubmit(e)}>
+    <div className={style.wrapper}>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div>
+          <h1 className={style.titleform}>Create New Product</h1>
+            <div className={style.divcell}>
+            <label className={style.label1}>Name: </label>
+            <input
+              className={style.input1}
+              type="text"
+              value={estado.name}
+              name="name"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            {err.name}
+          </div>
+            <div className={style.divcell}>
+            <label className={style.label1}>Description: </label>
+            <input
+              className={style.input1}
+              type="text"
+              value={estado.description}
+              name="description"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            {err.name}
+          </div>
+          <div className={style.divcell}>
+            <label className={style.label1}>Price: </label>
+            <input
+              className={style.input1}
+              type="number"
+              value={estado.price}
+              min="0"
+              max="1000"
+              name="price"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            {err.price}
+          </div>
+          <div className={style.divcell}>
+            <label className={style.label1}>stock: </label>
+            <input
+              className={style.input1}
+              type="number"
+              value={estado.stock}
+              min="1"
+              max="1000"
+              name="stock"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            {err.stock}
+          </div>
+          <div className={style.divcell}>
+            <label className={style.label1}>Rating: </label>
+            <input
+              className={style.input1}
+              type="number"
+              value={estado.rating}
+              min="1"
+              max="1000"
+              name="rating"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            {err.rating}
+          </div>
+          <div className={style.divcell}>
+            <label className={style.label1}>Image: </label>
+            <input
+              className={style.input1}
+              // key="image"
+              type="text"
+              value={estado.image}
+              name="image"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+            {err.image}
+          </div>
           <div>
-            <h1 className={style.titleform}>Create New Product</h1>
-            <div className={style.divcell}>
-              <label className={style.label1}>Name: </label>
-              <input
-                value={newProduct.name}
-                placeholder="Nombre producto"
-                autoComplete="off"
-                onChange={(e) => handleInputChange(e)}
-                pattern="[A-Za-z0-9_-]{4}"
-                required="required"
-                type="text" name='name'
-              />
-              {errors.name}
+            <div>
+              <label className={style.label1}>Brand: </label>
+
+              <select className={style.input1} onChange={(e) => handleSelectBrand(e)}>
+                 <option value="none" selected disabled > Select Brand</option>
+                {newDatas?.map((e) => (
+                  <option className={style.input1} key={e} value={e}>
+                    {e}
+                  </option>
+                ))}
+              </select>
+              {err.brand}              
             </div>
-            <div className={style.divcell}>
-              <label className={style.label1}>Description: </label>
-              <input
-                className={style.input1}
-                placeholder="Descripcón del producto"
-                type="text"
-                value={newProduct.description}
-                name="description"
-                onChange={(e) => handleInputChange(e)}
-                required="required"
-              />
-              {errors.description}
-            </div>
-<<<<<<< HEAD
-            <div className={style.divcell}>
-              <label className={style.label1}>Price: </label>
-              <input
-                className={style.input1}
-                placeholder='Valor del producto en Dolares'
-                type="number"
-                value={newProduct.price}
-                min="0"
-                name="price"
-                onChange={(e) => handleInputChange(e)}
-                required="required"
-              />
-              {errors.price}
-            </div>
-            <div className={style.divcell}>
-              <label className={style.label1}>stock: </label>
-              <input
-                className={style.input1}
-                type="number"
-                value={newProduct.stock}
-                min="1"
-                name="stock"
-                onChange={(e) => handleInputChange(e)}
-                required="required"
-              />
-              {errors.stock}
-            </div>
-            <div className={style.divcell}>
-              <label value="0" className={style.label1}>Rating: </label>
-              <input
-                className={style.input1}
-                type="number"
-                placeholder='Popularidad del Producto'
-                value={newProduct.rating}
-                min="0"
-                max="5"
-                name="rating"
-                onChange={(e) => handleInputChange(e)}
-                required="required"
-              />
-              {errors.rating}
-            </div>
-            <div className={style.divcell}>
-              <label className={style.label1}>Image: </label>
-                <input
-                  className={style.input1}
-                  type="file"
-                  onChange={(e) => {
-                    uploadImage(e.target.files);
-                  }}
-                ></input>
-                {newProduct.image &&
-                  <div>
-                    <img src={newProduct.image} alt="" width='500px' />
-                    <button
-                      name={newProduct.image}
-                      onClick={(name) => handleDeleteImage(name)}
-                    >
-                      X
-                    </button>
-                  </div>
-                }
-              {errors.image}
-=======
 
             <div>
               <label className={style.label1}>Category: </label>
@@ -356,52 +276,22 @@ export default function CreateForm() {
                 ))}
                 {err.category}
               </select>
->>>>>>> features
             </div>
+
             <div>
-              <div>
-                <label className={style.label1}>Brand: </label>
-                <select required="required" className={style.input1} defaultValue="" name="brand" onChange={(e) => handleInputChange(e)}>
-                  <option value=""   > Select Brand</option>
-                  {
-                    allBrand?.map((e, i) =>
-                      (<option key={i} value={e}>{e}</option>))
-                  }
-                </select>
-                {errors.brand}
-              </div>
-              <div>
-                <label className={style.label1}>Category: </label>
-                <select className={style.input1} name="categories" defaultValue="" onChange={(e) => handleSelectCat(e)}>
-                  <option value="" > Select Category</option>
-                  {setCat?.map((e, i) => (
-                    <option className={style.input1} key={i} value={e}>
-                      {e}
-                    </option>
-                  ))}
-                </select>
-                {errors.categories}
-              </div>
-              <ul>
-                {newProduct.categories.map((d, i) =>
-                  <div key={i}>
-                    <button type='button' onClick={() => handleDeleteCategories(d)}>X</button>
-                    <li >{d}</li>
-                  </div>
-                )}
-              </ul>
-              <div>
-                <button type="submit" className={style.btn} onClick={handleSubmit}>
-                  Create
-                </button>
-                <Link to="/">
-                  <button className={style.btn}>Go Back</button>
-                </Link>
-              </div>
+              <button type="submit" className={style.btn}  onClick={handleSubmit}>
+                Create
+              </button>
+              <Link to="/">
+                <button className={style.btn}>Go Back</button>
+              </Link>
             </div>
+
+            
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
+    </div>
     </div>
   );
 }
