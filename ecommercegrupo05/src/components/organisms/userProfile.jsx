@@ -10,7 +10,7 @@ export default function UserProfile () {
     const [user, setUser] = useState({
         name: profile.name,
         email: profile.email,
-        picture: profile.picture,
+        picture: profile.picture || 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/240px-Avatar_icon_green.svg.png',
         telephone: profile.telephone|| 0,
         id: profile.id || 0,
         state: profile.state|| '',
