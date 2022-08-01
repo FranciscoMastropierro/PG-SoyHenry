@@ -1,6 +1,6 @@
 .main{   
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     margin: 60px 0 60px;
     justify-items: center;
     align-items: center;
@@ -9,7 +9,6 @@
     align-content: center;
 }
 .img{
-
     height: 6rem;
     object-fit: contain;
     object-position: center;
@@ -24,12 +23,16 @@
     height: auto;
     padding: 2rem;
     border-radius: 5px;
+    transition: 0.5s;
 }
 .item:hover{    
     transform: scale(1.1);
-    background-color: #01F60370;
+    background-color: #fff;
 }
 .title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 80px 0 10px;
     font-size: 30px;
     font-family: 'Share Tech', sans-serif;

@@ -13,7 +13,7 @@ export default function Home () {
             <SliderNews />
             <SlidePopularProducts />
             <SlideBestNotebooks />                      
-            <BrandBar/>
+            {/* <BrandBar/> */}
             <Slider/>
             <Footer/>
         </div>

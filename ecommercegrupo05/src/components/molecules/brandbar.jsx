@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from '@chakra-ui/react'
-import { Link as ReactLink } from "react-router-dom";
+import { Link as ReactLink, useNavigate } from "react-router-dom";
 import Apple from '../../assets/apple.png'
 import Asus from '../../assets/asus2.png'
 import Dell from '../../assets/dell.png'
@@ -10,30 +10,36 @@ import Lenovo from '../../assets/lenovo.png'
 import Lg from '../../assets/lg.png'
 import Samsung from '../../assets/samsung.png'
 import style from '../../styles/brandbar.module.css'
+import { getFilters, getProductByBrand } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const brandbar = () => {
-    // const [value, setValue] = useState({
-    //     "brand": [],
-    //     "categorie": "",
-    //     "order": "minor",
-    //     "praice": {
-    //         "min": "",
-    //         "max": ""
-    //     }
-    // })
+const Brandbar = () => {
 
-    // let navigate = useNavigate()
+    const data = useSelector((state) => state.brand)
 
-    // useEffect(() => {
-    //     getProductByName(value)
-    //     setProducts(searchedProducts)
-    // }, [value]) //eslint-disable-line react-hooks/exhaustive-deps
+    const [marca, setMarca] = useState('')
 
-    // function handleClick(e) {
-    //     e.preventDefault()
-    //     setValue('')
-    //     navigate(`/allProducts?name=${value}`)
-    // }
+    let navigate = useNavigate()
+
+    const dispatch = useDispatch()
+    
+    function handleClick(e) {
+        e.preventDefault()
+        setMarca(e.target.value)
+        navigate(`/products/brand?name=${marca}`)
+    }
+
+    useEffect((e) => {
+        // getProductByName(value)
+        // setProducts(searchedProducts)
+        dispatch(getProductByBrand(marca))
+        // setMarca({
+        //     ...marca,
+        //     brand: [e.target.value]
+        // })
+        // dispatch(getFilters(marca))
+    }, [marca]) //eslint-disable-line react-hooks/exhaustive-deps
+
 
     const links = [
         {
@@ -82,23 +88,25 @@ const brandbar = () => {
 
         <div>
             <h1 className={style.title}>Best Brands</h1>
-            {links.map(({ to, src }) => (
-                <div className={style.main}>
+            <div className={style.main}>
+            {links.map(({ to, src, value }) => (
+                <button key={src} onClick={handleClick}>
                     <Link as={ReactLink} to={to}>
                         <div className={style.item}>
                             <img src={src}
                                 alt="Intel"
                                 className={style.img}
-                                // value={value}
+                                value={value}
                                 width='141'
                                 height='106' />
                         </div>
                     </Link>
-                </div>
+                </button>
             ))}
+            </div>
 
         </div>
     )
 }
 
-export default brandbar
+export default Brandbar

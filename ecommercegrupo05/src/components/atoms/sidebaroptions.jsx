@@ -36,10 +36,10 @@ export function SidebarOptions() {
     useEffect(() => {
         if(isAuthenticated ){
             const getToken = async () => {
-               const token = await getAccessTokenSilently()
-               console.log("token ;)", token)
-           }
-           getToken()
+            const token = await getAccessTokenSilently()
+            console.log("token ;)", token)
+        }
+        getToken()
         } 
         console.log('no hay token :(')
     }, [isAuthenticated])

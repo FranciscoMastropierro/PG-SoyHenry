@@ -12,7 +12,8 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    SET_PROFILE
+    SET_PROFILE,
+    GET_PRODUCT_BY_BRAND
 } from './actions'
 
 const initialState = {
@@ -67,7 +68,7 @@ function rootReducer(state = initialState, { type, payload }) {
                 detail: payload
             }
         case GET_USER_BY_EMAIL:
-             return {
+            return {
             ...state,
             searchedUser: payload,
             };

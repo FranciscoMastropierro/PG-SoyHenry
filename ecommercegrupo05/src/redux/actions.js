@@ -21,6 +21,7 @@ export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 
 
+
 export function getProducts(loc) {
     return async function (dispatch) {
         let json = '';
@@ -96,6 +97,7 @@ export function getFilters(category) {
         }
     }
 }
+
 export function banUser(body) {
     return async function (dispatch) {
         const { data } = await axios.get('http://localhost:3001/admin/ban', (body))
@@ -125,6 +127,7 @@ export function getCate() {
         })
     }
 }
+
 export function getAllCategories() {
     return async function(dispatch) {
         const json = await axios(`http://localhost:3001/categories`)
