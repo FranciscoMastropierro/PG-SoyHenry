@@ -7,6 +7,8 @@ router.get('/', getUsers)
 
 router.get('/:name', getUserByName)
 
+router.get('/:id', getUserByName)
+
 router.get('/:email', getUserByEmail)
 
 router.put('/edit', updateUsers)

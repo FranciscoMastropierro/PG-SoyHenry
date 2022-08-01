@@ -8,6 +8,7 @@ const products = require('./products.route.js')
 const users = require('./user.route.js')
 const orders = require('./orders.route.js')
 const routeAuth = require('./auth0.route.js')
+const commentary = require('./product.reviews.route')
 
 const router = Router();
 
@@ -25,6 +26,8 @@ router.use("/", routeAuth)
 router.use('/users', users)
 
 router.use('/orders', orders)
+
+router.use('/commentary', commentary)
 
 
 module.exports = router;

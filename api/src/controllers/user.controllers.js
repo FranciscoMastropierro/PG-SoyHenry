@@ -28,7 +28,20 @@ getUserByName : async (req, res) => {
     try{
         const user = await Users.findOne({
             where: {
-                name: name
+                username: name
+            }
+        });
+        res.status(200).json(user)
+    }catch(error){
+        res.status(400).json({ error: "User didnt found" + error})
+    }
+},
+getUserById : async (req, res) => {
+    const { id } = req.query;
+    try{
+        const user = await Users.findOne({
+            where: {
+                name: id
             }
         });
         res.status(200).json(user)
@@ -39,13 +52,56 @@ getUserByName : async (req, res) => {
 
 //Traer todos los usuarios
 getUsers : async (req, res) => {
-    try{
-        const users = await Users.findAll()
-        res.send(users)
-    }catch(error){
-        res.status(404).send(error)
 
+    const { name,id,email } = req.query;
+    console.log(Object.keys(req.query))
+    if(Object.keys(req.query).length===0){
+        try{
+            const users = await Users.findAll()
+            return res.send(users)
+        }catch(error){
+            return res.status(404).send(error)
+    
+        }
     }
+    if(name){
+        try{
+            const user = await Users.findOne({
+                where: {
+                    username: name
+                }
+            });
+            return res.status(200).json(user)
+        }catch(error){
+            return res.status(400).json({ error: "User didnt found" + error})
+        }
+    }
+    if(id){
+        try{
+            const user = await Users.findOne({
+                where: {
+                    id: id
+                }
+            });
+            return res.status(200).json(user)
+        }catch(error){
+            return res.status(400).json({ error: "User didnt found" + error})
+        }
+    }
+    if(email){
+        try{
+            const user = await Users.findOne({
+                where: {
+                    email: email
+                }
+            });
+            return res.status(200).json(user)
+        }catch(error){
+            return res.status(400).json({ error: "User didnt found" + error})
+        }
+    }
+
+    
 },
 
 
