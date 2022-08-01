@@ -10,75 +10,49 @@ import Lenovo from '../../assets/lenovo.png'
 import Lg from '../../assets/lg.png'
 import Samsung from '../../assets/samsung.png'
 import style from '../../styles/brandbar.module.css'
-import { getFilters, getProductByBrand } from '../../redux/actions';
+// import { getFilters, getProductByBrand } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Brandbar = () => {
 
-    const data = useSelector((state) => state.brand)
-
-    const [marca, setMarca] = useState('')
-
-    let navigate = useNavigate()
-
-    const dispatch = useDispatch()
-    
-    function handleClick(e) {
-        e.preventDefault()
-        setMarca(e.target.value)
-        navigate(`/products/brand?name=${marca}`)
-    }
-
-    useEffect((e) => {
-        // getProductByName(value)
-        // setProducts(searchedProducts)
-        dispatch(getProductByBrand(marca))
-        // setMarca({
-        //     ...marca,
-        //     brand: [e.target.value]
-        // })
-        // dispatch(getFilters(marca))
-    }, [marca]) //eslint-disable-line react-hooks/exhaustive-deps
-
-
     const links = [
         {
-            to: 'allProducts',
+            to: '/allProducts?name=apple',
             src: Apple,
             value: 'Apple'
         },
         {
-            to: '',
+            to: '/allProducts?name=asus',
             src: Asus,
             value: 'Asus'
         },
         {
-            to: '',
+            to: '/allProducts?name=dell',
             src: Dell,
             value: 'Dell'
         },
         {
-            to: '',
+            to: '/allProducts?name=hp',
             src: Hp,
             value: 'Hp'
         },
         {
-            to: '',
+            to: '/allProducts?name=jbl',
             src: Jbl,
             value: 'Jbl'
         },
         {
-            to: '',
+            to: '/allProducts?name=lenovo',
             src: Lenovo,
             value: 'Lenovo'
         },
         {
-            to: '',
+            to: '/allProducts?name=lg',
             src: Lg,
             value: 'Lg'
         },
         {
-            to: '',
+            to: '/allProducts?name=samsung',
             src: Samsung,
             value: 'Samsung'
         }
@@ -90,7 +64,6 @@ const Brandbar = () => {
             <h1 className={style.title}>Best Brands</h1>
             <div className={style.main}>
             {links.map(({ to, src, value }) => (
-                <button key={src} onClick={handleClick}>
                     <Link as={ReactLink} to={to}>
                         <div className={style.item}>
                             <img src={src}
@@ -101,7 +74,6 @@ const Brandbar = () => {
                                 height='106' />
                         </div>
                     </Link>
-                </button>
             ))}
             </div>
 
