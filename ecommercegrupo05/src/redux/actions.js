@@ -11,14 +11,15 @@ export const CLEANER = 'CLEANER'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
 export const GET_USER_BY_EMAIL = 'GET_USER_BY_EMAIL'
-export const GET_FILTER_PRICE = 'GET_FILTER_PRICE' 
-export const GET_FILTER_BRAND = 'GET_FILTER_BRAND' 
+export const GET_FILTER_PRICE = 'GET_FILTER_PRICE'
+export const GET_FILTER_BRAND = 'GET_FILTER_BRAND'
 export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME'
-export const GET_CATEGORIES = 'GET_CATEGORIES' 
-export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES' 
+export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
+export const TOKEN = 'TOKEN'
 
 
 export function getProducts(loc) {
@@ -126,7 +127,7 @@ export function getCate() {
     }
 }
 export function getAllCategories() {
-    return async function(dispatch) {
+    return async function (dispatch) {
         const json = await axios(`http://localhost:3001/categories`)
         const data = json.data
         return dispatch({
@@ -142,10 +143,24 @@ export function cleaner() {
     }
 }
 
-export function setProf (u) {
+export function setProf(u) {
     return {
         type: SET_PROFILE,
         payload: u
+    }
+}
+
+export function token(tok) {
+    return async function (dispatch) {
+        const { data } = await axios.post('http://localhost:3001/products/filter',
+            {
+                Headers: {
+                    'Authorization': `Basic${tok}`
+                }
+            },
+        )
+
+        return dispatch({ type: TOKEN, payload: data })
     }
 }
 

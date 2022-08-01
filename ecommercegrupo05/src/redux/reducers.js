@@ -8,11 +8,12 @@ import {
     BAN_USER,
     UPGRADE_USER,
     GET_ALL_CATEGORIES,
-    GET_USER_BY_EMAIL,    
+    GET_USER_BY_EMAIL,
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    SET_PROFILE
+    SET_PROFILE,
+    TOKEN
 } from './actions'
 
 const initialState = {
@@ -26,14 +27,15 @@ const initialState = {
     productsToRender: [],
     filterPrice: [],
     categories: [],
-    allCategories:[],
-    allUsers:[],
-    searchedUser:[],
-    laptos: [],    
+    allCategories: [],
+    allUsers: [],
+    searchedUser: [],
+    laptos: [],
     filters: [],
     cate: [],
-    profile: []
-    }
+    profile: [],
+    token: []
+}
 
 function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
@@ -67,9 +69,9 @@ function rootReducer(state = initialState, { type, payload }) {
                 detail: payload
             }
         case GET_USER_BY_EMAIL:
-             return {
-            ...state,
-            searchedUser: payload,
+            return {
+                ...state,
+                searchedUser: payload,
             };
         case GET_ALL_USERS:
             return {
@@ -95,7 +97,7 @@ function rootReducer(state = initialState, { type, payload }) {
             }
         case GET_CATE:
             return {
-                ...state,               
+                ...state,
                 cate: payload
             }
         case GET_ALL_CATEGORIES:
@@ -107,6 +109,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 profile: payload
+            }
+        case TOKEN:
+            return {
+                ...state,
+                token: payload
             }
         default: return state;
     }
