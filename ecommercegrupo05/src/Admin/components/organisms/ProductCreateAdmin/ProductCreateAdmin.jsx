@@ -220,7 +220,7 @@ export default function CreateForm() {
               <label className={style.label1}>Price: </label>
               <input
                 className={style.input1}
-                placeholder='Valor del producto en Dolares'
+                placeholder='Valor del producto'
                 type="number"
                 value={newProduct.price}
                 min="0"
