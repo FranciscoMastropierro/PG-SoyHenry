@@ -1,0 +1,15 @@
+.NavContainer{
+    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    
+    
+    
+}
+.NavLink{
+    background-color: #2ecc36;
+    font-family: 'Red Hat Display', sans-serif;
+    width: 100%;
+    
+}

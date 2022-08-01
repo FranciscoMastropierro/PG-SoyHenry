@@ -1,5 +1,4 @@
-.filters
-{
+.filters {
     display: flex;
     justify-content: space-around;
     padding: 20px;
@@ -7,51 +6,83 @@
     margin: 0;
 }
 
-.div
-{
+.div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.select
-{
+.select {
     border: none;
     background: #333333;
     color: #01F603;
     transition: 0.5s;
 }
 
-.row
-{
+.row {
     display: flex;
     flex-direction: column;
     /* color: #01F603; */
 }
 
-.titleColor
-{
+.titleColor {
     color: #01F603;
 }
 
-.btn
-{
+.btn {
     padding: 4px;
     background-color: #01f60470;
     margin-top: 10px;
+    margin-right: 17px;
     border-radius: 4px;
     color: #fff;
     transition: 0.5s;
 }
 
-.btn:hover
-{
+.btn:hover {
     color: #000;
     background-color: #ffffff90;
     letter-spacing: 1px;
 }
 
-.title
-{
+.title {
     color: #01F603;
+}
+
+.brandss{
+    display: flex;
+    justify-content: center;   
+    margin: 5px;
+    padding: 2px;  
+    border-radius: 9px;
+    width: auto;
+    height: auto;
+    
+  }
+
+  .brands2{
+    display: flex;
+    align-items: center;
+    border: none;
+    background: #333333;
+    color: #01F603;
+    transition: 0.5s;
+    margin: 5px;  
+    width: auto;
+    height: auto;
+    
+  }
+
+.botnX {
+    cursor: pointer;
+    background-color: #c5181830;
+    border: transparent;
+    color: black;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.botnX:hover {
+    background-color: red;
+    border-radius: 7px;
 }

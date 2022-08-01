@@ -4,10 +4,16 @@ import {
     GET_DETAIL,
     CLEANER,
     CREATE_PRODUCT,
-    PAGINACION,    
-    GET_CATEGORIES,    
+    PAGINACION,
+    BAN_USER,
+    UPGRADE_USER,
+    GET_ALL_CATEGORIES,
+    GET_USER_BY_EMAIL,
     GET_FILTERS,
-    GET_CATE
+    GET_CATE,
+    GET_ALL_USERS,
+    SET_PROFILE,
+    TOKEN
 } from './actions'
 
 const initialState = {
@@ -18,11 +24,18 @@ const initialState = {
     clean: [],
     productsPerPage: 15,
     pages: 0,
-    productsToRender: [],    
-    laptos: [],    
+    productsToRender: [],
+    filterPrice: [],
+    categories: [],
+    allCategories: [],
+    allUsers: [],
+    searchedUser: [],
+    laptos: [],
     filters: [],
-    cate: []
-    }
+    cate: [],
+    profile: [],
+    token: []
+}
 
 function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
@@ -41,11 +54,29 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
+        case BAN_USER:
+            return {
+                ...state,
+            }
+        case UPGRADE_USER:
+            return {
+                ...state,
+            }
 
         case GET_DETAIL:
             return {
                 ...state,
                 detail: payload
+            }
+        case GET_USER_BY_EMAIL:
+            return {
+                ...state,
+                searchedUser: payload,
+            };
+        case GET_ALL_USERS:
+            return {
+                ...state,
+                allUsers: payload
             }
         case CLEANER:
             return {
@@ -66,11 +97,27 @@ function rootReducer(state = initialState, { type, payload }) {
             }
         case GET_CATE:
             return {
-                ...state,               
+                ...state,
                 cate: payload
             }
+        case GET_ALL_CATEGORIES:
+            return {
+                ...state,
+                allCategories: payload,
+            }
+        case SET_PROFILE:
+            return {
+                ...state,
+                profile: payload
+            }
+        case TOKEN:
+            return {
+                ...state,
+                token: payload
+            }
         default: return state;
+        }
     }
-}
+
 
 export default rootReducer;

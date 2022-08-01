@@ -5,7 +5,7 @@ const { Products, Categories_Products, Categories } = conn.models;
 const { Op } = require('sequelize');
 const productList = require('../asset/productList');
 
-
+const reducer = (previousValue, currentValue) => previousValue.concat(currentValue);
 module.exports = {
   getProducts: async (req, res) => {
     const { name } = req.query;
@@ -34,23 +34,32 @@ module.exports = {
     }
   },
   getFilter: async(req,res)=>{
-    console.log(req.body)
+    let arr=[]
     if(!req.body){
       return res.status(404).send('Products not found');
     }
     const {praice,brand,order,categorie}=req.body
     let min = 0;
     let max = 0;
-    if(!!praice.min){
-      min=praice.min
+    if(!!praice){
+      if(!!praice.min){
+        min=praice.min
+      }
+      if(!!praice.max){
+        max=praice.max
+      }
     }
-    if(!!praice.max){
-      max=praice.max
-    }
+
     const productsBd = await Products.findAll({
       include: { model: Categories },
     });
     let auxproductsBd=productsBd
+    brand?.length>0 && brand.map(e=>{
+      if(e){
+      arr.push(auxproductsBd.filter(elemt => elemt.brand== e ))
+      } 
+    })
+     arr?.length>0 && (auxproductsBd= arr.reduce(reducer));
     if(!!order && order=="minor"){
       auxproductsBd.sort(function(a, b) {
       if (Number(a.price) > Number(b.price)) {
@@ -95,19 +104,17 @@ module.exports = {
         return 0
       })
     }
-    if(!!min && !!max ){
-      if(!!min){
-        auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
+      if(min || max ){
+        if(!!min){
+          auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
+        }
+        if(!!max){
+          auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) < Number(max));
+        }
       }
-      if(!!max){
-        auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) < Number(max));
-      }
-    }
+    
     if(!!categorie){
       auxproductsBd = auxproductsBd.filter(elemt => elemt.Categories?.map(elemt => elemt.name.toLowerCase()) == categorie.toLowerCase() )
-    }
-    if(!!brand){
-      auxproductsBd = auxproductsBd.filter(elemt => elemt.brand== brand )
     }
     if(!auxproductsBd.length){
       return res.status(404).send('Product not found');

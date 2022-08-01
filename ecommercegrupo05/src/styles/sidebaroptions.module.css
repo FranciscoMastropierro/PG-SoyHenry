@@ -21,19 +21,52 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
 }
 .onPath {
     color: #01F603;
 }
-
-.linkCart {
-    display: flex;
+.menudiv{
+    display: flex;  
+    height: 4rem;
+    width: 24rem;  
+    font-size: 24px;
+    align-items: center;
     justify-content: space-around;
+    font-family: 'Share Tech', sans-serif;
+}
+.menudiv:hover{
+        
+    background-color: aliceblue;
+    transform: scale(1.1) ;
+    animation-duration: 1s;
+}
+.modal{
+    background-color: black;
+}
+
+.linkWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .cartItems {
-    margin-left: 5px;
+    position: absolute;
+    right: -4px;
+    font-size: 12px !important;
+    font-weight: 800;
+    bottom: -8px;
+    background-color: white;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    color: #000;
+    margin: 0 !important;
+    display: block;
+    text-align: center;
 }
 
 

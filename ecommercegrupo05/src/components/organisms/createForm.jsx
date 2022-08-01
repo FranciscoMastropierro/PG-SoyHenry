@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
    import {
     getProducts,
     createProduct,
-//     getAllCategories,
-//     getAllProducts,
+    getAllCategories,
+
    } from "../../redux/actions";
 
 import style from '../../styles/createForm.module.css'
@@ -23,7 +23,7 @@ const inputValidate = (estado) => {
   errors.price = `price is required`;
 } if(estado.brand.length === 0) {
   errors.brand = 'You must select a brand';
-} if(estado.category.length === 0) {
+} if(estado.category) {
   errors.category = 'You must select a category';
 } if(estado.image === "") {
     errors.image = 'put a valid image';
@@ -43,10 +43,11 @@ return errors;
 export default function CreateForm() {
   const dispatch = useDispatch();
   const nav = useNavigate();
+
+
   const products = useSelector((state) => state.data);
-  console.log(products)
- 
-//  const category = useSelector((state) => state.category);
+
+  const category = useSelector((state) => state.allCategories);
 
     
   
@@ -68,11 +69,9 @@ export default function CreateForm() {
   products.map((e) =>setBrand.push(e.brand));
   let newDatas = [...new Set(setBrand)];
 
-  const category = ['Laptops', 'keyboards', 'monitors']
+  
 
-  //products.map((e) =>category.push(e.Categories.name))
-  let setCat = [...new Set(category)]
-  console.log(setCat)
+  
   
   //cambia el estado
   function handleChange(e) {
@@ -160,6 +159,7 @@ export default function CreateForm() {
 
     useEffect(() => {
       dispatch(getProducts());
+      dispatch(getAllCategories());
      }, []);
 
      
@@ -269,9 +269,9 @@ export default function CreateForm() {
 
               <select className={style.input1} onChange={(e) => handleSelectCat(e)}>
                 <option value="none" selected disabled > Select Category</option>
-                {setCat?.map((e) => (
-                  <option className={style.input1} key={e} value={e}>
-                    {e}
+                {category?.map((e) => (
+                  <option className={style.input1} key={e.id} value={e.id}>
+                    {e.name}
                   </option>
                 ))}
                 {err.category}

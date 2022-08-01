@@ -1,0 +1,112 @@
+.container{
+    margin-left: 100px;  
+    margin-right: 100px;
+    margin-top: 25px;
+    background-color: rgb(172, 172, 172);
+    padding: 2rem;
+}
+
+.card{
+
+
+    display: grid;
+    grid-template-columns: 50px 50px  100px 200px 130px 150px 150px 75px 150px 110px ;
+    grid-auto-rows: auto;  
+   
+
+    border-bottom: 0.5px solid rgba(129, 129, 129, 0.514) ;
+
+    font-family: 'Cantarell', sans-serif;
+   
+    
+    
+}
+.element{
+    margin: 10px 10px 10px 30px;
+}
+.tabletop{
+    display: flex;
+    justify-content: space-around;
+}
+.DelBtn{
+    background-color: rgba(230, 64, 64, 0);
+    font-family: 'Cantarell', sans-serif;
+    border-color: rgba(240, 248, 255, 0);
+}
+.DelBtn:hover{
+    color: rgba(206, 37, 37, 0.815);    
+    font-family: 'Cantarell', sans-serif;
+    transform: scale(1.2);
+}
+.ModBtn{
+    background-color: rgba(230, 64, 64, 0);
+    font-family: 'Cantarell', sans-serif;
+    border-color: rgba(240, 248, 255, 0);
+    font-size: 20px;
+}
+.ModBtn:hover{
+    color: rgba(104, 245, 39, 0.747);    
+    font-family: 'Cantarell', sans-serif;
+    transform: scale(1.2);
+}
+.stockBtn{
+    background-color: rgba(230, 64, 64, 0);
+    font-family: 'Cantarell', sans-serif;
+    border-color: rgba(240, 248, 255, 0);
+}
+.stockBtn:hover{
+    color: rgba(153, 228, 233, 0.747);    
+    font-family: 'Cantarell', sans-serif;
+    transform: scale(1.2);
+}
+.categoryAdder{
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.secondaryBar{
+   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cantarell', sans-serif;
+    margin:50px 400px 50px 400px;
+    padding: 20px ;
+
+} 
+.addbtn{
+    color: black;
+    font-weight: 700;
+    height: 60px;
+    width: 300px;
+    background-color: rgba(62, 216, 57, 0.788);   
+    border-color: rgba(240, 248, 255, 0);
+    font-size: 15px;
+}
+.addbtn:hover{
+    
+    transform: scale(1.1);
+}
+.img{
+    height: 75px;
+    width: 75px;
+    box-shadow: 0 0 15px black;
+}
+.cardinfo{
+    display: grid;
+    grid-template-columns: 220px 130px 150px 130px 90px 110px 300px;
+    margin: 0 240px 0 230px;
+    border-bottom: 0.5px solid rgba(129, 129, 129, 0.514)
+
+}
+.stockinput{
+    height:25px ;
+    width: 55px;
+}
+.stockdiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}

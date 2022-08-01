@@ -21,8 +21,6 @@ export const CartProvider = ({ children }) => {
             return initialState
         }
     });
-    console.log("🚀 ~ file: CartItem.jsx ~ line 24 ~ const[state,setState]=useState ~ state", state.products)
-
     
     useEffect(() => {
         localStorage.setItem('cartState', JSON.stringify(state))

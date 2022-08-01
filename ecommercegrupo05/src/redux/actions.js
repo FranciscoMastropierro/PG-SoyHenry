@@ -1,14 +1,26 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
 export const GET_DETAIL = 'GET_DETAIL'
+export const BAN_USER = 'BAN_USER'
+export const UPGRADE_USER = 'UPGRADE_USER'
+export const GET_ALL_USERS = 'GET_ALL_USERS'
 export const CLEANER = 'CLEANER'
 export const CREATE_PRODUCT = 'CREATE_PRODUCT'
 export const PAGINACION = 'PAGINACION'
+export const GET_USER_BY_EMAIL = 'GET_USER_BY_EMAIL'
+export const GET_FILTER_PRICE = 'GET_FILTER_PRICE'
+export const GET_FILTER_BRAND = 'GET_FILTER_BRAND'
+export const GET_ORDER_BY_NAME = 'GET_ORDER_BY_NAME'
+export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
-export const LOGIN_USER = 'LOGIN_USER'
+export const SET_PROFILE = 'SET_PROFILE'
+export const TOKEN = 'TOKEN'
+
 
 
 export function getProducts(loc) {
@@ -45,12 +57,62 @@ export function getDetail(id) {
         })
     }
 }
+export function getUsers() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/user/`)
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_USERS,
+            payload: data
+        })
+    }
+}
+export function getUserByEmail(email) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/user/${email}`)
+        const data = json.data
+        return dispatch({
+            type: GET_USER_BY_EMAIL,
+            payload: data
+        })
+    }
+}
 
 export function getFilters(category) {
     return async function (dispatch) {
-        const { data } = await axios.post('http://localhost:3001/products/filter', (category))
+        try {
+            const { data } = await axios.post('http://localhost:3001/products/filter', (category))
+            return dispatch({ type: GET_FILTERS, payload: data })
+        }
+        catch (error) {
+            return swal({
+                title: "No existen resultados para este filtro.",
+                input: "text",
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                cancelButtonText: "Cancelar",
+                buttons: {
+                    cancel: 'ok'
+                }
+            })
+        }
+    }
+}
+
+export function banUser(body) {
+    return async function (dispatch) {
+        const { data } = await axios.get('http://localhost:3001/admin/ban', (body))
         return dispatch({
-            type: GET_FILTERS,
+            type: BAN_USER,
+            payload: data
+        })
+    }
+}
+export function upgradeToAdmin(body) {
+    return async function (dispatch) {
+        const { data } = await axios.get('http://localhost:3001/admin/upgrade', (body))
+        return dispatch({
+            type: UPGRADE_USER,
             payload: data
         })
     }
@@ -67,19 +129,43 @@ export function getCate() {
     }
 }
 
+export function getAllCategories() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/categories`)
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_CATEGORIES,
+            payload: data
+        })
+    }
+}
+
 export function cleaner() {
     return {
         type: CLEANER
     }
 }
 
-export let loginUser = async () => {
-    const json = await axios('http://localhost:3001/');
-    const data = json.data
-    console.log(data)
-    return data
+export function setProfile (u) {
+    return {
+        type: SET_PROFILE,
+        payload: u
+    }
 }
 
+export function token(tok) {
+    return async function (dispatch) {
+        const { data } = await axios.post('http://localhost:3001/products/filter',
+            {
+                Headers: {
+                    'Authorization': `Basic${tok}`
+                }
+            },
+        )
+
+        return dispatch({ type: TOKEN, payload: data })
+    }
+}
 
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
