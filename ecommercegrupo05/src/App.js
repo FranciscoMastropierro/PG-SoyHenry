@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import AOS from 'aos';
 import "aos/dist/aos.css";
-import Home from './components/organisms/Home'
+import {Home} from './components/organisms/Home'
 import AllProducts from './components/organisms/allProducts';
 import Details from './components/organisms/details';
 import Login from './components/organisms/login';
