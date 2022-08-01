@@ -74,6 +74,9 @@ export function SidebarOptions() {
 
     return (
         <div className={style.options}>
+            {isAuthenticated && (
+                <span>Hola!, {user.name}</span>
+            )}
             {links.map(({ to, name, src, styleClass, cartNumber }) => (
                 <Link to={to} className={style.link} key={name}>
                     <div className={style.linkWrapper}>
