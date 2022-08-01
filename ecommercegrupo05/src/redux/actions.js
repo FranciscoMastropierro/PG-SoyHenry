@@ -142,7 +142,7 @@ export function cleaner() {
     }
 }
 
-export function setProf (u) {
+export function setProfile (u) {
     return {
         type: SET_PROFILE,
         payload: u

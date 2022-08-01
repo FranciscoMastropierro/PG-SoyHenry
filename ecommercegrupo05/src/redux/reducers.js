@@ -32,7 +32,7 @@ const initialState = {
     laptos: [],    
     filters: [],
     cate: [],
-    profile: []
+    profile: [],
     }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -109,7 +109,8 @@ function rootReducer(state = initialState, { type, payload }) {
                 profile: payload
             }
         default: return state;
+        }
     }
-}
+
 
 export default rootReducer;
