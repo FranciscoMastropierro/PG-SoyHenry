@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
    import {
@@ -9,7 +9,7 @@ import Axios from 'axios';
 
    } from "../../../../redux/actions";
 
-import style from './ProductCreateAdmin.module.css'
+import style from './ProductModifyAdmin.module.css'
 
 
 export function validate(newProduct) {
@@ -52,16 +52,26 @@ export default function CreateForm() {
   const products = useSelector((state) => state.data);
   const [errors, setErrors] = React.useState({});
 
+  //Modify
+  const {id} = useParams()
+
+  let selectedProduct = products.filter((item)=> item.id === id)
+
+  
+
+
   const [newProduct, setProduct] = useState({
-    name: "",
-    brand: "",
-    image: "",
-    price: "",
-    categories: [],
-    stock: "",
-    rating: "",
-    description: "",
+    name: selectedProduct[0].name ,
+    brand: selectedProduct[0].brand,
+    image: selectedProduct[0].image,
+    price: selectedProduct[0].price,
+    categories: [selectedProduct[0].Categories[0].name] ,
+    stock: selectedProduct[0].stock,
+    rating: selectedProduct[0].rating,
+    description: selectedProduct[0].description,
   });
+  
+  console.log("this", newProduct)
   // crea un set de brands para el select 
   const setBrand = [];
   products.map((e) => setBrand.push(e.brand));
@@ -70,6 +80,7 @@ export default function CreateForm() {
   
   products.map((e) => category.push(e.Categories[0]?.name))
   let setCat = [...new Set(category)]
+  console.log( "setcat" ,setCat)
 
   const handleInputChange = function (e) {
 
@@ -80,24 +91,6 @@ export default function CreateForm() {
     setErrors(objError)
   }
 
-  function handleSelectCat(e) {
-    if (Object.values(newProduct.categories).includes(e.target.value)) {
-      alert("Esta categoria ya se encuentra en la lista")
-    }
-    else if (!e.target.value) {
-
-    }
-    else {
-      setProduct({
-        ...newProduct,
-        categories: [...newProduct.categories, e.target.value]
-      });
-      setErrors(validate({
-        ...newProduct,
-        categories: [e.target.value]
-      }));
-    }
-  }
 
 
   const handleSubmit = function (e) {
@@ -151,14 +144,7 @@ export default function CreateForm() {
       })
     }
   }
-  const handleDeleteCategories = function (e) {
-    if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
-      setProduct({
-        ...newProduct,
-        categories: newProduct.categories.filter(k => k !== e)
-      })
-    }
-  }
+
   const uploadImage = (files) => {
     const formData = new FormData();
     formData.append('file', files[0]);
@@ -189,9 +175,9 @@ export default function CreateForm() {
       <div className={style.wrapper}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
-            <h1 className={style.titleform}>Create New Product</h1>
+            <h1 className={style.titleform}>Modificar Producto</h1>
             <div className={style.divcell}>
-              <label className={style.label1}>Name: </label>
+              <label className={style.label1}>Nombre: </label>
               <input
                 value={newProduct.name}
                 placeholder="Nombre producto"
@@ -204,9 +190,9 @@ export default function CreateForm() {
               {errors.name}
             </div>
             <div className={style.divcell}>
-              <label className={style.label1}>Description: </label>
-              <input
-                className={style.input1}
+              <label className={style.label1}>Descripción: </label>
+              <textarea
+                className={style.text}
                 placeholder="Descripcón del producto"
                 type="text"
                 value={newProduct.description}
@@ -217,7 +203,7 @@ export default function CreateForm() {
               {errors.description}
             </div>
             <div className={style.divcell}>
-              <label className={style.label1}>Price: </label>
+              <label className={style.label1}>Precio: </label>
               <input
                 className={style.input1}
                 placeholder='Valor del producto'
@@ -244,25 +230,11 @@ export default function CreateForm() {
               {errors.stock}
             </div>
             <div className={style.divcell}>
-              <label value="0" className={style.label1}>Rating: </label>
-              <input
-                className={style.input1}
-                type="number"
-                placeholder='Popularidad del Producto'
-                value={newProduct.rating}
-                min="0"
-                max="5"
-                name="rating"
-                onChange={(e) => handleInputChange(e)}
-                required="required"
-              />
-              {errors.rating}
-            </div>
-            <div className={style.divcell}>
-              <label className={style.label1}>Image: </label>
+              <label className={style.label1}>Imagen: </label>
                 <input
                   className={style.input1}
                   type="file"
+                  title=" "
                   onChange={(e) => {
                     uploadImage(e.target.files);
                   }}
@@ -282,42 +254,22 @@ export default function CreateForm() {
             </div>
             <div>
               <div>
-                <label className={style.label1}>Brand: </label>
+                <label className={style.label1}>Marca: </label>
                 <select required="required" className={style.input1} defaultValue="" name="brand" onChange={(e) => handleInputChange(e)}>
-                  <option value=""   > Select Brand</option>
+                  <option value={selectedProduct[0].brand} selected > {selectedProduct[0].brand}</option>
                   {
-                    allBrand?.map((e, i) =>
+                    allBrand?.filter((item)=>item !== selectedProduct[0].brand).map((e, i) =>
                       (<option key={i} value={e}>{e}</option>))
                   }
                 </select>
                 {errors.brand}
-              </div>
-              <div>
-                <label className={style.label1}>Category: </label>
-                <select className={style.input1} name="categories" defaultValue="" onChange={(e) => handleSelectCat(e)}>
-                  <option value="" > Select Category</option>
-                  {setCat?.map((e, i) => (
-                    <option className={style.input1} key={i} value={e}>
-                      {e}
-                    </option>
-                  ))}
-                </select>
-                {errors.categories}
-              </div>
-              <ul>
-                {newProduct.categories.map((d, i) =>
-                  <div key={i}>
-                    <button type='button' onClick={() => handleDeleteCategories(d)}>X</button>
-                    <li >{d}</li>
-                  </div>
-                )}
-              </ul>
+              </div>                          
               <div>
                 <button type="submit" className={style.btn} onClick={handleSubmit}>
-                  Create
+                  Modificar
                 </button>
-                <Link to="/">
-                  <button className={style.btn}>Go Back</button>
+                <Link to="/admin/products">
+                  <button className={style.btn}>Ir Hacia Atrás</button>
                 </Link>
               </div>
             </div>
