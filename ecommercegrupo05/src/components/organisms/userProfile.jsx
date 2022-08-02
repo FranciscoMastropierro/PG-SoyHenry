@@ -27,6 +27,7 @@ export default function UserProfile () {
     function handleSubmit (e) {
         e.preventDefault()
         dispatch(setProfile(user))
+        alert('Los cambios han sido realizados exitosamente!')
     }
 
     return (
