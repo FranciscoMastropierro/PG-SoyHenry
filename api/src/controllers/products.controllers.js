@@ -257,6 +257,20 @@ module.exports = {
     const brandResult = Array.from(brandSet)
 
     res.send(brandResult)
-  }
+  },
+  updateProduct: async (req, res) => {
+    const {id, update } =req.body;
 
+    const { name, price, brand, stock, description, image, disable }=update
+    console.log(name, price, brand, stock, description, image, disable)
+    if(!name || !price || !brand || !stock || !description || !image){
+      console.log("entre")
+      return res.status(404).send("fill in all the data")
+    }
+    await Products.update(
+      { name, price, brand, stock, description, image, disable },
+      { where: { id } }
+    );
+    return res.status(404).send("the product was changed");
+  }
 };
