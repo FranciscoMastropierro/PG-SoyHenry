@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import trash from "../../assets/trash3.png";
+import trash from "../../assets/trash2.png";
 import style from "../../styles/cart.module.css";
 import { useCartContext } from "../../context/CartItem";
 
