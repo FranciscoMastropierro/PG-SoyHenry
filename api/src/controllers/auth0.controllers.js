@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { requiresAuth } = require('express-openid-connect');
+const { requiresAuth , auth } = require('express-openid-connect');
 const { Users } = require('../db')
 const url = require('url')
 
@@ -34,13 +34,11 @@ module.exports = {
 
 
     infoProfile: (req, res) => {
+            // const { user } = auth
 
-        res.send({success: true})
-        
-        
-        
-        
-        
+            res.send(req.oidc.user)
+
+
         
         // let arrUserInfo = []
 

@@ -34,7 +34,8 @@ const initialState = {
     filters: [],
     cate: [],
     profile: [],
-    token: []
+    userLoged: {},
+
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -110,10 +111,10 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 profile: payload
             }
-        case TOKEN:
+         case TOKEN:
             return {
-                ...state,
-                token: payload
+                 ...state,
+                 userLoged: payload
             }
         default: return state;
         }

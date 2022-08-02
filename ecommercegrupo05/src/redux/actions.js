@@ -155,13 +155,13 @@ export function setProfile (u) {
 
 export function token(tok) { 
     return async function (dispatch) {
-        console.log("Flag Actions", await tok)
-        const { data } = await axios.post('http://localhost:3001/products/filter',
+        console.log("Flag Actions", tok)
+        const { data } = await axios.get('http://localhost:3001/profile',
             {
-                Headers: {
+                headers: {
                     'Authorization': `Bearer ${tok}`
                 }
-            },
+            }
         )
         
         return dispatch({ type: TOKEN, payload: data })
