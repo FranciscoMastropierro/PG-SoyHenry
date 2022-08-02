@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const { requiresAuth } = require('express-openid-connect');
+const { auth } = require('express-openid-connect');
 const { authenthincateUser, infoProfile } = require('../controllers/auth0.controllers');
 const {Users} = require('../db');
 const {expressjwt} = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
+
 
 
 const router = Router();
@@ -22,12 +23,14 @@ const authorizationAccess = expressjwt({
     audience: process.env.AUTH0_AUDIENCE,
     issuer:`https://dev-81nqhdy2.us.auth0.com/`,
     algorithms: ["RS256"],
+    
 });
 
 
 // router.get('/', authorizationAccess);
 
 
-router.get("/profile", authorizationAccess  ,infoProfile);
+
+router.post("/profile", authorizationAccess  ,infoProfile);
 
 module.exports = router;

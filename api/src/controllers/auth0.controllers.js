@@ -1,7 +1,8 @@
 const { Router } = require('express');
-const { requiresAuth , auth } = require('express-openid-connect');
+const { auth } = require('express-openid-connect');
 const { Users } = require('../db')
 const url = require('url')
+const axios = require('axios')
 
 
 module.exports = {
@@ -33,12 +34,11 @@ module.exports = {
 
 
 
-    infoProfile: (req, res) => {
-            // const { user } = auth
+    infoProfile: async (req, res, next) => {
 
-            res.send(req.oidc.user)
-
-
+            console.log(req.body)
+        
+       
         
         // let arrUserInfo = []
 
