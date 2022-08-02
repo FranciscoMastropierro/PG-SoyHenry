@@ -9,8 +9,7 @@ import {getProducts} from "../../../../redux/actions"
 
 
 import style from "./ProductsAdmin.module.css";
-import { ImCross } from "react-icons/im"
-import { BiPlusMedical, BiShowAlt } from "react-icons/bi"
+
 import { HiPencilAlt } from "react-icons/hi"
 
 function ProductsAdmin(){
@@ -154,7 +153,7 @@ function deleteHandler(e){
 
 
                             <button className={style.DelBtn} id={e.id} onClick={()=>deleteHandler(e)}>
-                              <ImCross/>
+                              disable
                             </button>                            
 
                             <button className={style.ModBtn}>

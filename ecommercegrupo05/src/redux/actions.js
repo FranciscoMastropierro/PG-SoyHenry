@@ -20,6 +20,7 @@ export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 
 
@@ -104,6 +105,15 @@ export function banUser(body) {
         const { data } = await axios.get('http://localhost:3001/admin/ban', (body))
         return dispatch({
             type: BAN_USER,
+            payload: data
+        })
+    }
+}
+export function updateProduct(id, update) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/products/', ({id, update}))
+        return dispatch({
+            type: UPDATE_PRODUCT,
             payload: data
         })
     }

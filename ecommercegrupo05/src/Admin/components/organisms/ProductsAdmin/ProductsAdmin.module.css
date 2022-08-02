@@ -10,13 +10,13 @@
 
 
     display: grid;
-    grid-template-columns: 50px 50px  100px 200px 130px 150px 150px 75px 150px 110px ;
+    grid-template-columns: 150px 50px  100px 200px 130px 150px 150px 75px 150px 110px ;
     grid-auto-rows: auto;  
    
 
     border-bottom: 0.5px solid rgba(129, 129, 129, 0.514) ;
 
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Share Tech', sans-serif;
    
     
     
@@ -29,34 +29,37 @@
     justify-content: space-around;
 }
 .DelBtn{
-    background-color: rgba(230, 64, 64, 0);
-    font-family: 'Cantarell', sans-serif;
+    background-color: rgb(228, 42, 42);
+    height: 50px;
+    width: 100px;
+    font-family: 'Share Tech', sans-serif;
     border-color: rgba(240, 248, 255, 0);
+    border-radius: 0.5rem;
+    border: 2px solid black;
 }
 .DelBtn:hover{
-    color: rgba(206, 37, 37, 0.815);    
-    font-family: 'Cantarell', sans-serif;
-    transform: scale(1.2);
+    box-shadow: 1px 1px 15px red;
 }
 .ModBtn{
     background-color: rgba(230, 64, 64, 0);
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Share Tech', sans-serif;
     border-color: rgba(240, 248, 255, 0);
     font-size: 20px;
+    
 }
 .ModBtn:hover{
     color: rgba(104, 245, 39, 0.747);    
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Share Tech', sans-serif;
     transform: scale(1.2);
 }
 .stockBtn{
     background-color: rgba(230, 64, 64, 0);
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Share Tech', sans-serif;
     border-color: rgba(240, 248, 255, 0);
 }
 .stockBtn:hover{
     color: rgba(153, 228, 233, 0.747);    
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Share Tech', sans-serif;
     transform: scale(1.2);
 }
 .categoryAdder{
@@ -69,7 +72,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-family: 'Cantarell', sans-serif;
+    font-family: 'Share Tech', sans-serif;
     margin:50px 400px 50px 400px;
     padding: 20px ;
 
@@ -82,6 +85,7 @@
     background-color: rgba(62, 216, 57, 0.788);   
     border-color: rgba(240, 248, 255, 0);
     font-size: 15px;
+    border-radius: 0.5rem;
 }
 .addbtn:hover{
     
@@ -95,7 +99,7 @@
 .cardinfo{
     display: grid;
     grid-template-columns: 220px 130px 150px 130px 90px 110px 300px;
-    margin: 0 240px 0 230px;
+    margin: 0 240px 0 330px;
     border-bottom: 0.5px solid rgba(129, 129, 129, 0.514)
 
 }

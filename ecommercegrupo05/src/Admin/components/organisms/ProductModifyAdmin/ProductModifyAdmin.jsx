@@ -4,44 +4,43 @@ import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
    import {
     getProducts,
-    createProduct,
-    getAllCategories,
+    updateProduct
 
    } from "../../../../redux/actions";
 
 import style from './ProductModifyAdmin.module.css'
 
 
-export function validate(newProduct) {
+export function validate(update) {
   let errors = {};
 
-  if (!newProduct.name) {
+  if (!update.name) {
     errors.name = 'Nombre requerido';
-  } if (newProduct.name.length < 4) {
+  } if (update.name.length < 4) {
     errors.name = 'Nombre mayor a 4 caracteres';
-  } if (!newProduct.price) {
+  } if (!update.price) {
     errors.price = `Precio requerido`;
-  } if (newProduct.price <= 0) {
+  } if (update.price <= 0) {
     errors.price = `El precio no puede ser nulo`;
-  } if (!newProduct.brand) {
+  } if (!update.brand) {
     errors.brand = 'Seleccione un brand';
-  } if (!newProduct.categories) {
+  } if (!update.categories) {
     errors.categories = 'Seleccione una categoria';
-  } if (newProduct.image === "") {
+  } if (update.image === "") {
     errors.image = 'Inserte imagen';
-  } if (newProduct.stock < 0) {
+  } if (update.stock < 0) {
     errors.stock = 'El stock no puede ser nulo';
-  } if (!newProduct.stock) {
+  } if (!update.stock) {
     errors.stock = 'Ingresar stock';
-  } if (newProduct.rating === "" || newProduct.rating > 5 || newProduct.rating < 0) {
+  } if (update.rating === "" || update.rating > 5 || update.rating < 0) {
     errors.rating = 'Ingresar un rango entre 1 y 5';
-  } if (newProduct.description === "") {
+  } if (update.description === "") {
     errors.description = 'Descripcion es requerida';
   }
   return errors;
 };
 function redirect() {
-  window.location.href = "/";
+  window.location.href = "/admin/products";
 }
 export default function CreateForm() {
   const dispatch = useDispatch();
@@ -60,7 +59,7 @@ export default function CreateForm() {
   
 
 
-  const [newProduct, setProduct] = useState({
+  const [update, setProduct] = useState({
     name: selectedProduct[0].name ,
     brand: selectedProduct[0].brand,
     image: selectedProduct[0].image,
@@ -71,7 +70,7 @@ export default function CreateForm() {
     description: selectedProduct[0].description,
   });
   
-  console.log("this", newProduct)
+  console.log("this", update)
   // crea un set de brands para el select 
   const setBrand = [];
   products.map((e) => setBrand.push(e.brand));
@@ -85,9 +84,9 @@ export default function CreateForm() {
   const handleInputChange = function (e) {
 
     setProduct({
-      ...newProduct, [e.target.name]: e.target.value
+      ...update, [e.target.name]: e.target.value
     });
-    let objError = validate({ ...newProduct, [e.target.name]: e.target.value });
+    let objError = validate({ ...update, [e.target.name]: e.target.value });
     setErrors(objError)
   }
 
@@ -96,8 +95,9 @@ export default function CreateForm() {
   const handleSubmit = function (e) {
     e.preventDefault();
     setErrors(validate(setProduct))
-    if (Object.keys(errors).length === 0 && newProduct.categories.length > 0) {
-      dispatch(createProduct(newProduct));
+    if (Object.keys(errors).length === 0 && update.categories.length > 0) {
+  
+      dispatch(updateProduct(id , update));
       setProduct({
         name: "",
         brand: "",
@@ -122,7 +122,7 @@ export default function CreateForm() {
   // }, [dispatch]);
   const handleInputBrand = function (e) {
     e.preventDefault();
-    if (Object.values(newProduct.brand).includes(e.target.value)) {
+    if (Object.values(update.brand).includes(e.target.value)) {
       alert("Esta marca ya se encuentra en la lista")
     }
     else if (!e.target.value) {
@@ -130,17 +130,17 @@ export default function CreateForm() {
     }
     else {
       setProduct({
-        ...newProduct, brand: [...newProduct.brand, e.target.value]
+        ...update, brand: [...update.brand, e.target.value]
       });
-      let objError = validate({ ...newProduct, [e.target.name]: e.target.value });
+      let objError = validate({ ...update, [e.target.name]: e.target.value });
       setErrors(objError)
     }
   }
   const handleDeleteBrand = function (e) {
     if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
       setProduct({
-        ...newProduct,
-        brand: newProduct.brand.filter(k => k !== e)
+        ...update,
+        brand: update.brand.filter(k => k !== e)
       })
     }
   }
@@ -155,10 +155,10 @@ export default function CreateForm() {
       // eslint-disable-next-line no-loop-func
       .then((res) => {
         setProduct({
-          ...newProduct,
+          ...update,
           image: res.data.secure_url,
         });
-        setErrors(validate(newProduct))
+        setErrors(validate(update))
       });
 
   }
@@ -166,7 +166,7 @@ export default function CreateForm() {
   function handleDeleteImage(e) {
     e.preventDefault();
     setProduct({
-      ...newProduct,
+      ...update,
       image: "",
     });
   }
@@ -179,7 +179,8 @@ export default function CreateForm() {
             <div className={style.divcell}>
               <label className={style.label1}>Nombre: </label>
               <input
-                value={newProduct.name}
+                className={style.input1}
+                value={update.name}
                 placeholder="Nombre producto"
                 autoComplete="off"
                 onChange={(e) => handleInputChange(e)}
@@ -192,10 +193,10 @@ export default function CreateForm() {
             <div className={style.divcell}>
               <label className={style.label1}>Descripción: </label>
               <textarea
-                className={style.text}
+                className={style.input2}
                 placeholder="Descripcón del producto"
                 type="text"
-                value={newProduct.description}
+                value={update.description}
                 name="description"
                 onChange={(e) => handleInputChange(e)}
                 required="required"
@@ -208,7 +209,7 @@ export default function CreateForm() {
                 className={style.input1}
                 placeholder='Valor del producto'
                 type="number"
-                value={newProduct.price}
+                value={update.price}
                 min="0"
                 name="price"
                 onChange={(e) => handleInputChange(e)}
@@ -221,7 +222,7 @@ export default function CreateForm() {
               <input
                 className={style.input1}
                 type="number"
-                value={newProduct.stock}
+                value={update.stock}
                 min="1"
                 name="stock"
                 onChange={(e) => handleInputChange(e)}
@@ -232,18 +233,19 @@ export default function CreateForm() {
             <div className={style.divcell}>
               <label className={style.label1}>Imagen: </label>
                 <input
-                  className={style.input1}
+                  className={style.choose}
                   type="file"
                   title=" "
                   onChange={(e) => {
                     uploadImage(e.target.files);
                   }}
                 ></input>
-                {newProduct.image &&
+                {update.image &&
                   <div>
-                    <img src={newProduct.image} alt="" width='500px' />
+                    <img className={style.img} src={update.image} alt="" width='400px' />
                     <button
-                      name={newProduct.image}
+                      className={style.x}
+                      name={update.image}
                       onClick={(name) => handleDeleteImage(name)}
                     >
                       X
@@ -264,7 +266,7 @@ export default function CreateForm() {
                 </select>
                 {errors.brand}
               </div>                          
-              <div>
+              <div className={style.btndiv}>
                 <button type="submit" className={style.btn} onClick={handleSubmit}>
                   Modificar
                 </button>

@@ -13,7 +13,8 @@ import {
     GET_CATE,
     GET_ALL_USERS,
     SET_PROFILE,
-    TOKEN
+    TOKEN,
+    UPDATE_PRODUCT
 } from './actions'
 
 const initialState = {
@@ -67,6 +68,10 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 detail: payload
+            }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
             }
         case GET_USER_BY_EMAIL:
             return {

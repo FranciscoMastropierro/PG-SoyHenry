@@ -189,10 +189,11 @@ export default function CreateForm() {
       <div className={style.wrapper}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
-            <h1 className={style.titleform}>Create New Product</h1>
+            <h1 className={style.titleform}>Crear Producto</h1>
             <div className={style.divcell}>
-              <label className={style.label1}>Name: </label>
+              <label className={style.label1}>Nombre: </label>
               <input
+                className={style.input1}
                 value={newProduct.name}
                 placeholder="Nombre producto"
                 autoComplete="off"
@@ -204,7 +205,7 @@ export default function CreateForm() {
               {errors.name}
             </div>
             <div className={style.divcell}>
-              <label className={style.label1}>Description: </label>
+              <label className={style.label1}>Descripción: </label>
               <input
                 className={style.input1}
                 placeholder="Descripcón del producto"
@@ -217,7 +218,7 @@ export default function CreateForm() {
               {errors.description}
             </div>
             <div className={style.divcell}>
-              <label className={style.label1}>Price: </label>
+              <label className={style.label1}>Precio: </label>
               <input
                 className={style.input1}
                 placeholder='Valor del producto'
@@ -231,10 +232,11 @@ export default function CreateForm() {
               {errors.price}
             </div>
             <div className={style.divcell}>
-              <label className={style.label1}>stock: </label>
+              <label className={style.label1}>Stock: </label>
               <input
                 className={style.input1}
                 type="number"
+                placeholder='Numero de unidades'
                 value={newProduct.stock}
                 min="1"
                 name="stock"
@@ -243,25 +245,11 @@ export default function CreateForm() {
               />
               {errors.stock}
             </div>
+           
             <div className={style.divcell}>
-              <label value="0" className={style.label1}>Rating: </label>
-              <input
-                className={style.input1}
-                type="number"
-                placeholder='Popularidad del Producto'
-                value={newProduct.rating}
-                min="0"
-                max="5"
-                name="rating"
-                onChange={(e) => handleInputChange(e)}
-                required="required"
-              />
-              {errors.rating}
-            </div>
-            <div className={style.divcell}>
-              <label className={style.label1}>Image: </label>
+              <label className={style.label1}>Imagen: </label>
                 <input
-                  className={style.input1}
+                  className={style.choose}
                   type="file"
                   onChange={(e) => {
                     uploadImage(e.target.files);
@@ -271,6 +259,7 @@ export default function CreateForm() {
                   <div>
                     <img src={newProduct.image} alt="" width='500px' />
                     <button
+                      className={style.x}
                       name={newProduct.image}
                       onClick={(name) => handleDeleteImage(name)}
                     >
@@ -282,9 +271,9 @@ export default function CreateForm() {
             </div>
             <div>
               <div>
-                <label className={style.label1}>Brand: </label>
+                <label className={style.label1}>Marca: </label>
                 <select required="required" className={style.input1} defaultValue="" name="brand" onChange={(e) => handleInputChange(e)}>
-                  <option value=""   > Select Brand</option>
+                  <option value=""   > Seleccionar Marca</option>
                   {
                     allBrand?.map((e, i) =>
                       (<option key={i} value={e}>{e}</option>))
@@ -293,9 +282,9 @@ export default function CreateForm() {
                 {errors.brand}
               </div>
               <div>
-                <label className={style.label1}>Category: </label>
+                <label className={style.label1}>Categoria: </label>
                 <select className={style.input1} name="categories" defaultValue="" onChange={(e) => handleSelectCat(e)}>
-                  <option value="" > Select Category</option>
+                  <option value="" > Seleccionar categoria</option>
                   {setCat?.map((e, i) => (
                     <option className={style.input1} key={i} value={e}>
                       {e}
@@ -307,17 +296,17 @@ export default function CreateForm() {
               <ul>
                 {newProduct.categories.map((d, i) =>
                   <div key={i}>
-                    <button type='button' onClick={() => handleDeleteCategories(d)}>X</button>
+                    <button className={style.x} type='button' onClick={() => handleDeleteCategories(d)}>X</button>
                     <li >{d}</li>
                   </div>
                 )}
               </ul>
-              <div>
+              <div className={style.btndiv}>
                 <button type="submit" className={style.btn} onClick={handleSubmit}>
-                  Create
+                  Crear
                 </button>
                 <Link to="/">
-                  <button className={style.btn}>Go Back</button>
+                  <button className={style.btn}>Ir Hacia atras</button>
                 </Link>
               </div>
             </div>
