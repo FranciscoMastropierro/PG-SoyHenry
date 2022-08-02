@@ -257,6 +257,5 @@ module.exports = {
     const brandResult = Array.from(brandSet)
 
     res.send(brandResult)
-  }
-
+  },
 };
