@@ -28,7 +28,7 @@ export function SidebarOptions() {
         if(isAuthenticated ){
             const getToken = async () => {
                const token = await getAccessTokenSilently()
-            //    console.log("token ;)", token)
+               console.log("token ;)", token)
            }
            getToken()
            dispatch(token(getToken()))
