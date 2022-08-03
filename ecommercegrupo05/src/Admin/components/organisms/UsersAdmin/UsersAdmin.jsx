@@ -4,7 +4,7 @@ import style from "./UsersAdmin.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, banUser, upgradeToAdmin } from "../../../../redux/actions"
 import { ImCross } from "react-icons/im"
-import { GiUpgrade } from "react-icons/gi"
+import { FaCrown } from "react-icons/fa"
 import SearchBarAdmin from "../../molecules/SearchBarUserAdmin/SearchBarUserAdmin"
 import swal from 'sweetalert'
 
@@ -105,7 +105,6 @@ async function handleAdmin(e){
                   <h3 className={style.searchtext}>User since: {searchedUsers.createdAt.slice(0,10)}</h3>
                   <h3 className={style.searchtext}>Membership: {searchedUsers.membership}</h3>
                   <button className={style.DelBtn} email={searchedUsers.email} onClick={() => handleBan(searchedUsers)}>Ban <ImCross/></button>
-                  <button className={style.ModBtn} id={searchedUsers.id} onClick={() => handleAdmin(searchedUsers)}>Give Admin <GiUpgrade/></button> 
                 </div>
             ):(<></>)
                 
@@ -114,9 +113,9 @@ async function handleAdmin(e){
             <div className={style.cardinfo}>
                 
                 
-                <p>User</p>
+                <p>Id</p>
+                <p>Username</p>
                 <p>Email</p>
-                <p>Membership</p>
                 
                 
             </div>
@@ -125,12 +124,12 @@ async function handleAdmin(e){
             {users.map(e=> {
                 return(
                         <div className={style.card} key={e.id}>
-                            <button className={style.DelBtn} email={e.email} onClick={() => handleBan(e)}><ImCross/></button>
-                            <button className={style.ModBtn} id={e.id} onClick={() => handleAdmin(e)}><GiUpgrade/></button>
+                            <button className={style.DelBtn} email={e.email} onClick={() => handleBan(e)}> Ban </button>
+                          {e.isAdmin? <FaCrown/> :  <button className={style.ModBtn} id={e.id} onClick={() => handleAdmin(e)}> Admin</button>}
                             <p className={style.element}>{e.id}</p>
-                            <p className={style.element}>{e.name.slice(0,11)}</p>
+                            <p className={style.element}>{e.username}</p>
                             <p className={style.element}>{e.email}</p>
-                            <p className={style.element}>{e.membership}</p>
+                            
                                             
                         </div>
 

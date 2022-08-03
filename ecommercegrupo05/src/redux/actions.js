@@ -23,6 +23,9 @@ export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
+export const POST_FAVORITE = 'POST_FAVORITE'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const UPDATE_STOCK = 'UPDATE_STOCK'
 
 
 
@@ -62,7 +65,7 @@ export function getDetail(id) {
 }
 export function getUsers() {
     return async function (dispatch) {
-        const json = await axios(`http://localhost:3001/user/`)
+        const json = await axios(`http://localhost:3001/users/`)
         const data = json.data
         return dispatch({
             type: GET_ALL_USERS,
@@ -116,6 +119,24 @@ export function updateProduct(id, update) {
         const { data } = await axios.put('http://localhost:3001/products/', ({id, update}))
         return dispatch({
             type: UPDATE_PRODUCT,
+            payload: data
+        })
+    }
+}
+export function updateStock(id, stock) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/products/stock', ({id, stock}))
+        return dispatch({
+            type: UPDATE_STOCK,
+            payload: data
+        })
+    }
+}
+export function deleteProduct(id) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/product/'  + id )
+        return dispatch({
+            type: DELETE_PRODUCT,
             payload: data
         })
     }
@@ -212,6 +233,17 @@ export function createProduct(payload) {
         const data = await json.data
         return dispatch({
             type: CREATE_PRODUCT,
+            payload: data
+        })
+    }
+}
+export function favoritePost(idProducts,idUser) {
+    return async function (dispatch) {
+        console.log(idProducts,idUser)
+        const json = await axios.post(`http://localhost:3001/favorite`, idProducts,idUser)
+        const data = await json.data
+        return dispatch({
+            type: POST_FAVORITE,
             payload: data
         })
     }

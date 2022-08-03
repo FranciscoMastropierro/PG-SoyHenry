@@ -1,4 +1,6 @@
 import {
+    UPDATE_STOCK,
+    POST_FAVORITE,
     GET_PRODUCTS,
     GET_PRODUCT_BY_NAME,
     GET_DETAIL,
@@ -17,6 +19,7 @@ import {
     UPDATE_PRODUCT,
     TOTAL_PRICE,
     GET_PRODUCTS_CART,
+    DELETE_PRODUCT,
 } from './actions'
 
 const initialState = {
@@ -59,11 +62,23 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
+        case UPDATE_STOCK:
+            return {
+                ...state,
+            }
+        case POST_FAVORITE:
+            return {
+                ...state,
+            }
         case BAN_USER:
             return {
                 ...state,
             }
         case UPGRADE_USER:
+            return {
+                ...state,
+            }
+        case DELETE_PRODUCT:
             return {
                 ...state,
             }
