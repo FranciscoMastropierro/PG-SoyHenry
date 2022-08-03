@@ -1,6 +1,5 @@
 import React from 'react';
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from 'react';
+import { Auth0Provider } from "@auth0/auth0-react";
 
 
 export default function ({children}) {

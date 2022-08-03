@@ -16,7 +16,6 @@ export function Home () {
 
     useEffect(() => {
         if(isAuthenticated && Array.isArray(profile)) {
-        console.log('es array')
         dispatch(setProfile(user))
         }
     }, [isAuthenticated, profile])

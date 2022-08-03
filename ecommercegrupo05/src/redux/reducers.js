@@ -13,7 +13,10 @@ import {
     GET_CATE,
     GET_ALL_USERS,
     SET_PROFILE,
-    TOKEN
+    TOKEN,
+    UPDATE_PRODUCT,
+    TOTAL_PRICE,
+    GET_PRODUCTS_CART,
 } from './actions'
 
 const initialState = {
@@ -34,7 +37,9 @@ const initialState = {
     filters: [],
     cate: [],
     profile: [],
-    token: []
+    token: [],
+    totalPrice: 0,
+    productsCart: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -67,6 +72,10 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 detail: payload
+            }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
             }
         case GET_USER_BY_EMAIL:
             return {
@@ -114,6 +123,16 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 token: payload
+            }
+        case TOTAL_PRICE:
+            return {
+                ...state,
+                totalPrice: payload
+            }
+        case GET_PRODUCTS_CART:
+            return {
+                ...state,
+                productsCart: payload
             }
         default: return state;
         }
