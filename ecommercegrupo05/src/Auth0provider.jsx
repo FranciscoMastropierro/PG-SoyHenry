@@ -7,9 +7,11 @@ export default function ({children}) {
 
     return (
         <Auth0Provider
-        domain='dev-81nqhdy2.us.auth0.com'
+        domain='https://dev-81nqhdy2.us.auth0.com'
         clientId='A6q8eeIevBO37mbaercJOAcuJU1LRRns'
         redirectUri={window.location.origin}
+        audience= "https://dev-81nqhdy2.us.auth0.com/api/v2/"
+        //Se necesita el audience
         >
             {children}
         </Auth0Provider>
