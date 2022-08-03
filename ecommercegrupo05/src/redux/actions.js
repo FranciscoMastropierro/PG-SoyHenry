@@ -23,6 +23,8 @@ export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const GET_COMMENTS = 'GET_COMMENTS'
 
 
 
@@ -81,6 +83,17 @@ export function getUserByEmail(email) {
     }
 }
 
+export function getFilterBrand() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/products/brand/all`)
+        const data = json.data
+        return dispatch({
+            type: GET_FILTER_BRAND,
+            payload: data
+        })
+    }
+}
+
 export function getFilters(category) {
     return async function (dispatch) {
         try {
@@ -130,7 +143,6 @@ export function upgradeToAdmin(body) {
     }
 }
 
-
 export function getCate() {
     return async function (dispatch) {
         const json = await axios('http://localhost:3001/categories')
@@ -152,6 +164,7 @@ export function getAllCategories() {
         })
     }
 }
+
 
 export function cleaner() {
     return {
@@ -223,6 +236,26 @@ export function token(tok, user) {
         return dispatch({ type: TOKEN, payload: data })
     }
 }
+
+export function crateComment(comment) {
+    return async function (dispatch) {
+        const { data } = await axios.post('http://localhost:3001/commentary', (comment))
+        return dispatch({ type: CREATE_COMMENT, payload: data })
+    }
+}
+
+export function getComments(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/commentary?productId=${id}`)
+        const data = json.data
+        return dispatch({
+            type: GET_COMMENTS,
+            payload: data
+        })
+    }
+}
+
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 export function createProduct(payload) {
     return async function (dispatch) {

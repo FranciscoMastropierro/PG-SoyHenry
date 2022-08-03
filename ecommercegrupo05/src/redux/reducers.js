@@ -17,6 +17,8 @@ import {
     UPDATE_PRODUCT,
     TOTAL_PRICE,
     GET_PRODUCTS_CART,
+    GET_COMMENTS,
+    GET_FILTER_BRAND
 } from './actions'
 
 const initialState = {
@@ -35,11 +37,13 @@ const initialState = {
     searchedUser: [],
     laptos: [],
     filters: [],
+    filterBrands: [],
     cate: [],
     profile: [],
     token: [],
     totalPrice: 0,
     productsCart: [],
+    commentsUser: [],
     userLoged: {},
 }
 
@@ -105,6 +109,11 @@ function rootReducer(state = initialState, { type, payload }) {
                 filters: payload,
                 laptos: payload,
             }
+        case GET_FILTER_BRAND:
+            return {
+                ...state,
+                filterBrands: payload
+            }
         case GET_CATE:
             return {
                 ...state,
@@ -135,9 +144,14 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 productsCart: payload
             }
+        case GET_COMMENTS:
+            return {
+                ...state,
+                commentsUser: payload
+            }
         default: return state;
-        }
     }
+}
 
 
 export default rootReducer;

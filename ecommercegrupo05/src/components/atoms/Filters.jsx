@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getCate, getFilters, getProducts } from "../../redux/actions";
+import { getCate, getFilterBrand, getFilters, getProducts } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../../styles/allProducts.module.css";
 
 
 export default function Filters() {
     const dispatch = useDispatch();
-    const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
         "brand": [],
         "categorie": "",
@@ -17,15 +16,16 @@ export default function Filters() {
         }
     })
 
-    const data = useSelector((state) => state.copyData)
+    const data = useSelector((state) => state.filterBrands)
     const cate = useSelector((state) => state.cate)
-    const brandRepeat = data.map(e => e.brand).sort()
+    const brandRepeat = data.map(e => e).sort()
     const brands = [...new Set(brandRepeat)]
     const allCategories = cate.map(e => e.name).sort()
 
     useEffect(() => {
         dispatch(getProducts())
         dispatch(getCate())
+        dispatch(getFilterBrand())
     }, [dispatch])
 
     function handleCLickRecharge(e) {  
