@@ -13,7 +13,8 @@ import {
     GET_CATE,
     GET_ALL_USERS,
     SET_PROFILE,
-    TOKEN
+    TOKEN,
+    GET_COMMENTS
 } from './actions'
 
 const initialState = {
@@ -34,7 +35,8 @@ const initialState = {
     filters: [],
     cate: [],
     profile: [],
-    token: []
+    token: [],
+    commentsUser: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -115,9 +117,14 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 token: payload
             }
+        case GET_COMMENTS:
+            return {
+                ...state,
+                commentsUser: payload
+            }
         default: return state;
-        }
     }
+}
 
 
 export default rootReducer;

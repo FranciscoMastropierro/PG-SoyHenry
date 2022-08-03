@@ -20,6 +20,9 @@ export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const GET_COMMENTS = 'GET_COMMENTS'
+
 
 
 
@@ -147,7 +150,7 @@ export function cleaner() {
     }
 }
 
-export function setProfile (u) {
+export function setProfile(u) {
     return {
         type: SET_PROFILE,
         payload: u
@@ -168,6 +171,24 @@ export function token(tok) {
     }
 }
 
+export function crateComment(comment) {
+    return async function (dispatch) {
+        const { data } = await axios.post('http://localhost:3001/commentary', (comment))
+        return dispatch({ type: CREATE_COMMENT, payload: data })
+    }
+}
+
+export function getComments(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/commentary?productId=${id}`)
+        const data = json.data
+        return dispatch({
+            type: GET_COMMENTS,
+            payload: data
+        })
+    }
+}
+
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 export function createProduct(payload) {
@@ -180,6 +201,7 @@ export function createProduct(payload) {
         })
     }
 }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 export function paginacion(payload) {
