@@ -24,9 +24,11 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: large;
+    font-size: x-large;
     font-weight: 600;
     color: #01F603;
+    width: 650px;
+
 }
 .wrapperTotal{
     display: flex;
@@ -43,6 +45,7 @@
 }
 
 .img{
+    
     height: 150px;
     width: 150px;
     border-radius: 0.5rem;
@@ -98,7 +101,7 @@
     text-transform: uppercase;
     width: 100%;
     text-align: center;
-    -webkit-box-reflect: below -74px linear-gradient(transparent, #0004);
+    -webkit-box-reflect: below -40px linear-gradient(transparent, #0004);
 }
 
 .h9 .span 

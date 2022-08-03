@@ -20,9 +20,11 @@ export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const TOTAL_PRICE = 'TOTAL_PRICE'
+export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
-
 
 
 
@@ -111,6 +113,15 @@ export function banUser(body) {
         })
     }
 }
+export function updateProduct(id, update) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/products/', ({id, update}))
+        return dispatch({
+            type: UPDATE_PRODUCT,
+            payload: data
+        })
+    }
+}
 export function upgradeToAdmin(body) {
     return async function (dispatch) {
         const { data } = await axios.get('http://localhost:3001/admin/upgrade', (body))
@@ -157,6 +168,32 @@ export function setProfile(u) {
     }
 }
 
+export function getTotalPrice(payload) {
+    return {
+        type: TOTAL_PRICE,
+        payload: payload
+    }
+}
+
+export function getProductCart(payload) {
+    return {
+        type: GET_PRODUCTS_CART,
+        payload: payload
+    }
+}
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
+
+
+// export function postProfile (u) {
+//     return async function (dispatch) {
+//         const { data } = await axios.post(`http://localhost:3001/users/`, u)
+//         return dispatch ({
+//             type: SET_PROFILE,
+//             payload: data
+//         })
+//     }
+// }
+
 export function token(tok) {
     return async function (dispatch) {
         const { data } = await axios.post('http://localhost:3001/products/filter',
@@ -202,8 +239,16 @@ export function createProduct(payload) {
     }
 }
 
+//////////////////////////////////////   PUTS   /////////////////////////////////////////
+
+export function changeProfile(id) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/users/edit/')
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
+
 export function paginacion(payload) {
     return async function (dispatch) {
         return dispatch({
