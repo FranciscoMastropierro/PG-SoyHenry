@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfile } from '../../redux/actions'
+import { setProfile, postProfile } from '../../redux/actions'
 import style from '../../styles/userProfile.module.css'
 import avatar from '../../assets/avatar.png'
 import { useEffect } from 'react';
@@ -13,6 +13,7 @@ export default function UserProfile () {
     const {user} = useAuth0()
     const [error, setError] = useState({})
     const [profile, setprofile] = useState({
+        picture: user.picture,
         name: user.given_name,
         nickname: user.nickname,
         email: user.email,
@@ -60,13 +61,13 @@ export default function UserProfile () {
 
     function handleSubmit (e) {
         e.preventDefault()
-        dispatch(setProfile(profile))
+        console.log('submiteadoooo')
     }
 
     return (
         <div className={style.ProfileContainer}>
             <h1>Tu Perfil</h1>
-            {/* <img src={profile.picture} alt='profile-photo' className={style.profilePhoto} /> */}
+            <img src={profile.picture} alt='profile-photo' className={style.profilePhoto} />
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={style.infoContainer}>
                 <div className={style.info}>

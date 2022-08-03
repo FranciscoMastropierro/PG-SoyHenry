@@ -20,7 +20,7 @@ export function SidebarOptions() {
     const dispatch = useDispatch()
     const auth = useAuth0()
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = auth;
-    const handleSubmit = () => user ? logout() : loginWithRedirect(navigate('/userprofile'))
+    const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
 

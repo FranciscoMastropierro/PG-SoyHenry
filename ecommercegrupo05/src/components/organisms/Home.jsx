@@ -20,7 +20,6 @@ export function Home () {
         }
     }, [isAuthenticated, profile])
 
-
     return (
         <div>
             <SliderNews />
