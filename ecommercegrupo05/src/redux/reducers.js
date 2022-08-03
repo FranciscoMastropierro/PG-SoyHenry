@@ -39,7 +39,8 @@ const initialState = {
     profile: [],
     token: [],
     totalPrice: 0,
-    productsCart: []
+    productsCart: [],
+    userLoged: {},
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -122,7 +123,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case TOKEN:
             return {
                 ...state,
-                token: payload
+                userLoged: payload
             }
         case TOTAL_PRICE:
             return {

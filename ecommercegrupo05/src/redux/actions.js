@@ -208,16 +208,18 @@ export async function postProfile (u) {
         return data
 }
 
-export function token(tok) {
+export function token(tok, user) { 
     return async function (dispatch) {
-        const { data } = await axios.post('http://localhost:3001/products/filter',
+        console.log("Flag Actions", tok)
+        console.log("Flag Actions user", user)
+        const { data } = await axios.post('http://localhost:3001/profile',user,
             {
-                Headers: {
-                    'Authorization': `Basic${tok}`
+                headers: {
+                    'Authorization': `Bearer ${tok}`
                 }
-            },
+            }
         )
-
+        
         return dispatch({ type: TOKEN, payload: data })
     }
 }
