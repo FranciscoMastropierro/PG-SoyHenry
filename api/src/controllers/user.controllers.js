@@ -60,7 +60,7 @@ module.exports = {
     }
   },
   postUser: async (req, res) => {
-    const { email, firstname, lastname, address, postalCode, username } =
+    const { email, firstname, lastname, address, postalCode, username, profileImage } =
       req.body;
 
     try {
@@ -71,6 +71,7 @@ module.exports = {
         address,
         postalCode,
         username,
+        profileImage
       });
 
       res.send({ msg: "User Created", user });

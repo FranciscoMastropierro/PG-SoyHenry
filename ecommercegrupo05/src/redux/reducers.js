@@ -13,6 +13,7 @@ import {
     GET_CATE,
     GET_ALL_USERS,
     SET_PROFILE,
+    CHANGE_PROFILE,
     TOKEN,
     TOTAL_PRICE,
     GET_PRODUCTS_CART
@@ -128,6 +129,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 productsCart: payload
+            }
+        case CHANGE_PROFILE:
+            return {
+                ...state,
+                profile: payload
             }
         default: return state;
         }

@@ -19,6 +19,7 @@ export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
+export const CHANGE_PROFILE = 'CHANGE_PROFILE'
 export const TOKEN = 'TOKEN'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
@@ -154,18 +155,22 @@ export function setProfile(u) {
 
         const { data } = await axios('http://localhost:3001/users/')
         const found = data.find(user => user.email === u.email)
-
         if(!found) {
             u = {
                 firstname: u.given_name,
                 lastname: u.family_name || ' ',
+                username: u.nickname || ' ',
                 email: u.email,
-                picture: u.picture || null,
+                profileImage: u.picture,
                 }
+
             const posted = await postProfile(u)
+
+            console.log(posted.user)
+
             return dispatch ({
                 type: SET_PROFILE,
-                payload: posted
+                payload: posted.user
             })
         } else {
             return dispatch ({
@@ -188,6 +193,11 @@ export function getProductCart(payload) {
         type: GET_PRODUCTS_CART,
         payload: payload
     }
+}
+
+export async function getProfile (id) {
+    const {data} = await axios(`http://localhost:3001/users/${id}`);
+    return data
 }
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
@@ -225,9 +235,14 @@ export function createProduct(payload) {
 
 //////////////////////////////////////   PUTS   /////////////////////////////////////////
 
-export function changeProfile(id) {
+export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/users/edit/')
+        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
+        const getuFromBack = await getProfile(id)
+        return dispatch({
+            type: CHANGE_PROFILE,
+            payload:  getuFromBack
+        })
     }
 }
 
