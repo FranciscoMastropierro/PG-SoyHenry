@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import trash from "../../assets/trash2.png";
 import style from "../../styles/cart.module.css";
 import { useCartContext } from "../../context/CartItem";
+import { getProductCart, getTotalPrice } from "../../redux/actions";
+import { useDispatch } from 'react-redux';
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
   const superState = useCartContext();
+
+  const dispatch = useDispatch()
 
   const [precio, setPrecio] = useState(true);
 
   const { addItemToCart, deleteItemToCart, deleteAll } = superState.effects;
 
   const { products } = superState.state;
+
+  useEffect(() => {
+    dispatch(getProductCart(products))
+  }, [dispatch])
 
   const totalPricePerProducts = products.map(
     ({ amount, price }) => amount * price
@@ -20,6 +29,10 @@ export default function NotFound() {
     (accum, current) => (accum = accum + current),
     0
   );
+
+  useEffect(() => {
+    dispatch(getTotalPrice(totalPrice))
+  }, [dispatch])
 
   const handleItemToCart = (product) => () => addItemToCart(product);
 
@@ -95,7 +108,9 @@ export default function NotFound() {
               <p >Precio Total: ${precio}</p>
             </div>
             <div className={style.space}>
-              <button className={style.total}>COMPRAR</button>
+              <Link to='/TestAddresForm'>
+                <button className={style.total}>COMPRAR</button>
+              </Link>
             </div>
           </div>
         </div>

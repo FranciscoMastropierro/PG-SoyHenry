@@ -20,5 +20,24 @@ module.exports = {
     const{idProducts,idUser}=req.body;
     await Favorites.destroy({ where: { ProductId: idProducts, UserId:idUser } });
     return res.send('the favorite was deleted')
-}
+},getUsersFavorite: async (req, res) => {
+  const {id}=req.params
+  if(!id){
+    return res.status(404).send("ingrese id")
+  }
+  let user = await Users.findAll({
+    attributes: { exclude: ["address", "postalCode","isAdmin","profileImage"] },
+    where: { id: id },
+    include: [
+      { model: Products, 
+        attributes: { exclude: ["description", "rating","disable","stock"] } ,
+        through: { Favorites: [] } },
+    ],
+   
+  });
+  if (!user.length){
+    return res.status(404).send("")
+  }
+  return res.send(user);
+},
 }

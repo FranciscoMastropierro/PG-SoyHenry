@@ -10,6 +10,7 @@ const orders = require('./orders.route.js')
 const routeAuth = require('./auth0.route.js')
 const admin = require('./admin.route.js')
 const commentary = require('./product.reviews.route')
+const stripe= require('./stripe.route')
 const favorite = require('./product.favorite.route')
 
 const router = Router();
@@ -33,6 +34,7 @@ router.use('/orders', orders)
 
 router.use('/commentary', commentary)
 
+router.use('/stripe', stripe)
 router.use('/favorite', favorite)
 
 

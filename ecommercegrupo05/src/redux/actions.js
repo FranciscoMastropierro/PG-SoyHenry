@@ -21,6 +21,8 @@ export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const TOTAL_PRICE = 'TOTAL_PRICE'
+export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
 
 
 
@@ -157,12 +159,38 @@ export function cleaner() {
     }
 }
 
-export function setProfile (u) {
+export function setProfile(u) {
     return {
         type: SET_PROFILE,
         payload: u
     }
 }
+
+export function getTotalPrice(payload) {
+    return {
+        type: TOTAL_PRICE,
+        payload: payload
+    }
+}
+
+export function getProductCart(payload) {
+    return {
+        type: GET_PRODUCTS_CART,
+        payload: payload
+    }
+}
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
+
+
+// export function postProfile (u) {
+//     return async function (dispatch) {
+//         const { data } = await axios.post(`http://localhost:3001/users/`, u)
+//         return dispatch ({
+//             type: SET_PROFILE,
+//             payload: data
+//         })
+//     }
+// }
 
 export function token(tok) {
     return async function (dispatch) {
@@ -178,8 +206,6 @@ export function token(tok) {
     }
 }
 
-///////////////////////////////////   POSTS     ///////////////////////////////////////////
-
 export function createProduct(payload) {
     return async function (dispatch) {
         const json = await axios.post(`http://localhost:3001/products/`, payload)
@@ -191,7 +217,16 @@ export function createProduct(payload) {
     }
 }
 
+//////////////////////////////////////   PUTS   /////////////////////////////////////////
+
+export function changeProfile(id) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/users/edit/')
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
+
 export function paginacion(payload) {
     return async function (dispatch) {
         return dispatch({

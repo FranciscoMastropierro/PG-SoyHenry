@@ -14,7 +14,9 @@ import {
     GET_ALL_USERS,
     SET_PROFILE,
     TOKEN,
-    UPDATE_PRODUCT
+    UPDATE_PRODUCT,
+    TOTAL_PRICE,
+    GET_PRODUCTS_CART,
 } from './actions'
 
 const initialState = {
@@ -35,7 +37,9 @@ const initialState = {
     filters: [],
     cate: [],
     profile: [],
-    token: []
+    token: [],
+    totalPrice: 0,
+    productsCart: []
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -119,6 +123,16 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 token: payload
+            }
+        case TOTAL_PRICE:
+            return {
+                ...state,
+                totalPrice: payload
+            }
+        case GET_PRODUCTS_CART:
+            return {
+                ...state,
+                productsCart: payload
             }
         default: return state;
         }
