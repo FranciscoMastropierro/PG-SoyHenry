@@ -1,4 +1,4 @@
-.userProfileContainer {
+.ProfileContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,15 +10,25 @@
 h2 {
     display: flex;
     justify-content: center;
-    margin: 10px;
-    padding: 10px;
-    font-size: 20px;
+    padding: 5px;
+    font-size: 20px !important;
     border-radius: 4px;
     box-shadow: 1px 1px 3px 2px #181818;
     background: #242424dc;
     color: #01F603;
 }
-.userProfileContainer h1 {
+h3 {
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+    padding: 3px;
+    font-size: 18px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px 2px #181818;
+    background: #ff0000dc;
+    color: rgb(255, 191, 191);
+}
+.ProfileContainer h1 {
     font-size: 2rem;
 }
 .profilePhoto {
@@ -32,6 +42,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px;
 }
 .infoContainer {
     display: flex;
@@ -41,6 +52,9 @@ h2 {
     display: flex;
     flex-direction: column;
     margin: 0 20px 0 20px
+}
+.info label {
+    margin-top: 10px;
 }
 .info input{
     padding: 6px;
@@ -54,7 +68,7 @@ h2 {
 .info input::placeholder {
     margin: 10px
 }
-.userProfileContainer button {
+.ProfileContainer button {
     margin: 20px;
     padding: 7px;
     border-radius: 4px;
