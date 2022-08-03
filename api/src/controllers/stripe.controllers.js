@@ -23,7 +23,7 @@ module.exports ={
                 payment_method: id,
                 confirm: true
             });
-            console.log("payment", payment)
+            console.log("payment", payment.charges.data)
             res.json({ msg: "Successful payment" })
         } catch(error) {
             console.log(error)
