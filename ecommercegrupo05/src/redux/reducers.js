@@ -46,8 +46,6 @@ const initialState = {
     commentsUser: [],
     userLoged: {},
 }
-console.log("🚀 filters", initialState.filters)
-
 
 function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
