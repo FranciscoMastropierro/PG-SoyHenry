@@ -154,7 +154,7 @@ function deleteHandler(e){
                             </button>
                             <div className={style.stockdiv}>
                               <button className={style.stockBtn} id={e.id} onClick={()=>StockHandler(e)}>                              
-                                 Restock                              
+                                 Restockear                              
                               </button>
                               <input className={style.stockinput} type="number" name='stock' onChange={(e) => handleChange(e)}/>
                             </div>

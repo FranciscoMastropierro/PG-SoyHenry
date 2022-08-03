@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartItem';
 
 //favorites
-import favorites from '../../assets/favourites.png'
-import click from '../../assets/favourites-click.png'
-import { useAuth0 } from "@auth0/auth0-react";
+//import favorites from '../../assets/favourites.png'
+//import click from '../../assets/favourites-click.png'
+//import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function CardProducts() {
@@ -31,10 +31,10 @@ export default function CardProducts() {
 
   
 
-    function HandleFavorite(){
-        isAuthenticated? console.log("will fav")
-        : loginWithRedirect()
-    }
+    //function HandleFavorite(){
+    //    user? console.log("will fav")
+    //    : loginWithRedirect()
+    //}
 
     return (
         <div className={style.cardWrapper}>
@@ -44,9 +44,9 @@ export default function CardProducts() {
                     return (
                         <div className={style.card} key={index}>
 
-                                <button className={style.favButton} onClick={HandleFavorite()}>
+                                {/*<button className={style.favButton} onClick={HandleFavorite()}>
                                     <img className={style.favEmpty} src={favorites} alt="favorites" />
-                                </button>
+                    </button>*/}
 
                             <div className={style.imgDiv}>
                                 <img className={style.img} src={image} alt="imagen de producto" />
