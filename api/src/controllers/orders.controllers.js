@@ -21,34 +21,32 @@ module.exports = {
 
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
-    const { UserId, products, address, postalCode } = req.body;
-    
+    const { UserId, products } = req.body;
+    const arr=[]
     try {
       if (!UserId || !Object.keys(products))
         res.status(403).send({ msj: "Invalid params" });
-      Users.findOne({ where: { id : UserId } }).then(user=>{
+      Users.findAll({ where: { id : UserId } }).then(user=>{
         const aux = {
         UserId,
         amount: products
-          .map((e) => e.quantity * e.price)
+          .map((e) => e.amount * e.price)
           .reduce((prev, next) => prev + next),
-        shipmentAddress: address ? address : user.address,
-        postalCode: postalCode ? postalCode : user.postalCode,
+        shipmentAddress: user[0].dataValues.address,
+        postalCode:  user[0].dataValues.postalCode,
+        state:"completed",
+        paid:true,
          };
-        Order.create(aux).then(order=>{
-          products.forEach(async (p) => {
-          try {
-          order.addProducts(p.id, { through: { unitPrice: p.price,quantity: p.quantity}}).then(respuesta=>{
-            res.send({msj: 'Order Created', respuesta})
-          });
-        } catch (error) {
-         console.log(error);   
-        }
-        });
-      });
+        Order.create(aux).then(async(order)=>{
+          for await  (let p of products) {
+            let respuesta= await order.addProducts(p.id, { through: { unitPrice: p.price,quantity: p.amount}})
+            arr.push(respuesta[0].dataValues)
+            Products.update({stock:(Number(p.stock)-Number(p.amount))},{where:{id:p.id}})
+      };
+      res.send({msj: 'Order Created', arr})
+    });
       })
     } catch (error) {
-      console.log(error);
       res.status(403).send('Fail create order')
     }
   },
