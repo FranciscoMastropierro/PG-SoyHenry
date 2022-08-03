@@ -5,7 +5,6 @@ import "aos/dist/aos.css";
 import {Home} from './components/organisms/Home'
 import AllProducts from './components/organisms/allProducts';
 import Details from './components/organisms/details';
-import Login from './components/organisms/login';
 import Profile from './components/organisms/Profile.jsx';
 import Cart from './components/organisms/cart';
 import AboutUs from './components/organisms/aboutUs';
@@ -50,7 +49,6 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/allProducts' element={<AllProducts />} />
             <Route exact path='/details/:id' element={<Details />} />
-            <Route exact path='/login' element={<Login />} />
             <Route exact path='/favorites' element={<PrivateRoute component={Favorites} />} />
             <Route exact path='/userprofile' element={<PrivateRoute component={UserProfile} />} />
             <Route exact path = '/profile' element={<PrivateRoute component={Profile} />} />

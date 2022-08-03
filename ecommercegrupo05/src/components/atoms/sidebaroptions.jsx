@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import style from '../../styles/sidebaroptions.module.css'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
@@ -16,13 +16,13 @@ import { setProf, token } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
 
 export function SidebarOptions() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const auth = useAuth0()
-    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = auth;
-    const handleSubmit = () => user ? logout() : loginWithRedirect()
+    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = auth;
+    const handleSubmit = () => user ? logout() : loginWithRedirect(navigate('/userprofile'))
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
-
 
     useEffect(() => {
         if(isAuthenticated ){
@@ -36,9 +36,7 @@ export function SidebarOptions() {
         // console.log('no hay token :(')
     }, [isAuthenticated])
 
-
     let loc = useLocation().pathname
-
 
     const superState = useCartContext()
     const { products } = superState.state
@@ -71,11 +69,10 @@ export function SidebarOptions() {
             cartNumber: cachearNumber
         }
     ]
-
     return (
         <div className={style.options}>
             {isAuthenticated && (
-                <span>Hola!, {user.name}</span>
+                <span>Hola {user.name}!</span>
             )}
             {links.map(({ to, name, src, styleClass, cartNumber }) => (
                 <Link to={to} className={style.link} key={name}>
