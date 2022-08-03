@@ -83,6 +83,17 @@ export function getUserByEmail(email) {
     }
 }
 
+export function getFilterBrand() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/products/brand/all`)
+        const data = json.data
+        return dispatch({
+            type: GET_FILTER_BRAND,
+            payload: data
+        })
+    }
+}
+
 export function getFilters(category) {
     return async function (dispatch) {
         try {
@@ -132,7 +143,6 @@ export function upgradeToAdmin(body) {
     }
 }
 
-
 export function getCate() {
     return async function (dispatch) {
         const json = await axios('http://localhost:3001/categories')
@@ -154,6 +164,7 @@ export function getAllCategories() {
         })
     }
 }
+
 
 export function cleaner() {
     return {
