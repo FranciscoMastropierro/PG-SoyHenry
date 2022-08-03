@@ -7,7 +7,7 @@
     color: white;
     font-family: 'Share Tech', sans-serif;
 }
-h2 {
+.ProfileContainer h2 {
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -19,7 +19,7 @@ h2 {
     background: #242424dc;
     color: #01F603;
 }
-h3 {
+.ProfileContainer h3 {
     display: flex;
     justify-content: center;
     margin: 3px;
