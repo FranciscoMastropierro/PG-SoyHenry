@@ -20,17 +20,19 @@ export default function CardProducts() {
 
     const productsToRender = useSelector((state) => state.productsToRender)
     
-    let {loginWithRedirect, user, isAuthenticated } = useAuth0()
+    let {loginWithRedirect, isAuthenticated } = useAuth0()
     // if (!productsToRender.length) return <div className={style.loader}></div>
     if (!productsToRender.length) return <h1>no hemos encontrado los productos que buscaste</h1>
 
     const handleItemToCart = (product) => () => addItemToCart(product)
 
     //favorites 
-    
-    
+   
+
+  
+
     function HandleFavorite(){
-        user? console.log("will fav")
+        isAuthenticated? console.log("will fav")
         : loginWithRedirect()
     }
 
@@ -42,7 +44,7 @@ export default function CardProducts() {
                     return (
                         <div className={style.card} key={index}>
 
-                                <button className={style.favButton} onClick={(e)=>HandleFavorite(e)}>
+                                <button className={style.favButton} onClick={HandleFavorite()}>
                                     <img className={style.favEmpty} src={favorites} alt="favorites" />
                                 </button>
 

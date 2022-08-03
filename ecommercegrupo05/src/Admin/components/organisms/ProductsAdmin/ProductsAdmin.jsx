@@ -127,23 +127,14 @@ function deleteHandler(e){
 
             <div className={style.secondaryBar}>
               
-              <Link to="/admin/products/create"><button className={style.addbtn}><h3>Create New Product</h3></button></Link>
+              <Link to="/admin/products/create"><button className={style.addbtn}><h3>Crear producto</h3></button></Link>
             
 
             </div>
 
            
 
-            <div className={style.cardinfo}>
-                
-                <p>Product Name</p>
-                <p>Brand</p>
-                <p>Image</p>
-                <p>Price</p>
-                <p>Rating</p>                
-                <p>Stock</p>
-                
-            </div>
+            
 
             {products.map(e=> {
                 return(
@@ -153,12 +144,12 @@ function deleteHandler(e){
 
 
                             <button className={style.DelBtn} id={e.id} onClick={()=>deleteHandler(e)}>
-                              disable
+                              Deshabilitar
                             </button>                            
 
                             <button className={style.ModBtn}>
-                              <Link style={{ textDecoration: 'none', color: 'green'}} to={`/admin/products/modify/${e.id}`}>
-                                <HiPencilAlt/>
+                              <Link style={{ textDecoration: 'none'}} to={`/admin/products/modify/${e.id}`}>
+                                Modificar
                               </Link>
                             </button>
                             <div className={style.stockdiv}>
@@ -175,9 +166,9 @@ function deleteHandler(e){
                             <p className={style.element}>{e.brand}</p>
                             <p className={style.element}><img className={style.img} src={e.image} alt={e.id} /></p>
                             <p className={style.element}>${e.price}</p>
-                            <p className={style.element}>{e.rating}</p>
                             
-                            <p className={style.element}>{e.stock}</p>                       
+                            
+                            <p className={style.element}> stock: {e.stock}</p>                       
                         </div>
 
 
