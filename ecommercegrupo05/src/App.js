@@ -29,6 +29,8 @@ import Checkout from './components/organisms/checkoutForm/Checkout';
 // import UserProfile from './components/organisms/userProfile';
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import TestCheckout from './components/organisms/checkoutForm/TestCheckout';
+import TestAddresForm from './components/organisms/checkoutForm/TestAddresForm';
+import Review from './components/organisms/checkoutForm/Review';
 
 
 
@@ -55,7 +57,8 @@ function App() {
             <Route exact path = '/OrdersMock' element={<PrivateRoute component={OrdersMock}  />} />
             <Route exact path = '/Settings' element={<PrivateRoute component={SettingsMock}  />} />
             <Route exact path = '/TestCheckout' element={<PrivateRoute component={TestCheckout}  />} />
-            {/* <Route exact path = '/Checkout' element={<PrivateRoute component={Checkout}  />} /> */}
+            <Route exact path = '/Checkout' element={<PrivateRoute component={Checkout}  />} />
+            <Route exact path = '/TestAddresForm' element={<PrivateRoute component={TestAddresForm}  />} />
             <Route exact path='/cart' element={<Cart />} />
             <Route exact path='/aboutUs' element={<AboutUs />} />
             <Route exact path='/faq' element={<Faq />} />

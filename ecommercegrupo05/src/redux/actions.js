@@ -20,6 +20,8 @@ export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
+export const TOTAL_PRICE = 'TOTAL_PRICE'
+export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
 
 
 
@@ -147,10 +149,24 @@ export function cleaner() {
     }
 }
 
-export function setProfile (u) {
+export function setProfile(u) {
     return {
         type: SET_PROFILE,
         payload: u
+    }
+}
+
+export function getTotalPrice(payload) {
+    return {
+        type: TOTAL_PRICE,
+        payload: payload
+    }
+}
+
+export function getProductCart(payload) {
+    return {
+        type: GET_PRODUCTS_CART,
+        payload: payload
     }
 }
 
