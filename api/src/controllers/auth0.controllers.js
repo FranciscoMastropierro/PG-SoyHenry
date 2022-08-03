@@ -36,21 +36,25 @@ module.exports = {
 
     infoProfile: async (req, res, next) => {
 
-            console.log(req.body)
-        
-       
-        
-        // let arrUserInfo = []
-
-        // const isAuthenticated = req.oidc.isAuthenticated();
-        // const user = req.oidc.user;
-
-        // user.isAuthenticated = isAuthenticated
-
-        // arrUserInfo.push(user)
-
-        // console.log(arrUserInfo)
-        // res.send(arrUserInfo)
+        const user = req.body;
+        try {
+            Users.findOrCreate({
+                            where: {
+                                firstname: user.given_name,
+                                lastname: user.family_name,
+                                username: user.nickname,
+                                email: user.email,
+                                profileImage: user.picture,
+                            },
+                        }).then(user => {
+                            const aux = user[0]
+                            if(aux.disable) res.status(401).send({msj : `User disable : ${aux}`})
+                            res.send(aux)
+                        })
+        } catch (error) {
+            res.send(error)
+        }  
+                    
     },
 
 
