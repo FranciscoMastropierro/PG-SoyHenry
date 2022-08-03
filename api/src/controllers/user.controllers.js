@@ -40,9 +40,10 @@ module.exports = {
   //Ver bien que datos son los que vamos a modificar, segun los datos que nos proporcione Auth0
   updateUser: async (req, res) => {
     const { id } = req.params;
-    const { user } = req.body;
+    const  user  = req.body;
 
-    user.isAdmin = false;
+    // user.isAdmin = false;
+    
     try {
         const backUser = Users.findOne({ where: { id } })
         if (backUser.disable)
