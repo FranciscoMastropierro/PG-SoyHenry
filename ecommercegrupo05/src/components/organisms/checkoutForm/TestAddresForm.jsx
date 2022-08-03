@@ -30,11 +30,11 @@ const TestAddresForm = () => {
 
                 <div className={style.inputBox}>
                     <span className={style.span}>Nombre :</span>
-                    <input type="text" placeholder="Nombre" className={style.input} value={name} readonly />
+                    <input type="text" placeholder="Nombre" className={style.input} defaultValue={name} />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>email :</span>
-                    <input type="email" placeholder="example@example.com" className={style.input} value={email} readonly />
+                    <input type="email" placeholder="example@example.com" className={style.input} defaultValue={email} />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>Direccion :</span>
