@@ -160,9 +160,29 @@ export function cleaner() {
 }
 
 export function setProfile(u) {
-    return {
-        type: SET_PROFILE,
-        payload: u
+    return async function (dispatch) {
+
+        const { data } = await axios('http://localhost:3001/users/')
+        const found = data.find(user => user.email === u.email)
+
+        if(!found) {
+            u = {
+                firstname: u.given_name,
+                lastname: u.family_name || ' ',
+                email: u.email,
+                picture: u.picture || null,
+                }
+            const posted = await postProfile(u)
+            return dispatch ({
+                type: SET_PROFILE,
+                payload: posted
+            })
+        } else {
+            return dispatch ({
+                type: SET_PROFILE,
+                payload: found
+            })
+        }
     }
 }
 
@@ -182,15 +202,11 @@ export function getProductCart(payload) {
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 
-// export function postProfile (u) {
-//     return async function (dispatch) {
-//         const { data } = await axios.post(`http://localhost:3001/users/`, u)
-//         return dispatch ({
-//             type: SET_PROFILE,
-//             payload: data
-//         })
-//     }
-// }
+
+export async function postProfile (u) {
+        const { data } = await axios.post(`http://localhost:3001/users/`, u)
+        return data
+}
 
 export function token(tok) {
     return async function (dispatch) {
