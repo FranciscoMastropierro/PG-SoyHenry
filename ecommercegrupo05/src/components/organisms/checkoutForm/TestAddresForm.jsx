@@ -2,9 +2,14 @@ import React from "react";
 import style from '../../../styles/testAddresform.module.css'
 import card from '../../../assets/card_img.png'
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const TestAddresForm = () => {
+
+    const {user} = useAuth0()
+
+    const { name, email } = user
     
 
     return(
@@ -25,11 +30,11 @@ const TestAddresForm = () => {
 
                 <div className={style.inputBox}>
                     <span className={style.span}>Nombre :</span>
-                    <input type="text" placeholder="Nombre" className={style.input}/>
+                    <input type="text" placeholder="Nombre" className={style.input} value={name} readonly />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>email :</span>
-                    <input type="email" placeholder="example@example.com" className={style.input}/>
+                    <input type="email" placeholder="example@example.com" className={style.input} value={email} readonly />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>Direccion :</span>
