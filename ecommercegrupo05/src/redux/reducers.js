@@ -15,7 +15,7 @@ import {
     GET_CATE,
     GET_ALL_USERS,
     //SET_PROFILE,
-   // CHANGE_PROFILE,
+    CHANGE_PROFILE,
     TOKEN,
     UPDATE_PRODUCT,
     TOTAL_PRICE,

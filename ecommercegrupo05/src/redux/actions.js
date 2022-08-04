@@ -19,7 +19,7 @@ export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 //export const SET_PROFILE = 'SET_PROFILE'
-//export const CHANGE_PROFILE = 'CHANGE_PROFILE'
+export const CHANGE_PROFILE = 'CHANGE_PROFILE'
 // export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
@@ -318,17 +318,17 @@ export function favoritePost(idProducts,idUser) {
 
 //////////////////////////////////////   PUTS   /////////////////////////////////////////
 
-//export function changeProfile(id, user) {
-//    return async function (dispatch) {
-//        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
-//        const getuFromBack = await getProfile(id)
-//        return dispatch({
-//            type: CHANGE_PROFILE,
-//            payload:  getuFromBack
-//        })
-//    //    const { data } = await axios.put('http://localhost:3001/api/users/edit/')
-//    }
-//}
+export function changeProfile(id, user) {
+    return async function (dispatch) {
+        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
+        const getuFromBack = await getProfile(id)
+        return dispatch({
+            type: CHANGE_PROFILE,
+            payload:  getuFromBack
+        })
+    //    const { data } = await axios.put('http://localhost:3001/api/users/edit/')
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
