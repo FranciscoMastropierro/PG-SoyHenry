@@ -25,6 +25,7 @@ export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
+export const GET_MSG_CART = 'GET_MSG_CART'
 
 
 
@@ -212,6 +213,13 @@ export function getProductCart(payload) {
         payload: payload
     }
 }
+
+export function getMsgCart(payload) {
+    return {
+        type: GET_MSG_CART,
+        payload: payload
+    }
+}
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 
@@ -223,8 +231,8 @@ export async function postProfile (u) {
 
 export function token(tok, user) { 
     return async function (dispatch) {
-        console.log("Flag Actions", tok)
-        console.log("Flag Actions user", user)
+        // console.log("Flag Actions", tok)
+        // console.log("Flag Actions user", user)
         const { data } = await axios.post('http://localhost:3001/profile',user,
             {
                 headers: {
