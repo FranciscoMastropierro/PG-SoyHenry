@@ -1,10 +1,19 @@
 require("dotenv").config();
 const { Commentary, Users, Products } = require("../db.js");
-
+async function updateProduct (productId) {
+  let promedio=0;
+  const newProducts = await Products.findOne({ where: { id: productId },include: [
+    { model: Commentary,  }] })
+    newProducts.dataValues.Commentaries.map((e)=>{
+      promedio+=Number(e.dataValues.rating)
+    })
+  Products.update({rating:(promedio/newProducts.dataValues.Commentaries.length)},{where:{id:productId}})
+}
 module.exports = {
  createAndAddComment : async (req, res) => {
+
   try {
-    const { text, productId,userId } = req.body;
+    const { text,rating, productId,userId, } = req.body;
     if(!text){
       return res.status(400).json({ error: "Ingrese un comentario" })
     }
@@ -16,14 +25,16 @@ module.exports = {
     }
 
     Users.findOne({ where: { id: userId } }).then((user) => {
-      Products.findOne({ where: { id: productId } }).then(async (product)=>{
+      Products.findOne({ where: { id: productId }}).then(async (product)=>{
         const newComment = await Commentary.create({
           text: text,
+          rating
         });
         await user.addCommentary(newComment);
         await product.addCommentary(newComment);
+        updateProduct(productId)
         Commentary.findOne({ where: { id: newComment.id } }).then((coment)=>{
-          return res.json({Commentary:coment, Users:user,Products:product })
+          return res.json({Commentary:coment, Users:userId,Products:productId })
         })
       }).catch((err) => {
       return res.status(400).json({ err })
@@ -31,7 +42,7 @@ module.exports = {
       
     }).catch((err) => {
       return res.status(400).json({ err })
-    });;
+    });
     }
   catch (err) {
     console.log(err);
@@ -72,7 +83,7 @@ getCommentsbyProduct : async (req, res) => {
 },
 editComment: async (req, res) => {
   try {
-    const { id, newComment } = req.body;
+    const { id, newComment,rating } = req.body;
     if(!id || !newComment){
     return { error: 'ingrese toda la informacion' };
     }
@@ -80,8 +91,9 @@ editComment: async (req, res) => {
     if (comment) {
 
       comment.text = newComment;
-      
+      comment.rating = rating;
       comment.save();
+      updateProduct(comment.dataValues.ProductId)
       return res.send(comment);
     }
   } catch(err){
@@ -95,13 +107,17 @@ deleteCommentById : async (req, res) =>  {
     if(!id){
       return res.send("ingrese id del comentario");
     }
-    const comment = await Commentary.findOne({ where: { id: id } });
+    let idproduct;
+    const comment = await Commentary.findOne({ where: {  id } });
     if (comment) {
+      
+      idproduct=comment.dataValues.ProductId
       await comment.destroy({
         where: {
           id: id,
         },
       });
+      updateProduct(idproduct)
       return res.send("Comentario eliminado");
     }
     else{
