@@ -7,9 +7,10 @@ import { useParams } from 'react-router-dom';
 
 function Comments() {
   const dispatch = useDispatch();
-  const commentUsers = useSelector(state => state.commentsUser)
+  let commentProduct = useSelector(state => state.commentsUser)
   const { id } = useParams();
-  console.log(commentUsers)
+
+  // console.log('idProduct', id)
 
   // -------- estado para enviar comentarios
   const [input, setInput] = useState({
@@ -21,6 +22,8 @@ function Comments() {
   useEffect(() => {
     dispatch(getComments(id))
   }, [id])
+
+  // console.log('estado', commentProduct)
 
   function handleText(e) {
     e.preventDefault(e);
@@ -38,7 +41,7 @@ function Comments() {
       ...input,
       text: ''
     })
-    // dispatch(getComments())
+    dispatch(getComments(id))
   }
 
 
@@ -52,18 +55,27 @@ function Comments() {
         <button onClick={(e) => handleSubmit(e)}>Enviar</button>
       </div>
       <div>
-        <h2>{commentUsers.length} Comentarios</h2>
-        {/* {
-          commentUsers ?.map(c => {
-            return(
-            <div key={c.id}>
-              <h3>{c.userInfo['firstname']}</h3>
-              <p>{c.text}</p>
-            </div>
-            )
-          })
-          : commentUsers
-        } */}
+        { Array.isArray(commentProduct) ? (commentProduct.length === 1 
+        ? <h2> {commentProduct.length} Comentario</h2> 
+        : <h2> {commentProduct.length} Comentarios</h2>)
+        : ''
+        }
+        {
+          Array.isArray(commentProduct) ?
+            commentProduct.map(c => {
+              return (
+                <div>
+                <div key={c.id}>
+                  <h3>{c.userInfo['firstname']} {c.userInfo['lastname']}</h3>
+                  <p>{c.text}</p>
+                </div>
+                <button>editar</button>
+                <button>borrar</button>
+                </div>
+              )
+            })
+            : <p>'Sin Comentarios'</p>
+        }
       </div>
 
     </div>
