@@ -18,6 +18,10 @@
   background-color: #424242;
   box-shadow: 1px 1px 10px rgb(45, 226, 21);
   font-family: "Share Tech", sans-serif;
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
 }
 .element {
   margin: 10px 5px 10px 5px;
@@ -60,7 +64,7 @@
   font-family: "Share Tech", sans-serif;
   height: 50px;
   width: 100px;
-  margin-top: 20px;
+  margin-top: 17px;
   margin-left: 25px;
  
 }

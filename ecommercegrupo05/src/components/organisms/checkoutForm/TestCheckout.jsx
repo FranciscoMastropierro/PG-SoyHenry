@@ -48,7 +48,7 @@ const CheckoutForm = () => {
             const { id } = paymentMethod
 
             try {
-                const { data } = await axios.post('http://localhost:3001/stripe/api/checkout', {
+                const { data } = await axios.post('http://localhost:3001/api/stripe/api/checkout', {
                     id,
                     amount: totalPrice
                 })

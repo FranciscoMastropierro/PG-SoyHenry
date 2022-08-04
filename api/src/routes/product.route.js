@@ -4,6 +4,6 @@ const {getProductDetail, deleteProduct} = require('../controllers/product.contro
 
 router.get('/:id', getProductDetail)
 
-router.delete('/:id', deleteProduct)
+router.put('/:id', deleteProduct)
 
 module.exports = router;
