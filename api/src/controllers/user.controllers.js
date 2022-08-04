@@ -40,27 +40,25 @@ module.exports = {
   //Ver bien que datos son los que vamos a modificar, segun los datos que nos proporcione Auth0
   updateUser: async (req, res) => {
     const { id } = req.params;
-    const  user  = req.body;
+    const user = req.body;
 
     // user.isAdmin = false;
-    
-    try {
-        const backUser = Users.findOne({ where: { id } })
-        if (backUser.disable)
-        return res
-          .status(404)
-          .send({
-            error: `User ${backUser.username} Disable`,
-          });
-        const aux = await Users.update(user, { where: { id } });
 
-        res.status(200).send({msj : `User update`});
+    try {
+      const backUser = Users.findOne({ where: { id } });
+      if (backUser.disable)
+        return res.status(404).send({
+          error: `User ${backUser.username} Disable`,
+        });
+      const aux = await Users.update(user, { where: { id } });
+
+      res.status(200).send({ msj: `User update` });
     } catch (error) {
-        res.status(404).send(error)
+      res.status(404).send(error);
     }
   },
   postUser: async (req, res) => {
-    const { email, firstname, lastname, address, postalCode, username } =
+    const { email, firstname, lastname, address, postalCode, username, profileImage } =
       req.body;
 
     try {
@@ -71,6 +69,7 @@ module.exports = {
         address,
         postalCode,
         username,
+        profileImage
       });
 
       res.send({ msg: "User Created", user });
@@ -80,49 +79,69 @@ module.exports = {
     }
   },
   changeRole: async (req, res) => {
-    const { id } = req.params;
-    const { user } = req.body;
-
+    const { id, order } = req.body;
+    
     try {
-      const backUser = Users.findOne({ where: { id } });
-      if (user.isAdmin) {
-        const newAdmin = await Users.update(
-          { isAdmin: true, disable : false },
-          { where: { id } }
-        );
+      const backUser = await Users.findOne({ where: { id } });
+      if (order === "admin") {
+        if (!backUser.isAdmin) {
+          const newAdmin = await Users.update(
+            { isAdmin: true, disable: false },
+            { where: { id } }
+          );
 
-        return res.send({
-          msj: `User ${newAdmin.firstname} ${newAdmin.lastname} new Admin`,
-        });
-      } if (!user.disable){
-        const activeUser = await Users.update(
-          { disable: false },
-          { where: { id } }
-        );
           return res.send({
-          msj: `User ${activeUser.firstname} ${activeUser.lastname} active`,
-        });
-      }else {
-        res.status(404).send({msj : `Invalid params`})
+            msj: `User ${newAdmin.firstname} ${newAdmin.lastname} new Admin`,
+          });
+        } else {
+          const activeUser = await Users.update(
+            { disable: false, isAdmin: false },
+            { where: { id } }
+          );
+          return res.send({
+            msj: `User ${activeUser.firstname} ${activeUser.lastname} no longer admin`,
+          });
+        }
+      } else if (order === "ban") {
+        if (!backUser.disable) {
+          const newAdmin = await Users.update(
+            { isAdmin: false, disable: true },
+            { where: { id } }
+          );
+
+          return res.send({
+            msj: `User ${newAdmin.firstname} ${newAdmin.lastname} banned`,
+          });
+        }
+        if (backUser.disable) {
+          const activeUser = await Users.update(
+            { disable: false, isAdmin: false },
+            { where: { id } }
+          );
+          return res.send({
+            msj: `User ${activeUser.firstname} ${activeUser.lastname} no longer banned`,
+          });
+        }
+      } else {
+        res.status(404).send({ msj: `Invalid params` });
       }
     } catch (error) {
       return res.status(404).send(error);
     }
   },
 
-  deleteUser : async (req, res) => {
+  deleteUser: async (req, res) => {
     const { id } = req.params;
     try {
-      const backUser = Users.findOne({ where: { id } })
-      if (backUser.email){
-        await Users.destroy({ where: { id } })
-        res.send({msj : `User ${backUser.email} delete` })
+      const backUser = Users.findOne({ where: { id } });
+      if (backUser.email) {
+        await Users.destroy({ where: { id } });
+        res.send({ msj: `User ${backUser.email} delete` });
       } else {
-        res.status(404).send({msj : `User not found : ${id}` })
+        res.status(404).send({ msj: `User not found : ${id}` });
       }
     } catch (error) {
-      res.status(404).send(error)
+      res.status(404).send(error);
     }
-   
-  }
+  },
 };
