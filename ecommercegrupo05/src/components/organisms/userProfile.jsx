@@ -32,11 +32,11 @@ export default function UserProfile () {
     dispatch(setProfile(u))
     }
 
-    useEffect(() => {
-        if(isAuthenticated && Array.isArray(profile)) {
-        dispatch(setProfile(u))
-    }
-    },[])
+    // useEffect(() => {
+    //     if(isAuthenticated && Array.isArray(profile)) {
+    //     dispatch(setProfile(u))
+    // }
+    // },[])
 
     // useEffect(() => {
     //     dispatch(setProfile(u))

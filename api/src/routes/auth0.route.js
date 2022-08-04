@@ -1,10 +1,11 @@
 const { Router } = require('express');
-const { requiresAuth } = require('express-openid-connect');
-const { authenthincateUser, infoProfile } = require('../controllers/auth0.controllers');
+const {  infoProfile } = require('../controllers/auth0.controllers');
 const {Users} = require('../db');
 const {expressjwt} = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
-
+const {
+  AUTH0_DOMAIN, AUTH0_AUDIENCE
+} = process.env;
 
 const router = Router();
 
@@ -15,19 +16,19 @@ const authorizationAccess = expressjwt({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
+      jwksUri: `${AUTH0_DOMAIN}/.well-known/jwks.json`,
     }),
   
     // Validate the audience and the issuer.
-    audience: process.env.AUTH0_AUDIENCE,
-    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+    audience: AUTH0_AUDIENCE,
+    issuer: `https://dev-81nqhdy2.us.auth0.com/`,
     algorithms: ["RS256"],
 });
 
 
 // router.get('/', authenthincateUser);
 
-console.log(typeof expressjwt)
+// console.log(typeof expressjwt)
 router.get("/profile", authorizationAccess  ,infoProfile);
 
 module.exports = router;

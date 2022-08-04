@@ -1,7 +1,5 @@
-const { Router } = require('express');
-const { requiresAuth } = require('express-openid-connect');
 const { Users } = require('../db')
-const url = require('url')
+
 
 
 module.exports = {
@@ -33,28 +31,28 @@ module.exports = {
 
 
 
-    infoProfile: (req, res) => {
+    infoProfile: async (req, res, next) => {
 
-        res.send({success: true})
-        
-        
-        
-        
-        
-        
-        // let arrUserInfo = []
+        const user = req.body;
+        try {
+            Users.findOrCreate({
+                            where: {
+                                firstname: user.given_name,
+                                lastname: user.family_name,
+                                username: user.nickname,
+                                email: user.email,
+                                profileImage: user.picture,
+                            },
+                        }).then(user => {
+                            const aux = user[0]
+                            if(aux.disable) res.status(401).send({msj : `User disable : ${aux}`})
+                            res.send(aux)
+                        })
+        } catch (error) {
+            res.send(error)
+        }  
 
-        // const isAuthenticated = req.oidc.isAuthenticated();
-        // const user = req.oidc.user;
-
-        // user.isAuthenticated = isAuthenticated
-
-        // arrUserInfo.push(user)
-
-        // console.log(arrUserInfo)
-        // res.send(arrUserInfo)
     },
-
 
 
 

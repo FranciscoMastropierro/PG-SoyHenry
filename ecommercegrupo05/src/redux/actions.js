@@ -21,8 +21,11 @@ export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const CHANGE_PROFILE = 'CHANGE_PROFILE'
 export const TOKEN = 'TOKEN'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const GET_COMMENTS = 'GET_COMMENTS'
 
 
 
@@ -81,6 +84,17 @@ export function getUserByEmail(email) {
     }
 }
 
+export function getFilterBrand() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/products/brand/all`)
+        const data = json.data
+        return dispatch({
+            type: GET_FILTER_BRAND,
+            payload: data
+        })
+    }
+}
+
 export function getFilters(category) {
     return async function (dispatch) {
         try {
@@ -111,6 +125,15 @@ export function banUser(body) {
         })
     }
 }
+export function updateProduct(id, update) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/products/', ({id, update}))
+        return dispatch({
+            type: UPDATE_PRODUCT,
+            payload: data
+        })
+    }
+}
 export function upgradeToAdmin(body) {
     return async function (dispatch) {
         const { data } = await axios.get('http://localhost:3001/admin/upgrade', (body))
@@ -120,7 +143,6 @@ export function upgradeToAdmin(body) {
         })
     }
 }
-
 
 export function getCate() {
     return async function (dispatch) {
@@ -143,6 +165,7 @@ export function getAllCategories() {
         })
     }
 }
+
 
 export function cleaner() {
     return {
@@ -206,19 +229,41 @@ export async function postProfile (u) {
         return data
 }
 
-export function token(tok) {
+export function token(tok, user) { 
     return async function (dispatch) {
-        const { data } = await axios.post('http://localhost:3001/products/filter',
+        console.log("Flag Actions", tok)
+        console.log("Flag Actions user", user)
+        const { data } = await axios.post('http://localhost:3001/profile',user,
             {
-                Headers: {
-                    'Authorization': `Basic${tok}`
+                headers: {
+                    'Authorization': `Bearer ${tok}`
                 }
-            },
+            }
         )
-
+        
         return dispatch({ type: TOKEN, payload: data })
     }
 }
+
+export function crateComment(comment) {
+    return async function (dispatch) {
+        const { data } = await axios.post('http://localhost:3001/commentary', (comment))
+        return dispatch({ type: CREATE_COMMENT, payload: data })
+    }
+}
+
+export function getComments(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/commentary?productId=${id}`)
+        const data = json.data
+        return dispatch({
+            type: GET_COMMENTS,
+            payload: data
+        })
+    }
+}
+
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 export function createProduct(payload) {
     return async function (dispatch) {

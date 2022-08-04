@@ -25,7 +25,7 @@ const config = {
   clientSecret : CLIENTSECRET,
   authorizationParams: {
     response_type : 'code',
-    audience : 'https://dev-rc0v97zv.us.auth0.com/api/v2/',
+    audience : 'https://dev-81nqhdy2.us.auth0.com/api/v2/',
     scope : 'openid profile email'
   }
 };
