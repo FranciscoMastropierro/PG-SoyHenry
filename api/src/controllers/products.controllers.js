@@ -257,6 +257,19 @@ module.exports = {
     const brandResult = Array.from(brandSet)
 
     res.send(brandResult)
+  },
+  updateProduct: async (req, res) => {
+    const {id, update } =req.body;
+    
+    const { name, price, brand, stock, description, image }=update
+    if(!name || !price || !brand || !stock || !description || !image){
+      
+      return res.status(404).send("fill in all the data")
+    }
+    await Products.update(
+      { name, price, brand, stock, description, image },
+      { where: { id } }
+    );
+    return res.status(200).send("the product was changed");
   }
-
 };

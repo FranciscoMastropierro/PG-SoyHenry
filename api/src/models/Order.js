@@ -22,25 +22,24 @@ module.exports = (sequelize) => {
     },
     amount: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: false
     },
     state: {
-      type: DataTypes.ENUM("created", "processing", "completed", "canceled"),
-      defaultValue: "created",
-      allowNull: false,
+      type: DataTypes.ENUM("completed", "canceled"),
+      allowNull: false
     },
     paid: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: false,
+        allowNull: false
     },
     shipmentAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     postalCode : {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     }
   },
   {

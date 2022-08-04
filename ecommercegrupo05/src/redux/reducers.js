@@ -12,8 +12,12 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    SET_PROFILE,
-    TOKEN
+    TOKEN,
+    UPDATE_PRODUCT,
+    TOTAL_PRICE,
+    GET_PRODUCTS_CART,
+    GET_COMMENTS,
+    GET_FILTER_BRAND
 } from './actions'
 
 const initialState = {
@@ -32,10 +36,19 @@ const initialState = {
     searchedUser: [],
     laptos: [],
     filters: [],
+    filterBrands: [],
     cate: [],
+<<<<<<< HEAD
     profile: [],
     userLoged: {},
 
+=======
+    token: [],
+    totalPrice: 0,
+    productsCart: [],
+    commentsUser: [],
+    userLoged: {},
+>>>>>>> develop
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -69,6 +82,10 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 detail: payload
             }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
+            }
         case GET_USER_BY_EMAIL:
             return {
                 ...state,
@@ -96,6 +113,11 @@ function rootReducer(state = initialState, { type, payload }) {
                 filters: payload,
                 laptos: payload,
             }
+        case GET_FILTER_BRAND:
+            return {
+                ...state,
+                filterBrands: payload
+            }
         case GET_CATE:
             return {
                 ...state,
@@ -106,6 +128,7 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 allCategories: payload,
             }
+<<<<<<< HEAD
         case SET_PROFILE:
             return {
                 ...state,
@@ -115,10 +138,36 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                  ...state,
                  userLoged: payload
+=======
+        // case SET_PROFILE:
+        //     return {
+        //         ...state,
+        //         profile: payload
+        //     }
+        case TOKEN:
+            return {
+                ...state,
+                userLoged: payload
+            }
+        case TOTAL_PRICE:
+            return {
+                ...state,
+                totalPrice: payload
+            }
+        case GET_PRODUCTS_CART:
+            return {
+                ...state,
+                productsCart: payload
+            }
+        case GET_COMMENTS:
+            return {
+                ...state,
+                commentsUser: payload
+>>>>>>> develop
             }
         default: return state;
-        }
     }
+}
 
 
 export default rootReducer;
