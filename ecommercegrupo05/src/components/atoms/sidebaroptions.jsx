@@ -20,18 +20,17 @@ export function SidebarOptions() {
     const dispatch = useDispatch()
     const auth = useAuth0()
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = auth;
-    const handleSubmit = () => user ? logout() : loginWithRedirect(navigate('/userprofile'))
+    const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
 
     useEffect(() => {
         if(isAuthenticated ){
-            const getToken = async () => {
-               const token = await getAccessTokenSilently()
-            //    console.log("token ;)", token)
-           }
-           getToken()
-           dispatch(token(getToken()))
+            // const tok =  getAccessTokenSilently()
+            getAccessTokenSilently().then(tok =>{
+                // console.log("usr ;)", user)
+                dispatch(token(tok, user))
+            })
         } 
         // console.log('no hay token :(')
     }, [isAuthenticated])

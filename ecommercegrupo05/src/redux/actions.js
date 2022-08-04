@@ -19,6 +19,7 @@ export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const SET_PROFILE = 'SET_PROFILE'
+export const CHANGE_PROFILE = 'CHANGE_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
@@ -27,6 +28,8 @@ export const POST_FAVORITE = 'POST_FAVORITE'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const UPDATE_STOCK = 'UPDATE_STOCK'
 export const UPDATE_ROL = 'UPDATE_ROL'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const GET_COMMENTS = 'GET_COMMENTS'
 
 
 
@@ -80,6 +83,17 @@ export function getUserByEmail(email) {
         const data = json.data
         return dispatch({
             type: GET_USER_BY_EMAIL,
+            payload: data
+        })
+    }
+}
+
+export function getFilterBrand() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/products/brand/all`)
+        const data = json.data
+        return dispatch({
+            type: GET_FILTER_BRAND,
             payload: data
         })
     }
@@ -161,7 +175,6 @@ export function upgradeToAdmin(body) {
     }
 }
 
-
 export function getCate() {
     return async function (dispatch) {
         const json = await axios('http://localhost:3001/categories')
@@ -184,6 +197,7 @@ export function getAllCategories() {
     }
 }
 
+
 export function cleaner() {
     return {
         type: CLEANER
@@ -191,9 +205,33 @@ export function cleaner() {
 }
 
 export function setProfile(u) {
-    return {
-        type: SET_PROFILE,
-        payload: u
+    return async function (dispatch) {
+
+        const { data } = await axios('http://localhost:3001/users/')
+        const found = data.find(user => user.email === u.email)
+        if(!found) {
+            u = {
+                firstname: u.given_name,
+                lastname: u.family_name || ' ',
+                username: u.nickname || ' ',
+                email: u.email,
+                profileImage: u.picture,
+                }
+
+            const posted = await postProfile(u)
+
+            console.log(posted.user)
+
+            return dispatch ({
+                type: SET_PROFILE,
+                payload: posted.user
+            })
+        } else {
+            return dispatch ({
+                type: SET_PROFILE,
+                payload: found
+            })
+        }
     }
 }
 
@@ -210,32 +248,55 @@ export function getProductCart(payload) {
         payload: payload
     }
 }
+
+export async function getProfile (id) {
+    const {data} = await axios(`http://localhost:3001/users/${id}`);
+    return data
+}
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 
-// export function postProfile (u) {
-//     return async function (dispatch) {
-//         const { data } = await axios.post(`http://localhost:3001/users/`, u)
-//         return dispatch ({
-//             type: SET_PROFILE,
-//             payload: data
-//         })
-//     }
-// }
 
-export function token(tok) {
+export async function postProfile (u) {
+        const { data } = await axios.post(`http://localhost:3001/users/`, u)
+        return data
+}
+
+export function token(tok, user) { 
     return async function (dispatch) {
-        const { data } = await axios.post('http://localhost:3001/products/filter',
+        console.log("Flag Actions", tok)
+        console.log("Flag Actions user", user)
+        const { data } = await axios.post('http://localhost:3001/profile',user,
             {
-                Headers: {
-                    'Authorization': `Basic${tok}`
+                headers: {
+                    'Authorization': `Bearer ${tok}`
                 }
-            },
+            }
         )
-
+        
         return dispatch({ type: TOKEN, payload: data })
     }
 }
+
+export function crateComment(comment) {
+    return async function (dispatch) {
+        const { data } = await axios.post('http://localhost:3001/commentary', (comment))
+        return dispatch({ type: CREATE_COMMENT, payload: data })
+    }
+}
+
+export function getComments(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/commentary?productId=${id}`)
+        const data = json.data
+        return dispatch({
+            type: GET_COMMENTS,
+            payload: data
+        })
+    }
+}
+
+///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
 export function createProduct(payload) {
     return async function (dispatch) {
@@ -261,9 +322,14 @@ export function favoritePost(idProducts,idUser) {
 
 //////////////////////////////////////   PUTS   /////////////////////////////////////////
 
-export function changeProfile(id) {
+export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/users/edit/')
+        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
+        const getuFromBack = await getProfile(id)
+        return dispatch({
+            type: CHANGE_PROFILE,
+            payload:  getuFromBack
+        })
     }
 }
 

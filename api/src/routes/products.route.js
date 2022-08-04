@@ -9,7 +9,7 @@ router.post('/filter', getFilter)
 
 // router.get('/brand', getProductsByBrand)
 
-// router.get('/brand/all', getAllBrand)
+router.get('/brand/all', getAllBrand)
 
 // router.get('/categories', filterByCategories)
 
