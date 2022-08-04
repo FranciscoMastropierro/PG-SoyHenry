@@ -32,6 +32,7 @@ export const UPDATE_ROL = 'UPDATE_ROL'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const GET_MSG_CART = 'GET_MSG_CART'
+export const POST_ORDERS = 'POST_ORDERS'
 
 
 
@@ -307,6 +308,7 @@ export function createProduct(payload) {
         })
     }
 }
+
 export function favoritePost(idProducts,idUser) {
     return async function (dispatch) {
         console.log(idProducts,idUser)
@@ -314,6 +316,17 @@ export function favoritePost(idProducts,idUser) {
         const data = await json.data
         return dispatch({
             type: POST_FAVORITE,
+            payload: data
+        })
+    }
+}
+
+export function postOrder(id, products) {
+    return async function (dispatch) {
+        // console.log(products,idUser)
+        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products})
+        return dispatch({
+            type: POST_ORDERS,
             payload: data
         })
     }
