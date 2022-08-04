@@ -142,7 +142,7 @@ export function updateProduct(id, update) {
 }
 export function changeRole(id) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/users/role/' , (id) )
+        const { data } = await axios.put('http://localhost:3001/api/users/role/' , (id) )
         return dispatch({
             type: UPDATE_ROL,
             payload: data
@@ -151,7 +151,7 @@ export function changeRole(id) {
 }
 export function updateStock(id, stock) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/products/stock', ({id, stock}))
+        const { data } = await axios.put('http://localhost:3001/api/products/stock', ({id, stock}))
         return dispatch({
             type: UPDATE_STOCK,
             payload: data
@@ -160,7 +160,7 @@ export function updateStock(id, stock) {
 }
 export function deleteProduct(id) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/product/'  + id )
+        const { data } = await axios.put('http://localhost:3001/api/product/'  + id )
         return dispatch({
             type: DELETE_PRODUCT,
             payload: data
@@ -310,7 +310,7 @@ export function createProduct(payload) {
 export function favoritePost(idProducts,idUser) {
     return async function (dispatch) {
         console.log(idProducts,idUser)
-        const json = await axios.post(`http://localhost:3001/favorite`, idProducts,idUser)
+        const json = await axios.post(`http://localhost:3001/api/favorite`, idProducts,idUser)
         const data = await json.data
         return dispatch({
             type: POST_FAVORITE,
@@ -323,12 +323,12 @@ export function favoritePost(idProducts,idUser) {
 
 export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
-        const getuFromBack = await getProfile(id)
-        return dispatch({
-            type: CHANGE_PROFILE,
-            payload:  getuFromBack
-        })
+        const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user)
+        // const getuFromBack = await getProfile(id)
+        // return dispatch({
+        //     type: CHANGE_PROFILE,
+        //     payload:  getuFromBack
+        // })
     //    const { data } = await axios.put('http://localhost:3001/api/users/edit/')
     }
 }
