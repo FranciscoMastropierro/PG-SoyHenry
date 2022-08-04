@@ -31,6 +31,7 @@ export const UPDATE_STOCK = 'UPDATE_STOCK'
 export const UPDATE_ROL = 'UPDATE_ROL'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
+export const GET_MSG_CART = 'GET_MSG_CART'
 
 
 
@@ -246,9 +247,11 @@ export function getProductCart(payload) {
     }
 }
 
-export async function getProfile (id) {
-    const {data} = await axios(`http://localhost:3001/users/${id}`);
-    return data
+export function getMsgCart(payload) {
+    return {
+        type: GET_MSG_CART,
+        payload: payload
+    }
 }
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 

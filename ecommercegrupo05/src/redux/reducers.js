@@ -24,6 +24,7 @@ import {
     UPDATE_ROL,
     GET_COMMENTS,
     GET_FILTER_BRAND,
+    GET_MSG_CART
 } from './actions'
 
 const initialState = {
@@ -49,6 +50,7 @@ const initialState = {
     productsCart: [],
     commentsUser: [],
     userLoged: {},
+    msgCart: ''
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -169,12 +171,12 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 commentsUser: payload
             }
-       // case CHANGE_PROFILE:
-       //     return {
-       //         ...state,
-        //        profile: payload
-        //    }
-       // default: return state;
+        case GET_MSG_CART:
+            return {
+                ...state,
+                msgCart: payload
+            }
+        default: return state;
     }
 }
 
