@@ -163,7 +163,7 @@ export const CartProvider = ({ children }) => {
             result = cartItems.splice(0,0)
             console.log('aqui entre en borrar todo')
         }else {
-            
+            return cartItems
         }
         updateState({ products: result });
     }

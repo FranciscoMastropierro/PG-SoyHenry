@@ -71,7 +71,7 @@ const CheckoutForm = () => {
                             cancel: 'ok'
                         }
                     })
-                    setTimeout(() => navigate('/'), 5000)
+                    setTimeout(() => navigate('/'), 3000)
                     localStorage.removeItem(totalProducts);
                 }
 
@@ -97,7 +97,7 @@ const CheckoutForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
+        <form onSubmit={handleSubmit} className='card card-body' >
 
             <img
                 src='https://idahonews.com/resources/media/54376d60-a84a-48cf-bdac-03a3d32fbccb-full36x25_GettyImages1182622625.jpg?1595459846300'
@@ -111,7 +111,7 @@ const CheckoutForm = () => {
                 <CardElement className='form-control' />
             </div>
 
-            <button className='btn btn-success' >
+            <button className='btn btn-success' onClick={handleItemToDeleteAll(totalProducts)}>
                 {
                     loading
                         ? <div className="spinner-border text-dark" role="status">
