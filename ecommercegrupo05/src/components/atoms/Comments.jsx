@@ -3,21 +3,24 @@ import { Textarea } from '@chakra-ui/react'
 import style from '../../styles/comments.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { crateComment, getComments } from '../../redux/actions';
+import { useParams } from 'react-router-dom';
 
 function Comments() {
   const dispatch = useDispatch();
   const commentUsers = useSelector(state => state.commentsUser)
+  const { id } = useParams();
+  console.log(commentUsers)
 
   // -------- estado para enviar comentarios
   const [input, setInput] = useState({
     text: '',
-    productId: 'ff5f4fbe-88fe-4501-8a97-abed261aeff5',
+    productId: id,
     userId: 'c2fcac02-9259-4047-b4ab-dd68ab6711b8'
   })
 
   useEffect(() => {
-    dispatch(getComments(input.productId))
-  }, [])
+    dispatch(getComments(id))
+  }, [id])
 
   function handleText(e) {
     e.preventDefault(e);
@@ -35,7 +38,7 @@ function Comments() {
       ...input,
       text: ''
     })
-    dispatch(getComments(input.productId))
+    // dispatch(getComments())
   }
 
 
@@ -50,9 +53,8 @@ function Comments() {
       </div>
       <div>
         <h2>{commentUsers.length} Comentarios</h2>
-        {
-          commentUsers ?
-          commentUsers.map(c => {
+        {/* {
+          commentUsers ?.map(c => {
             return(
             <div key={c.id}>
               <h3>{c.userInfo['firstname']}</h3>
@@ -61,7 +63,7 @@ function Comments() {
             )
           })
           : commentUsers
-        }
+        } */}
       </div>
 
     </div>

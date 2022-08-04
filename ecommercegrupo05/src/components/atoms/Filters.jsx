@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getCate, getFilterBrand, getFilters, getProducts } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../../styles/allProducts.module.css";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Filters() {
@@ -21,6 +22,7 @@ export default function Filters() {
     const brandRepeat = data.map(e => e).sort()
     const brands = [...new Set(brandRepeat)]
     const allCategories = cate.map(e => e.name).sort()
+    let navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getProducts())
@@ -29,9 +31,10 @@ export default function Filters() {
     }, [dispatch])
 
     function handleCLickRecharge(e) {  
-        window.location.reload()
+        // window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
+        navigate('/allProducts')
         setInput({
             "brand": [],
             "categorie": "",
