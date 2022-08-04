@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
     },
     firstname: {
       type: DataTypes.STRING,
@@ -20,6 +20,7 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      // unique: true
     },
     address:{
       type :DataTypes.STRING,
@@ -34,7 +35,11 @@ module.exports = (sequelize) => {
       unique: true,
     },
     profileImage:{
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
+    },
+    disable: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,

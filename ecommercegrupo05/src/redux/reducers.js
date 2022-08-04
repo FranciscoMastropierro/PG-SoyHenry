@@ -20,6 +20,7 @@ import {
     TOTAL_PRICE,
     GET_PRODUCTS_CART,
     DELETE_PRODUCT,
+    UPDATE_ROL,
 } from './actions'
 
 const initialState = {
@@ -71,6 +72,10 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
             }
         case BAN_USER:
+            return {
+                ...state,
+            }
+        case UPDATE_ROL:
             return {
                 ...state,
             }

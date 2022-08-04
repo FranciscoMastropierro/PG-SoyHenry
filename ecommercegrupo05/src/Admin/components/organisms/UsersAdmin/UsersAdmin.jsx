@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from "react-router-dom";
 import style from "./UsersAdmin.module.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, banUser, upgradeToAdmin } from "../../../../redux/actions"
+import { getUsers, banUser, changeRole } from "../../../../redux/actions"
 import { ImCross } from "react-icons/im"
 import { FaCrown } from "react-icons/fa"
 import SearchBarAdmin from "../../molecules/SearchBarUserAdmin/SearchBarUserAdmin"
@@ -42,7 +42,7 @@ console.log("sds",searchedUsers)
 })
 .then((willBan) => {
   if (willBan) {
-     dispatch(banUser(putInfo))
+    dispatch(changeRole({id:e.id , order:"ban"}))
     swal("the user has been banned!", {
       icon: "success",
     });
@@ -59,8 +59,8 @@ console.log("sds",searchedUsers)
 
 }
 async function handleAdmin(e){
-  const putInfo = {userId: e.id}
   
+  console.log(e.id)
   swal({
     title: "Are you sure?",
     text: "Once upgraded the user will be able to access the administration panel",
@@ -70,7 +70,7 @@ async function handleAdmin(e){
   })
   .then((willUpgrade) => {
     if (willUpgrade) {
-       dispatch(upgradeToAdmin(putInfo))
+       dispatch(changeRole({id:e.id , order: "admin"}))
       swal("the user has been upgraded!", {
         icon: "success",
       });
@@ -114,7 +114,7 @@ async function handleAdmin(e){
                 
                 
                 <p>Id</p>
-                <p>Username</p>
+                <p>Usuario</p>
                 <p>Email</p>
                 
                 
@@ -124,8 +124,8 @@ async function handleAdmin(e){
             {users.map(e=> {
                 return(
                         <div className={style.card} key={e.id}>
-                            <button className={style.DelBtn} email={e.email} onClick={() => handleBan(e)}> Ban </button>
-                          {e.isAdmin? <FaCrown/> :  <button className={style.ModBtn} id={e.id} onClick={() => handleAdmin(e)}> Admin</button>}
+                          {e.disable? <button className={style.DelIcon} email={e.email} onClick={() => handleBan(e)}> <ImCross className={style.DelIconr}/> </button>: <button className={style.DelBtn} email={e.email} onClick={() => handleBan(e)}> Ban </button>}  
+                          {e.isAdmin? <button className={style.ModIcon} id={e.id} onClick={() => handleAdmin(e)}> <FaCrown className={style.ModIconr}/> </button> :  <button className={style.ModBtn} id={e.id} onClick={() => handleAdmin(e)}> Admin</button>}
                             <p className={style.element}>{e.id}</p>
                             <p className={style.element}>{e.username}</p>
                             <p className={style.element}>{e.email}</p>

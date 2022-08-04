@@ -26,6 +26,7 @@ export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
 export const POST_FAVORITE = 'POST_FAVORITE'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const UPDATE_STOCK = 'UPDATE_STOCK'
+export const UPDATE_ROL = 'UPDATE_ROL'
 
 
 
@@ -119,6 +120,15 @@ export function updateProduct(id, update) {
         const { data } = await axios.put('http://localhost:3001/products/', ({id, update}))
         return dispatch({
             type: UPDATE_PRODUCT,
+            payload: data
+        })
+    }
+}
+export function changeRole(id) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/users/role/' , (id) )
+        return dispatch({
+            type: UPDATE_ROL,
             payload: data
         })
     }
