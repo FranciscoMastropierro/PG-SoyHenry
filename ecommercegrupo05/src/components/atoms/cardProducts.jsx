@@ -54,12 +54,16 @@ export default function CardProducts() {
                             <h2 className={style.h2}>{name}</h2>
                             <br/>
                             <div className={style.price}>$<h3>{price}</h3></div>
-                            <button className={style.btn}>
-                                <Link to={`/details/${id}`}>Detalles</Link>
-                            </button>
-                            <button className={style.btn}>
-                                <Link to='#' onClick={handleItemToCart(product)}>Añadir al Carrito 🛒</Link>
-                            </button>
+                            <Link to={`/details/${id}`} className={style.btn}>
+                                <button>
+                                    Detalles
+                                </button>
+                            </Link>
+                            <Link to='#' onClick={handleItemToCart(product)} className={style.btn}>
+                                <button>
+                                    Añadir al Carrito 🛒
+                                </button>
+                            </Link>
                         </div>
                     )
                 })

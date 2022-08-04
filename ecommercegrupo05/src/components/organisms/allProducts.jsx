@@ -32,7 +32,7 @@ export default function AllProducts() {
       <div className={style.container}>
         <div className={style.filters}>
           <div className={style.div}><Filters /></div>
-          <CardProducts />
+          <div className={style.cardContainer}><CardProducts /></div>
         </div>
       </div>
     </>

@@ -60,6 +60,7 @@ const CheckoutForm = () => {
                         }
                     })
                     setTimeout(() => navigate('/'), 5000)
+                    localStorage.removeItem(totalProducts);
                 }
 
             } catch (error) {
