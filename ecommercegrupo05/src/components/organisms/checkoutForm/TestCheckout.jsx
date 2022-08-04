@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { loadStripe } from '@stripe/stripe-js';
+import { useCartContext } from "../../../context/CartItem";
+import { getMsgCart } from '../../../redux/actions';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
@@ -12,6 +14,12 @@ import style from '../../../styles/testCheckout.module.css'
 const stripePromise = loadStripe("pk_test_51LPdB5H9O09Vk58eN5dLZfEZTY7pil4bPkqlWiYchUAjx82DR52o26b4bm8aUoEtqfJuF7BFFcS01wKLUpSJ22d900UhCklx09")
 
 const CheckoutForm = () => {
+
+    const dispatch = useDispatch()
+
+    const superState = useCartContext();
+
+    const { deleteAllCart } = superState.effects;
 
     // const [disable, setDisable] = useState(true)
     const [loading, setLoading] = useState(false)
@@ -23,6 +31,8 @@ const CheckoutForm = () => {
     const stripe = useStripe()
     const elements = useElements()
     const navigate = useNavigate()
+
+    const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -42,7 +52,9 @@ const CheckoutForm = () => {
                     id,
                     amount: totalPrice
                 })
-                console.log(data)
+                // console.log(data.msg)
+
+                dispatch(getMsgCart(data.msg))
 
                 elements.getElement(CardElement).clear()
 
@@ -70,6 +82,7 @@ const CheckoutForm = () => {
         }
     }
 
+
     // useEffect(() => {
     //   if(!stripe) {
     //     setDisable(false)
@@ -84,7 +97,7 @@ const CheckoutForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className='card card-body'>
+        <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
 
             <img
                 src='https://idahonews.com/resources/media/54376d60-a84a-48cf-bdac-03a3d32fbccb-full36x25_GettyImages1182622625.jpg?1595459846300'

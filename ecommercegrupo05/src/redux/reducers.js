@@ -18,7 +18,8 @@ import {
     TOTAL_PRICE,
     GET_PRODUCTS_CART,
     GET_COMMENTS,
-    GET_FILTER_BRAND
+    GET_FILTER_BRAND,
+    GET_MSG_CART
 } from './actions'
 
 const initialState = {
@@ -45,6 +46,7 @@ const initialState = {
     productsCart: [],
     commentsUser: [],
     userLoged: {},
+    msgCart: ''
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -148,6 +150,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 commentsUser: payload
+            }
+        case GET_MSG_CART:
+            return {
+                ...state,
+                msgCart: payload
             }
         default: return state;
     }
