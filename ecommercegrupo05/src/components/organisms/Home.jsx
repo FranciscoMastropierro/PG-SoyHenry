@@ -14,11 +14,13 @@ export function Home () {
     const profile = useSelector((state) => state.profile)
     let { user, isAuthenticated } = useAuth0()
 
-    useEffect(() => {
-        if(isAuthenticated && Array.isArray(profile)) {
-        dispatch(setProfile(user))
-        }
-    }, [isAuthenticated, profile])
+    // useEffect(() => {
+    //     if(isAuthenticated && Array.isArray(profile)) {
+    //     dispatch(setProfile(user))
+    //     }
+    // },[isAuthenticated, profile])
+
+    // console.log(profile)
 
     return (
         <div>

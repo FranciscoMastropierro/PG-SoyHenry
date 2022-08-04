@@ -166,8 +166,6 @@ export function setProfile(u) {
 
             const posted = await postProfile(u)
 
-            console.log(posted.user)
-
             return dispatch ({
                 type: SET_PROFILE,
                 payload: posted.user
