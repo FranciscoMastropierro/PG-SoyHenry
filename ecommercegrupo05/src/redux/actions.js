@@ -160,7 +160,8 @@ export function token(tok, user) {
         const { data } = await axios.post('http://localhost:3001/profile',user,
             {
                 headers: {
-                    'Authorization': `Bearer ${tok}`
+                    'Authorization': `Bearer ${tok}`,
+                    'userInfo': user
                 }
             }
         )

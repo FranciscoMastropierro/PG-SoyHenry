@@ -36,21 +36,28 @@ module.exports = {
 
     infoProfile: async (req, res, next) => {
 
-            console.log(req.body)
-        
-       
-        
-        // let arrUserInfo = []
+            const infoAuth = req.body
 
-        // const isAuthenticated = req.oidc.isAuthenticated();
-        // const user = req.oidc.user;
+            await Users.findOrCreate({
+                where: {
+                    firstname: infoAuth.given_name,
+                    lastname: infoAuth.family_name,
+                    username: infoAuth.nickname,
+                    email: infoAuth.email,
+                    profileImage: infoAuth.picture,
+                },
+            })
 
-        // user.isAuthenticated = isAuthenticated
 
-        // arrUserInfo.push(user)
+            const infoUser =  await Users.findOne({
+                where: {email: infoAuth.email}
+            })
 
-        // console.log(arrUserInfo)
-        // res.send(arrUserInfo)
+
+            res.send(infoUser.Users)
+
+
+
     },
 
 
