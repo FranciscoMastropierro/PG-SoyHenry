@@ -29,6 +29,6 @@ const authorizationAccess = expressjwt({
 // router.get('/', authenthincateUser);
 
 // console.log(typeof expressjwt)
-router.get("/profile", authorizationAccess  ,infoProfile);
+router.post("/profile", authorizationAccess  ,infoProfile);
 
 module.exports = router;
