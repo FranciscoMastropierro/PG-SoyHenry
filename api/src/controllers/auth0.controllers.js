@@ -36,28 +36,33 @@ module.exports = {
 
     infoProfile: async (req, res, next) => {
 
-            const infoAuth = req.body
+        const user = req.body;
+        try {
+            Users.findOrCreate({
+                            where: {
+                                firstname: user.given_name,
+                                lastname: user.family_name,
+                                username: user.nickname,
+                                email: user.email,
+                                profileImage: user.picture,
+                            },
+                        }).then(user => {
+                            const aux = user[0]
+                            if(aux.disable) res.status(401).send({msj : `User disable : ${aux}`})
+                            res.send(aux)
+                           
+                        })
+        } catch (error) {
+            res.send(error)
+        }
 
-            await Users.findOrCreate({
-                where: {
-                    firstname: infoAuth.given_name,
-                    lastname: infoAuth.family_name,
-                    username: infoAuth.nickname,
-                    email: infoAuth.email,
-                    profileImage: infoAuth.picture,
-                },
-            })
 
+        const infoUser = await Users.findOne({
+            where:{email: user.email}
+        })
 
-            const infoUser =  await Users.findOne({
-                where: {email: infoAuth.email}
-            })
-
-
-            res.send(infoUser.Users)
-
-
-
+        console.log(infoUser.dataValues)
+                    
     },
 
 
