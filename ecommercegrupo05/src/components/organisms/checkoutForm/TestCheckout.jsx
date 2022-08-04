@@ -60,7 +60,6 @@ const CheckoutForm = () => {
 
                 if (data.msg === 'Successful payment') {
                     // dispatch(postOrder({ email: user.email, address:edit.address}))
-                    // dispatch(clearCart())
                     swal({
                         title: "Compra exitosa",
                         input: "text",
