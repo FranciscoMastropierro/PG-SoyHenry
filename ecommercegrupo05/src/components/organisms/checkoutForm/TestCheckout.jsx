@@ -97,7 +97,7 @@ const CheckoutForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className='card card-body' >
+        <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
 
             <img
                 src='https://idahonews.com/resources/media/54376d60-a84a-48cf-bdac-03a3d32fbccb-full36x25_GettyImages1182622625.jpg?1595459846300'
@@ -111,7 +111,7 @@ const CheckoutForm = () => {
                 <CardElement className='form-control' />
             </div>
 
-            <button className='btn btn-success' onClick={handleItemToDeleteAll(totalProducts)}>
+            <button className='btn btn-success' >
                 {
                     loading
                         ? <div className="spinner-border text-dark" role="status">
