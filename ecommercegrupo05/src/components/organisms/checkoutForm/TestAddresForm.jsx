@@ -3,14 +3,17 @@ import style from '../../../styles/testAddresform.module.css'
 import card from '../../../assets/card_img.png'
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 
 const TestAddresForm = () => {
 
     const {user} = useAuth0()
 
+    // const user = useSelector((state) => state.profile)
+    console.log("🚀 ~ file: TestAddresForm.jsx ~ line 13 ~ TestAddresForm ~ user", user)
+
     const { name, email } = user
-    
 
     return(
         <div className={style.container}>
