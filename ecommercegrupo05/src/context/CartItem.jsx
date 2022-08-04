@@ -156,12 +156,12 @@ export const CartProvider = ({ children }) => {
     const deleteAllCart = msg => {
         
         
-        console.log("🚀 ~ file: CartItem.jsx ~ line 157 ~ CartProvider ~ adentro de la funcion", mensaje)
+        // console.log("🚀 ~ file: CartItem.jsx ~ line 157 ~ CartProvider ~ adentro de la funcion", mensaje)
         const cartItems = msg
         let result = []
         if(mensaje === 'Successful payment'){
             result = cartItems.splice(0,0)
-            console.log('aqui entre en borrar todo')
+            // console.log('aqui entre en borrar todo')
         }else {
             return cartItems
         }

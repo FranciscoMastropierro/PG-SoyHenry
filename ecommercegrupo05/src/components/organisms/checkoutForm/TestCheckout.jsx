@@ -4,7 +4,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { loadStripe } from '@stripe/stripe-js';
 import { useCartContext } from "../../../context/CartItem";
-import { getMsgCart } from '../../../redux/actions';
+import { getMsgCart, postOrder } from '../../../redux/actions';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
@@ -26,7 +26,16 @@ const CheckoutForm = () => {
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 19 ~ CheckoutForm ~ totalProducts aqui", totalProducts)
+    const userLoged = useSelector((state) => state.userLoged)
+
+    const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
+        return {
+            id,
+            stock,
+            amount,
+            price
+        }
+    })
 
     const stripe = useStripe()
     const elements = useElements()
@@ -59,7 +68,7 @@ const CheckoutForm = () => {
                 elements.getElement(CardElement).clear()
 
                 if (data.msg === 'Successful payment') {
-                    // dispatch(postOrder({ email: user.email, address:edit.address}))
+                    dispatch(postOrder(userLoged.id, finalProducts))
                     swal({
                         title: "Compra exitosa",
                         input: "text",
