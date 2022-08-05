@@ -19,7 +19,7 @@ import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
 import UserOrders from './components/organisms/UserOrders';
 import { Whatsapp } from './components/atoms/whatsapp';
-import Admin from './Admin/Admin';
+import Admin from './Admin/Admin.jsx';
 import { CartProvider } from './context/CartItem';
 import style from "./styles/details.module.css";
 import UserProfile from './components/organisms/userProfile';

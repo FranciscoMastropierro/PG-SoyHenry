@@ -153,11 +153,6 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 allCategories: payload,
             }
-        // case SET_PROFILE:
-        //     return {
-        //         ...state,
-        //         profile: payload
-        //     }
         case TOKEN:
             return {
                 ...state,

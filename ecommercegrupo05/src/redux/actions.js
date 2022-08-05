@@ -18,7 +18,6 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
-//export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
@@ -325,10 +324,6 @@ export function postOrder(id, products) {
 export function changeProfile(id, user) {
     return async function (dispatch) {
         const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
-        // return dispatch({
-        //     type: TOKEN,
-        //     payload: user
-        // })
     }
 }
 
