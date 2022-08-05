@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import swal from 'sweetalert';
+import { useSelector } from 'react-redux'
 
 const CartContext = createContext();
 
@@ -10,6 +11,9 @@ export const CartProvider = ({ children }) => {
         total: 0,
         products: []
     }
+
+    const mensaje = useSelector((state) => state.msgCart)
+    // console.log("🚀 ~ file: CartItem.jsx ~ line 16 ~ CartProvider ~ msg rogelioooo", mensaje.length)
 
     const [state, setState] = useState(() => {
         try {
@@ -26,7 +30,15 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('cartState', JSON.stringify(state))
     }, [state]);
 
-    const cachearNumber = state.products.reduce((accum, current) => accum = accum + current?.amount, 0)
+    // useEffect(() => {
+    //     if(mensaje.length !== 0) {
+    //         localStorage.clear()
+    //     }else {
+    //         localStorage.setItem('cartState', JSON.stringify(state))
+    //     }
+    // }, [state, mensaje]);
+
+    // const cachearNumber = state.products.reduce((accum, current) => accum = accum + current?.amount, 0)
 
     // const totalAmount = state.products.reduce((accum, current) => accum = Number(accum) + Number(current?.price), 0)
 
@@ -149,12 +161,29 @@ export const CartProvider = ({ children }) => {
         }
     }
 
+    const deleteAllCart = products => {
+        
+        
+        // console.log("🚀 ~ file: CartItem.jsx ~ line 157 ~ CartProvider ~ adentro de la funcion", mensaje)
+        const cartItems = products
+        let result = []
+        if(mensaje === 'Successful payment'){
+            result = cartItems.splice(0,0)
+            // window.localStorage.clear()
+            // console.log('aqui entre en borrar todo', {mensaje, products})
+        }else {
+            return cartItems
+        }
+        updateState({ products: result });
+    }
+
     const storage = {
         state,
         effects: {
             addItemToCart,
             deleteItemToCart,
-            deleteAll
+            deleteAll,
+            deleteAllCart
         }
     }
 

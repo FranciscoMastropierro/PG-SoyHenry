@@ -27,11 +27,16 @@ module.exports = {
 
     deleteProduct : async (req, res) =>{
         const {id} = req.params;
+        console.log(id)
         try {
            
-            await Products.destroy({where :{id}})
-
-            res.status(200).send('Produtc deleted!')
+            await Products.update({disable: true},{              
+                where: {
+                    id:id
+                 }
+                })
+                      
+            res.status(200).send('Product deleted!')
 
         } catch (error) {
             console.log(error);

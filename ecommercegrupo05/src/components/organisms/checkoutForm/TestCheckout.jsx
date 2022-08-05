@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { loadStripe } from '@stripe/stripe-js';
+import { useCartContext } from "../../../context/CartItem";
+import { getMsgCart, postOrder } from '../../../redux/actions';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
@@ -13,16 +15,34 @@ const stripePromise = loadStripe("pk_test_51LPdB5H9O09Vk58eN5dLZfEZTY7pil4bPkqlW
 
 const CheckoutForm = () => {
 
+    const dispatch = useDispatch()
+
+    const superState = useCartContext();
+
+    const { deleteAllCart } = superState.effects;
+
     // const [disable, setDisable] = useState(true)
     const [loading, setLoading] = useState(false)
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 19 ~ CheckoutForm ~ totalProducts aqui", totalProducts)
+    const userLoged = useSelector((state) => state.userLoged)
+
+    const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
+        return {
+            id,
+            stock,
+            amount,
+            price
+        }
+    })
+    console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts", finalProducts)
 
     const stripe = useStripe()
     const elements = useElements()
     const navigate = useNavigate()
+
+    const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -38,17 +58,18 @@ const CheckoutForm = () => {
             const { id } = paymentMethod
 
             try {
-                const { data } = await axios.post('http://localhost:3001/stripe/api/checkout', {
+                const { data } = await axios.post('http://localhost:3001/api/stripe/api/checkout', {
                     id,
                     amount: totalPrice
                 })
-                console.log(data)
+                console.log(data.msg)
+
+                dispatch(getMsgCart(data.msg))
 
                 elements.getElement(CardElement).clear()
 
                 if (data.msg === 'Successful payment') {
-                    // dispatch(postOrder({ email: user.email, address:edit.address}))
-                    // dispatch(clearCart())
+                    dispatch(postOrder(userLoged.id, finalProducts))
                     swal({
                         title: "Compra exitosa",
                         input: "text",
@@ -59,7 +80,8 @@ const CheckoutForm = () => {
                             cancel: 'ok'
                         }
                     })
-                    setTimeout(() => navigate('/'), 5000)
+                    setTimeout(() => navigate('/'), 3000)
+                    window.localStorage.clear();
                 }
 
             } catch (error) {
@@ -68,6 +90,7 @@ const CheckoutForm = () => {
             setLoading(false)
         }
     }
+
 
     // useEffect(() => {
     //   if(!stripe) {
@@ -80,10 +103,10 @@ const CheckoutForm = () => {
     // pendiente, tengo que verificar que valor es el que toma en cuenta stripe para poder pegarme a esa propiedad
 
 
-
+    // onClick={handleItemToDeleteAll(totalProducts)}
 
     return (
-        <form onSubmit={handleSubmit} className='card card-body'>
+        <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
 
             <img
                 src='https://idahonews.com/resources/media/54376d60-a84a-48cf-bdac-03a3d32fbccb-full36x25_GettyImages1182622625.jpg?1595459846300'
@@ -97,7 +120,7 @@ const CheckoutForm = () => {
                 <CardElement className='form-control' />
             </div>
 
-            <button className='btn btn-success' >
+            <button className='btn btn-success'>
                 {
                     loading
                         ? <div className="spinner-border text-dark" role="status">
