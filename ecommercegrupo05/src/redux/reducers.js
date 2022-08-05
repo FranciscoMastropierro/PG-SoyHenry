@@ -12,7 +12,6 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    SET_PROFILE,
     CHANGE_PROFILE,
     TOKEN,
     UPDATE_PRODUCT,
@@ -40,7 +39,6 @@ const initialState = {
     filters: [],
     filterBrands: [],
     cate: [],
-    profile: [],
     token: [],
     totalPrice: 0,
     productsCart: [],
@@ -124,11 +122,6 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 allCategories: payload,
-            }
-        case SET_PROFILE:
-            return {
-                ...state,
-                profile: payload
             }
         case TOKEN:
             return {

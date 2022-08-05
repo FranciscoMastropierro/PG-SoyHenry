@@ -18,7 +18,6 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
-export const SET_PROFILE = 'SET_PROFILE'
 export const CHANGE_PROFILE = 'CHANGE_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
@@ -173,34 +172,12 @@ export function cleaner() {
     }
 }
 
-export function setProfile(u) {
-    return async function (dispatch) {
-
-        const { data } = await axios('http://localhost:3001/users/')
-        const found = data.find(user => user.email === u.email)
-        if(!found) {
-            u = {
-                firstname: u.given_name,
-                lastname: u.family_name || ' ',
-                username: u.nickname || ' ',
-                email: u.email,
-                profileImage: u.picture,
-                }
-
-            const posted = await postProfile(u)
-
-            return dispatch ({
-                type: SET_PROFILE,
-                payload: posted.user
-            })
-        } else {
-            return dispatch ({
-                type: SET_PROFILE,
-                payload: found
-            })
-        }
-    }
-}
+// export function setProfile(u) {
+//     return dispatch ({
+//         type: SET_PROFILE,
+//         payload: found
+//     })
+// }
 
 export function getTotalPrice(payload) {
     return {
@@ -224,10 +201,10 @@ export async function getProfile (id) {
 
 
 
-export async function postProfile (u) {
-        const { data } = await axios.post(`http://localhost:3001/users/`, u)
-        return data
-}
+// export async function postProfile (u) {
+//         const { data } = await axios.post(`http://localhost:3001/users/`, u)
+//         return data
+// }
 
 export function token(tok, user) { 
     return async function (dispatch) {
@@ -240,7 +217,6 @@ export function token(tok, user) {
                 }
             }
         )
-        
         return dispatch({ type: TOKEN, payload: data })
     }
 }

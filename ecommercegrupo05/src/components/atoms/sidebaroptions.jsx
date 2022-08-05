@@ -12,7 +12,7 @@ import click from '../../assets/favourites-click.png'
 import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
-import { setProfile, token } from '../../redux/actions.js'
+import { token } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
 
 export function SidebarOptions() {
@@ -26,33 +26,15 @@ export function SidebarOptions() {
     const photo = isAuthenticated? logoutt : loginn
 
     // useEffect(() => {
-    //     if(isAuthenticated && Array.isArray(profile)) {
-    //     dispatch(setProfile(user))
-    //     }
-    // },[isAuthenticated, profile])
-
-    // useEffect(() => {
     //     if(isAuthenticated ){
-    //         const getToken = async () => {
-    //            const token = await getAccessTokenSilently()
-    //         //    console.log("token ;)", token)
-    //        }
-    //        getToken()
-    //        dispatch(token(getToken()))
-    //     } 
+    //         // const tok =  getAccessTokenSilently()
+    //         getAccessTokenSilently().then(tok =>{
+    //             // console.log("usr ;)", user)
+    //             dispatch(token(tok, user))
+    //         })
+    //     }
     //     // console.log('no hay token :(')
     // }, [isAuthenticated])
-
-    useEffect(() => {
-        if(isAuthenticated ){
-            // const tok =  getAccessTokenSilently()
-            getAccessTokenSilently().then(tok =>{
-                // console.log("usr ;)", user)
-                dispatch(token(tok, user))
-            })
-        }
-        // console.log('no hay token :(')
-    }, [isAuthenticated])
 
     let loc = useLocation().pathname
 

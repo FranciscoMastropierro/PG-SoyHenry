@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfile, changeProfile } from '../../redux/actions'
+import { changeProfile, token } from '../../redux/actions'
 import { useAuth0 } from "@auth0/auth0-react";
 import pencil from '../../assets/edit.png'
 import style from '../../styles/userProfile.module.css'
@@ -10,10 +10,9 @@ export default function UserProfile () {
     
     const u = useAuth0().user
     const dispatch = useDispatch()
-    const profile = useSelector((state) => state.profile)
-    const [user, setUser] = useState(profile)
-    const [changingState, setChangingState] = useState(false)
-    const { isAuthenticated, isLoading } = useAuth0()
+    const userLoged = useSelector((state) => state.userLoged)
+    const [user, setUser] = useState(userLoged)
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0()
 
     function handleChange (e) {
         setUser({
@@ -24,38 +23,27 @@ export default function UserProfile () {
     
     function handleSubmit (e) {
         e.preventDefault()
-        dispatch(changeProfile(profile.id, user))
+        dispatch(changeProfile(userLoged.id, user))
         alert('tus cambios se han realizado con exito')
     }
 
-    if(isAuthenticated && Array.isArray(profile)) {
-    dispatch(setProfile(u))
-    }
-
-    // useEffect(() => {
-    //     if(isAuthenticated && Array.isArray(profile)) {
-    //     dispatch(setProfile(u))
-    // }
-    // },[])
-
-    // useEffect(() => {
-    //     dispatch(setProfile(u))
-    // })
-
-    // (
-    //     dispatch()
-    //     if(Object.keys(profile).length > 0){
-    //     setUser(profile)
-        
-    //     }
-    //     ,[profile])
+    useEffect(() => {
+        if(isAuthenticated ){
+            // const tok =  getAccessTokenSilently()
+            getAccessTokenSilently().then(tok =>{
+                // console.log("usr ;)", user)
+                dispatch(token(tok, u))
+            })
+        }
+        // console.log('no hay token :(')
+    }, [isAuthenticated])
 
     console.log(user)
 
     return (
         <div className={style.ProfileContainer}>
             <h1>Tu Perfil</h1>
-            <img src={profile.profileImage} alt='profile-photo' className={style.profilePhoto} />
+            <img src={userLoged.profileImage} alt='profile-photo' className={style.profilePhoto} />
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={style.infoContainer}>
                 <div className={style.info}>
