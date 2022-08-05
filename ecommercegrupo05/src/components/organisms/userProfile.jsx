@@ -23,25 +23,15 @@ export default function UserProfile () {
     
     function handleSubmit (e) {
         e.preventDefault()
-        // dispatch(changeProfile(userLoged.id, user))
+        dispatch(changeProfile(userLoged.id, user))
         alert('tus cambios se han realizado con exito')
     }
 
     useEffect(() => {
-        if(!isLoading && isAuthenticated){
-            // const tok =  getAccessTokenSilently()
-            getAccessTokenSilently().then(tok =>{
-                // console.log("usr ;)", user)
-                dispatch(token(tok, u))
-            })
-            console.log(userLoged)
-            if(userLoged) {
-                Object.keys(userLoged).length > 0 && setUser(userLoged)
-            }
+        if(userLoged) {
+            Object.keys(userLoged).length > 0 && setUser(userLoged)
         }
-        
-        // console.log('no hay token :(')
-    }, [isLoading, isAuthenticated, Object.keys(userLoged).length])
+    }, [Object.keys(userLoged).length])
 
     return (
         <div className={style.ProfileContainer}>
@@ -49,30 +39,74 @@ export default function UserProfile () {
             <img src={userLoged.profileImage} alt='profile-photo' className={style.profilePhoto} />
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={style.infoContainer}>
-                <div className={style.info}>
-
-                    <label>Nombre *</label>
+                    <label>Nombre</label>
                     <input key='firstname' placeholder='Nombre' value={user?.firstname || ''} type='text' name='firstname' onChange={(e) => handleChange(e)}/>
 
-                    <label>Apellido *</label>
+                    <label>Apellido</label>
                     <input key='lastname' placeholder='Apellido' value={user?.lastname || ''} type='text' name='lastname' onChange={(e) => handleChange(e)}/>
 
-                    <label>Nombre de usuario *</label>
+                    <label>Nombre de usuario</label>
                     <input key='username' placeholder='Nombre de usuario' value={user?.username || ''} type='text' name='username' onChange={(e) => handleChange(e)}/>
 
                     <label>Email</label>
                     <input key='email' placeholder='Email' value={user?.email || ''} type='text' name='email' onChange={(e) => handleChange(e)} disabled />
                     
-                    <label>Direccion *</label>
+                    <label>Direccion</label>
                     <input key='address' placeholder='Direccion' value={user?.address || ''} type='text' name='address' onChange={(e) => handleChange(e)}/>
                     
-                    <label>CP *</label>
+                    <label>CP</label>
                     <input key='postalCode' placeholder='Codigo postal' value={user?.postalCode || ''} type='number' name='postalCode' onChange={(e) => handleChange(e)}/>
-                
-                </div>
                 </div>
             <button type='submit'>Aceptar cambios</button>
             </form>
         </div>
     )
 }
+
+
+// {user && inputs.map(input => {return (
+//     <div className={style.labelInput}>
+//         <label>{input.placeholder}</label>
+//         <input key={input.name} placeholder={input.placeholder} value={input.value || ''} type={input.type} disabled={input.disabled} onChange={(e) => handleChange(e)}/>
+//     </div>
+// )})}
+
+    // const inputs = [
+    //     {
+    //         name: 'firstname',
+    //         placeholder:'Nombre *',
+    //         type: 'text',
+    //         disabled: false,
+    //     },
+    //     {
+    //         name: 'lastname',
+    //         placeholder:'Apellido *',
+    //         type:'text',
+    //         disabled: false,
+    //     },
+    //     {
+    //         name:'username',
+    //         placeholder:'Nombre de usuario',
+    //         type: 'text',
+    //         disabled: false,
+    //     },
+    //     {
+    //         name: 'email',
+    //         placeholder:'Email',
+    //         type: 'text',
+    //         disabled: true,
+    //     },
+    //     {
+    //         name: 'address',
+    //         placeholder: 'Direccion',
+    //         type: 'text',
+    //         disabled: false,
+    //     },
+    //     {
+    //         name: 'postalCode',
+    //         placeholder: 'Codigo postal',
+    //         value: user.postalCode,
+    //         type: 'text',
+    //         disabled: false,
+    //     },
+    // ]

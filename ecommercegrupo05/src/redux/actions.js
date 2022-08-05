@@ -199,13 +199,6 @@ export async function getProfile (id) {
 }
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
-
-
-// export async function postProfile (u) {
-//         const { data } = await axios.post(`http://localhost:3001/users/`, u)
-//         return data
-// }
-
 export function token(tok, user) { 
     return async function (dispatch) {
         // console.log("Flag Actions", tok)
@@ -254,16 +247,15 @@ export function createProduct(payload) {
 
 //////////////////////////////////////   PUTS   /////////////////////////////////////////
 
-// export function changeProfile(id, user) {
-//     return async function (dispatch) {
-//         const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
-//         const getuFromBack = await getProfile(id)
-//         return dispatch({
-//             type: CHANGE_PROFILE,
-//             payload:  getuFromBack
-//         })
-//     }
-// }
+export function changeProfile(id, user) {
+    return async function (dispatch) {
+        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user);
+        return dispatch({
+            type: CHANGE_PROFILE,
+            payload: user
+        })
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
