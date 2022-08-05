@@ -37,6 +37,25 @@ module.exports = {
     }
 
   },
+  getAllByidUser: async (req, res) => {
+    const { UserId } = req.body;
+    console.log(UserId)
+    try {
+      const order = await Order.findAll({
+        where:{UserId},
+        include: [{
+          model: Users
+        },{
+          model: Products
+        }
+      ],
+      });
+      res.send(order);
+    } catch (error) {
+      console.log(error);
+    }
+
+  },
 
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
