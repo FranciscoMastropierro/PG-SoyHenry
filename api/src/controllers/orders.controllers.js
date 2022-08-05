@@ -8,9 +8,12 @@ module.exports = {
     try {
       const order = await Order.findOne({
         where: { id },
-        include: {
-          model: Products,
-        },
+        include: [{
+          model: Users
+        },{
+          model: Products
+        }
+      ],
       });
 
       res.send(order);
@@ -18,10 +21,26 @@ module.exports = {
       console.log(error);
     }
   },
+  getAllOrder: async (req, res) => {
+    try {
+      const order = await Order.findAll({
+        include: [{
+          model: Users
+        },{
+          model: Products
+        }
+      ],
+      });
+      res.send(order);
+    } catch (error) {
+      console.log(error);
+    }
+
+  },
 
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
-    const { UserId, products } = req.body;
+    const { UserId, products,shipmentAddress,postalCode } = req.body;
     const arr=[]
     try {
       if (!UserId || !Object.keys(products))
@@ -32,8 +51,8 @@ module.exports = {
         amount: products
           .map((e) => e.amount * e.price)
           .reduce((prev, next) => prev + next),
-        shipmentAddress: user[0].dataValues.address,
-        postalCode:  user[0].dataValues.postalCode,
+        shipmentAddress: shipmentAddress,
+        postalCode:  postalCode,
         state:"completed",
         paid:true,
          };

@@ -1,4 +1,6 @@
 import {
+    UPDATE_STOCK,
+    POST_FAVORITE,
     GET_PRODUCTS,
     GET_PRODUCT_BY_NAME,
     GET_DETAIL,
@@ -12,7 +14,8 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    SET_PROFILE,
+    //SET_PROFILE,
+    CHANGE_PROFILE,
     TOKEN,
     UPDATE_PRODUCT,
     TOTAL_PRICE,
@@ -21,6 +24,9 @@ import {
     GET_COMMENTS_ID,
     CREATE_COMMENT,
     DELETE_COMMENT,
+    DELETE_PRODUCT,
+    UPDATE_ROL,
+    GET_MSG_CART
 } from './actions'
 
 const initialState = {
@@ -41,13 +47,13 @@ const initialState = {
     filters: [],
     filterBrands: [],
     cate: [],
-    profile: [],
     token: [],
     totalPrice: 0,
     productsCart: [],
     userLoged: {},
     commentsUserXProduct: [],
     commentsCreateXProduct: [],
+    msgCart: ''
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -67,11 +73,27 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
+        case UPDATE_STOCK:
+            return {
+                ...state,
+            }
+        case POST_FAVORITE:
+            return {
+                ...state,
+            }
         case BAN_USER:
             return {
                 ...state,
             }
+        case UPDATE_ROL:
+            return {
+                ...state,
+            }
         case UPGRADE_USER:
+            return {
+                ...state,
+            }
+        case DELETE_PRODUCT:
             return {
                 ...state,
             }
@@ -127,11 +149,11 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 allCategories: payload,
             }
-        case SET_PROFILE:
-            return {
-                ...state,
-                profile: payload
-            }
+        // case SET_PROFILE:
+        //     return {
+        //         ...state,
+        //         profile: payload
+        //     }
         case TOKEN:
             return {
                 ...state,
@@ -161,6 +183,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 // commentsCreateXProduct: payload
+            }
+        case GET_MSG_CART:
+            return {
+                ...state,
+                msgCart: payload
             }
         default: return state;
     }
