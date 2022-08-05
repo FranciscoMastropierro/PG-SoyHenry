@@ -5,21 +5,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { crateComment, deleteComment, editComment, getComments } from '../../redux/actions';
 import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from '@chakra-ui/react'
+import trash from "../../assets/trash2.png";
+// import {
+//   Drawer,
+//   DrawerBody,
+//   DrawerFooter,
+//   DrawerHeader,
+//   DrawerOverlay,
+//   DrawerContent,
+//   DrawerCloseButton,
+// } from '@chakra-ui/react'
 
 function Comments() {
   const dispatch = useDispatch();
   let commentProduct = useSelector(state => state.commentsUserXProduct)
   const idProductCurrent = useParams().id;
-  const { id } = commentProduct
 
   //  console.log('idProduct', id)
 
@@ -27,15 +27,15 @@ function Comments() {
   const [input, setInput] = useState({
     text: '',
     productId: idProductCurrent,
-    userId: 'bf201d7c-cc20-440e-ba3c-e641a4f6334d'
+    userId: 'b8d60582-edbb-4eb8-a9be-72b5f44c6560'
   })
 
-  const [modificar, setModificar] = useState(true)
+  // const [modificar, setModificar] = useState(true)
 
-  const [edit, setEdit] = useState({
-    id: '',
-    newComment: ''
-  })
+  // const [edit, setEdit] = useState({
+  //   id: '',
+  //   newComment: ''
+  // })
   // console.log("🚀 ~ file: Comments.jsx ~ line 37 ~ Comments ~ edit", edit)
 
   useEffect(() => {
@@ -44,8 +44,8 @@ function Comments() {
 
   // console.log('estado', commentProduct)
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  // const { isOpen, onOpen, onClose } = useDisclosure()
+  // const btnRef = React.useRef()
 
 
   function handleText(e) {
@@ -66,9 +66,9 @@ function Comments() {
       confirmButtonText: "Guardar",
       cancelButtonText: "Cancelar",
       buttons: {
-          cancel: 'ok'
+        cancel: 'ok'
       }
-  })
+    })
     setInput({
       ...input,
       text: ''
@@ -76,44 +76,42 @@ function Comments() {
     dispatch(getComments(idProductCurrent))
   }
 
-  function handleEditComment(e) {
-    e.preventDefault(e)
-    // const {id, text} = e.target.value
-    setEdit({
-      ...edit,
-      newComment: e.target.value
-    })
-    
-    console.log('aqui estoy', edit)
-  }
+  // function handleEditComment(e) {
+  //   e.preventDefault(e)
+  //   // const {id, text} = e.target.value
+  //   setEdit({
+  //     ...edit,
+  //     newComment: e.target.value
+  //   })
 
-  function handleBtnEditId(e){
-    e.preventDefault(e)
-    setEdit({
-      ...edit,
-      id: e.target.value
-    })
-    setModificar(false)
-  }
+  //   console.log('aqui estoy', edit)
+  // }
 
-  function handleBtnEdit(e) {
-    e.preventDefault(e);
-    setEdit({
-      ...edit,
-      id: e.target.value
-    })
-    
-    console.log('aqui estoy dos', edit)
-    dispatch(editComment(edit))
-    alert('comentario modificado.')
-    setEdit({
-      id: '',
-      newComment: ''
-    })
-    setModificar(true)
-    onClose()
-  }
-  
+  // function handleBtnEditId(e){
+  //   e.preventDefault(e)
+  //   setEdit({
+  //     ...edit,
+  //     id: e.target.value
+  //   })
+  //   setModificar(false)
+  // }
+
+  // function handleBtnEdit(e) {
+  //   e.preventDefault(e);
+  //   setEdit({
+  //     ...edit,
+  //     id: e.target.value
+  //   })
+  //   dispatch(editComment(edit))
+  //   alert('comentario modificado.')
+  //   setEdit({
+  //     id: '',
+  //     newComment: ''
+  //   })
+  //   setModificar(true)
+  //   onClose()
+  // }
+
   function handleBtnDelete(e) {
     e.preventDefault(e);
     const idDel = e.target.value
@@ -130,14 +128,14 @@ function Comments() {
     })
     dispatch(getComments(idProductCurrent))
   }
-  
+
   return (
     <div className={style.div}>
-      <div>
+      <div className={style.textarea} >
         <label>Dejar comentario del producto
           <Textarea placeholder='Escribe tu comentario aqui...' value={input.text} onChange={e => handleText(e)} />
         </label>
-        <button onClick={(e) => handleSubmit(e)}>Enviar</button>
+        <button className={style.btnSend} onClick={(e) => handleSubmit(e)}>Enviar</button>
       </div>
       <div>
         {Array.isArray(commentProduct) ? (commentProduct.length === 1
@@ -147,15 +145,14 @@ function Comments() {
         }
         {
           Array.isArray(commentProduct) ?
-          commentProduct.map(({id, userInfo, text}) => {
-            // console.log("🚀 ~ file: Comments.jsx ~ line 150 ~ Comments ~ commentProduct", commentProduct)
-            return (
-                <div key={id}>
+            commentProduct.map(({ id, userInfo, text }) => {              
+              return (
+                <div key={id} className={style.allComments}>
                   <div>
                     <h3>{userInfo['firstname']} {userInfo['lastname']}</h3>
                     <p>{text}</p>
                   </div>
-                    <button onClick={onOpen} ref={btnRef}>
+                  {/* <button onClick={onOpen} ref={btnRef}>
                       Editar
                     </button>
                   <Drawer
@@ -193,13 +190,13 @@ function Comments() {
                       </DrawerFooter>
                       
                     </DrawerContent>
-                  </Drawer>
-                  <button value={id} onClick={e => handleBtnDelete(e)}>borrar</button>
+                  </Drawer> */}
+                  <button className={style.btnTrash1} onClick={e => handleBtnDelete(e)}><img src={trash} className={style.trash1} /></button>
                 </div>
               )
             })
             : <p>'Sin Comentarios'</p>
-          }
+        }
       </div>
 
     </div>
