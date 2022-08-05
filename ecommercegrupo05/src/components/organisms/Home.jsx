@@ -10,16 +10,6 @@ import Footer from '../molecules/footer'
 // import { useDispatch, useSelector } from 'react-redux';
 
 export function Home () {
-    // const dispatch = useDispatch()
-    // const userLoged = useSelector((state) => state.userLoged)
-    // let { user, isAuthenticated } = useAuth0()
-
-    // useEffect(() => {
-    //     if(isAuthenticated && Array.isArray(profile)) {
-    //     dispatch(setProfile(user))
-    //     }
-    // }, [isAuthenticated, profile])
-
     return (
         <div>
             <SliderNews />
