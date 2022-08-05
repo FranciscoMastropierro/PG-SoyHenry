@@ -1,5 +1,7 @@
 .searchbarGeneralContainer {
     position: absolute;
+    top: 2.5vw;
+    left: 150px;
     max-height: 200px;
     width: 289px;
     background-color: #181A1B;

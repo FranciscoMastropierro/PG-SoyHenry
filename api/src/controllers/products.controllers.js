@@ -5,13 +5,14 @@ const { Products, Categories_Products, Categories } = conn.models;
 const { Op } = require('sequelize');
 const productList = require('../asset/productList');
 
-
+const reducer = (previousValue, currentValue) => previousValue.concat(currentValue);
 module.exports = {
   getProducts: async (req, res) => {
     const { name } = req.query;
 
     if (!name) {
       const productsBd = await Products.findAll({
+        where:{ disable:false},
         include: { model: Categories },
       });
     
@@ -33,12 +34,35 @@ module.exports = {
       else return res.status(404).send('Product not found');
     }
   },
-  getPrice: async(req,res)=>{
+  getFilter: async(req,res)=>{
+    let arr=[]
+    if(!req.body){
+      return res.status(404).send('Products not found');
+    }
+    const {praice,brand,order,categorie}=req.body
+    let min = 0;
+    let max = 0;
+    if(!!praice){
+      if(!!praice.min){
+        min=praice.min
+      }
+      if(!!praice.max){
+        max=praice.max
+      }
+    }
+
     const productsBd = await Products.findAll({
       include: { model: Categories },
     });
-    if(!!req.query.order && req.query.order=="Asc"){
-    productsBd.sort(function(a, b) {
+    let auxproductsBd=productsBd
+    brand?.length>0 && brand.map(e=>{
+      if(e){
+      arr.push(auxproductsBd.filter(elemt => elemt.brand== e ))
+      } 
+    })
+     arr?.length>0 && (auxproductsBd= arr.reduce(reducer));
+    if(!!order && order=="minor"){
+      auxproductsBd.sort(function(a, b) {
       if (Number(a.price) > Number(b.price)) {
         return 1;
       }
@@ -47,24 +71,9 @@ module.exports = {
       }
       return 0;
     });
-      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else if(!!req.query.min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        return res.send(result);
-      }
-      else if(!!req.query.max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else 
-        return res.send(productsBd);
-    }
-    if(!!req.query.order && req.query.order=="Desc"){
-      productsBd.sort(function(a, b) {
+     }
+    else if(!!order && order=="higher"){
+      auxproductsBd.sort(function(a, b) {
         if (Number(a.price) < Number(b.price)) {
           return 1;
         }
@@ -73,38 +82,45 @@ module.exports = {
         }
         return 0;
       });
-      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else if(!!req.query.min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        return res.send(result);
-      }
-      else if(!!req.query.max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else 
-        return res.send(productsBd);
     }
-    else if(!!req.query.min || !!req.query.max ){
-      if(!!req.query.min &&!!req.query.max && Number(req.query.min)<Number(req.query.max)){
-        const result1 = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        const result = result1.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
-      else if(!!req.query.min){
-        const result = productsBd.filter(elemt => Number(elemt.price) > Number(req.query.min));
-        return res.send(result);
-      }
-      else if(!!req.query.max){
-        const result = productsBd.filter(elemt => Number(elemt.price) < Number(req.query.max));
-        return res.send(result);
-      }
+    else if(!!order && order=="Asc"){
+      auxproductsBd.sort(function(a,b){
+        if(a.name > b.name){
+          return 1;
+        };
+        if (a.name < b.name){
+          return -1
+        };
+        return 0
+      })
     }
-    else   return res.status(404).send("Ingrese una Query permitida");
+    else if (!!order && order=="Desc") {
+      auxproductsBd.sort(function (a,b){
+        if(a.name> b.name){
+          return -1;
+        };
+        if(a.name < b.name){
+          return 1;
+        };
+        return 0
+      })
+    }
+      if(min || max ){
+        if(!!min){
+          auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) > Number(min));
+        }
+        if(!!max){
+          auxproductsBd = auxproductsBd.filter(elemt => Number(elemt.price) < Number(max));
+        }
+      }
+    
+    if(!!categorie){
+      auxproductsBd = auxproductsBd.filter(elemt => elemt.Categories?.map(elemt => elemt.name.toLowerCase()) == categorie.toLowerCase() )
+    }
+    if(!auxproductsBd.length){
+      return res.status(404).send('Product not found');
+    }
+    else return res.send(auxproductsBd);
   },
 
   filterByCategories : async ( req, res) => {
@@ -155,25 +171,30 @@ module.exports = {
   },
 
   postProduct: async (req, res) => {
-    const products = req.body;
-    console.log(req.body)
-
+    const {categories, ...products} = req.body;
     //name image price stock brand rating description 
     try {
-      if (!products.name || !products.price || !products.brand)
+      if (!products.name || !products.price || !products.brand||!products.image ||!products.stock||!products.description ||!categories){
+        
         return res
-          .status(400)
-          .send({ error: "Not all fields are required, but..." });
+        .status(400)
+        .send({ error: "Not all fields are required, but..." });
+      }
 
-    const product = await Products.create(products);
+    const product = await Products.create({...products});
+       categories.forEach(async (e) => {
+        const newCat = await Categories.findAll({ 
+          where:{
+            name: e
+          }
 
-      // console.log(videogame)
+        })
+        await product.addCategories(newCat, { through: Categories_Products })
+    });
+   
+    
 
-      products.categories.forEach(
-        async (e) => await product.addCategories(e, { through: Categories_Products })
-      );
-
-      res.send({ msj: `Product added`, data: product.dataValues });
+      res.send({ msj: `Product added`, data: product });
     } catch (error) {
       console.error(error);
     }
@@ -181,19 +202,25 @@ module.exports = {
 
   preLoadProducts : async () =>{
     const upToDb = productList.map( async(el) => {
+      try {
+
       const categories = await Categories.findAll();
-      const { id } = categories.find(elemt => elemt.name == el.categories.toString())
+      const { id } = categories?.find(elemt => elemt.name == el.categories.toString())
       const product = await Products.create({
+        
               name: el.name,
               image: el.image,
               price: el.price,
-              stock: el.quantity,
+              stock: 300,
               brand: el.brand,
               rating: el.calification,
               description: el.description.trim(),
       });
-      //console.log(Products.__proto__)
+      // console.log(conn.models)
       await product.addCategories(id, { through: Categories_Products })
+    } catch (error) {
+        console.log(error)
+    }
     })
   },
 
@@ -231,6 +258,30 @@ module.exports = {
     const brandResult = Array.from(brandSet)
 
     res.send(brandResult)
-  }
+  },
+  updateProduct: async (req, res) => {
+    const {id, update } =req.body;
+    
+    const { name, price, brand, stock, description, image }=update
+    if(!name || !price || !brand || !stock || !description || !image){
+      
+      return res.status(404).send("fill in all the data")
+    }
+    await Products.update(
+      { name, price, brand, stock, description, image },
+      { where: { id } }
+    );
+    return res.status(200).send("the product was changed");
+  },
+  updateStock: async (req, res) => {
+    const {id, stock } =req.body;
+       
+    let newStock = stock.stock 
 
+    await Products.update(
+      { stock: newStock},
+      { where: { id } }
+    );
+    return res.status(200).send("stock was changed");
+  }
 };

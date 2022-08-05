@@ -1,0 +1,31 @@
+.container{
+    margin: 100px 120px;
+    background-color: gray;
+    padding: 2rem;
+}
+.CardTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 200px 30px 0px;
+    font-family: 'Vazirmatn', sans-serif;
+    border-bottom: 1px solid rgb(7, 7, 7);
+}
+.Card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Vazirmatn', sans-serif;
+    border-bottom: 1px solid rgb(184, 184, 184);
+    margin: 10px 0 10px 0 ;
+}
+
+.cardbtn{
+    color: black;
+    background-color: green;
+    width: 100px;
+    height: 45px;
+    margin: 5px;
+    font-size: larger;
+
+}

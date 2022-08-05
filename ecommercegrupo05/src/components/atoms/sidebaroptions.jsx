@@ -1,30 +1,96 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from '../../styles/sidebaroptions.module.css'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import keyboard from '../../assets/keyboard.png';
+import favourites from '../../assets/favourites.png';
+import cart from '../../assets/cart.png';
+import userPic from '../../assets/user.png';
+import home from '../../assets/home.png';
+import fav from '../../assets/favourites.png';
+import click from '../../assets/favourites-click.png'
+import logoutt from '../../assets/logout.png';
+import loginn from '../../assets/login.png';
+import { useAuth0 } from "@auth0/auth0-react";
+import { token } from '../../redux/actions.js'
+import { useCartContext } from '../../context/CartItem';
 
-export default function SidebarOptions () {
+export function SidebarOptions() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
+    const handleSubmit = () => user ? logout() : loginWithRedirect()
+    const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
+    const photo = isAuthenticated? logoutt : loginn
+
     let loc = useLocation().pathname
 
+    const superState = useCartContext()
+    const { products } = superState.state
+    const cachearNumber = products.reduce((accum, current) => accum = accum + current?.amount, 0)
+
+    const links = [
+        {
+            to: '/',
+            name: 'inicio',
+            src: home,
+            styleClass: loc === '/' ? style.onPath : ''
+        },
+        {
+            to: '/allProducts',
+            name: 'Productos',
+            src: keyboard,
+            styleClass: loc === '/allProducts' ? style.onPath : ''
+        },
+        {
+            to: '/favorites',
+            name: 'Favoritos',
+            src: loc === '/favorites' ? click : fav,
+            styleClass: loc === '/favorites' ? favourites : click
+        },
+        {
+            to: '/cart',
+            name: 'Carrito',
+            src: cart,
+            styleClass: style.cartItems,
+            cartNumber: cachearNumber
+        }
+    ]
     return (
         <div className={style.options}>
-            <Link to='/'>
-                <span className={loc === '/'? style.onPath : null}>Inicio</span>
-            </Link>
-            <Link to='/allProducts'>
-                <span className={loc === '/allProducts'? style.onPath : null}>Productos</span>
-            </Link>
+            {isAuthenticated && (
+                <span>Hola {user.name}!</span>
+            )}
+            {links.map(({ to, name, src, styleClass, cartNumber }) => (
+                <Link to={to} className={style.link} key={name}>
+                    <div className={style.linkWrapper}>
+                        <img src={src} alt={name} />
+                        <span className={styleClass}>
+                            {name === 'Carrito' ? cartNumber : name}
+                        </span>
+                    </div>
+                    {name === 'Carrito' && (
+                        <span className={loc === '/cart' ? style.onPath : ''}>Carrito</span>
+                    )}
+                </Link>
+            ))}
 
-            <Link to="/favorites">
-                <span className={loc === '/favorites'? style.onPath : null}>Favoritos</span>
-            </Link>
+            <button onClick={handleSubmit} className={style.link}>
+                <img src={photo} alt='login'/>
+                <span>{log}</span>
+            </button>
 
-            <Link to='/cart'>
-                <span className={loc === '/cart'? style.onPath : null}>Carrito 🛒</span>
+            {isAuthenticated && (<Link to='/userprofile' className={style.link}>
+                <img src={userPic} alt='user' />
+                <span>Mi Perfil</span>
             </Link>
-
-            <Link to='/login'>
-                <span className={loc === '/login'? style.onPath : null}>Iniciar sesión</span>
-            </Link>
+            )}
         </div>
+
     )
 }
+
+
+
+
+

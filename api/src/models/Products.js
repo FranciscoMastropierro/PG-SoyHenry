@@ -14,6 +14,7 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
+            // unique: true
         },
         image: {
             type: DataTypes.STRING,
@@ -24,7 +25,7 @@ module.exports = (sequelize) => {
         },
         stock: {
             type: DataTypes.INTEGER,
-            defaultValue : 0,
+            defaultValue : 300,
         },
         brand: {
             type: DataTypes.STRING,

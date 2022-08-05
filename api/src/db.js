@@ -30,15 +30,16 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Products,Categories,Commentary,Users,Order } = sequelize.models;
+const { Products,Categories,Commentary,Users,Order, Products_Orders } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
 
 // Character - n*n-> Role
-Products.belongsToMany(Categories, { through: "Categories_Products" });
-Categories.belongsToMany(Products, { through: "Categories_Products" });
+const Categories_Products = sequelize.define('Categories_Products', {}, { timestamps: false });
+Products.belongsToMany(Categories, { through: Categories_Products });
+Categories.belongsToMany(Products, { through: Categories_Products });
 
 Commentary.belongsTo(Products);
 Products.hasMany(Commentary);
@@ -49,11 +50,12 @@ Users.hasMany(Commentary);
 Order.belongsTo(Users);
 Users.hasMany(Order);
 
-Products.belongsToMany(Order, { through: "Products_orders" });
-Order.belongsToMany(Products, { through: "Products_orders" });
+Products.belongsToMany(Order, { through: Products_Orders });
+Order.belongsToMany(Products, { through: Products_Orders });
 
-Products.belongsToMany(Users, { through: "Favorites" });
-Users.belongsToMany(Products, { through: "Favorites" });
+const Favorites = sequelize.define('Favorites', {}, { timestamps: false });
+Products.belongsToMany(Users, { through: Favorites });
+Users.belongsToMany(Products, { through: Favorites });
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

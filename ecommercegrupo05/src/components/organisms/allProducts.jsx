@@ -4,13 +4,13 @@ import { getProducts, paginacion } from "../../redux/actions";
 import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
-import FilterPrice from "../atoms/filterPrice";
-import FilterBrand from "../atoms/filterBrand";
-import FilterByOrder from "../atoms/filterByOrder";
-import FilterCategories from "../atoms/filterCategories";
 import { useLocation } from "react-router-dom";
+import Filters from "../atoms/Filters";
+import { useCartContext } from '../../context/CartItem';
 
 export default function AllProducts() {
+
+  const superState = useCartContext()
   const dispatch = useDispatch()
   const pages = useSelector((state) => state.pages)
   const products = useSelector((state) => state.data)
@@ -28,14 +28,13 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className={style.filters}>
-        <div className={style.div}><FilterPrice /></div>
-        <div className={style.div}><FilterBrand /></div>
-        <div className={style.div}><FilterCategories /></div>
-        <div className={style.div}><FilterByOrder /></div>
-      </div>
       <Pagination />
-      <CardProducts />
+      <div className={style.container}>
+        <div className={style.filters}>
+          <div className={style.div}><Filters /></div>
+          <div className={style.cardContainer}><CardProducts /></div>
+        </div>
+      </div>
     </>
   );
 }
