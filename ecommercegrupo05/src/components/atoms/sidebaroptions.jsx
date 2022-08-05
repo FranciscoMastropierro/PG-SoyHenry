@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import style from '../../styles/sidebaroptions.module.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
 import cart from '../../assets/cart.png';
@@ -12,28 +12,29 @@ import click from '../../assets/favourites-click.png'
 import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
-import { setProf, token } from '../../redux/actions.js'
+import { token } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
 
 export function SidebarOptions() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const auth = useAuth0()
+    const profile = useSelector((state) => state.profile)
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = auth;
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
 
-    useEffect(() => {
-        if(isAuthenticated ){
-            // const tok =  getAccessTokenSilently()
-            getAccessTokenSilently().then(tok =>{
-                // console.log("usr ;)", user)
-                dispatch(token(tok, user))
-            })
-        } 
-        // console.log('no hay token :(')
-    }, [isAuthenticated])
+    // useEffect(() => {
+    //     if(isAuthenticated ){
+    //         // const tok =  getAccessTokenSilently()
+    //         getAccessTokenSilently().then(tok =>{
+    //             // console.log("usr ;)", user)
+    //             dispatch(token(tok, user))
+    //         })
+    //     }
+    //     // console.log('no hay token :(')
+    // }, [isAuthenticated])
 
     let loc = useLocation().pathname
 
@@ -88,7 +89,7 @@ export function SidebarOptions() {
             ))}
 
             <button onClick={handleSubmit} className={style.link}>
-                <img src={photo} />
+                <img src={photo} alt='login'/>
                 <span>{log}</span>
             </button>
 
