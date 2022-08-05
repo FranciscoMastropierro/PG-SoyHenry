@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const {createAndAddComment,getCommentsbyProduct,editComment,deleteCommentById} = require('../controllers/product.reviews')
+const {createAndAddComment,getCommentsbyProduct,editComment,deleteCommentById,GetAllReviews} = require('../controllers/product.reviews')
 
 router.post("/", createAndAddComment);
 
 router.get("/", getCommentsbyProduct);
+
+router.get("/all", GetAllReviews);
 
 router.put("/", editComment)
 

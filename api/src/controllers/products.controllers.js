@@ -12,6 +12,7 @@ module.exports = {
 
     if (!name) {
       const productsBd = await Products.findAll({
+        where:{ disable:false},
         include: { model: Categories },
       });
     
@@ -271,5 +272,16 @@ module.exports = {
       { where: { id } }
     );
     return res.status(200).send("the product was changed");
+  },
+  updateStock: async (req, res) => {
+    const {id, stock } =req.body;
+       
+    let newStock = stock.stock 
+
+    await Products.update(
+      { stock: newStock},
+      { where: { id } }
+    );
+    return res.status(200).send("stock was changed");
   }
 };

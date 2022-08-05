@@ -3,6 +3,7 @@ const {  Products,Users,Favorites } = require("../db.js");
 module.exports = {
   favoritePost : async (req, res) => {
     const {idProducts,idUser}=req.body
+    console.log(idUser)
     Users.findByPk(idUser).then((user) => {
       Products.findByPk(idProducts).then  (async(product) => {
         user.addProducts(product).then(respuesta=>{

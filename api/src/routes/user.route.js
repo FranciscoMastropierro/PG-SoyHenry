@@ -7,7 +7,7 @@ router.get('/', getUsers)
 
 router.get('/:id', getUserById)
 
-router.put('/role/:id', changeRole)
+router.put('/role', changeRole)
 
 router.put('/edit/:id', updateUser)
 
