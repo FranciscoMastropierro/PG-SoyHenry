@@ -70,7 +70,7 @@ export function getDetail(id) {
 }
 export function getUsers() {
     return async function (dispatch) {
-        const json = await axios(`http://localhost:3001/api/user/`)
+        const json = await axios(`http://localhost:3001/api/users/`)
         const data = json.data
         return dispatch({
             type: GET_ALL_USERS,
