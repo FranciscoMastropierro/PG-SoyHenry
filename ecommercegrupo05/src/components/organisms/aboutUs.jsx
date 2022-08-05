@@ -12,6 +12,11 @@ export default function AboutUs() {
                 </div>
                 <div className={style.content}>
                     <h3 className={style.h3}>Rogelio Ramirez<br/><span className={style.span}>FrontEnd Developer</span></h3>
+                    <ul className={style.sci}>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
