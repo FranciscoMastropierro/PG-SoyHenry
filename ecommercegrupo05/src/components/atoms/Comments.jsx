@@ -23,64 +23,17 @@ function Comments() {
 
   //  console.log('idProduct', id)
 
-  // -------- estado para enviar comentarios
-  const [input, setInput] = useState({
-    text: '',
-    rating: 3,
-    productId: idProductCurrent,
-    userId: '9c286e46-ef82-4db9-a5a6-1feef70792e4'
-  })
-
-  // const [modificar, setModificar] = useState(true)
-
-  // const [edit, setEdit] = useState({
-  //   id: '',
-  //   newComment: ''
-  // })
-  // console.log("🚀 ~ file: Comments.jsx ~ line 37 ~ Comments ~ edit", edit)
-
   useEffect(() => {
     dispatch(getComments(idProductCurrent))
   }, [idProductCurrent])
 
-  // console.log('estado', commentProduct)
-
-  // const { isOpen, onOpen, onClose } = useDisclosure()
-  // const btnRef = React.useRef()
-
-
-  function handleText(e) {
-    e.preventDefault(e);
-    setInput({
-      ...input,
-      text: e.target.value
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault(e);
-    dispatch(crateComment(input));
-    dispatch(getComments(idProductCurrent))
-    setInput({
-      ...input,
-      text: ''
-    })
-    swal({
-      title: "Gracias por su comentario.",
-      input: "text",
-      showCancelButton: true,
-      confirmButtonText: "Guardar",
-      cancelButtonText: "Cancelar",
-      buttons: {
-        cancel: 'ok'
-      }
-    })
-  }
 
   function handleBtnDelete(e) {
     e.preventDefault(e);
     const idDel = e.target.value
+    // console.log('id delete',idDel)
     dispatch(deleteComment(idDel));
+    dispatch(getComments(idProductCurrent))
     swal({
       title: "Comentario eliminado.",
       input: "text",
@@ -91,17 +44,12 @@ function Comments() {
         cancel: 'ok'
       }
     })
-    dispatch(getComments(idProductCurrent))
   }
+
+  // console.log('estado',commentProduct)
 
   return (
     <div className={style.div}>
-      <div className={style.textarea} >
-        <label>Dejar comentario del producto
-          <Textarea placeholder='Escribe tu comentario aqui...' value={input.text} onChange={e => handleText(e)} />
-        </label>
-        <button className={style.btnSend} onClick={(e) => handleSubmit(e)}>Enviar</button>
-      </div>
       <div>
         {Array.isArray(commentProduct) ? (commentProduct.length === 1
           ? <h2> {commentProduct.length} Comentario</h2>
@@ -118,7 +66,7 @@ function Comments() {
                     <p className={style.text}>{text}</p>
                   </div>
                   
-                  <button className={style.btnTrash1} onClick={e => handleBtnDelete(e)}><img src={trash} className={style.trash1} /></button>
+                  <button  value={id} onClick={e => handleBtnDelete(e)}>{id}<img src={trash} className={style.trash1} /></button>
                 </div>
               )
             })
@@ -128,6 +76,7 @@ function Comments() {
 
     </div>
   )
+  // className={style.btnTrash1}
 }
 
 export default Comments
