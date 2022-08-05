@@ -141,7 +141,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case CHANGE_PROFILE:
             return {
                 ...state,
-                profile: payload
+                userLoged: payload
             }
         case GET_COMMENTS:
             return {
