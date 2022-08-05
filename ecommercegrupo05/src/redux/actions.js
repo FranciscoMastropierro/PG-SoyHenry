@@ -224,8 +224,8 @@ export async function postProfile (u) {
 
 export function token(tok, user) { 
     return async function (dispatch) {
-        console.log("Flag Actions", tok)
-        console.log("Flag Actions user", user)
+        // console.log("Flag Actions", tok)
+        // console.log("Flag Actions user", user)
         const { data } = await axios.post('http://localhost:3001/profile',user,
             {
                 headers: {
@@ -258,7 +258,7 @@ export function getComments(id) {
 
 export function editComment(comment) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/commentary', (comment))
+        const { data } = await axios.put('http://localhost:3001/commentary', comment)
         return dispatch({ type: EDIT_COMMENT, payload: data })
     }
 }

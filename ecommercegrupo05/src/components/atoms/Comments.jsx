@@ -27,19 +27,22 @@ function Comments() {
   const [input, setInput] = useState({
     text: '',
     productId: idProductCurrent,
-    userId: 'adddbe6c-bc51-4bc6-85c3-55fd7fcf9533'
+    userId: 'bf201d7c-cc20-440e-ba3c-e641a4f6334d'
   })
 
+  const [modificar, setModificar] = useState(true)
+
   const [edit, setEdit] = useState({
-    id: '10',
+    id: '',
     newComment: ''
   })
+  // console.log("🚀 ~ file: Comments.jsx ~ line 37 ~ Comments ~ edit", edit)
 
   useEffect(() => {
     dispatch(getComments(idProductCurrent))
   }, [idProductCurrent])
 
-  console.log('estado', commentProduct)
+  // console.log('estado', commentProduct)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
@@ -56,7 +59,16 @@ function Comments() {
   function handleSubmit(e) {
     e.preventDefault(e);
     dispatch(crateComment(input));
-    alert('gracias por su comentario.')
+    swal({
+      title: "Gracias por su comentario.",
+      input: "text",
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+      buttons: {
+          cancel: 'ok'
+      }
+  })
     setInput({
       ...input,
       text: ''
@@ -71,26 +83,37 @@ function Comments() {
       ...edit,
       newComment: e.target.value
     })
+    
+    console.log('aqui estoy', edit)
   }
 
-  // function handleBtnEditId(e){
-  //   e.preventDefault(e)
-  //   setEdit({
-  //     ...edit,
-  //     id: e.target.value
-  //   })
-  // }
+  function handleBtnEditId(e){
+    e.preventDefault(e)
+    setEdit({
+      ...edit,
+      id: e.target.value
+    })
+    setModificar(false)
+  }
 
   function handleBtnEdit(e) {
     e.preventDefault(e);
-   dispatch(editComment(edit))
+    setEdit({
+      ...edit,
+      id: e.target.value
+    })
+    
+    console.log('aqui estoy dos', edit)
+    dispatch(editComment(edit))
     alert('comentario modificado.')
     setEdit({
       id: '',
       newComment: ''
     })
+    setModificar(true)
+    onClose()
   }
-
+  
   function handleBtnDelete(e) {
     e.preventDefault(e);
     const idDel = e.target.value
@@ -102,14 +125,12 @@ function Comments() {
       confirmButtonText: "Guardar",
       cancelButtonText: "Cancelar",
       buttons: {
-          cancel: 'ok'
+        cancel: 'ok'
       }
-  })
+    })
     dispatch(getComments(idProductCurrent))
   }
-
-
-
+  
   return (
     <div className={style.div}>
       <div>
@@ -126,16 +147,17 @@ function Comments() {
         }
         {
           Array.isArray(commentProduct) ?
-            commentProduct.map(c => {
-              return (
-                <div>
-                  <div key={c.id} >
-                    <h3>{c.userInfo['firstname']} {c.userInfo['lastname']}</h3>
-                    <p>{c.text}</p>
+          commentProduct.map(({id, userInfo, text}) => {
+            // console.log("🚀 ~ file: Comments.jsx ~ line 150 ~ Comments ~ commentProduct", commentProduct)
+            return (
+                <div key={id}>
+                  <div>
+                    <h3>{userInfo['firstname']} {userInfo['lastname']}</h3>
+                    <p>{text}</p>
                   </div>
-                  <button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-                    Editar
-                  </button>
+                    <button onClick={onOpen} ref={btnRef}>
+                      Editar
+                    </button>
                   <Drawer
                     isOpen={isOpen}
                     placement='bottom'
@@ -152,20 +174,32 @@ function Comments() {
                       </DrawerBody>
 
                       <DrawerFooter>
-                        <button variant='outline' mr={3} onClick={onClose}>
-                          Cancel
-                        </button>
-                        <button value={c.id} onClick={e => handleBtnEdit(e)} colorScheme='blue'>Modificar</button>
+                        {
+                          modificar
+                            ? 
+                              <div>
+                                <button variant='outline' mr={3} onClick={onClose}>
+                                Cancel
+                                </button>
+                                <button value={id} onClick={(e) => handleBtnEditId(e)}>
+                                confirmar 
+                                </button>
+                              </div>
+                            : 
+                              <button onClick={e => handleBtnEdit(e)}>
+                              Modificar 
+                              </button>
+                        }
                       </DrawerFooter>
+                      
                     </DrawerContent>
                   </Drawer>
-
-                  <button value={c.id} onClick={e => handleBtnDelete(e)}>borrar</button>
+                  <button value={id} onClick={e => handleBtnDelete(e)}>borrar</button>
                 </div>
               )
             })
             : <p>'Sin Comentarios'</p>
-        }
+          }
       </div>
 
     </div>
