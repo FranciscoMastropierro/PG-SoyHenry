@@ -19,8 +19,6 @@ export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 //export const SET_PROFILE = 'SET_PROFILE'
-export const CHANGE_PROFILE = 'CHANGE_PROFILE'
-// export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
@@ -32,6 +30,7 @@ export const UPDATE_ROL = 'UPDATE_ROL'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const GET_MSG_CART = 'GET_MSG_CART'
+export const POST_ORDERS = 'POST_ORDERS'
 
 
 
@@ -207,30 +206,10 @@ export function cleaner() {
 }
 
 // export function setProfile(u) {
-//     return async function (dispatch) {
-
-//         const { data } = await axios('http://localhost:3001/api/users/')
-//         const found = data.find(user => user.email === u.email)
-
-//         if(!found) {
-//             u = {
-//                 firstname: u.given_name,
-//                 lastname: u.family_name || ' ',
-//                 email: u.email,
-//                 picture: u.picture || null,
-//                 }
-//             const posted = await postProfile(u)
-//             return dispatch ({
-//                 type: SET_PROFILE,
-//                 payload: posted
-//             })
-//         } else {
-//             return dispatch ({
-//                 type: SET_PROFILE,
-//                 payload: found
-//             })
-//         }
-//     }
+//     return dispatch ({
+//         type: SET_PROFILE,
+//         payload: found
+//     })
 // }
 
 export function getTotalPrice(payload) {
@@ -272,7 +251,6 @@ export function token(tok, user) {
                 }
             }
         )
-        
         return dispatch({ type: TOKEN, payload: data })
     }
 }
@@ -307,6 +285,7 @@ export function createProduct(payload) {
         })
     }
 }
+
 export function favoritePost(idProducts,idUser) {
     return async function (dispatch) {
         console.log(idProducts,idUser)
@@ -319,17 +298,26 @@ export function favoritePost(idProducts,idUser) {
     }
 }
 
+export function postOrder(id, products) {
+    return async function (dispatch) {
+        // console.log(products,idUser)
+        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products})
+        return dispatch({
+            type: POST_ORDERS,
+            payload: data
+        })
+    }
+}
+
 //////////////////////////////////////   PUTS   /////////////////////////////////////////
 
 export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user)
-        // const getuFromBack = await getProfile(id)
-        // return dispatch({
-        //     type: CHANGE_PROFILE,
-        //     payload:  getuFromBack
-        // })
-    //    const { data } = await axios.put('http://localhost:3001/api/users/edit/')
+        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user);
+        return dispatch({
+            type: TOKEN,
+            payload: user
+        })
     }
 }
 

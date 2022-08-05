@@ -8,12 +8,12 @@ import { useSelector } from "react-redux";
 
 const TestAddresForm = () => {
 
-    const {user} = useAuth0()
+    // const {user} = useAuth0()
 
-    // const user = useSelector((state) => state.profile)
-    console.log("🚀 ~ file: TestAddresForm.jsx ~ line 13 ~ TestAddresForm ~ user", user)
+    const user = useSelector((state) => state.userLoged)
+    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 13 ~ TestAddresForm ~ user", user)
 
-    const { name, email } = user
+    const { username, email, address, postalCode } = user
 
     return(
         <div className={style.container}>
@@ -33,7 +33,7 @@ const TestAddresForm = () => {
 
                 <div className={style.inputBox}>
                     <span className={style.span}>Nombre :</span>
-                    <input type="text" placeholder="Nombre" className={style.input} defaultValue={name} />
+                    <input type="text" placeholder="Nombre" className={style.input} defaultValue={username} />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>email :</span>
@@ -41,7 +41,7 @@ const TestAddresForm = () => {
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>Direccion :</span>
-                    <input type="text" placeholder="calle#" className={style.input}/>
+                    <input type="text" placeholder="calle#" className={style.input} defaultValue={address}/>
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>ciudad :</span>
@@ -55,7 +55,7 @@ const TestAddresForm = () => {
                     </div>
                     <div className={style.inputBox}>
                         <span className={style.span}>Codigo postal :</span>
-                        <input type="text" placeholder="123 456" className={style.input}/>
+                        <input type="text" placeholder="123 456" className={style.input} defaultValue={postalCode}/>
                     </div>
                 </div>
             </div>
