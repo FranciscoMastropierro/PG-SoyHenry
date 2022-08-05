@@ -298,10 +298,10 @@ export function favoritePost(idProducts,idUser) {
     }
 }
 
-export function postOrder(id, products) {
+export function postOrder(id, products, shipmentAddress, postalCode) {
     return async function (dispatch) {
         // console.log(products,idUser)
-        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products})
+        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products, shipmentAddress, postalCode})
         return dispatch({
             type: POST_ORDERS,
             payload: data
@@ -314,6 +314,7 @@ export function postOrder(id, products) {
 export function changeProfile(id, user) {
     return async function (dispatch) {
         const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
+        console.log(user)
         // return dispatch({
         //     type: TOKEN,
         //     payload: user
