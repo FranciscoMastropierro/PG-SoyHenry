@@ -26,8 +26,9 @@ function Comments() {
   // -------- estado para enviar comentarios
   const [input, setInput] = useState({
     text: '',
+    rating: 3,
     productId: idProductCurrent,
-    userId: 'b8d60582-edbb-4eb8-a9be-72b5f44c6560'
+    userId: '9c286e46-ef82-4db9-a5a6-1feef70792e4'
   })
 
   // const [modificar, setModificar] = useState(true)
@@ -59,6 +60,11 @@ function Comments() {
   function handleSubmit(e) {
     e.preventDefault(e);
     dispatch(crateComment(input));
+    dispatch(getComments(idProductCurrent))
+    setInput({
+      ...input,
+      text: ''
+    })
     swal({
       title: "Gracias por su comentario.",
       input: "text",
@@ -69,48 +75,7 @@ function Comments() {
         cancel: 'ok'
       }
     })
-    setInput({
-      ...input,
-      text: ''
-    })
-    dispatch(getComments(idProductCurrent))
   }
-
-  // function handleEditComment(e) {
-  //   e.preventDefault(e)
-  //   // const {id, text} = e.target.value
-  //   setEdit({
-  //     ...edit,
-  //     newComment: e.target.value
-  //   })
-
-  //   console.log('aqui estoy', edit)
-  // }
-
-  // function handleBtnEditId(e){
-  //   e.preventDefault(e)
-  //   setEdit({
-  //     ...edit,
-  //     id: e.target.value
-  //   })
-  //   setModificar(false)
-  // }
-
-  // function handleBtnEdit(e) {
-  //   e.preventDefault(e);
-  //   setEdit({
-  //     ...edit,
-  //     id: e.target.value
-  //   })
-  //   dispatch(editComment(edit))
-  //   alert('comentario modificado.')
-  //   setEdit({
-  //     id: '',
-  //     newComment: ''
-  //   })
-  //   setModificar(true)
-  //   onClose()
-  // }
 
   function handleBtnDelete(e) {
     e.preventDefault(e);
@@ -149,48 +114,10 @@ function Comments() {
               return (
                 <div key={id} className={style.allComments}>
                   <div>
-                    <h3>{userInfo['firstname']} {userInfo['lastname']}</h3>
-                    <p>{text}</p>
+                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']}</h3> 
+                    <p className={style.text}>{text}</p>
                   </div>
-                  {/* <button onClick={onOpen} ref={btnRef}>
-                      Editar
-                    </button>
-                  <Drawer
-                    isOpen={isOpen}
-                    placement='bottom'
-                    onClose={onClose}
-                    finalFocusRef={btnRef}
-                  >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                      <DrawerCloseButton />
-                      <DrawerHeader>Escribe tu nuevo comentario</DrawerHeader>
-
-                      <DrawerBody>
-                        <Textarea placeholder='Nuevo Comentario...' value={edit.newComment} onChange={e => handleEditComment(e)} />
-                      </DrawerBody>
-
-                      <DrawerFooter>
-                        {
-                          modificar
-                            ? 
-                              <div>
-                                <button variant='outline' mr={3} onClick={onClose}>
-                                Cancel
-                                </button>
-                                <button value={id} onClick={(e) => handleBtnEditId(e)}>
-                                confirmar 
-                                </button>
-                              </div>
-                            : 
-                              <button onClick={e => handleBtnEdit(e)}>
-                              Modificar 
-                              </button>
-                        }
-                      </DrawerFooter>
-                      
-                    </DrawerContent>
-                  </Drawer> */}
+                  
                   <button className={style.btnTrash1} onClick={e => handleBtnDelete(e)}><img src={trash} className={style.trash1} /></button>
                 </div>
               )
