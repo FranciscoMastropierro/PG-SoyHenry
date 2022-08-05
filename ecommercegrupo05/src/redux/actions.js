@@ -313,11 +313,11 @@ export function postOrder(id, products) {
 
 export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user);
-        return dispatch({
-            type: TOKEN,
-            payload: user
-        })
+        const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
+        // return dispatch({
+        //     type: TOKEN,
+        //     payload: user
+        // })
     }
 }
 
