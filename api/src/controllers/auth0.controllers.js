@@ -2,7 +2,6 @@ const { Users } = require('../db')
 
 module.exports = {
     infoProfile: async (req, res, next) => {
-
         const user = req.body;
 
         Users.findOne({where :{email:user.email}}).then(aux =>{

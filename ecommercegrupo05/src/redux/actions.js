@@ -19,8 +19,6 @@ export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 //export const SET_PROFILE = 'SET_PROFILE'
-export const CHANGE_PROFILE = 'CHANGE_PROFILE'
-// export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
@@ -31,6 +29,8 @@ export const UPDATE_STOCK = 'UPDATE_STOCK'
 export const UPDATE_ROL = 'UPDATE_ROL'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
+export const GET_MSG_CART = 'GET_MSG_CART'
+export const POST_ORDERS = 'POST_ORDERS'
 
 
 
@@ -141,7 +141,7 @@ export function updateProduct(id, update) {
 }
 export function changeRole(id) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/users/role/' , (id) )
+        const { data } = await axios.put('http://localhost:3001/api/users/role/' , (id) )
         return dispatch({
             type: UPDATE_ROL,
             payload: data
@@ -150,7 +150,7 @@ export function changeRole(id) {
 }
 export function updateStock(id, stock) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/products/stock', ({id, stock}))
+        const { data } = await axios.put('http://localhost:3001/api/products/stock', ({id, stock}))
         return dispatch({
             type: UPDATE_STOCK,
             payload: data
@@ -159,7 +159,7 @@ export function updateStock(id, stock) {
 }
 export function deleteProduct(id) {
     return async function (dispatch) {
-        const { data } = await axios.put('http://localhost:3001/product/'  + id )
+        const { data } = await axios.put('http://localhost:3001/api/product/'  + id )
         return dispatch({
             type: DELETE_PRODUCT,
             payload: data
@@ -206,30 +206,10 @@ export function cleaner() {
 }
 
 // export function setProfile(u) {
-//     return async function (dispatch) {
-
-//         const { data } = await axios('http://localhost:3001/api/users/')
-//         const found = data.find(user => user.email === u.email)
-
-//         if(!found) {
-//             u = {
-//                 firstname: u.given_name,
-//                 lastname: u.family_name || ' ',
-//                 email: u.email,
-//                 picture: u.picture || null,
-//                 }
-//             const posted = await postProfile(u)
-//             return dispatch ({
-//                 type: SET_PROFILE,
-//                 payload: posted
-//             })
-//         } else {
-//             return dispatch ({
-//                 type: SET_PROFILE,
-//                 payload: found
-//             })
-//         }
-//     }
+//     return dispatch ({
+//         type: SET_PROFILE,
+//         payload: found
+//     })
 // }
 
 export function getTotalPrice(payload) {
@@ -246,9 +226,11 @@ export function getProductCart(payload) {
     }
 }
 
-export async function getProfile (id) {
-    const {data} = await axios(`http://localhost:3001/users/${id}`);
-    return data
+export function getMsgCart(payload) {
+    return {
+        type: GET_MSG_CART,
+        payload: payload
+    }
 }
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
@@ -269,7 +251,6 @@ export function token(tok, user) {
                 }
             }
         )
-        
         return dispatch({ type: TOKEN, payload: data })
     }
 }
@@ -304,13 +285,25 @@ export function createProduct(payload) {
         })
     }
 }
+
 export function favoritePost(idProducts,idUser) {
     return async function (dispatch) {
         console.log(idProducts,idUser)
-        const json = await axios.post(`http://localhost:3001/favorite`, idProducts,idUser)
+        const json = await axios.post(`http://localhost:3001/api/favorite`, idProducts,idUser)
         const data = await json.data
         return dispatch({
             type: POST_FAVORITE,
+            payload: data
+        })
+    }
+}
+
+export function postOrder(id, products) {
+    return async function (dispatch) {
+        // console.log(products,idUser)
+        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products})
+        return dispatch({
+            type: POST_ORDERS,
             payload: data
         })
     }
@@ -320,13 +313,11 @@ export function favoritePost(idProducts,idUser) {
 
 export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
-        const getuFromBack = await getProfile(id)
+        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user);
         return dispatch({
-            type: CHANGE_PROFILE,
-            payload:  getuFromBack
+            type: TOKEN,
+            payload: user
         })
-    //    const { data } = await axios.put('http://localhost:3001/api/users/edit/')
     }
 }
 

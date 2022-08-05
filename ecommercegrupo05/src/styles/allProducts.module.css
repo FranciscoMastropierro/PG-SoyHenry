@@ -1,15 +1,27 @@
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .filters {
     display: flex;
     justify-content: space-around;
-    padding: 20px;
-    margin-top: 20px;
-    margin: 0;
 }
 
 .div {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    margin-top: 1rem;
+    left: 40px;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #33333370;
+}
+
+.cardContainer{
+    margin-left: 4rem;
 }
 
 .select {
