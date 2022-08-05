@@ -16,8 +16,6 @@ function SlidePopularProducts() {
 
   const dispatch = useDispatch();
   const infoData = useSelector(state => state.data);
-  // console.log("🚀 ~ file: SlidePopularProducts.jsx ~ line 19 ~ SlidePopularProducts ~ infoData", infoData)
-
   useEffect(()=>{
       dispatch(getProducts())
   },[]) //eslint-disable-line react-hooks/exhaustive-deps
