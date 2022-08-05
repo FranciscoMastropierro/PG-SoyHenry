@@ -18,7 +18,7 @@ export default function Pagination() {
     }
 
     return(
-        <nav>
+        <nav className={styles.paginadodiv}>
             <ul className={styles.paginado}>
                 { pageNumber && 
                 pageNumber.map(number => (

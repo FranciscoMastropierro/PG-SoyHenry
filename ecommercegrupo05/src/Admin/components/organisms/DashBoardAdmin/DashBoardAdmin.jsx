@@ -12,8 +12,8 @@ function DashBoard(){
   return (
           <div className={style.container} >
             <div className={style.flex}>
-              <h3 className={style.text}>Welcome to the administration panel!</h3>              
-              <h3 className={style.subtext}>Use the tabs above to move through the different features</h3>              
+              <h3 className={style.text}>Bienvenido al panel de administracion!</h3>              
+              <h3 className={style.subtext}>Usa las diferentes opciones de arriba para moverte</h3>              
             </div>
           </div>
 

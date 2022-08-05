@@ -37,7 +37,7 @@ export default function Navbar () {
                 <SearchBar/>
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
-            <SidebarOptions/>
+            <SidebarOptions id={userLoged.id}/>
         </div>
     )
 }
