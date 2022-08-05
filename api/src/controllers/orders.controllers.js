@@ -8,15 +8,34 @@ module.exports = {
     try {
       const order = await Order.findOne({
         where: { id },
-        include: {
-          model: Products,
-        },
+        include: [{
+          model: Users
+        },{
+          model: Products
+        }
+      ],
       });
 
       res.send(order);
     } catch (error) {
       console.log(error);
     }
+  },
+  getAllOrder: async (req, res) => {
+    try {
+      const order = await Order.findAll({
+        include: [{
+          model: Users
+        },{
+          model: Products
+        }
+      ],
+      });
+      res.send(order);
+    } catch (error) {
+      console.log(error);
+    }
+
   },
 
   postOrder: async (req, res) => {
