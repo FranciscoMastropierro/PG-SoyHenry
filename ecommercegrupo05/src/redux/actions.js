@@ -23,9 +23,10 @@ export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const GET_COMMENTS_ID = 'GET_COMMENTS_ID'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
-export const GET_COMMENTS = 'GET_COMMENTS'
-
 
 
 export function getProducts(loc) {
@@ -249,9 +250,23 @@ export function getComments(id) {
         const json = await axios(`http://localhost:3001/commentary?productId=${id}`)
         const data = json.data
         return dispatch({
-            type: GET_COMMENTS,
+            type: GET_COMMENTS_ID,
             payload: data
         })
+    }
+}
+
+export function editComment(comment) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/commentary', (comment))
+        return dispatch({ type: EDIT_COMMENT, payload: data })
+    }
+}
+
+export function deleteComment(id) {
+    return async function (dispatch) {
+        const { data } = await axios.delete(`http://localhost:3001/commentary?id=${id}`)
+        return dispatch({ type: DELETE_COMMENT, payload: data })
     }
 }
 
