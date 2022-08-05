@@ -92,10 +92,7 @@ const UserOrders = () => {
     {
       value: '5',
     },
-
-
   ]
-
 
   return (
     <div className={style.container}>
