@@ -26,6 +26,7 @@ const CheckoutForm = () => {
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 29 ~ CheckoutForm ~ totalProducts", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
@@ -36,7 +37,7 @@ const CheckoutForm = () => {
             price
         }
     })
-    console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts", finalProducts)
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts", finalProducts)
 
     const stripe = useStripe()
     const elements = useElements()
