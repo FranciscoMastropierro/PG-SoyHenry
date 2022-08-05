@@ -37,10 +37,29 @@ module.exports = {
     }
 
   },
+  getAllByidUser: async (req, res) => {
+    const { UserId } = req.body;
+    console.log(UserId)
+    try {
+      const order = await Order.findAll({
+        where:{UserId},
+        include: [{
+          model: Users
+        },{
+          model: Products
+        }
+      ],
+      });
+      res.send(order);
+    } catch (error) {
+      console.log(error);
+    }
+
+  },
 
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
-    const { UserId, products } = req.body;
+    const { UserId, products,shipmentAddress,postalCode } = req.body;
     const arr=[]
     try {
       if (!UserId || !Object.keys(products))
@@ -51,8 +70,8 @@ module.exports = {
         amount: products
           .map((e) => e.amount * e.price)
           .reduce((prev, next) => prev + next),
-        shipmentAddress: user[0].dataValues.address,
-        postalCode:  user[0].dataValues.postalCode,
+        shipmentAddress: shipmentAddress,
+        postalCode:  postalCode,
         state:"completed",
         paid:true,
          };
