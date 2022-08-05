@@ -31,6 +31,7 @@ export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const GET_MSG_CART = 'GET_MSG_CART'
 export const POST_ORDERS = 'POST_ORDERS'
+export const GET_ALL_USERS_ORDER = 'GET_ALL_USERS_ORDER'
 
 
 
@@ -84,6 +85,16 @@ export function getUserByEmail(email) {
         const data = json.data
         return dispatch({
             type: GET_USER_BY_EMAIL,
+            payload: data
+        })
+    }
+}
+export function getAllByidUser(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/api/orders/` , {id})
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_USERS_ORDER,
             payload: data
         })
     }

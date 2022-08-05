@@ -1,34 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { getUserOrders } from "../../redux/actions";
+import { getAllByidUser, getProducts } from "../../redux/actions";
 
 import style from "../../styles/UserOrders.module.css";
 
 const UserOrders = () => {
-  //  const dispatch = useDispatch
-  // const {id} = useParams()
-  //
-  // useEffect(() => {
-  // dispatch(getUserOrders(id))
-  //
-  // }, [])
-  //
-  // const UserOrders = useSelector((state) => state.UserOrders)
+  const dispatch = useDispatch()
+  const {id} = useParams()
+  useEffect(() => {
+    dispatch(getAllByidUser(id))
+    
+  }, [])
+  
+  const allOrders = useSelector((state) => state.UserOrders)
 
-  const allOrders = [{
-    id: 1,
-    state: "created",
-    address:"Av falsa 123",
-    email: "juansalas@gmail.com"
-    },
-    {
-        id: 2,
-        state: "created",
-        address:"Av verdadera 123",
-        email: "martina99@gmail.com"
-    }
-]
+ 
 
 
   return (
@@ -37,23 +24,49 @@ const UserOrders = () => {
 
       {allOrders && allOrders.length ? (
         <>
-          <div className={style.CardTop}>
-            <h2> id</h2>
-            <h2> Estado</h2>
-            <h2>Direccion</h2>
-            <h2>Email</h2>
-          </div>
+          
 
-          {allOrders.map((e) => {
+          {allOrders.map((order) => {
             return (
-              <div className={style.Card} key={e.id}>
-                <h3 className={style.info}>{e.id}</h3>
-                <h3 className={style.info}>{e.state}</h3>
-                <h3 className={style.info}>{e.address}</h3>
-                <h3 className={style.info}>{e.email}</h3>
-                <NavLink to={`/orderdetail/${e.id}`}>
-                  <button className={style.cardbtn}>Detalle</button>
-                </NavLink>
+              <div className={style.Card} key={order.id}>
+                <div>
+                <h4 className={style.firstInfo}> {order.date.slice(0,10)} </h4>
+                </div>
+
+                {order.Products.map((item)=>{
+                  return (
+                    <div className={style.productDiv}>
+                      <div>
+                        <img src={item.image} alt="item" />
+                      </div>
+                      <div className={style.productDivinfo}>
+                        <div >
+                          <h3>{item.name}</h3>
+                         <h3>{item.brand}</h3>
+                        </div>
+                        <div>
+                           <h3>$ {item.price}</h3>
+                        </div>
+                         
+
+                      </div>
+                      <div className={style.productDivinfo}>
+                         <button className={style.btn}> Ver detalle</button>
+                         <button className={style.btn}> Dejar Reseña</button>
+                      </div>
+                    
+                    </div>
+                    )
+
+                  
+
+
+
+
+                })}
+
+
+                
               </div>
             );
           })}
@@ -68,3 +81,10 @@ const UserOrders = () => {
 };
 
 export default UserOrders;
+//<h3 className={style.info}>{e.paymentMethod}</h3>
+//                <h3 className={style.info}>{e.state}</h3>
+//                <h3 className={style.info}>{e.shipmentAddress}</h3>
+//                <h3 className={style.info}>{e.postalCode}</h3>
+//                <NavLink to={`/orderdetail/${e.id}`}>
+//                  <button className={style.cardbtn}>Detalle</button>
+//                </NavLink>

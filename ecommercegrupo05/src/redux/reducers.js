@@ -14,6 +14,7 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
+    GET_ALL_USERS_ORDER,
     //SET_PROFILE,
     CHANGE_PROFILE,
     TOKEN,
@@ -49,8 +50,9 @@ const initialState = {
     totalPrice: 0,
     productsCart: [],
     commentsUser: [],
+    UserOrders:[],
     userLoged: {},
-    msgCart: ''
+    msgCart: '',
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -65,6 +67,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 searchedProducts: payload
+            }
+        case GET_ALL_USERS_ORDER:
+            return {
+                ...state,
+                UserOrders: payload
             }
         case CREATE_PRODUCT:
             return {
