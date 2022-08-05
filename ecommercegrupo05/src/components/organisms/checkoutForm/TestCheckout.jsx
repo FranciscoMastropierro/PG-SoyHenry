@@ -36,6 +36,7 @@ const CheckoutForm = () => {
             price
         }
     })
+    console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts", finalProducts)
 
     const stripe = useStripe()
     const elements = useElements()
@@ -61,7 +62,7 @@ const CheckoutForm = () => {
                     id,
                     amount: totalPrice
                 })
-                // console.log(data.msg)
+                console.log(data.msg)
 
                 dispatch(getMsgCart(data.msg))
 
@@ -80,7 +81,7 @@ const CheckoutForm = () => {
                         }
                     })
                     setTimeout(() => navigate('/'), 3000)
-                    localStorage.removeItem(totalProducts);
+                    window.localStorage.clear();
                 }
 
             } catch (error) {
@@ -102,7 +103,7 @@ const CheckoutForm = () => {
     // pendiente, tengo que verificar que valor es el que toma en cuenta stripe para poder pegarme a esa propiedad
 
 
-
+    // onClick={handleItemToDeleteAll(totalProducts)}
 
     return (
         <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
@@ -119,7 +120,7 @@ const CheckoutForm = () => {
                 <CardElement className='form-control' />
             </div>
 
-            <button className='btn btn-success' >
+            <button className='btn btn-success'>
                 {
                     loading
                         ? <div className="spinner-border text-dark" role="status">
