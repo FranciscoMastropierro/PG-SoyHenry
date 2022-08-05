@@ -28,11 +28,13 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className={style.filters}>
-        <div className={style.div}><Filters /></div>
-      </div>
       <Pagination />
-      <CardProducts />
+      <div className={style.container}>
+        <div className={style.filters}>
+          <div className={style.div}><Filters /></div>
+          <div className={style.cardContainer}><CardProducts /></div>
+        </div>
+      </div>
     </>
   );
 }

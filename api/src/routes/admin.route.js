@@ -2,9 +2,9 @@ const { Router } = require("express");
 const router = Router();
 const {banUser, upgradeToAdmin} = require('../controllers/admin.controllers')
 
-router.get("/ban", banUser);
+router.put("/ban", banUser);
 
-router.get("/upgrade", upgradeToAdmin);
+router.put("/upgrade", upgradeToAdmin);
 
 
 module.exports = router;

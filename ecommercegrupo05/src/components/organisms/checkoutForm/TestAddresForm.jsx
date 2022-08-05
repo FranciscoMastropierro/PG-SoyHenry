@@ -3,14 +3,17 @@ import style from '../../../styles/testAddresform.module.css'
 import card from '../../../assets/card_img.png'
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 
 const TestAddresForm = () => {
 
-    const {user} = useAuth0()
+    // const {user} = useAuth0()
 
-    const { name, email } = user
-    
+    const user = useSelector((state) => state.userLoged)
+    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 13 ~ TestAddresForm ~ user", user)
+
+    const { username, email, address, postalCode } = user
 
     return(
         <div className={style.container}>
@@ -30,15 +33,15 @@ const TestAddresForm = () => {
 
                 <div className={style.inputBox}>
                     <span className={style.span}>Nombre :</span>
-                    <input type="text" placeholder="Nombre" className={style.input} value={name} readonly />
+                    <input type="text" placeholder="Nombre" className={style.input} defaultValue={username} />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>email :</span>
-                    <input type="email" placeholder="example@example.com" className={style.input} value={email} readonly />
+                    <input type="email" placeholder="example@example.com" className={style.input} defaultValue={email} />
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>Direccion :</span>
-                    <input type="text" placeholder="calle#" className={style.input}/>
+                    <input type="text" placeholder="calle#" className={style.input} defaultValue={address}/>
                 </div>
                 <div className={style.inputBox}>
                     <span className={style.span}>ciudad :</span>
@@ -52,7 +55,7 @@ const TestAddresForm = () => {
                     </div>
                     <div className={style.inputBox}>
                         <span className={style.span}>Codigo postal :</span>
-                        <input type="text" placeholder="123 456" className={style.input}/>
+                        <input type="text" placeholder="123 456" className={style.input} defaultValue={postalCode}/>
                     </div>
                 </div>
             </div>
