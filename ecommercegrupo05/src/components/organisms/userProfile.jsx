@@ -11,8 +11,8 @@ export default function UserProfile () {
     const u = useAuth0().user
     const dispatch = useDispatch()
     const userLoged = useSelector((state) => state.userLoged)
-    const [user, setUser] = useState(userLoged)
-    const { isAuthenticated, getAccessTokenSilently } = useAuth0()
+    const [user, setUser] = useState(null)
+    const { isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0()
 
     function handleChange (e) {
         setUser({
@@ -23,22 +23,25 @@ export default function UserProfile () {
     
     function handleSubmit (e) {
         e.preventDefault()
-        dispatch(changeProfile(userLoged.id, user))
+        // dispatch(changeProfile(userLoged.id, user))
         alert('tus cambios se han realizado con exito')
     }
 
     useEffect(() => {
-        if(isAuthenticated ){
+        if(!isLoading && isAuthenticated){
             // const tok =  getAccessTokenSilently()
             getAccessTokenSilently().then(tok =>{
                 // console.log("usr ;)", user)
                 dispatch(token(tok, u))
             })
+            console.log(userLoged)
+            if(userLoged) {
+                Object.keys(userLoged).length > 0 && setUser(userLoged)
+            }
         }
+        
         // console.log('no hay token :(')
-    }, [isAuthenticated])
-
-    console.log(user)
+    }, [isLoading, isAuthenticated, Object.keys(userLoged).length])
 
     return (
         <div className={style.ProfileContainer}>
@@ -49,22 +52,22 @@ export default function UserProfile () {
                 <div className={style.info}>
 
                     <label>Nombre *</label>
-                    <input key='firstname' placeholder='Nombre' value={user.firstname} type='text' name='firstname' onChange={(e) => handleChange(e)}/>
+                    <input key='firstname' placeholder='Nombre' value={user?.firstname || ''} type='text' name='firstname' onChange={(e) => handleChange(e)}/>
 
                     <label>Apellido *</label>
-                    <input key='lastname' placeholder='Apellido' value={user.lastname} type='text' name='lastname' onChange={(e) => handleChange(e)}/>
+                    <input key='lastname' placeholder='Apellido' value={user?.lastname || ''} type='text' name='lastname' onChange={(e) => handleChange(e)}/>
 
                     <label>Nombre de usuario *</label>
-                    <input key='username' placeholder='Nombre de usuario' value={user.username} type='text' name='username' onChange={(e) => handleChange(e)}/>
+                    <input key='username' placeholder='Nombre de usuario' value={user?.username || ''} type='text' name='username' onChange={(e) => handleChange(e)}/>
 
                     <label>Email</label>
-                    <input key='email' placeholder='Email' value={user.email} type='text' name='email' onChange={(e) => handleChange(e)} disabled />
+                    <input key='email' placeholder='Email' value={user?.email || ''} type='text' name='email' onChange={(e) => handleChange(e)} disabled />
                     
                     <label>Direccion *</label>
-                    <input key='address' placeholder='Direccion' value={user.address} type='text' name='address' onChange={(e) => handleChange(e)}/>
+                    <input key='address' placeholder='Direccion' value={user?.address || ''} type='text' name='address' onChange={(e) => handleChange(e)}/>
                     
                     <label>CP *</label>
-                    <input key='postalCode' placeholder='Codigo postal' value={user.postalCode} type='number' name='postalCode' onChange={(e) => handleChange(e)}/>
+                    <input key='postalCode' placeholder='Codigo postal' value={user?.postalCode || ''} type='number' name='postalCode' onChange={(e) => handleChange(e)}/>
                 
                 </div>
                 </div>

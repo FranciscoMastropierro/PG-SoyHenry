@@ -208,8 +208,8 @@ export async function getProfile (id) {
 
 export function token(tok, user) { 
     return async function (dispatch) {
-        console.log("Flag Actions", tok)
-        console.log("Flag Actions user", user)
+        // console.log("Flag Actions", tok)
+        // console.log("Flag Actions user", user)
         const { data } = await axios.post('http://localhost:3001/profile',user,
             {
                 headers: {
@@ -254,16 +254,16 @@ export function createProduct(payload) {
 
 //////////////////////////////////////   PUTS   /////////////////////////////////////////
 
-export function changeProfile(id, user) {
-    return async function (dispatch) {
-        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
-        const getuFromBack = await getProfile(id)
-        return dispatch({
-            type: CHANGE_PROFILE,
-            payload:  getuFromBack
-        })
-    }
-}
+// export function changeProfile(id, user) {
+//     return async function (dispatch) {
+//         const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user)
+//         const getuFromBack = await getProfile(id)
+//         return dispatch({
+//             type: CHANGE_PROFILE,
+//             payload:  getuFromBack
+//         })
+//     }
+// }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 

@@ -18,23 +18,10 @@ import { useCartContext } from '../../context/CartItem';
 export function SidebarOptions() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const auth = useAuth0()
-    const profile = useSelector((state) => state.profile)
-    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = auth;
+    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
-
-    // useEffect(() => {
-    //     if(isAuthenticated ){
-    //         // const tok =  getAccessTokenSilently()
-    //         getAccessTokenSilently().then(tok =>{
-    //             // console.log("usr ;)", user)
-    //             dispatch(token(tok, user))
-    //         })
-    //     }
-    //     // console.log('no hay token :(')
-    // }, [isAuthenticated])
 
     let loc = useLocation().pathname
 
