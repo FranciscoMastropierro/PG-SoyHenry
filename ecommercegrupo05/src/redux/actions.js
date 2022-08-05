@@ -70,7 +70,7 @@ export function getDetail(id) {
 }
 export function getUsers() {
     return async function (dispatch) {
-        const json = await axios(`http://localhost:3001/api/user/`)
+        const json = await axios(`http://localhost:3001/api/users/`)
         const data = json.data
         return dispatch({
             type: GET_ALL_USERS,
@@ -313,7 +313,7 @@ export function postOrder(id, products) {
 
 export function changeProfile(id, user) {
     return async function (dispatch) {
-        const { data } = await axios.put(`http://localhost:3001/users/edit/${id}`, user);
+        const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
         return dispatch({
             type: TOKEN,
             payload: user
