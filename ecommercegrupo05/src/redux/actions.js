@@ -324,7 +324,7 @@ export function postOrder(id, products, shipmentAddress, postalCode) {
 export function changeProfile(id, user) {
     return async function (dispatch) {
         const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
-        console.log(user)
+        console.log('aqui en action para el put',user)
         // return dispatch({
         //     type: TOKEN,
         //     payload: user

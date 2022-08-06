@@ -161,27 +161,27 @@ export const CartProvider = ({ children }) => {
         }
     }
 
-    const deleteAllCart = products => {
+    // const deleteAllCart = products => {
         
-        const cartItems = products
-        let result = []
-        if(mensaje === 'Successful payment'){
-            result = cartItems.splice(0,0)
-            window.localStorage.clear()
-            // console.log('aqui entre en borrar todo', {mensaje, products})
-        }else {
-            return cartItems
-        }
-        updateState({ products: result });
-    }
+    //     const cartItems = products
+    //     let result = []
+    //     if(mensaje === 'Successful payment'){
+    //         result = cartItems.splice(0,0)
+    //         // window.localStorage.clear()
+    //         // console.log('aqui entre en borrar todo', {mensaje, products})
+    //     }else {
+    //         return cartItems
+    //     }
+    //     updateState({ products: result });
+    // }
 
     const storage = {
         state,
         effects: {
             addItemToCart,
             deleteItemToCart,
-            deleteAll,
-            deleteAllCart
+            deleteAll
+            // deleteAllCart
         }
     }
 

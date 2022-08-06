@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeProfile, token } from '../../redux/actions'
 import { useAuth0 } from "@auth0/auth0-react";
+import swal from 'sweetalert';
 import user from '../../assets/user.png'
 import style from '../../styles/userProfile.module.css'
 
@@ -24,7 +25,18 @@ export default function UserProfile () {
     function handleSubmit (e) {
         e.preventDefault()
         dispatch(changeProfile(userLoged.id, user))
-        alert('tus cambios se han realizado con exito')
+
+        swal({
+            title: "Tu Perfil fue actualizado con exito",
+            input: "text",
+            showCancelButton: true,
+            confirmButtonText: "Guardar",
+            cancelButtonText: "Cancelar",
+            buttons: {
+                cancel: 'ok'
+            }
+        })
+        window.location.reload()
     }
 
     useEffect(() => {

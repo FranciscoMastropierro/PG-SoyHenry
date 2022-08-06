@@ -19,19 +19,19 @@ const CheckoutForm = () => {
 
     const superState = useCartContext();
 
-    const { deleteAllCart } = superState.effects;
+    // const { deleteAllCart } = superState.effects;
 
     // const [disable, setDisable] = useState(true)
     const [loading, setLoading] = useState(false)
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 29 ~ CheckoutForm ~ totalProducts", totalProducts)
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 29 ~ CheckoutForm ~ totalProducts este es el otro", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const { address, postalCode } = userLoged
 
-    console.log("🚀 ~ file: TestCheckout.jsx ~ line 31 ~ CheckoutForm ~ userLoged", userLoged)
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 31 ~ CheckoutForm ~ informacion final", userLoged)
 
     const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
         return {
@@ -41,13 +41,13 @@ const CheckoutForm = () => {
             price
         }
     })
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts", finalProducts)
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts este es", finalProducts)
 
     const stripe = useStripe()
     const elements = useElements()
     const navigate = useNavigate()
 
-    const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
+    // const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -96,9 +96,9 @@ const CheckoutForm = () => {
         }
     }
     
-    useEffect(() => {
-        return handleItemToDeleteAll(totalProducts)
-    }, [])
+    // useEffect(() => {
+    //     return handleItemToDeleteAll(totalProducts)
+    // }, [])
 
 
     // useEffect(() => {
