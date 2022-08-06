@@ -85,8 +85,9 @@ const CheckoutForm = () => {
                             cancel: 'ok'
                         }
                     })
-                    setTimeout(() => navigate('/'), 3000)
+                    setTimeout(() => navigate('/'), 2000)
                     window.localStorage.clear();
+                    setTimeout(() => window.location.reload(), 3000)
                 }
 
             } catch (error) {

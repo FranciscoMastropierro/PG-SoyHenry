@@ -27,7 +27,8 @@ import {
     DELETE_COMMENT,
     DELETE_PRODUCT,
     UPDATE_ROL,
-    GET_MSG_CART
+    GET_MSG_CART,
+    NUMBER_PAGE
 } from './actions'
 
 const initialState = {
@@ -37,7 +38,7 @@ const initialState = {
     detail: [],
     clean: [],
     productsPerPage: 15,
-    pages: 0,
+    pages: 1,
     productsToRender: [],
     filterPrice: [],
     categories: [],
@@ -73,8 +74,8 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 searchedProducts: payload
             }
-        case GET_ALL_USERS_ORDER:
-            return {
+            case GET_ALL_USERS_ORDER:
+                return {
                 ...state,
                 UserOrders: payload
             }
@@ -82,7 +83,7 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
-        case UPDATE_STOCK:
+            case UPDATE_STOCK:
             return {
                 ...state,
             }
@@ -90,7 +91,7 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
-        case BAN_USER:
+            case BAN_USER:
             return {
                 ...state,
             }
@@ -98,46 +99,51 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
-        case UPGRADE_USER:
+            case UPGRADE_USER:
             return {
                 ...state,
             }
-        case DELETE_PRODUCT:
+            case DELETE_PRODUCT:
             return {
                 ...state,
             }
 
-        case GET_DETAIL:
-            return {
+            case GET_DETAIL:
+                return {
                 ...state,
                 detail: payload
             }
-        case UPDATE_PRODUCT:
-            return {
+            case UPDATE_PRODUCT:
+                return {
                 ...state,
             }
-        case GET_USER_BY_EMAIL:
+            case GET_USER_BY_EMAIL:
             return {
                 ...state,
                 searchedUser: payload,
             };
-        case GET_ALL_USERS:
-            return {
-                ...state,
-                allUsers: payload
+            case GET_ALL_USERS:
+                return {
+                    ...state,
+                    allUsers: payload
             }
         case CLEANER:
             return {
                 ...state,
                 detail: []
             }
-        case PAGINACION:
+            case PAGINACION:
             return {
                 ...state,
-                productsToRender: state.data.slice(payload, payload + state.productsPerPage)
+                productsToRender: payload   //state.data.slice(payload, payload + state.productsPerPage)
             }
-        case GET_FILTERS:
-            return {
+            case NUMBER_PAGE:
+                return {
+                    ...state,
+                    pages: payload
+                }
+                case GET_FILTERS:
+                    return {
                 ...state,
                 data: payload,
                 filters: payload,

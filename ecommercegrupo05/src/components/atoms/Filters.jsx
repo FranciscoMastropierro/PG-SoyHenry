@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCate, getFilterBrand, getFilters, getProducts } from "../../redux/actions";
+import { getCate, getFilterBrand, getFilters, getProducts, numberPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../../styles/allProducts.module.css";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,7 @@ export default function Filters() {
         // window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
+        dispatch(numberPage(1))
         navigate('/allProducts')
         setInput({
             "brand": [],
@@ -98,7 +99,8 @@ export default function Filters() {
 
     function handleSubmit(e) {
         e.preventDefault(e);
-        dispatch(getFilters(input));        
+        dispatch(getFilters(input));
+        dispatch(numberPage(1))    
     }
 
     return (

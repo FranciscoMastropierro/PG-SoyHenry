@@ -34,6 +34,7 @@ export const GET_COMMENTS = 'GET_COMMENTS'
 export const GET_MSG_CART = 'GET_MSG_CART'
 export const POST_ORDERS = 'POST_ORDERS'
 export const GET_ALL_USERS_ORDER = 'GET_ALL_USERS_ORDER'
+export const NUMBER_PAGE = 'NUMBER_PAGE'
 
 
 
@@ -355,6 +356,15 @@ export function paginacion(payload) {
     return async function (dispatch) {
         return dispatch({
             type: PAGINACION,
+            payload: payload
+        })
+    }
+}
+
+export function numberPage(payload) {
+    return async function (dispatch) {
+        return dispatch({
+            type: NUMBER_PAGE,
             payload: payload
         })
     }

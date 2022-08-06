@@ -22,7 +22,7 @@ export default function Navbar () {
                 dispatch(token(tok, user))
             })
         }
-        console.log('usuario logueado', userLoged)
+        // console.log('usuario logueado', userLoged)
         // console.log('no hay token :(')
     }, [isLoading, isAuthenticated, Object.keys(userLoged).length])
 

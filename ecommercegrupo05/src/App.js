@@ -23,11 +23,9 @@ import Admin from './Admin/Admin.jsx';
 import { CartProvider } from './context/CartItem';
 import style from "./styles/details.module.css";
 import UserProfile from './components/organisms/userProfile';
-import Checkout from './components/organisms/checkoutForm/Checkout';
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import TestCheckout from './components/organisms/checkoutForm/TestCheckout';
 import TestAddresForm from './components/organisms/checkoutForm/TestAddresForm';
-import Review from './components/organisms/checkoutForm/Review';
 
 
 function App() {
