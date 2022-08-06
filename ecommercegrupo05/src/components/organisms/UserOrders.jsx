@@ -141,11 +141,13 @@ const UserOrders = () => {
                                 {
                                   optionsRating.map(({ value }) => {
                                     return (
-                                      <div onChange={e => handleRating(e)}>
+                                      <div >
                                         <div >
+                                        <select onChange={e => handleRating(e)}>
                                           <input type="radio" id={value} name="rating" value={value}
                                           />
                                           <label for="huey">{value}</label>
+                                          </select>
                                         </div>
                                       </div>
                                     )
