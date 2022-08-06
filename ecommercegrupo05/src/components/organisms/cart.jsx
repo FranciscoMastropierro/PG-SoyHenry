@@ -3,10 +3,18 @@ import trash from "../../assets/trash2.png";
 import style from "../../styles/cart.module.css";
 import { useCartContext } from "../../context/CartItem";
 import { getProductCart, getTotalPrice } from "../../redux/actions";
-import { useDispatch } from 'react-redux';
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
 
-export default function NotFound() {
+export default function Cart() {
+
+  const userLoged = useSelector((state) => state.userLoged)
+
+  const { address, postalCode } = userLoged
+
+  const navigate = useNavigate()
+
   const superState = useCartContext();
 
   const dispatch = useDispatch()
@@ -20,6 +28,24 @@ export default function NotFound() {
   useEffect(() => {
     dispatch(getProductCart(products))
   }, [dispatch])
+
+  const handleComprar = () => {
+    if(!address || !postalCode){
+      swal({
+          title: "Es necesario completar tu perfil",
+          input: "text",
+          showCancelButton: true,
+          confirmButtonText: "Guardar",
+          cancelButtonText: "Cancelar",
+          buttons: {
+              cancel: 'ok'
+          }
+      })
+      setTimeout(() => navigate('/userprofile'), 3000)
+  }else {
+    navigate('/TestAddresForm')
+  }
+  }
 
   const totalPricePerProducts = products.map(
     ({ amount, price }) => amount * price
@@ -108,9 +134,7 @@ export default function NotFound() {
               <p >Precio Total: ${precio}</p>
             </div>
             <div className={style.space}>
-              <Link to='/TestAddresForm'>
-                <button className={style.total}>COMPRAR</button>
-              </Link>
+              <button className={style.total} onClick={handleComprar}>COMPRAR</button>
             </div>
           </div>
         </div>

@@ -19,14 +19,19 @@ const CheckoutForm = () => {
 
     const superState = useCartContext();
 
-    const { deleteAllCart } = superState.effects;
+    // const { deleteAllCart } = superState.effects;
 
     // const [disable, setDisable] = useState(true)
     const [loading, setLoading] = useState(false)
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 29 ~ CheckoutForm ~ totalProducts este es el otro", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
+
+    const { address, postalCode } = userLoged
+
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 31 ~ CheckoutForm ~ informacion final", userLoged)
 
     const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
         return {
@@ -36,12 +41,13 @@ const CheckoutForm = () => {
             price
         }
     })
+    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts este es", finalProducts)
 
     const stripe = useStripe()
     const elements = useElements()
     const navigate = useNavigate()
 
-    const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
+    // const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -61,14 +67,14 @@ const CheckoutForm = () => {
                     id,
                     amount: totalPrice
                 })
-                // console.log(data.msg)
+                console.log(data.msg)
 
                 dispatch(getMsgCart(data.msg))
 
                 elements.getElement(CardElement).clear()
 
                 if (data.msg === 'Successful payment') {
-                    dispatch(postOrder(userLoged.id, finalProducts))
+                    dispatch(postOrder(userLoged.id, finalProducts, address, postalCode))
                     swal({
                         title: "Compra exitosa",
                         input: "text",
@@ -80,7 +86,7 @@ const CheckoutForm = () => {
                         }
                     })
                     setTimeout(() => navigate('/'), 3000)
-                    localStorage.removeItem(totalProducts);
+                    window.localStorage.clear();
                 }
 
             } catch (error) {
@@ -89,6 +95,10 @@ const CheckoutForm = () => {
             setLoading(false)
         }
     }
+    
+    // useEffect(() => {
+    //     return handleItemToDeleteAll(totalProducts)
+    // }, [])
 
 
     // useEffect(() => {
@@ -102,10 +112,10 @@ const CheckoutForm = () => {
     // pendiente, tengo que verificar que valor es el que toma en cuenta stripe para poder pegarme a esa propiedad
 
 
-
+    // onClick={handleItemToDeleteAll(totalProducts)}
 
     return (
-        <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
+        <form onSubmit={handleSubmit} className='card card-body'>
 
             <img
                 src='https://idahonews.com/resources/media/54376d60-a84a-48cf-bdac-03a3d32fbccb-full36x25_GettyImages1182622625.jpg?1595459846300'
@@ -119,7 +129,7 @@ const CheckoutForm = () => {
                 <CardElement className='form-control' />
             </div>
 
-            <button className='btn btn-success' >
+            <button className='btn btn-success'>
                 {
                     loading
                         ? <div className="spinner-border text-dark" role="status">

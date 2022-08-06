@@ -1,19 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import style from '../../../styles/testAddresform.module.css'
 import card from '../../../assets/card_img.png'
-import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { changeProfile } from "../../../redux/actions";
+import swal from 'sweetalert';
 
 
 const TestAddresForm = () => {
 
-    // const {user} = useAuth0()
+    const dispatch = useDispatch()
 
-    const user = useSelector((state) => state.userLoged)
-    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 13 ~ TestAddresForm ~ user", user)
+    const navigate = useNavigate()
 
-    const { username, email, address, postalCode } = user
+    const userLoged = useSelector((state) => state.userLoged)
+    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 17 ~ TestAddresForm ~ en formulario", userLoged)
+
+    const { username, email, address, postalCode } = userLoged
+    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 20 ~ TestAddresForm ~ postalCode", postalCode)
+    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 20 ~ TestAddresForm ~ address", address)
+
+    const [confirmar, setConfirmar] = useState(true)
+
+    const [user, setUser] = useState({
+        address: userLoged.address,
+        postalCode: userLoged.postalCode
+    })
+    // console.log("🚀 ~ file: TestAddresForm.jsx ~ line 27 ~ TestAddresForm ~ user", user)
+    
+    
+    function handleConfirmar (e) {
+        e.preventDefault()
+        if(!user.address || !user.postalCode){
+        return swal({
+                title: "Es necesaria la direccion y codigo postal",
+                input: "text",
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                cancelButtonText: "Cancelar",
+                buttons: {
+                    cancel: 'ok'
+                }
+            })
+        }else {
+            dispatch(changeProfile(userLoged.id, user))
+            setConfirmar(false)
+            
+        }
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        dispatch(changeProfile(userLoged.id, user))
+        navigate('/TestCheckout')
+    }
+    
+    function handleChange (e) {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return(
         <div className={style.container}>
@@ -28,21 +75,24 @@ const TestAddresForm = () => {
 
                 <div className={style.inputBox}>
                     <span className={style.span}>Tarjetas aceptadas :</span>
-                    <img src={card} alt="" className={style.img}/>
+                    <img src={card} alt="imagen de tarjetas" className={style.img}/>
                 </div>
 
                 <div className={style.inputBox}>
                     <span className={style.span}>Nombre :</span>
                     <input type="text" placeholder="Nombre" className={style.input} defaultValue={username} />
                 </div>
+
                 <div className={style.inputBox}>
                     <span className={style.span}>email :</span>
                     <input type="email" placeholder="example@example.com" className={style.input} defaultValue={email} />
                 </div>
+
                 <div className={style.inputBox}>
                     <span className={style.span}>Direccion :</span>
-                    <input type="text" placeholder="calle#" className={style.input} defaultValue={address}/>
+                    <input type="text" key='address' placeholder="calle#" className={style.input} defaultValue={user.address || address} name='address' onChange={(e) => handleChange(e)}/>
                 </div>
+
                 <div className={style.inputBox}>
                     <span className={style.span}>ciudad :</span>
                     <input type="text" placeholder="Buenos Aires" className={style.input}/>
@@ -53,18 +103,25 @@ const TestAddresForm = () => {
                         <span className={style.span}>Pais :</span>
                         <input type="text" placeholder="Argentina" className={style.input}/>
                     </div>
+
                     <div className={style.inputBox}>
                         <span className={style.span}>Codigo postal :</span>
-                        <input type="text" placeholder="123 456" className={style.input} defaultValue={postalCode}/>
+                        <input type="text" key='postalCode' placeholder="123 456" className={style.input} defaultValue={user.postalCode || postalCode} name='postalCode' onChange={(e) => handleChange(e)}/>
                     </div>
                 </div>
             </div>
         </div>
-        <Link to='/TestCheckout'>
-            <button className={style.submitBtn}>
-                Continuar
-            </button>
-        </Link> 
+        {
+            confirmar
+                ?
+                    <button type="submit" className={style.submitBtn} onClick={(e) => handleConfirmar(e) }>
+                        Confirmar Datos
+                    </button>
+                :
+                    <button className={style.submitBtn} onClick={ handleSubmit }>
+                        Continuar
+                    </button>
+        }
     </form>
 </div>
     )

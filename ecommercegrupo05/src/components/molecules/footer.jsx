@@ -1,7 +1,7 @@
 import React from "react";
 import style from '../../styles/footer.module.css';
 import whatsapp from '../../assets/whatsapp.png';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Footer () {
 
@@ -28,6 +28,11 @@ export default function Footer () {
                 <div className={style.innerContainer}>
                     <h3 className={style.title}>Ayuda</h3>
                     {ayuda.map(a => { return ( <h3 className={style.subCategories} key={a}>{a}</h3> )})}
+                </div>
+                <div className={style.innerContainer}>
+                    <Link to='/aboutus'>
+                        <h3 className={style.title}>About Us</h3>
+                    </Link>
                 </div>
             </div>
         </div>

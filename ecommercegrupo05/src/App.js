@@ -52,7 +52,6 @@ function App() {
             <Route exact path = '/Orders/:id' element={<PrivateRoute component={UserOrders}  />} />
             <Route exact path = '/Settings' element={<PrivateRoute component={SettingsMock}  />} />
             <Route exact path = '/TestCheckout' element={<PrivateRoute component={TestCheckout}  />} />
-            {/* <Route exact path = '/Checkout' element={<PrivateRoute component={Checkout}  />} />  */} //esto es de prueba
             <Route exact path = '/TestAddresForm' element={<PrivateRoute component={TestAddresForm}  />} />
             <Route exact path='/cart' element={<Cart />} />
             <Route exact path='/aboutUs' element={<AboutUs />} />
