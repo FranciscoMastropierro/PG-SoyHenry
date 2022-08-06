@@ -14,8 +14,6 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    //SET_PROFILE,
-    CHANGE_PROFILE,
     TOKEN,
     UPDATE_PRODUCT,
     TOTAL_PRICE,
@@ -94,7 +92,6 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
-
         case GET_DETAIL:
             return {
                 ...state,
@@ -146,11 +143,6 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 allCategories: payload,
             }
-        // case SET_PROFILE:
-        //     return {
-        //         ...state,
-        //         profile: payload
-        //     }
         case TOKEN:
             return {
                 ...state,
