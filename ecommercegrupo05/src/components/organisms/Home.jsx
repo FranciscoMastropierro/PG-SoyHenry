@@ -16,8 +16,8 @@ export function Home () {
             <SliderNews />
             <SlidePopularProducts />
             <SlideBestNotebooks />                      
-            <BrandBar/>
-            <Slider/>
+            <BrandBar />
+            <Slider />
             <Footer/>
         </div>
     )

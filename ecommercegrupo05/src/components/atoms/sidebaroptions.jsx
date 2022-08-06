@@ -45,12 +45,6 @@ export function SidebarOptions(props) {
             styleClass: loc === '/allProducts' ? style.onPath : ''
         },
         {
-            to: '/favorites',
-            name: 'Favoritos',
-            src: loc === '/favorites' ? click : fav,
-            styleClass: loc === '/favorites' ? favourites : click
-        },
-        {
             to: '/cart',
             name: 'Carrito',
             src: cart,
@@ -84,12 +78,6 @@ export function SidebarOptions(props) {
 
             {isAuthenticated && <UserMenu
             id={props.id}/>}
-
-            {/*isAuthenticated && (<Link to='/userprofile' className={style.link}>
-                <img src={userPic} alt='user' />
-                <span>Mi Perfil</span>
-            </Link>
-            )*/}
         </div>
 
     )

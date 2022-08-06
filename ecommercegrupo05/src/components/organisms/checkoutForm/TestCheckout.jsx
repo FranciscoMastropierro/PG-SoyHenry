@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { loadStripe } from '@stripe/stripe-js';
 import { useCartContext } from "../../../context/CartItem";
 import { getMsgCart, postOrder } from '../../../redux/actions';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
 import style from '../../../styles/testCheckout.module.css'
@@ -17,21 +17,12 @@ const CheckoutForm = () => {
 
     const dispatch = useDispatch()
 
-    const superState = useCartContext();
-
-    // const { deleteAllCart } = superState.effects;
-
-    // const [disable, setDisable] = useState(true)
-    const [loading, setLoading] = useState(false)
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 29 ~ CheckoutForm ~ totalProducts este es el otro", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const { address, postalCode } = userLoged
-
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 31 ~ CheckoutForm ~ informacion final", userLoged)
 
     const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
         return {
@@ -41,13 +32,10 @@ const CheckoutForm = () => {
             price
         }
     })
-    // console.log("🚀 ~ file: TestCheckout.jsx ~ line 39 ~ finalProducts ~ finalProducts este es", finalProducts)
 
     const stripe = useStripe()
     const elements = useElements()
     const navigate = useNavigate()
-
-    // const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -57,7 +45,6 @@ const CheckoutForm = () => {
             card: elements.getElement(CardElement)
         })
 
-        setLoading(true)
 
         if (!error) {
             const { id } = paymentMethod
@@ -87,33 +74,14 @@ const CheckoutForm = () => {
                     })
                     setTimeout(() => navigate('/'), 2000)
                     window.localStorage.clear();
-                    setTimeout(() => window.location.reload(), 3000)
+                    setTimeout(() => window.location.reload(), 2000)
                 }
 
             } catch (error) {
                 console.log(error)
             }
-            setLoading(false)
         }
     }
-    
-    // useEffect(() => {
-    //     return handleItemToDeleteAll(totalProducts)
-    // }, [])
-
-
-    // useEffect(() => {
-    //   if(!stripe) {
-    //     setDisable(false)
-    //   }else{
-    //     setDisable(true)
-    //   }
-    // }, [stripe])
-
-    // pendiente, tengo que verificar que valor es el que toma en cuenta stripe para poder pegarme a esa propiedad
-
-
-    // onClick={handleItemToDeleteAll(totalProducts)}
 
     return (
         <form onSubmit={handleSubmit} className='card card-body'>
@@ -127,17 +95,11 @@ const CheckoutForm = () => {
             <h3 className='text-center my-2'>Precio Total: {totalPrice} $</h3>
 
             <div className='form-group'>
-                <CardElement className='form-control' />
+                <CardElement className='form-control' disabled={!stripe}/>
             </div>
 
             <button className='btn btn-success'>
-                {
-                    loading
-                        ? <div className="spinner-border text-dark" role="status">
-                            <span className="sr-only"></span>
-                        </div>
-                        : 'Buy'
-                }
+                Buy
             </button>
         </form>
     )

@@ -13,7 +13,6 @@ export const CartProvider = ({ children }) => {
     }
 
     const mensaje = useSelector((state) => state.msgCart)
-    // console.log("🚀 ~ file: CartItem.jsx ~ line 16 ~ CartProvider ~ msg rogelioooo", mensaje.length)
 
     const [state, setState] = useState(() => {
         try {
@@ -29,22 +28,6 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('cartState', JSON.stringify(state))
     }, [state]);
-
-    // useEffect(() => {
-    //     if(mensaje.length !== 0) {
-    //         localStorage.clear()
-    //     }else {
-    //         localStorage.setItem('cartState', JSON.stringify(state))
-    //     }
-    // }, [state, mensaje]);
-
-    // const cachearNumber = state.products.reduce((accum, current) => accum = accum + current?.amount, 0)
-
-    // const totalAmount = state.products.reduce((accum, current) => accum = Number(accum) + Number(current?.price), 0)
-
-    // const totalPricePerProducts = state.products.map(({amount, price}) => amount * price)
-
-    // const totalPrice = totalPricePerProducts.reduce((accum, current) => accum = accum + current, 0)
 
 
     const updateState = (props) => {
@@ -160,20 +143,6 @@ export const CartProvider = ({ children }) => {
             updateState({ products: itemDelete });
         }
     }
-
-    // const deleteAllCart = products => {
-        
-    //     const cartItems = products
-    //     let result = []
-    //     if(mensaje === 'Successful payment'){
-    //         result = cartItems.splice(0,0)
-    //         // window.localStorage.clear()
-    //         // console.log('aqui entre en borrar todo', {mensaje, products})
-    //     }else {
-    //         return cartItems
-    //     }
-    //     updateState({ products: result });
-    // }
 
     const storage = {
         state,
