@@ -4,11 +4,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
+  Button
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import userPic from '../../assets/user.png';
