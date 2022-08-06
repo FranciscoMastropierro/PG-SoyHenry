@@ -59,7 +59,8 @@ module.exports = {
 
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
-    const { UserId, products,shipmentAddress,postalCode } = req.body;
+    const {  UserId, products,shipmentAddress,postalCode  } = req.body;
+    console.log("here", UserId, products)
     const arr=[]
     try {
       if (!UserId || !Object.keys(products))

@@ -18,13 +18,11 @@ export default function Navbar () {
 
     useEffect(() => {
         if(!isLoading && isAuthenticated){
-            // const tok =  getAccessTokenSilently()
             getAccessTokenSilently().then(tok =>{
-                // console.log("usr ;)", user)
                 dispatch(token(tok, user))
             })
         }
-        console.log('usuario logueado', userLoged)
+        // console.log('usuario logueado', userLoged)
         // console.log('no hay token :(')
     }, [isLoading, isAuthenticated, Object.keys(userLoged).length])
 
@@ -37,7 +35,7 @@ export default function Navbar () {
                 <SearchBar/>
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
-            <SidebarOptions/>
+            <SidebarOptions id={userLoged.id}/>
         </div>
     )
 }

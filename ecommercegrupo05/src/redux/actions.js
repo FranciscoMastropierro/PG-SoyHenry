@@ -18,19 +18,23 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
-//export const SET_PROFILE = 'SET_PROFILE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const GET_COMMENTS_ID = 'GET_COMMENTS_ID'
+export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const POST_FAVORITE = 'POST_FAVORITE'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const UPDATE_STOCK = 'UPDATE_STOCK'
 export const UPDATE_ROL = 'UPDATE_ROL'
-export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const GET_MSG_CART = 'GET_MSG_CART'
 export const POST_ORDERS = 'POST_ORDERS'
+export const GET_ALL_USERS_ORDER = 'GET_ALL_USERS_ORDER'
+export const NUMBER_PAGE = 'NUMBER_PAGE'
 
 
 
@@ -70,7 +74,7 @@ export function getDetail(id) {
 }
 export function getUsers() {
     return async function (dispatch) {
-        const json = await axios(`http://localhost:3001/api/user/`)
+        const json = await axios(`http://localhost:3001/api/users/`)
         const data = json.data
         return dispatch({
             type: GET_ALL_USERS,
@@ -84,6 +88,16 @@ export function getUserByEmail(email) {
         const data = json.data
         return dispatch({
             type: GET_USER_BY_EMAIL,
+            payload: data
+        })
+    }
+}
+export function getAllByidUser(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/api/orders/` , {id})
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_USERS_ORDER,
             payload: data
         })
     }
@@ -267,9 +281,23 @@ export function getComments(id) {
         const json = await axios(`http://localhost:3001/api/commentary?productId=${id}`)
         const data = json.data
         return dispatch({
-            type: GET_COMMENTS,
+            type: GET_COMMENTS_ID,
             payload: data
         })
+    }
+}
+
+export function editComment(comment) {
+    return async function (dispatch) {
+        const { data } = await axios.put('http://localhost:3001/api/commentary', comment)
+        return dispatch({ type: EDIT_COMMENT, payload: data })
+    }
+}
+
+export function deleteComment(id) {
+    return async function (dispatch) {
+        const { data } = await axios.delete(`http://localhost:3001/api/commentary?id=${id}`)
+        return dispatch({ type: DELETE_COMMENT, payload: data })
     }
 }
 
@@ -298,10 +326,10 @@ export function favoritePost(idProducts,idUser) {
     }
 }
 
-export function postOrder(id, products) {
+export function postOrder(id, products, shipmentAddress, postalCode) {
     return async function (dispatch) {
         // console.log(products,idUser)
-        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products})
+        const {data} = await axios.post(`http://localhost:3001/api/orders`,{UserId: id, products, shipmentAddress, postalCode})
         return dispatch({
             type: POST_ORDERS,
             payload: data
@@ -314,6 +342,7 @@ export function postOrder(id, products) {
 export function changeProfile(id, user) {
     return async function (dispatch) {
         const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
+        console.log('aqui en action para el put',user)
         // return dispatch({
         //     type: TOKEN,
         //     payload: user
@@ -327,6 +356,15 @@ export function paginacion(payload) {
     return async function (dispatch) {
         return dispatch({
             type: PAGINACION,
+            payload: payload
+        })
+    }
+}
+
+export function numberPage(payload) {
+    return async function (dispatch) {
+        return dispatch({
+            type: NUMBER_PAGE,
             payload: payload
         })
     }

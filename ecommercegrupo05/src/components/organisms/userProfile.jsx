@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeProfile, token } from '../../redux/actions'
 import { useAuth0 } from "@auth0/auth0-react";
-import pencil from '../../assets/edit.png'
+import swal from 'sweetalert';
+import user from '../../assets/user.png'
 import style from '../../styles/userProfile.module.css'
 
 export default function UserProfile () {
@@ -24,7 +25,18 @@ export default function UserProfile () {
     function handleSubmit (e) {
         e.preventDefault()
         dispatch(changeProfile(userLoged.id, user))
-        alert('tus cambios se han realizado con exito')
+
+        swal({
+            title: "Tu Perfil fue actualizado con exito",
+            input: "text",
+            showCancelButton: true,
+            confirmButtonText: "Guardar",
+            cancelButtonText: "Cancelar",
+            buttons: {
+                cancel: 'ok'
+            }
+        })
+        window.location.reload()
     }
 
     useEffect(() => {
@@ -36,7 +48,7 @@ export default function UserProfile () {
     return (
         <div className={style.ProfileContainer}>
             <h1>Tu Perfil</h1>
-            <img src={userLoged.profileImage} alt='profile-photo' className={style.profilePhoto} />
+            <img src={userLoged.profileImage || user} alt='profile-photo' className={style.profilePhoto} />
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={style.infoContainer}>
                     <label>Nombre</label>

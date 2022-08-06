@@ -5,7 +5,7 @@ import style from '../../styles/favorites.module.css';
 export default function Favorites() {
     
     const Object = {
-         img: "https://www.nicepng.com/png/detail/145-1451818_drawing-adventure-bmo-adventure-time-bmo-drawing.png",
+        img: "https://www.nicepng.com/png/detail/145-1451818_drawing-adventure-bmo-adventure-time-bmo-drawing.png",
         name:"BMO Original",
         price:"999",
     }

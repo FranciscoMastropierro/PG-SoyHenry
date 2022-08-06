@@ -5,7 +5,6 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
 import cart from '../../assets/cart.png';
-import userPic from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
@@ -14,8 +13,11 @@ import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
 import { token } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
+import UserMenu from '../atoms/UserMenu';
 
-export function SidebarOptions() {
+
+export function SidebarOptions(props) {
+    
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
@@ -41,12 +43,6 @@ export function SidebarOptions() {
             name: 'Productos',
             src: keyboard,
             styleClass: loc === '/allProducts' ? style.onPath : ''
-        },
-        {
-            to: '/favorites',
-            name: 'Favoritos',
-            src: loc === '/favorites' ? click : fav,
-            styleClass: loc === '/favorites' ? favourites : click
         },
         {
             to: '/cart',
@@ -80,11 +76,8 @@ export function SidebarOptions() {
                 <span>{log}</span>
             </button>
 
-            {isAuthenticated && (<Link to='/userprofile' className={style.link}>
-                <img src={userPic} alt='user' />
-                <span>Mi Perfil</span>
-            </Link>
-            )}
+            {isAuthenticated && <UserMenu
+            id={props.id}/>}
         </div>
 
     )
