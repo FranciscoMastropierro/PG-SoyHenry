@@ -31,7 +31,7 @@ export default function Filters() {
     }, [dispatch])
 
     function handleCLickRecharge(e) {  
-        // window.location.reload()
+        window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
         dispatch(numberPage(1))

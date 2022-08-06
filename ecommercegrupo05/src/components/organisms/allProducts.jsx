@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, paginacion } from "../../redux/actions";
 import style from "../../styles/allProducts.module.css";
@@ -25,7 +25,7 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(getProducts(loc2))
-  }, [loc]) //eslint-disable-line react-hooks/exhaustive-deps  
+  }, [loc]) //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     dispatch(paginacion(productsToRender));
