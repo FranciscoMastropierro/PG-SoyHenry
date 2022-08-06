@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { crateComment, getAllByidUser, getProducts } from "../../redux/actions";
-
 import style from "../../styles/UserOrders.module.css";
-
 import swal from 'sweetalert';
 import {
   Modal,
@@ -29,14 +27,28 @@ const UserOrders = () => {
   const allOrders = useSelector((state) => state.UserOrders)
 
   // ----------------------------------------------------------
+  const usercurrent = useSelector(state => state.userLoged)
+  const idUser = usercurrent.id
   const [input, setInput] = useState({
     text: '',
     rating: 0,
-    productId: '20b9f439-fefd-489e-a8ce-2c845f470b81',
-    userId: '9c286e46-ef82-4db9-a5a6-1feef70792e4'
+    productId: '',
+    userId: idUser
   })
 
+  const [option, setOption] = useState(true)
+
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  function handleOption(e) {
+    e.preventDefault(e)
+    const idPro = e.target.value
+    setInput({
+      ...input,
+      productId: idPro
+    })
+    setOption(false)
+  }
 
   function handleText(e) {
     e.preventDefault(e);
@@ -57,12 +69,13 @@ const UserOrders = () => {
   function handleSubmit(e) {
     e.preventDefault(e);
     dispatch(crateComment(input));
-    // dispatch(getComments(idProductCurrent))
     setInput({
-      ...input,
       text: '',
-      rating: 0
+      rating: 0,
+      productId: '',
+      userId: idUser
     })
+    setOption(true)
     swal({
       title: "Gracias por su comentario.",
       input: "text",
@@ -100,15 +113,12 @@ const UserOrders = () => {
 
       {allOrders && allOrders.length ? (
         <>
-
-
           {allOrders.map((order) => {
             return (
               <div className={style.Card} key={order.id}>
                 <div>
                   <h4 className={style.firstInfo}> {order.date.slice(0, 10)} </h4>
                 </div>
-
                 {order.Products.map((item) => {
                   return (
                     <div className={style.productDiv}>
@@ -123,13 +133,20 @@ const UserOrders = () => {
                         <div>
                           <h3>$ {item.price}</h3>
                         </div>
-
-
                       </div>
                       <div className={style.productDivinfo}>
-                        <button className={style.btn}> Ver detalle</button>
-                        <button className={style.btn} onClick={onOpen}> Dejar Reseña</button>
-
+                        {
+                          option
+                            ?
+                            <button value={item.id} onClick={e => handleOption(e)} className={style.btn}> Opciones</button>
+                            :
+                            <>
+                              <Link to={`/details/${item.id}`}>
+                                <button className={style.btn}> Ver detalle</button>
+                              </Link>
+                              <button className={style.btn} onClick={onOpen}> Dejar Reseña</button>
+                            </>
+                        }
                         <Modal isOpen={isOpen} onClose={onClose}>
                           <ModalOverlay />
                           <ModalContent>
@@ -143,21 +160,17 @@ const UserOrders = () => {
                                     return (
                                       <div >
                                         <div >
-                                        <select onChange={e => handleRating(e)}>
-                                          <input type="radio" id={value} name="rating" value={value}
+                                          <input type="radio" id={value} name="rating" value={value} onChange={e => handleRating(e)}
                                           />
                                           <label for="huey">{value}</label>
-                                          </select>
                                         </div>
                                       </div>
                                     )
                                   })
                                 }
                               </fieldset>
-
                               <Textarea placeholder='Escribe tu comentario aqui...' value={input.text} onChange={e => handleText(e)} />
                             </ModalBody>
-
                             <ModalFooter>
                               <button colorScheme='blue' mr={3} onClick={onClose}>
                                 Cancelar
@@ -167,19 +180,9 @@ const UserOrders = () => {
                           </ModalContent>
                         </Modal>
                       </div>
-
                     </div>
                   )
-
-
-
-
-
-
                 })}
-
-
-
               </div>
             );
           })}
