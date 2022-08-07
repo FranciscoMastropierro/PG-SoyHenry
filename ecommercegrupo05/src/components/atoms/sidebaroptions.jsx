@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
 import cart from '../../assets/cart.png';
-import userPic from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
@@ -12,10 +11,14 @@ import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useCartContext } from '../../context/CartItem';
+import UserMenu from '../atoms/UserMenu';
 
 
-export function SidebarOptions() {
-    const { loginWithRedirect, logout, user, isAuthenticated} = useAuth0();
+export function SidebarOptions(props) {
+    
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
@@ -38,12 +41,6 @@ export function SidebarOptions() {
             name: 'Productos',
             src: keyboard,
             styleClass: loc === '/allProducts' ? style.onPath : ''
-        },
-        {
-            to: '/favorites',
-            name: 'Favoritos',
-            src: loc === '/favorites' ? click : fav,
-            styleClass: loc === '/favorites' ? favourites : click
         },
         {
             to: '/cart',
@@ -78,10 +75,8 @@ export function SidebarOptions() {
                     <span>{log}</span>
                 </button>
 
-                {isAuthenticated && (<Link to='/userprofile' className={style.link}>
-                    <img src={userPic} alt='user' />
-                    <span>Mi Perfil</span>
-                </Link>)}
+            {isAuthenticated && <UserMenu
+            id={props.id}/>}
         </div>
 
     )

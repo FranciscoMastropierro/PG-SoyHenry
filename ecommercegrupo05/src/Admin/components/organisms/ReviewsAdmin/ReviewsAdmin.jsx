@@ -66,10 +66,10 @@ const allreviews = [
                 <>
                   
                   <div className={style.CardTop}>
-                    <h2>review Id</h2>
+                    <h2>Id</h2>
                     <h2>email</h2>
                     <h2>Rating</h2>
-                    <h2>Text</h2>
+                    <h2>texto</h2>
                   </div>
                   
                   
@@ -77,7 +77,8 @@ const allreviews = [
                     <div className={style.Card} key={e.id}>
 
                         <button className={style.DelBtn} id={e.id} onClick={()=>deleteHandler(e)}>
-                          <ImCross/>
+                          < ImCross
+                          className={style.DelBtnr}/>
                         </button> 
                         <h3 className={style.info}>{e.id}</h3>                
                         <h3 className={style.info}>{e.email}</h3>                

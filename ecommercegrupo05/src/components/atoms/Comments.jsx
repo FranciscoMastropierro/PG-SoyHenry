@@ -1,71 +1,74 @@
 import React, { useEffect, useState } from 'react'
-import { Textarea } from '@chakra-ui/react'
 import style from '../../styles/comments.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { crateComment, getComments } from '../../redux/actions';
+import {deleteComment, getComments } from '../../redux/actions';
+import { useParams } from 'react-router-dom';
+import swal from 'sweetalert';
+import trash from "../../assets/trash2.png";
+
 
 function Comments() {
   const dispatch = useDispatch();
-  const commentUsers = useSelector(state => state.commentsUser)
-
-  // -------- estado para enviar comentarios
-  const [input, setInput] = useState({
-    text: '',
-    productId: 'ff5f4fbe-88fe-4501-8a97-abed261aeff5',
-    userId: 'c2fcac02-9259-4047-b4ab-dd68ab6711b8'
-  })
+  let commentProduct = useSelector(state => state.commentsUserXProduct)  
+  const idProductCurrent = useParams().id;
+  const usercurrent = useSelector(state => state.userLoged)
+  const idUser = usercurrent.id 
 
   useEffect(() => {
-    dispatch(getComments(input.productId))
-  }, [])
+    dispatch(getComments(idProductCurrent))
+  }, [idProductCurrent])
 
-  function handleText(e) {
-    e.preventDefault(e);
-    setInput({
-      ...input,
-      text: e.target.value
-    });
-  }
 
-  function handleSubmit(e) {
+  function handleBtnDelete(e) {
     e.preventDefault(e);
-    dispatch(crateComment(input));
-    alert('gracias por su comentario.')
-    setInput({
-      ...input,
-      text: ''
+    const idDel = e.target.value
+    dispatch(deleteComment(idDel));
+    swal({
+      title: "Comentario eliminado.",
+      input: "text",
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+      buttons: {
+        cancel: 'ok'
+      }
     })
-    dispatch(getComments(input.productId))
+    dispatch(getComments(idProductCurrent))
   }
-
-
 
   return (
     <div className={style.div}>
       <div>
-        <label>Dejar comentario del producto
-          <Textarea placeholder='Escribe tu comentario aqui...' value={input.text} onChange={e => handleText(e)} />
-        </label>
-        <button onClick={(e) => handleSubmit(e)}>Enviar</button>
-      </div>
-      <div>
-        <h2>{commentUsers.length} Comentarios</h2>
+        {Array.isArray(commentProduct) ? (commentProduct.length === 1
+          ? <h2> {commentProduct.length} Comentario</h2>
+          : <h2> {commentProduct.length} Comentarios</h2>)
+          : ''
+        }
         {
-          commentUsers ?
-          commentUsers.map(c => {
-            return(
-            <div key={c.id}>
-              <h3>{c.userInfo['firstname']}</h3>
-              <p>{c.text}</p>
-            </div>
-            )
-          })
-          : commentUsers
+          Array.isArray(commentProduct) ?
+            commentProduct.map(({ id, UserId, userInfo, text }) => {              
+              return (
+                <div key={id} className={style.allComments}>
+                  <div>
+                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']}</h3> 
+                    <p className={style.text}>{text}</p>
+                  </div>
+                  {
+                    UserId === idUser
+                    ?
+                      <button className={style.btnDelete} value={id} onClick={e => handleBtnDelete(e)}>Borrar</button>
+                      :
+                      ''                    
+                  }
+                </div>
+              )
+            })
+            : <p>'Sin Comentarios'</p>
         }
       </div>
-
     </div>
   )
+  // <img src={trash} className={style.trash1} />
 }
 
 export default Comments

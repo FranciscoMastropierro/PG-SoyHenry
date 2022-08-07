@@ -17,16 +17,15 @@ import SettingsMock from './components/molecules/SettingsMock';
 import OrdersMock from './components/molecules/OrdersMock';
 import Categories from './components/organisms/categories';
 import CreateForm from './components/organisms/createForm';
+import UserOrders from './components/organisms/UserOrders';
 import { Whatsapp } from './components/atoms/whatsapp';
 import Admin from './Admin/Admin.jsx';
 import { CartProvider } from './context/CartItem';
 import style from "./styles/details.module.css";
 import UserProfile from './components/organisms/userProfile';
-import Checkout from './components/organisms/checkoutForm/Checkout';
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import TestCheckout from './components/organisms/checkoutForm/TestCheckout';
 import TestAddresForm from './components/organisms/checkoutForm/TestAddresForm';
-import Review from './components/organisms/checkoutForm/Review';
 
 
 function App() {
@@ -48,9 +47,9 @@ function App() {
             <Route exact path='/userprofile' element={<PrivateRoute component={UserProfile} />} />
             <Route exact path = '/profile' element={<PrivateRoute component={Profile} />} />
             <Route exact path = '/OrdersMock' element={<PrivateRoute component={OrdersMock}  />} />
+            <Route exact path = '/Orders/:id' element={<PrivateRoute component={UserOrders}  />} />
             <Route exact path = '/Settings' element={<PrivateRoute component={SettingsMock}  />} />
             <Route exact path = '/TestCheckout' element={<PrivateRoute component={TestCheckout}  />} />
-            {/* <Route exact path = '/Checkout' element={<PrivateRoute component={Checkout}  />} />  */} //esto es de prueba
             <Route exact path = '/TestAddresForm' element={<PrivateRoute component={TestAddresForm}  />} />
             <Route exact path='/cart' element={<Cart />} />
             <Route exact path='/aboutUs' element={<AboutUs />} />

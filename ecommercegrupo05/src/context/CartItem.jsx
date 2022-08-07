@@ -13,7 +13,6 @@ export const CartProvider = ({ children }) => {
     }
 
     const mensaje = useSelector((state) => state.msgCart)
-    // console.log("🚀 ~ file: CartItem.jsx ~ line 16 ~ CartProvider ~ msg rogelioooo", msg)
 
     const [state, setState] = useState(() => {
         try {
@@ -29,14 +28,6 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('cartState', JSON.stringify(state))
     }, [state]);
-
-    const cachearNumber = state.products.reduce((accum, current) => accum = accum + current?.amount, 0)
-
-    // const totalAmount = state.products.reduce((accum, current) => accum = Number(accum) + Number(current?.price), 0)
-
-    // const totalPricePerProducts = state.products.map(({amount, price}) => amount * price)
-
-    // const totalPrice = totalPricePerProducts.reduce((accum, current) => accum = accum + current, 0)
 
 
     const updateState = (props) => {
@@ -153,28 +144,13 @@ export const CartProvider = ({ children }) => {
         }
     }
 
-    const deleteAllCart = msg => {
-        
-        
-        // console.log("🚀 ~ file: CartItem.jsx ~ line 157 ~ CartProvider ~ adentro de la funcion", mensaje)
-        const cartItems = msg
-        let result = []
-        if(mensaje === 'Successful payment'){
-            result = cartItems.splice(0,0)
-            // console.log('aqui entre en borrar todo')
-        }else {
-            return cartItems
-        }
-        updateState({ products: result });
-    }
-
     const storage = {
         state,
         effects: {
             addItemToCart,
             deleteItemToCart,
-            deleteAll,
-            deleteAllCart
+            deleteAll
+            // deleteAllCart
         }
     }
 

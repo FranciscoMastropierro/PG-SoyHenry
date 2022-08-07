@@ -22,6 +22,8 @@ export default function Navbar () {
                 dispatch(token(tok, user))
             })
         }
+        // console.log('usuario logueado', userLoged)
+        // console.log('no hay token :(')
     }, [isLoading, isAuthenticated, Object.keys(userLoged).length])
 
 
@@ -34,7 +36,7 @@ export default function Navbar () {
                 <SearchBar/>
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
-            <div className={style.sidebarToggle}>
+            <div className={style.sidebarToggle}  id={userLoged.id}>
                 <SidebarOptions/>
                 <ToggleMenu/>
             </div>

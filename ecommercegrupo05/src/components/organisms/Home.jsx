@@ -10,13 +10,14 @@ import Footer from '../molecules/footer'
 // import { useDispatch, useSelector } from 'react-redux';
 
 export function Home () {
+
     return (
         <div>
             <SliderNews />
             <SlidePopularProducts />
             <SlideBestNotebooks />                      
-            <BrandBar/>
-            <Slider/>
+            <BrandBar />
+            <Slider />
             <Footer/>
         </div>
     )
