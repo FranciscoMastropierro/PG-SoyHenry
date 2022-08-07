@@ -10,6 +10,7 @@ import trash from "../../assets/trash2.png";
 function Comments() {
   const dispatch = useDispatch();
   let commentProduct = useSelector(state => state.commentsUserXProduct)  
+  console.log("🚀 ~ file: Comments.jsx ~ line 13 ~ Comments ~ commentProduct", commentProduct)
   const idProductCurrent = useParams().id;
   const usercurrent = useSelector(state => state.userLoged)
   const idUser = usercurrent.id 
@@ -46,11 +47,12 @@ function Comments() {
         }
         {
           Array.isArray(commentProduct) ?
-            commentProduct.map(({ id, UserId, userInfo, text }) => {              
+            commentProduct.map(({ id, UserId, userInfo, text, rating }) => {              
               return (
                 <div key={id} className={style.allComments}>
                   <div>
-                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']}</h3> 
+                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']}</h3>
+                    <h5>{rating} ⭐</h5>
                     <p className={style.text}>{text}</p>
                   </div>
                   {
