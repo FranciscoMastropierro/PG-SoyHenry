@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Card from '../atoms/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilters } from '../../redux/actions';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -14,7 +14,7 @@ import style from '../../styles/slidepopularproducts.module.css'
 
 function SlideBestNotebooks() {
   const dispatch = useDispatch();
-  const [category, setCategory] = useState({
+  const [category, ] = useState({
     brand: "",
     categorie: "Laptops",
     order: "",
@@ -24,12 +24,17 @@ function SlideBestNotebooks() {
     }
   })
   const infoBestNotebooks = useSelector(state => state.laptos);
-   
+  const productsXRating = infoBestNotebooks.sort((obj1,obj2) => {
+    if(obj1.rating > obj2.rating) { return -1}
+    else if(obj1.rating < obj2.rating) {return 1}
+    else {return 0}
+  })
+  const productsToSee = productsXRating.slice(0, 10)
+
   useEffect(() => {
     dispatch(getFilters(category))
-  }, [dispatch])
+  }, [dispatch])  
 
-  const productsToSee = infoBestNotebooks.slice(0, 10)
   return (
     <div className={style.slideContainer}>
       <h3 className={style.title}> Las Mejores Computadoras </h3>
@@ -45,18 +50,19 @@ function SlideBestNotebooks() {
         // onSwiper={(swiper) => console.log(swiper)}
         >
           {
-            infoBestNotebooks ? productsToSee.map(({ id, image, name, price }) => {
+            infoBestNotebooks ? productsToSee.map(({ id, image, name, price, rating }) => {
               return (
                 <SwiperSlide key={id}>
                   <div className={style.sliderbg}>
-                    <Link to={`/details/${id}`}>
+                    {/* <Link to={`/details/${id}`}> */}
                       <Card
                         image={image}
                         name={name}
                         price={price}
                         id={id}
+                        rating={rating}
                       />
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </SwiperSlide>
               )

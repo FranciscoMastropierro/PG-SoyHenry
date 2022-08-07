@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Card from '../atoms/Card';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -20,10 +20,13 @@ function SlidePopularProducts() {
       dispatch(getProducts())
   },[]) //eslint-disable-line react-hooks/exhaustive-deps
 
-  // const productsXRating = infoData.map(ratingCant => ratingCant.rating).sort((a,b) => b-a)
-  const productsToSee = infoData.slice(0,10)
-  // console.log("🚀 actual", productsXRating)
-  
+  const productsXRating = infoData.sort((obj1,obj2) => {
+    if(obj1.rating > obj2.rating) { return -1}
+    else if(obj1.rating < obj2.rating) {return 1}
+    else {return 0}
+  })
+  const productsToSee = productsXRating.slice(0,10)
+    
     return (
         <div className={style.slideContainer}> 
             <h3 className={style.title}> Productos Populares</h3>
@@ -39,18 +42,19 @@ function SlidePopularProducts() {
         // onSwiper={(swiper) => console.log(swiper)}
       >
         {
-        infoData ? productsToSee.map(({id, image, name, price}) =>{
+        infoData ? productsToSee.map(({id, image, name, price, rating}) =>{
             return(
                       <SwiperSlide key={id}>
                       <div className={style.sliderbg}>                      
-                      <Link to={`/details/${id}`}>
+                      {/* <Link to={`/details/${id}`}> */}
                           <Card 
                           image={image} 
                           name={name}
                           price={price}
                           id={id}
+                          rating={rating}
                           />
-                      </Link>
+                      {/* </Link> */}
                       </div>
                       </SwiperSlide>
                   )
