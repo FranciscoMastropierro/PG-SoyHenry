@@ -36,9 +36,14 @@ const UserOrders = () => {
     userId: idUser
   })
 
+  const myOrders = allOrders.filter((e)=>e.UserId===idUser)
+
   const [option, setOption] = useState(true)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+
+
 
   function handleOption(e) {
     e.preventDefault(e)
@@ -111,9 +116,11 @@ const UserOrders = () => {
     <div className={style.container}>
       <h2 className={style.Title}> My Orders</h2>
 
-      {allOrders && allOrders.length ? (
+
+
+      {myOrders && myOrders.length ? (
         <>
-          {allOrders.map((order) => {
+          {myOrders.map((order) => {
             return (
               <div className={style.Card} key={order.id}>
                 <div>

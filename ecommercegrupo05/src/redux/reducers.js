@@ -27,7 +27,9 @@ import {
     DELETE_COMMENT,
     DELETE_PRODUCT,
     UPDATE_ROL,
-    GET_MSG_CART
+    GET_MSG_CART,
+    GET_ALL_ORDERS,
+    GET_ORDER_BY_ID,
 } from './actions'
 
 const initialState = {
@@ -57,6 +59,8 @@ const initialState = {
     msgCart: '',
     commentsUser: [],
     UserOrders:[],
+    allOrders:[],
+    currentOrder:[],
     
 }
 
@@ -77,6 +81,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 UserOrders: payload
+            }
+        case GET_ALL_ORDERS:
+            return {
+                ...state,
+                allOrders: payload
             }
         case CREATE_PRODUCT:
             return {
@@ -120,6 +129,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 searchedUser: payload,
+            };
+        case GET_ORDER_BY_ID:
+            return {
+                ...state,
+                currentOrder: payload,
             };
         case GET_ALL_USERS:
             return {
