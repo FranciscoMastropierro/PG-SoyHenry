@@ -20,7 +20,10 @@ function SlidePopularProducts() {
       dispatch(getProducts())
   },[]) //eslint-disable-line react-hooks/exhaustive-deps
 
+  // const productsXRating = infoData.map(ratingCant => ratingCant.rating).sort((a,b) => b-a)
   const productsToSee = infoData.slice(0,10)
+  // console.log("🚀 actual", productsXRating)
+  
     return (
         <div className={style.slideContainer}> 
             <h3 className={style.title}> Productos Populares</h3>

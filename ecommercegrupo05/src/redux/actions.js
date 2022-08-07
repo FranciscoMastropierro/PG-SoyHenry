@@ -20,6 +20,7 @@ export const GET_FILTERS = 'GET_FILTERS'
 export const GET_CATE = 'GET_CATE'
 export const TOKEN = 'TOKEN'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 export const TOTAL_PRICE = 'TOTAL_PRICE'
 export const GET_PRODUCTS_CART = 'GET_PRODUCTS_CART'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
@@ -35,6 +36,7 @@ export const GET_MSG_CART = 'GET_MSG_CART'
 export const POST_ORDERS = 'POST_ORDERS'
 export const GET_ALL_USERS_ORDER = 'GET_ALL_USERS_ORDER'
 export const NUMBER_PAGE = 'NUMBER_PAGE'
+export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 
 
 
@@ -57,6 +59,16 @@ export function getProductByName(name) {
         const data = json.data
         return dispatch({
             type: GET_PRODUCT_BY_NAME,
+            payload: data
+        })
+    }
+}
+export function getOrderById(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/api/orders/${id}`)
+        const data = json.data
+        return dispatch({
+            type: GET_ORDER_BY_ID,
             payload: data
         })
     }
@@ -282,6 +294,16 @@ export function getComments(id) {
         const data = json.data
         return dispatch({
             type: GET_COMMENTS_ID,
+            payload: data
+        })
+    }
+}
+export function getAllOrder() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/api/orders`)
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_ORDERS,
             payload: data
         })
     }

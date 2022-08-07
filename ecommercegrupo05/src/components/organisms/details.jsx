@@ -18,7 +18,7 @@ export default function Details() {
   const { id } = useParams();
   const product = useSelector((state) => state.detail);
 
-  const { image, name, price, brand, description, stock } = product
+  const { image, name, price, brand, description, stock, rating } = product
 
   useEffect(() => {
     dispatch(getDetail(id));
@@ -40,6 +40,7 @@ export default function Details() {
                   <h1 className={style.title}> {name}</h1>
                   <h3 className={style.brand}> {brand}</h3>
                   <h2 className={style.title}> ${price}</h2>
+                  <h2 className={style.brand}> Rating: {Math.round(rating)} ⭐</h2>
                   <button className={style.btn} onClick={handleItemToCart(product)}>Añadir al Carrito 🛒</button>
                   <p className={style.description}>{description}</p>
                   <h5 className={style.stock}> {stock} unidades disponibles</h5>
