@@ -91,7 +91,7 @@ const UserOrders = () => {
         cancel: 'ok'
       }
     })
-    onclose()
+    onClose()
   }
 
   const optionsRating = [
