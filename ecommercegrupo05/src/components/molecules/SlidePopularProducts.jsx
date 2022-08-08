@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Card from '../atoms/Card';
-// import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -10,6 +9,7 @@ import 'swiper/css/effect-cards'
 import style from '../../styles/slidepopularproducts.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions';
+import { Link } from 'react-router-dom';
 
 
 function SlidePopularProducts() {
@@ -46,7 +46,7 @@ function SlidePopularProducts() {
             return(
                       <SwiperSlide key={id}>
                       <div className={style.sliderbg}>                      
-                      {/* <Link to={`/details/${id}`}> */}
+                      <Link to={`/details/${id}`}>
                           <Card 
                           image={image} 
                           name={name}
@@ -54,7 +54,7 @@ function SlidePopularProducts() {
                           id={id}
                           rating={rating}
                           />
-                      {/* </Link> */}
+                      </Link>
                       </div>
                       </SwiperSlide>
                   )
