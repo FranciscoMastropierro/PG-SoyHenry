@@ -6,27 +6,27 @@ export default function PrivacyPolicy (){
     return(
         <>
         
-        <div className={styles.aboutTitle} >Privacy Policy</div>
+        <div className={styles.aboutTitle} >Politica de Privacidad</div>
         <p className={styles.aboutText}>
-        We may provide different or additional privacy notices in connection with certain activities, <br/>
-        programs, and offerings. We may also provide additional “just-in-time” notices that may supplement <br/>
-        or clarify our privacy practices or provide you with additional choices regarding your personal information.<br/>
+        Podemos proporcionar avisos de privacidad diferentes o adicionales en relación a ciertas actividades, <br/>
+        programas y ofertas. También podemos proporcionar avisos adicionales "justo a tiempo" que pueden complementar <br/>
+        o aclarar nuestras prácticas de privacidad o brindarle opciones adicionales con respecto a su información personal.<br/>
         </p>
         <br/>
         <p className={styles.aboutText}>
-        Our websites may include links to websites and/or applications operated and maintained by third parties. <br/>
-        Please note that we have no control over the privacy practices of websites or applications that we do not own. <br/>
-        We encourage you to review the privacy practices of those third parties.<br/>
+        Nuestros sitios web pueden incluir enlaces a sitios web y/o aplicaciones operadas y mantenidas por terceros. <br/>
+        Tenga en cuenta que no tenemos control sobre las prácticas de privacidad de los sitios web o aplicaciones que no son de nuestra propiedad. <br/>
+        Le recomendamos que revise las prácticas de privacidad de esos terceros.<br/>
         </p>
         <br/>
         <p className={styles.aboutText}>
-        The types of personal information we obtain about you depends on how you interact with us and our products and services. <br/>
-        When we use the term “personal information,” we are referring to information that identifies, relates to, describes, <br/>
-        or can be associated with you.<br/>
+        Los tipos de información personal que obtenemos sobre usted dependen de cómo interactúa con nosotros y nuestros productos y servicios. <br/>
+        Cuando usamos el término "información personal", nos referimos a la información que identifica, se relaciona con, describe, <br/>
+        o puede estar asociado con usted.<br/>
         </p>
         <br/>
         <div className={styles.marginDiv}>
-            <NavLink to = '/' className={styles.backtohome}>Back to Home</NavLink>
+            <NavLink to = '/' className={styles.backtohome}>Volver al Inicio</NavLink>
         </div>
         
         </>
