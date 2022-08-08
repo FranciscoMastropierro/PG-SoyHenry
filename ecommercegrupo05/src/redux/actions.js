@@ -37,6 +37,7 @@ export const POST_ORDERS = 'POST_ORDERS'
 export const GET_ALL_USERS_ORDER = 'GET_ALL_USERS_ORDER'
 export const NUMBER_PAGE = 'NUMBER_PAGE'
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
+export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS'
 
 
 
@@ -304,6 +305,16 @@ export function getAllOrder() {
         const data = json.data
         return dispatch({
             type: GET_ALL_ORDERS,
+            payload: data
+        })
+    }
+}
+export function GetAllReviews() {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/api/commentary/all`)
+        const data = json.data
+        return dispatch({
+            type: GET_ALL_COMMENTS,
             payload: data
         })
     }

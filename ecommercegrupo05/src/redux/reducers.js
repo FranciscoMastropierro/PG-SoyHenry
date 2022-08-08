@@ -31,6 +31,7 @@ import {
     NUMBER_PAGE,
     GET_ALL_ORDERS,
     GET_ORDER_BY_ID,
+    GET_ALL_COMMENTS,
 } from './actions'
 
 const initialState = {
@@ -62,6 +63,7 @@ const initialState = {
     UserOrders:[],
     allOrders:[],
     currentOrder:[],
+    allComments:[],
     
 }
 
@@ -82,6 +84,16 @@ function rootReducer(state = initialState, { type, payload }) {
                 return {
                 ...state,
                 UserOrders: payload
+            }
+            case GET_ALL_COMMENTS:
+                return {
+                ...state,
+                allComments: payload
+            }
+            case GET_ORDER_BY_ID:
+                return {
+                ...state,
+                currentOrder: payload
             }
         case GET_ALL_ORDERS:
             return {

@@ -77,7 +77,7 @@ export function SidebarOptions(props) {
             </button>
 
             {isAuthenticated && <UserMenu
-            id={props.id}/>}
+            id={props.id} isAdmin={props.isAdmin} />}
         </div>
 
     )

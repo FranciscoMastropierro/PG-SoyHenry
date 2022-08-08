@@ -35,7 +35,7 @@ export default function Navbar () {
                 <SearchBar/>
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
-            <SidebarOptions id={userLoged.id}/>
+            <SidebarOptions id={userLoged.id} isAdmin={userLoged.isAdmin} />
         </div>
     )
 }

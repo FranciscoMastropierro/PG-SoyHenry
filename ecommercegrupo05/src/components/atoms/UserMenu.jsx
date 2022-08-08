@@ -63,6 +63,14 @@ const UserMenu = (props) => {
             Información
 
           </MenuItem></Link>
+          { props.isAdmin && <Link to="/admin"><MenuItem bg="black" color="white" fontFamily="Share Tech, sans-serif" fontSize="1.2rem" _hover={{
+            background: "green",
+            color: "black",
+          }}>
+
+            Panel de Administración
+
+          </MenuItem></Link>}
         </MenuList>
       </Menu>
     </div>
