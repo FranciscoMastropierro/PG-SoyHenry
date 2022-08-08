@@ -13,7 +13,7 @@ export default function Footer () {
         <div className={style.bgfooter} >
         <div >
             <div className={style.textTitleFooter}>
-                Company
+                Compañia
             </div>
             <div>
                 <NavLink to ='/faq'  className={`${style.textTitleFooter2}`}>
@@ -22,7 +22,7 @@ export default function Footer () {
             </div>
             <div>
                 <NavLink to ='/returns' className={`${style.textTitleFooter2}`}>
-                Returns
+                Devoluciones
                 </NavLink>
             </div>
             <div className={style.textTitleFooter}>
@@ -30,24 +30,24 @@ export default function Footer () {
             </div>
             <div>
                 <NavLink to ='/termsandconditions' className={`${style.textTitleFooter2}`}>
-                Terms and conditions
+                Terminos y Condiciones
                 </NavLink>
             </div>
             <div>
                 <NavLink to ='/privacypolicy' className={`${style.textTitleFooter2}`}>
-                Privacy Policy
+                Politica de Privacidad
                 </NavLink>
             </div>
             <div>
                 <NavLink  to ='/termsofuse' className={`${style.textTitleFooter2}`}>
-                Terms of use
+                Terminos de Uso
                 </NavLink>
             </div>
         </div>
 
         <div className={style.divAlign}>
             <div className={style.textTitleFooter}>
-                Contact Us
+                Contactanos
             </div>
             <div className={style.texttitle2}>
                 info@hardwere.com
@@ -58,7 +58,7 @@ export default function Footer () {
 
             <div className={style.textTitleFooter}>
                     <Link to='/aboutus' className={`${style.textTitleFooter2}`}>
-                    About Us   
+                    Sobre Nosotros   
                     </Link>
             </div>
             <div className={style.iconsSize}>
@@ -67,7 +67,7 @@ export default function Footer () {
 
         </div>
         <div >
-            <label className={style.textTitleFooter} >Stay in touch</label>
+            <label className={style.textTitleFooter} >Mantenete en Contacto</label>
             <form
             >
                 
@@ -86,10 +86,10 @@ export default function Footer () {
             />
             </form>
             <p className={style.textTitleFooterinfoSize}>
-                By subscribing to "hard", you consent to <br></br>
-                receive recurring automated promotional <br></br>
-                and personalized marketing messages<br></br>
-                via automated technology</p>
+                Al subscribirte a NewHard <br></br>
+                aceptas recibir promociones <br></br>
+                y mensajes personalizados<br></br>
+                automatizados via e-mail</p>
         </div>
         </div>
     )

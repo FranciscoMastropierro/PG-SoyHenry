@@ -6,24 +6,24 @@ export default function TermsOfUse (){
     return(
         <>
         
-        <div className={styles.aboutTitle} >Terms of Use</div>
+        <div className={styles.aboutTitle} >Termino de Uso</div>
         <p className={styles.aboutText}>
-        All design, text, graphics, logos, button icons, images, audio and video clips, the selection and <br/>
-        arrangement thereof, and all software on the Sites is Copyright (c) Hard <br/>
-        ALL RIGHTS RESERVED. The compilation (meaning the collection, arrangement and assembly) of all <br/>
-        content on the Sites is the exclusive property of Hard and protected by U.S. and international <br/>
-        copyright laws. All software used on the Sites is the property of Hard or its software suppliers <br/>
-        and is protected by U.S. and international copyright laws.<br/>
+        Todo el diseño, texto, gráficos, logotipos, iconos de botones, imágenes, clips de audio y video, la selección y  <br/>
+        disposición de los mismos, y todo el software en el Sitio es Copyright (c) NewHard <br/>
+        RESERVADOS TODOS LOS DERECHOS. La compilación (es decir, la recopilación, arreglo y montaje) de todos los <br/>
+        El contenido de los Sitios es propiedad exclusiva de Hard y está protegido por <br/>
+        leyes de derechos de autor. Todo el software utilizado en los Sitios es propiedad de Hard o de sus proveedores de software <br/>
+        está protegido por las leyes de derechos de autor de EE. UU. e internacionales.<br/>
         </p>
         <br/>
         <p className={styles.aboutText}>
-        "Hard".com and all page headers, custom graphics and button icons are service marks, trademarks <br/>
-        All other trademarks, product names and company names or logos cited herein are the property of their <br/>
-        respective owners.<br/>
+        NewHard.com y todos los encabezados de página, gráficos personalizados e íconos de botones son marcas de servicio, marcas registradas <br/>
+        Todas las demás marcas comerciales, nombres de productos y nombres de empresas o logotipos citados en este documento son propiedad de sus <br/>
+        respectivos dueños.<br/>
         </p>
         <br/>
         <div className={styles.marginDiv}>
-            <NavLink to = '/' className={styles.backtohome}>Back to Home</NavLink>
+            <NavLink to = '/' className={styles.backtohome}>Volver al Inicio</NavLink>
         </div>
         
         </>
