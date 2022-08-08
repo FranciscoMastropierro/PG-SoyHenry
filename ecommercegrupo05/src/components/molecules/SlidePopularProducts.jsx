@@ -34,7 +34,7 @@ function SlidePopularProducts() {
         <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={80}
-        slidesPerView={5}
+        slidesPerView={4}
         navigation
         // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}

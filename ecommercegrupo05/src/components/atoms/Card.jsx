@@ -23,18 +23,13 @@ function Card({ image, name, price, id, rating }) {
     <div className={style.container}>
       <div className={style.imgContainer}>
         <img className={style.img} src={image} alt="Flag" width='130' height='100' />
-        {/* <button onClick={(e) => handleClick(e)}>
-          <img src={!fav? favourites : click} alt='favourite' className={style.favourite}/>
-        </button> */}
+
       </div>
       <div className={style.textContainer}>
         <h4 className={style.name}>{name}</h4>
         <h5 className={style.price}>${price}</h5>
         <h6 className={style.price}>⭐{Math.round(rating)}</h6>
         <button onClick={() => navigate(`/details/${id}`)}>Ver producto</button>
-        {/* <Link to={'/favorites'}>
-          <button>Agregar a favoritos</button>
-        </Link> */}
         <button onClick={onOpen}>Agregar a favoritos</button>
 
         <Modal isOpen={isOpen} onClose={onClose}>
