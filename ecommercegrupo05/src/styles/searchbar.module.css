@@ -27,6 +27,7 @@
     align-items: center;
     justify-content: center;
     background-color: #01F603;
+    color: rgb(212, 0, 255);
     border-radius: 3px;
 }
 .searchbarContainer img {

@@ -15,10 +15,7 @@ import UserMenu from '../atoms/UserMenu';
 
 
 export function SidebarOptions(props) {
-    
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
+    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
@@ -50,7 +47,7 @@ export function SidebarOptions(props) {
             cartNumber: cachearNumber
         }
     ]
-    console.log(user)
+    
     return (
         <div className={style.options}>
                 {isAuthenticated && (

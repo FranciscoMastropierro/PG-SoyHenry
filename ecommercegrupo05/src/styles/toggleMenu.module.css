@@ -14,6 +14,9 @@
     height: 2.5rem;
     width: auto;
 }
+.span {
+    margin: 5px
+}
 
 @media only screen and (min-width: 960px) {
     .toggleMenu {
