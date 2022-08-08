@@ -6,12 +6,24 @@ import { getDetail, cleaner } from "../../redux/actions";
 import style from "../../styles/details.module.css";
 import { useCartContext } from '../../context/CartItem';
 import Comments from "../atoms/Comments";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from '@chakra-ui/react'
 
 export default function Details() {
 
   const superState = useCartContext()
 
   const { addItemToCart } = superState.effects
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -42,6 +54,30 @@ export default function Details() {
                   <h2 className={style.title}> ${price}</h2>
                   <h2 className={style.brand}> Rating: {Math.round(rating)} ⭐</h2>
                   <button className={style.btn} onClick={handleItemToCart(product)}>Añadir al Carrito 🛒</button>
+                  <button onClick={onOpen} className={style.btn}>
+                    Agregar a favoritos
+                  </button>
+
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Quieres agregar a favoritos❓</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <p>Si deseas agregar un producto a favoritos, deber registrate primero.</p>
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <button colorScheme='blue' mr={3} onClick={onClose}>
+                          Cancelar
+                        </button>
+                        <Link to={'/favorites'}>
+                          <button variant='ghost'>Registrarme</button>
+                        </Link>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+
                   <p className={style.description}>{description}</p>
                   <h5 className={style.stock}> {stock} unidades disponibles</h5>
                 </div>
@@ -57,7 +93,7 @@ export default function Details() {
               </div>
             )}
         </div>
-        <Comments/>
+        <Comments />
       </div>
     </div>
   );

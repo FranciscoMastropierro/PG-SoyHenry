@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards'
 import style from '../../styles/slidepopularproducts.module.css'
+import { Link } from 'react-router-dom';
 
 
 function SlideBestNotebooks() {
@@ -54,7 +55,7 @@ function SlideBestNotebooks() {
               return (
                 <SwiperSlide key={id}>
                   <div className={style.sliderbg}>
-                    {/* <Link to={`/details/${id}`}> */}
+                    <Link to={`/details/${id}`}>
                       <Card
                         image={image}
                         name={name}
@@ -62,7 +63,7 @@ function SlideBestNotebooks() {
                         id={id}
                         rating={rating}
                       />
-                    {/* </Link> */}
+                    </Link>
                   </div>
                 </SwiperSlide>
               )
