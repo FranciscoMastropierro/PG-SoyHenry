@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Card from '../atoms/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilters } from '../../redux/actions';
-// import { Link } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
