@@ -1,8 +1,6 @@
 import React from "react";
 import style from '../../../styles/footerOne.module.css';
-import whatsapp from '../../../assets/whatsapp.png';
 import { Link, NavLink } from "react-router-dom";
-import swal from 'sweetalert';
 import { FaInstagram, FaPinterestP, FaTiktok, FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
