@@ -1,4 +1,4 @@
-.bgfooter{
+.bgfooter {
     background-color: #1b1b1b;
     padding: 30px 30px 50px 30px;
     display: flex;
@@ -7,26 +7,16 @@
     justify-content: space-evenly;
     width: 100%;
     height: auto;
+    font-family: 'Share Tech', sans-serif !important;
+    color: #d3d3d3 !important;
+    font-size: 17px !important;
+    text-decoration: none !important;
 }
 
-.divAlign{
+.divAlign {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-}
-
-.textTitleFooter{
-    font-family: 'Share Tech', sans-serif;
-    color: #d3d3d3;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.textTitleFooter2{
-    font-family: 'Share Tech', sans-serif;
-    color: #d3d3d3;
-    font-size: 20px;
-    text-decoration: none;
 }
 
 .textTitleFooter2:hover{
@@ -35,19 +25,6 @@
 
   a.textTitleFooter2.active {
     background-color: transparent;
-}
-
-.textTitleFooterinfoSize{
-    font-family: 'Share Tech', sans-serif;
-    color: #d3d3d3;
-    font-size: 20px;
-}
-
-.texttitle2{
-    font-family: 'Share Tech', sans-serif;
-    color: #d3d3d3;
-    font-size: 20px;
-    text-decoration: none;
 }
 
 .iconsSize{
@@ -97,4 +74,13 @@
 
 a.textTitleFooter2.active {
     background-color: transparent;
+}
+
+@media only screen and (max-width: 800px) {
+    .contact {
+        display: none;
+    }
+    .bgfooter {
+        font-size: 13px !important;
+    }
 }

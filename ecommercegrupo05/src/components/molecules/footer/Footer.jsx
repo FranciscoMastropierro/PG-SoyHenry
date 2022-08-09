@@ -47,6 +47,7 @@ export default function Footer () {
                 )})}
             </div>
 
+            <div className={style.contact}>
             <div className={style.divAlign}>
                 <div className={style.textTitleFooter}>
                     Contactanos via:
@@ -65,6 +66,7 @@ export default function Footer () {
                     <FaInstagram/> <FaPinterestP/> <FaTiktok/> <FaFacebookF/>
                 </div>
 
+            </div>
             </div>
 
             <div className={style.contactUs}>
