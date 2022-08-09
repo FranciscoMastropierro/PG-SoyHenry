@@ -5,7 +5,7 @@ const { Order, Users, Products, Products_Orders } = require("../db.js");
 module.exports = {
   getOrderById: async (req, res) => {
     const { id } = req.params;
-    console.log(id)
+    
     try {
       const order = await Order.findOne({
         where: { id },
