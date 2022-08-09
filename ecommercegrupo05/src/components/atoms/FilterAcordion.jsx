@@ -4,11 +4,9 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
+    Button,
   } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 export default function FilterAcordion () {
 
