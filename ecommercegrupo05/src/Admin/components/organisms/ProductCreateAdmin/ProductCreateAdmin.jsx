@@ -103,6 +103,9 @@ export default function CreateForm() {
   const handleSubmit = function (e) {
     e.preventDefault();
     setErrors(validate(setProduct))
+    console.log('Errores :',errors)
+    console.log('PRODUCTO :',newProduct)
+
     if (Object.keys(errors).length === 0 && newProduct.categories.length > 0) {
       dispatch(createProduct(newProduct));
       setProduct({

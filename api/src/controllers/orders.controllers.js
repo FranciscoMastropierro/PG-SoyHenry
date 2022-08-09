@@ -40,7 +40,7 @@ module.exports = {
 
   postOrder: async (req, res) => {
     //products array de objetos con products ID + quantity
-    const { UserId, products } = req.body;
+    const { UserId, products, shipmentAddress, postalCode } = req.body;
     const arr=[]
     try {
       if (!UserId || !Object.keys(products))
@@ -49,18 +49,19 @@ module.exports = {
         const aux = {
         UserId,
         amount: products
-          .map((e) => e.amount * e.price)
+          .map((e) => Number(e.quantity) * Number(e.price))
           .reduce((prev, next) => prev + next),
-        shipmentAddress: user[0].dataValues.address,
-        postalCode:  user[0].dataValues.postalCode,
+        shipmentAddress:shipmentAddress? shipmentAddress : user[0].dataValues.address,
+        postalCode: postalCode? postalCode :  user[0].dataValues.postalCode,
         state:"completed",
         paid:true,
          };
+         
         Order.create(aux).then(async(order)=>{
           for await  (let p of products) {
-            let respuesta= await order.addProducts(p.id, { through: { unitPrice: p.price,quantity: p.amount}})
+            let respuesta= await order.addProducts(p.id, { through: { unitPrice: p.price,quantity: p.quantity }})
             arr.push(respuesta[0].dataValues)
-            Products.update({stock:(Number(p.stock)-Number(p.amount))},{where:{id:p.id}})
+            Products.update({stock:(Number(p.stock)-Number(p.quantity))},{where:{id:p.id}})
       };
       res.send({msj: 'Order Created', arr})
     });

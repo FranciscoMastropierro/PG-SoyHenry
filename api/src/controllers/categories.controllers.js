@@ -1,9 +1,9 @@
 const axios = require('axios');
 require('dotenv').config();
-const productList = require('../asset/productList');
+// const productList = require('../asset/productList');
 const { Categories } = require('../db.js');
 
-
+const URL_JSON = 'https://api.jsonstorage.net/v1/json/19873e5d-80e0-40cc-a575-5723cc2e4084/62a6ce49-696b-4e87-87e4-c9b7c74fbc7c'
 
 
 module.exports = {
@@ -23,13 +23,22 @@ module.exports = {
     
     preLoadCategories : async (req, res) => {
         try {
-    
+            
+            const {data} = await axios.get(URL_JSON);
+
+
             let cateArr = [];
-            let cateMap = productList.map((el) => {
+            let cateMap = data?.map((el) => {
                 let cate = el.categories; 
                 
                 cateArr.push(cate)
             });
+    
+            // let cateMap = productList.map((el) => {
+            //     let cate = el.categories; 
+                
+            //     cateArr.push(cate)
+            // });
     
             let cateFlat = cateArr.flat();
     
