@@ -22,7 +22,7 @@ export default function AboutUs() {
 
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={cris} />
+                        <img className={style.img} src={cris} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Cristina Vlassov<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -35,7 +35,7 @@ export default function AboutUs() {
                 </div>
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={bayron} />
+                        <img className={style.img} src={bayron} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Bayron Murieles<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -48,7 +48,7 @@ export default function AboutUs() {
                 </div>
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={martin} />
+                        <img className={style.img} src={martin} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Martin Ojeda<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -61,7 +61,7 @@ export default function AboutUs() {
                 </div>
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={rogelio} />
+                        <img className={style.img} src={rogelio} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Rogelio Ramirez<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -85,7 +85,7 @@ export default function AboutUs() {
 
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={fran} />
+                        <img className={style.img} src={fran} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Francisco Mastropierro<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -98,7 +98,7 @@ export default function AboutUs() {
                 </div>
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={gaston} />
+                        <img className={style.img} src={gaston} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Gaston Gonzalez<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -111,7 +111,7 @@ export default function AboutUs() {
                 </div>
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={cesar} />
+                        <img className={style.img} src={cesar} alt='alterno'/>
                     </div>
                     <div className={style.content}>
                         <h3 className={style.h3}>Cesar Villanueva<br /><span className={style.span}>FullStack Developer</span></h3>
@@ -124,10 +124,10 @@ export default function AboutUs() {
                 </div>
                 <div className={style.card}>
                     <div className={style.imgBx}>
-                        <img className={style.img} src={rodrigo} />
+                        <img className={style.img} src={rodrigo} alt='alterno'/>
                     </div>
                     <div className={style.content}>
-                        <h3 className={style.h3}>Rodrigo Yones<br /><span className={style.span}>FullStack Developer</span></h3>
+                        <h3 className={style.h3}>Rodrigo Perez Yonez<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
                             <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
                             <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
