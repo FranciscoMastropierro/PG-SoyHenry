@@ -17,29 +17,22 @@ import OrderDetailAdmin from "./components/organisms/OrderDetailAdmin/OrderDetai
 
 function Admin() {
     return (
-                <div>
-                    <NavBarAdmin/>
-                    <div >
-
-                        <Routes>
-
-                            <Route exact path={"/"} element={<DashBoardAdmin/>}/>
-                            <Route exact path={"/users"} element={<UsersAdmin/>}/>
-                            <Route exact path={"/products"} element={<ProductsAdmin/>}/>
-                            <Route exact path={"/products/create"} element={<ProductCreateAdmin/>}/>
-                            <Route exact path={"/products/modify/:id"} element={<ProductModifyAdmin/>}/>
-                            <Route path={"/reviews"} element={<ReviewsAdmin/>}/>
-                            <Route path={"/orders"} element={<OrdersAdmin/>}/>
-                            <Route path={"/orderdetail/:id"} element={<OrderDetailAdmin/>}/>
-                            
-
-                        </Routes>
-                    </div>
-                </div>
-            
-        
-        
-    );   
+        <div>
+            <NavBarAdmin />
+            <div >
+                <Routes>
+                    <Route exact path={"/"} element={<DashBoardAdmin />} />
+                    <Route exact path={"/users"} element={<UsersAdmin />} />
+                    <Route exact path={"/products"} element={<ProductsAdmin />} />
+                    <Route exact path={"/products/create"} element={<ProductCreateAdmin />} />
+                    <Route exact path={"/products/modify/:id"} element={<ProductModifyAdmin />} />
+                    <Route path={"/reviews"} element={<ReviewsAdmin />} />
+                    <Route path={"/orders"} element={<OrdersAdmin />} />
+                    <Route path={"/orderdetail/:id"} element={<OrderDetailAdmin />} />
+                </Routes>
+            </div>
+        </div>
+    );
 };
 
 

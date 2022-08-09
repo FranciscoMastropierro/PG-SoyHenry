@@ -92,7 +92,7 @@ editComment: async (req, res) => {
 
       comment.text = newComment;
       comment.rating = rating;
-      comment.save();
+      await comment.save();
       updateProduct(comment.dataValues.ProductId)
       return res.send(comment);
     }
@@ -127,6 +127,22 @@ deleteCommentById : async (req, res) =>  {
     console.log(err);
     return res.send(err);
   }
-}
+},
+GetAllReviews : async (req, res) =>  {
+  try {
+    const commentary = await Commentary.findAll({
+      include: [{
+        model: Users
+      },{
+        model: Products
+      }
+    ],
+    });
+    res.send(commentary);
+  } catch (error) {
+    console.log(error);
+    res.status(404).send({ error });
+  }
 
+}
 }

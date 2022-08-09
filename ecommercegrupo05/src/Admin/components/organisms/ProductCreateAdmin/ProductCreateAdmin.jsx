@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
-   import {
-    getProducts,
-    createProduct,
-    getAllCategories,
+import {
+  getProducts,
+  createProduct
 
-   } from "../../../../redux/actions";
+} from "../../../../redux/actions";
 
 import style from './ProductCreateAdmin.module.css'
-
 
 export function validate(newProduct) {
   let errors = {};
@@ -33,8 +31,6 @@ export function validate(newProduct) {
     errors.stock = 'El stock no puede ser nulo';
   } if (!newProduct.stock) {
     errors.stock = 'Ingresar stock';
-  } if (newProduct.rating === "" || newProduct.rating > 5 || newProduct.rating < 0) {
-    errors.rating = 'Ingresar un rango entre 1 y 5';
   } if (newProduct.description === "") {
     errors.description = 'Descripcion es requerida';
   }
@@ -59,7 +55,6 @@ export default function CreateForm() {
     price: "",
     categories: [],
     stock: "",
-    rating: "",
     description: "",
   });
   // crea un set de brands para el select 
@@ -67,7 +62,7 @@ export default function CreateForm() {
   products.map((e) => setBrand.push(e.brand));
   let allBrand = [...new Set(setBrand)];
   const category = []
-  
+
   products.map((e) => category.push(e.Categories[0]?.name))
   let setCat = [...new Set(category)]
 
@@ -99,7 +94,6 @@ export default function CreateForm() {
     }
   }
 
-
   const handleSubmit = function (e) {
     e.preventDefault();
     setErrors(validate(setProduct))
@@ -112,10 +106,8 @@ export default function CreateForm() {
         price: "",
         categories: [],
         stock: "",
-        rating: "",
         description: "",
       })
-      redirect()
     }
     else {
       alert("Rellene todos los campos del formulario")
@@ -174,9 +166,7 @@ export default function CreateForm() {
         });
         setErrors(validate(newProduct))
       });
-
   }
-
   function handleDeleteImage(e) {
     e.preventDefault();
     setProduct({
@@ -245,28 +235,27 @@ export default function CreateForm() {
               />
               {errors.stock}
             </div>
-           
             <div className={style.divcell}>
               <label className={style.label1}>Imagen: </label>
-                <input
-                  className={style.choose}
-                  type="file"
-                  onChange={(e) => {
-                    uploadImage(e.target.files);
-                  }}
-                ></input>
-                {newProduct.image &&
-                  <div>
-                    <img src={newProduct.image} alt="" width='500px' />
-                    <button
-                      className={style.x}
-                      name={newProduct.image}
-                      onClick={(name) => handleDeleteImage(name)}
-                    >
-                      X
-                    </button>
-                  </div>
-                }
+              <input
+                className={style.choose}
+                type="file"
+                onChange={(e) => {
+                  uploadImage(e.target.files);
+                }}
+              ></input>
+              {newProduct.image &&
+                <div>
+                  <img src={newProduct.image} alt="" width='500px' />
+                  <button
+                    className={style.x}
+                    name={newProduct.image}
+                    onClick={(name) => handleDeleteImage(name)}
+                  >
+                    X
+                  </button>
+                </div>
+              }
               {errors.image}
             </div>
             <div>

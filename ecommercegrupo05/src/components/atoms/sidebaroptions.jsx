@@ -1,39 +1,24 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import style from '../../styles/sidebaroptions.module.css'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import keyboard from '../../assets/keyboard.png';
 import favourites from '../../assets/favourites.png';
 import cart from '../../assets/cart.png';
-import userPic from '../../assets/user.png';
 import home from '../../assets/home.png';
 import fav from '../../assets/favourites.png';
 import click from '../../assets/favourites-click.png'
 import logoutt from '../../assets/logout.png';
 import loginn from '../../assets/login.png';
 import { useAuth0 } from "@auth0/auth0-react";
-import { setProf, token } from '../../redux/actions.js'
 import { useCartContext } from '../../context/CartItem';
+import UserMenu from '../atoms/UserMenu';
 
-export function SidebarOptions() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const auth = useAuth0()
-    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently, isLoading } = auth;
+
+export function SidebarOptions(props) {
+    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
     const handleSubmit = () => user ? logout() : loginWithRedirect()
     const log = isAuthenticated? 'Salir' : 'Iniciar sesion'
     const photo = isAuthenticated? logoutt : loginn
-
-    useEffect(() => {
-        if(isAuthenticated ){
-            // const tok =  getAccessTokenSilently()
-            getAccessTokenSilently().then(tok =>{
-                // console.log("usr ;)", user)
-                dispatch(token(tok, user))
-            })
-        } 
-        // console.log('no hay token :(')
-    }, [isAuthenticated])
 
     let loc = useLocation().pathname
 
@@ -55,12 +40,6 @@ export function SidebarOptions() {
             styleClass: loc === '/allProducts' ? style.onPath : ''
         },
         {
-            to: '/favorites',
-            name: 'Favoritos',
-            src: loc === '/favorites' ? click : fav,
-            styleClass: loc === '/favorites' ? favourites : click
-        },
-        {
             to: '/cart',
             name: 'Carrito',
             src: cart,
@@ -68,35 +47,33 @@ export function SidebarOptions() {
             cartNumber: cachearNumber
         }
     ]
+    
     return (
         <div className={style.options}>
-            {isAuthenticated && (
-                <span>Hola {user.name}!</span>
-            )}
-            {links.map(({ to, name, src, styleClass, cartNumber }) => (
-                <Link to={to} className={style.link} key={name}>
-                    <div className={style.linkWrapper}>
-                        <img src={src} alt={name} />
-                        <span className={styleClass}>
-                            {name === 'Carrito' ? cartNumber : name}
-                        </span>
-                    </div>
-                    {name === 'Carrito' && (
-                        <span className={loc === '/cart' ? style.onPath : ''}>Carrito</span>
-                    )}
-                </Link>
-            ))}
+                {isAuthenticated && (
+                    <span className={style.span}>Hola {user.given_name} {user.family_name}!</span>
+                )}
+                {links.map(({ to, name, src, styleClass, cartNumber }) => (
+                    <Link to={to} className={style.link} key={name}>
+                        <div className={style.linkWrapper}>
+                            <img src={src} alt={name} />
+                            <span className={styleClass}>
+                                {name === 'Carrito' ? cartNumber : name}
+                            </span>
+                        </div>
+                        {name === 'Carrito' && (
+                            <span className={loc === '/cart' ? style.onPath : ''}>Carrito</span>
+                        )}
+                    </Link>
+                ))}
 
-            <button onClick={handleSubmit} className={style.link}>
-                <img src={photo} />
-                <span>{log}</span>
-            </button>
+                <button onClick={handleSubmit} className={style.link}>
+                    <img src={photo} alt='login'/>
+                    <span>{log}</span>
+                </button>
 
-            {isAuthenticated && (<Link to='/userprofile' className={style.link}>
-                <img src={userPic} alt='user' />
-                <span>Mi Perfil</span>
-            </Link>
-            )}
+            {isAuthenticated && <UserMenu
+            id={props.id} isAdmin={props.isAdmin} />}
         </div>
 
     )

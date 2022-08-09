@@ -11,13 +11,11 @@ import {
     Button,
     Input,
   } from '@chakra-ui/react'
-  
- 
 
 const Profile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
-   return (
+  return (
     <div> 
         <>
       <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
