@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import FilterAcordion from "./FilterAcordion";
 import { getCate, getFilterBrand, getFilters, getProducts, numberPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -102,10 +103,10 @@ export default function FiltersResponsive () {
         dispatch(numberPage(1))    
     }
     return (
-        <div>
+        <div className={style.filterContainer}>
             {/* ----------- filtro de categorias---------- */}
                 <select onChange={(e) => handleCategory(e)}>
-                    <option value="" >Elige una categoria</option>
+                    <option value="" >Categorias</option>
                     {allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
                                 {item}
@@ -117,7 +118,7 @@ export default function FiltersResponsive () {
             {/* ----------- filtro de marcas ---------- */}
 
             <select onChange={(e) => handleOrderBrand(e)} >
-                <option value="">Elige una marca</option>
+                <option value="">Marcas</option>
                 {brands && brands.map((item, index) => (
                         <option key={index} value={item}>
                             {item}
@@ -127,7 +128,6 @@ export default function FiltersResponsive () {
             <br />
 
             {/* ----------- filtro de precio ---------- */}
-
                 <input
                     type="number"
                     name="min"
@@ -146,21 +146,20 @@ export default function FiltersResponsive () {
                     onChange={(e) => handleFilterMax(e)}
                 />
                 <br />
-                {/* <div> */}
-                    {input.brand.map(c => {return (
+
+                    {/* {input.brand.map(c => {return (
                             <div key={c} >
                                 <div>
                                     <p >{c}</p>
                                     <button onClick={() => handleDelete(c)} >✖</button>
                                 </div>
                             </div>
-                    )})}
-                {/* </div> */}
-                <div>
+                    )})} */}
+
                     <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
                     <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
-                </div>
 
+                <FilterAcordion/>
         </div>
     )
 }

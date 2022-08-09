@@ -1,0 +1,36 @@
+.filterContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.filterContainer select{
+    width: 120px;
+    height: 100%;
+    margin: 1vw;
+    padding: 5px;
+    border-radius: 4px;
+}
+.filterContainer input {
+    margin: 1vw;
+    width: 100px;
+    padding: 5px;
+    border-radius: 4px;
+}
+.filterContainer button {
+    margin: 1vw;
+    padding: 5px;
+    border-radius: 4px;
+    background: greenyellow;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+.filterContainer button:hover {
+    background: rgb(26, 26, 26);
+    color: greenyellow;
+}
+
+@media only screen and (max-width: 850px) {
+    .filterContainer {
+        background: pink;
+    }
+}
