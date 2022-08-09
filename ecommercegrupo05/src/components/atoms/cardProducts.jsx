@@ -24,7 +24,7 @@ export default function CardProducts() {
 
     const productsToRender = useSelector((state) => state.productsToRender)
     
-    
+    let {user, loginWithRedirect,} = useAuth0()
     // if (!productsToRender.length) return <div className={style.loader}></div>
     if (!productsToRender.length) return <h1>no hemos encontrado los productos que buscaste</h1>
 
@@ -66,10 +66,3 @@ export default function CardProducts() {
         </div>
     )
 }
-
-
-{/* <Link to={`/cart`}>
-    <button className={style.btn}>
-        Añadir al Carrito 🛒
-    </button>
-</Link> */}

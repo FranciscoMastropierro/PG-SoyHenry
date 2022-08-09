@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
-   import {
-    getProducts,
-    createProduct,
-    getAllCategories,
+import {
+  getProducts,
+  createProduct,
+  getAllCategories,
 
-   } from "../../../../redux/actions";
+} from "../../../../redux/actions";
 
 import style from './ProductCreateAdmin.module.css'
 
@@ -32,7 +32,7 @@ export function validate(newProduct) {
   } if (newProduct.stock < 0) {
     errors.stock = 'El stock no puede ser nulo';
   } if (!newProduct.stock) {
-    errors.stock = 'Ingresar stock'; 
+    errors.stock = 'Ingresar stock';
   } if (newProduct.description === "") {
     errors.description = 'Descripcion es requerida';
   }
@@ -64,7 +64,7 @@ export default function CreateForm() {
   products.map((e) => setBrand.push(e.brand));
   let allBrand = [...new Set(setBrand)];
   const category = []
-  
+
   products.map((e) => category.push(e.Categories[0]?.name))
   let setCat = [...new Set(category)]
 
@@ -241,28 +241,28 @@ export default function CreateForm() {
               />
               {errors.stock}
             </div>
-           
+
             <div className={style.divcell}>
               <label className={style.label1}>Imagen: </label>
-                <input
-                  className={style.choose}
-                  type="file"
-                  onChange={(e) => {
-                    uploadImage(e.target.files);
-                  }}
-                ></input>
-                {newProduct.image &&
-                  <div>
-                    <img src={newProduct.image} alt="" width='500px' />
-                    <button
-                      className={style.x}
-                      name={newProduct.image}
-                      onClick={(name) => handleDeleteImage(name)}
-                    >
-                      X
-                    </button>
-                  </div>
-                }
+              <input
+                className={style.choose}
+                type="file"
+                onChange={(e) => {
+                  uploadImage(e.target.files);
+                }}
+              ></input>
+              {newProduct.image &&
+                <div>
+                  <img src={newProduct.image} alt="" width='500px' />
+                  <button
+                    className={style.x}
+                    name={newProduct.image}
+                    onClick={(name) => handleDeleteImage(name)}
+                  >
+                    X
+                  </button>
+                </div>
+              }
               {errors.image}
             </div>
             <div>
