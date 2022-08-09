@@ -1,88 +1,92 @@
 import React from "react";
 import style from '../../../styles/footerOne.module.css';
-import { Link, NavLink } from "react-router-dom";
+import whatsapp from '../../../assets/whatsapp.png';
+import { Link } from "react-router-dom";
+import swal from 'sweetalert';
 import { FaInstagram, FaPinterestP, FaTiktok, FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
 
-
-
-    return (
+   const footer = [
+    {
+        to: '/aboutus',
+        name: 'Compañia',
+    },
+    {
+        to: '/faq',
+        name: 'FAQ',
+    },
+    {
+        to: '/returns',
+        name: 'Devoluciones',
+    },{
+        to: '/aboutus',
+        name: 'Legal',
+    },
+    {
+        to: '/termsandconditions',
+        name: 'Terminos y condiciones',
+    },
+    {
+        to: '/privacypolicy',
+        name: 'Politicas de Privacidad'
+    },
+    {
+        to: '/termsofuse',
+        name: 'Terminos de uso',
+    },
+   ]
+   
+    return(
         <div className={style.bgfooter} >
-            <div >
-                <div className={style.textTitleFooter}>
-                    Compañia
-                </div>
-                <div>
-                    <NavLink to='/faq' className={`${style.textTitleFooter2}`}>
-                        FAQ
-                    </NavLink>
-                </div>
-                <div>
-                    <NavLink to='/returns' className={`${style.textTitleFooter2}`}>
-                        Devoluciones
-                    </NavLink>
-                </div>
-                <div className={style.textTitleFooter}>
-                    Legal
-                </div>
-                <div>
-                    <NavLink to='/termsandconditions' className={`${style.textTitleFooter2}`}>
-                        Terminos y Condiciones
-                    </NavLink>
-                </div>
-                <div>
-                    <NavLink to='/privacypolicy' className={`${style.textTitleFooter2}`}>
-                        Politica de Privacidad
-                    </NavLink>
-                </div>
-                <div>
-                    <NavLink to='/termsofuse' className={`${style.textTitleFooter2}`}>
-                        Terminos de Uso
-                    </NavLink>
-                </div>
+            <div className={style.divAlign}>
+                {footer.map(t => {return (
+                    <Link to={t.to} key={t.name} className={style.textTitleFooter2}>
+                        {t.name}
+                    </Link>
+                )})}
             </div>
 
+            <div className={style.contact}>
             <div className={style.divAlign}>
                 <div className={style.textTitleFooter}>
-                    Contactanos
+                    Contactanos via:
                 </div>
-                <div className={style.texttitle2}>
-                    info@hardwere.com
-                </div>
-                <div className={style.texttitle2} >
-                    1 -234-56780
-                </div>
+                <a href='mailto:info@hardwere.com' target='_blank' rel='noopener' className={style.texttitle2}>
+                        Mail
+                    </a>
+                
+                <a href="tel:+05890000111" className={style.texttitle2}>+541137699590</a>
 
-                <div className={style.textTitleFooter}>
-                    <Link to='/aboutus' className={`${style.textTitleFooter2}`}>
-                        Sobre Nosotros
-                    </Link>
-                </div>
+                <Link to='/aboutus' className={style.textTitleFooter}>
+                    Sobre Nosotros   
+                </Link>
+
                 <div className={style.iconsSize}>
-                    <FaInstagram /> <FaPinterestP /> <FaTiktok /> <FaFacebookF />
+                    <FaInstagram/> <FaPinterestP/> <FaTiktok/> <FaFacebookF/>
                 </div>
 
             </div>
-            <div >
-                <label className={style.textTitleFooter} >Mantenete en Contacto</label>
-                <form
-                >
+            </div>
 
+            <div className={style.contactUs}>
+                <label className={style.textTitleFooter} >Mantenete Informado</label>
+                <div className={style.inputSubmit}>
                     <input
-                        className={style.inputBox}
-                        placeholder='Enter Email'
-                        type='email'
-                        required
-                    >
+                    className={style.inputBox}
+                    placeholder='Enter Email' 
+                    type = 'email'
+                    required
+                    > 
                     </input>
-
-                    <input
-                        type="submit"
-                        value='✔'
-                        className={style.inputbtn}
+                    
+                    <input 
+                    type="submit" 
+                    value= 'Enviar'
+                    className={style.inputbtn}
                     />
-                </form>
+                </div>
+
                 <p className={style.textTitleFooterinfoSize}>
                     Al subscribirte a NewHard <br></br>
                     aceptas recibir promociones <br></br>
