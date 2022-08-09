@@ -263,13 +263,6 @@ export function getMsgCart(payload) {
 }
 ///////////////////////////////////   POSTS     ///////////////////////////////////////////
 
-
-
-// export async function postProfile (u) {
-//         const { data } = await axios.post(`http://localhost:3001/api/users/`, u)
-//         return data
-// }
-
 export function token(tok, user) { 
     return async function (dispatch) {
         
