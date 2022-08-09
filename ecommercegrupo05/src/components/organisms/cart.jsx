@@ -30,21 +30,21 @@ export default function Cart() {
   }, [dispatch])
 
   const handleComprar = () => {
-    if(!address || !postalCode){
+    if (!address || !postalCode) {
       swal({
-          title: "Es necesario completar tu perfil",
-          input: "text",
-          showCancelButton: true,
-          confirmButtonText: "Guardar",
-          cancelButtonText: "Cancelar",
-          buttons: {
-              cancel: 'ok'
-          }
+        title: "Es necesario completar tu perfil",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Guardar",
+        cancelButtonText: "Cancelar",
+        buttons: {
+          cancel: 'ok'
+        }
       })
       setTimeout(() => navigate('/userprofile'), 3000)
-  }else {
-    navigate('/TestAddresForm')
-  }
+    } else {
+      navigate('/TestAddresForm')
+    }
   }
 
   const totalPricePerProducts = products.map(
@@ -104,11 +104,11 @@ export default function Cart() {
                     <button
                       className={style.btn}
                       onClick={handleItemToDelete(product)}
-                      >
+                    >
                       {" "}
                       -{" "}
                     </button>
-                        <p>{amount}</p>
+                    <p>{amount}</p>
                     <button
                       className={style.btn}
                       onClick={handleItemToCart(product)}

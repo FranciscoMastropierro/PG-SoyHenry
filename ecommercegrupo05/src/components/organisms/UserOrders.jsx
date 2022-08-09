@@ -21,7 +21,6 @@ const UserOrders = () => {
   const { id } = useParams()
   useEffect(() => {
     dispatch(getAllByidUser(id))
-
   }, [])
 
   const allOrders = useSelector((state) => state.UserOrders)
@@ -36,14 +35,11 @@ const UserOrders = () => {
     userId: idUser
   })
 
-  const myOrders = allOrders.filter((e)=>e.UserId===idUser)
+  const myOrders = allOrders.filter((e) => e.UserId === idUser)
 
   const [option, setOption] = useState(true)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-
-
 
   function handleOption(e) {
     e.preventDefault(e)
@@ -115,8 +111,6 @@ const UserOrders = () => {
   return (
     <div className={style.container}>
       <h2 className={style.Title}> Mis ordenes</h2>
-
-
 
       {myOrders && myOrders.length ? (
         <>

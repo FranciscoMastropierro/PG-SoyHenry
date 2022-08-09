@@ -63,7 +63,7 @@ export default function CreateForm() {
   products.map((e) => setBrand.push(e.brand));
   let allBrand = [...new Set(setBrand)];
   const category = []
-  
+
   products.map((e) => category.push(e.Categories[0]?.name))
   let setCat = [...new Set(category)]
 
@@ -256,24 +256,24 @@ export default function CreateForm() {
             </div>
             <div className={style.divcell}>
               <label className={style.label1}>Image: </label>
-                <input
-                  className={style.input1}
-                  type="file"
-                  onChange={(e) => {
-                    uploadImage(e.target.files);
-                  }}
-                ></input>
-                {newProduct.image &&
-                  <div>
-                    <img src={newProduct.image} alt="" width='500px' />
-                    <button
-                      name={newProduct.image}
-                      onClick={(name) => handleDeleteImage(name)}
-                    >
-                      X
-                    </button>
-                  </div>
-                }
+              <input
+                className={style.input1}
+                type="file"
+                onChange={(e) => {
+                  uploadImage(e.target.files);
+                }}
+              ></input>
+              {newProduct.image &&
+                <div>
+                  <img src={newProduct.image} alt="" width='500px' />
+                  <button
+                    name={newProduct.image}
+                    onClick={(name) => handleDeleteImage(name)}
+                  >
+                    X
+                  </button>
+                </div>
+              }
               {errors.image}
             </div>
             <div>

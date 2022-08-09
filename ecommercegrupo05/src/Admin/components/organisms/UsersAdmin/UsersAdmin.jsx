@@ -33,7 +33,6 @@ function UsersAdmin() {
         swal("the user has changed successfully!", {
           icon: "success",
         });
-
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -55,7 +54,6 @@ function UsersAdmin() {
         swal("the user has changed successfully!", {
           icon: "success",
         });
-
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -72,7 +70,6 @@ function UsersAdmin() {
         <p>Usuario</p>
         <p>Email</p>
       </div>
-
       {users.map((e) => {
         return (
           <div className={style.card} key={e.id}>
@@ -123,5 +120,5 @@ function UsersAdmin() {
     </div>
   );
 }
-//
+
 export default UsersAdmin;

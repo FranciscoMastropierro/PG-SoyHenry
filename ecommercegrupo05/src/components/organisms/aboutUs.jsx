@@ -83,7 +83,6 @@ export default function AboutUs() {
 
             <div className={style.container}>
 
-
                 <div className={style.card}>
                     <div className={style.imgBx}>
                         <img className={style.img} src={fran} />
