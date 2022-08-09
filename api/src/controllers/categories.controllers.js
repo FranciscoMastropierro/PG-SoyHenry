@@ -1,10 +1,9 @@
-const axios = require('axios');
 require('dotenv').config();
 const productList = require('../asset/productList');
 const { Categories } = require('../db.js');
 
 
-
+ 
 
 module.exports = {
     
@@ -17,6 +16,7 @@ module.exports = {
         
         } catch (error) {
             console.error(error);
+            res.status(404).send({ error });
         }
 
     },
@@ -25,7 +25,7 @@ module.exports = {
         try {
     
             let cateArr = [];
-            let cateMap = productList.map((el) => {
+            productList.map((el) => {
                 let cate = el.categories; 
                 
                 cateArr.push(cate)
@@ -36,7 +36,7 @@ module.exports = {
             const cateSet = new Set(cateFlat);
             const cateResult = Array.from(cateSet)
     
-            const cateUpToDb = cateResult.map(async el => {
+            cateResult.map(async el => {
                 await Categories.findOrCreate({
                     where:{name: el}
                 })
@@ -46,6 +46,7 @@ module.exports = {
     
         } catch (error) {
             console.log(error)
+            res.status(404).send({ error });
         }
     
     }

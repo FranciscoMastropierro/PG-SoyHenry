@@ -140,6 +140,7 @@ module.exports = {
     
     } catch (error) {
       console.log('Flag log filterByCategory', error) 
+      res.status(404).send({ error });
     }
   },
 
@@ -167,6 +168,7 @@ module.exports = {
       
     } catch (error) {
       console.log(error)
+      res.status(404).send({ error });
     }
   },
 
@@ -197,6 +199,7 @@ module.exports = {
       res.send({ msj: `Product added`, data: product });
     } catch (error) {
       console.error(error);
+      res.status(404).send({ error });
     }
   },
 
@@ -220,6 +223,7 @@ module.exports = {
       await product.addCategories(id, { through: Categories_Products })
     } catch (error) {
         console.log(error)
+        res.status(404).send({ error });
     }
     })
   },
@@ -241,6 +245,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
+      res.status(404).send({ error });
     }
   },
 
