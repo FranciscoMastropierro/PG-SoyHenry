@@ -32,9 +32,7 @@ export function validate(newProduct) {
   } if (newProduct.stock < 0) {
     errors.stock = 'El stock no puede ser nulo';
   } if (!newProduct.stock) {
-    errors.stock = 'Ingresar stock';
-  } if (newProduct.rating === "" || newProduct.rating > 5 || newProduct.rating < 0) {
-    errors.rating = 'Ingresar un rango entre 1 y 5';
+    errors.stock = 'Ingresar stock'; 
   } if (newProduct.description === "") {
     errors.description = 'Descripcion es requerida';
   }
@@ -59,7 +57,6 @@ export default function CreateForm() {
     price: "",
     categories: [],
     stock: "",
-    rating: "",
     description: "",
   });
   // crea un set de brands para el select 
@@ -112,7 +109,6 @@ export default function CreateForm() {
         price: "",
         categories: [],
         stock: "",
-        rating: "",
         description: "",
       })
       redirect()

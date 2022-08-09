@@ -19,8 +19,13 @@ module.exports = {
 },
   deleteFavorite : async (req, res) => {
     const{idProducts,idUser}=req.body;
-    await Favorites.destroy({ where: { ProductId: idProducts, UserId:idUser } });
+
+    console.log(idProducts,idUser)
+
+    await Favorites.destroy({ where: { ProductId:idProducts, UserId:idUser } });
     return res.send('the favorite was deleted')
+
+
 },getUsersFavorite: async (req, res) => {
   const {id}=req.params
   if(!id){

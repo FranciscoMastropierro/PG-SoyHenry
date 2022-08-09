@@ -38,6 +38,8 @@ export const GET_ALL_USERS_ORDER = 'GET_ALL_USERS_ORDER'
 export const NUMBER_PAGE = 'NUMBER_PAGE'
 export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID'
 export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS'
+export const DELETE_FAVORITE = 'DELETE_FAVORITE'
+export const GET_USER_FAVORITES = 'GET_USER_FAVORITES'
 
 
 
@@ -319,6 +321,17 @@ export function GetAllReviews() {
         })
     }
 }
+export function getUsersFavorite(id) {
+    return async function (dispatch) {
+        const json = await axios(`http://localhost:3001/api/favorite/${id}`)
+        const data = json.data
+        console.log(data)
+        return dispatch({
+            type: GET_USER_FAVORITES,
+            payload: data
+        })
+    }
+}
 
 export function editComment(comment) {
     return async function (dispatch) {
@@ -350,10 +363,21 @@ export function createProduct(payload) {
 export function favoritePost(idProducts,idUser) {
     return async function (dispatch) {
         console.log(idProducts,idUser)
-        const json = await axios.post(`http://localhost:3001/api/favorite`, idProducts,idUser)
+        const json = await axios.post(`http://localhost:3001/api/favorite`, {idProducts,idUser})
         const data = await json.data
         return dispatch({
             type: POST_FAVORITE,
+            payload: data
+        })
+    }
+}
+export function deleteFavorite(idProducts,idUser) {
+    return async function (dispatch) {
+        console.log(idProducts,idUser)
+        const json = await axios.delete(`http://localhost:3001/api/favorite`, { data: { idProducts,idUser } })
+        const data = await json.data
+        return dispatch({
+            type: DELETE_FAVORITE,
             payload: data
         })
     }

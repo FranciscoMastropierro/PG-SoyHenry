@@ -4,7 +4,7 @@ import SearchBar from '../atoms/seacrbar.jsx'
 import {SidebarOptions} from '../atoms/sidebaroptions.jsx'
 import style from '../../styles/navbar.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { token } from '../../redux/actions';
+import { token, getUsersFavorite } from '../../redux/actions';
 // import { Switch } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -20,6 +20,7 @@ export default function Navbar () {
         if(!isLoading && isAuthenticated){
             getAccessTokenSilently().then(tok =>{
                 dispatch(token(tok, user))
+                    
             })
         }
         // console.log('usuario logueado', userLoged)

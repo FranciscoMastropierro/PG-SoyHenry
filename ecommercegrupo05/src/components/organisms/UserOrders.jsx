@@ -135,7 +135,7 @@ const UserOrders = () => {
                       <div className={style.productDivinfo}>
                         <div >
                           <h3>{item.name}</h3>
-                          <h3>{item.brand}</h3>
+                          <h3 className={style.productDivinfobrand}>{item.brand}</h3>
                         </div>
                         <div>
                           <h3>$ {item.price}</h3>
