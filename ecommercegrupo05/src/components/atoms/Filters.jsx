@@ -30,7 +30,7 @@ export default function Filters() {
         dispatch(getFilterBrand())
     }, [dispatch])
 
-    function handleCLickRecharge(e) {  
+    function handleCLickRecharge(e) {
         window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
@@ -100,7 +100,7 @@ export default function Filters() {
     function handleSubmit(e) {
         e.preventDefault(e);
         dispatch(getFilters(input));
-        dispatch(numberPage(1))    
+        dispatch(numberPage(1))
     }
 
     return (
@@ -173,7 +173,7 @@ export default function Filters() {
                             <div key={c} >
                                 <div className={style.brands2}>
                                     <p >{c}</p>
-                                    <button className={style.botnX }onClick={() => handleDelete(c)} >x</button>
+                                    <button className={style.botnX} onClick={() => handleDelete(c)} >x</button>
                                 </div>
                             </div>
                         )

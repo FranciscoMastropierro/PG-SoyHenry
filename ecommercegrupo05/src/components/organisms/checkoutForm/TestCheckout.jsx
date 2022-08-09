@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import { loadStripe } from '@stripe/stripe-js';
-import { useCartContext } from "../../../context/CartItem";
 import { getMsgCart, postOrder } from '../../../redux/actions';
-import { Elements, CardElement, useStripe, useElements, PaymentRequestButtonElement } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
 import style from '../../../styles/testCheckout.module.css'
@@ -62,15 +61,12 @@ const CheckoutForm = () => {
 
                 if (data.msg === 'Successful payment') {
                     dispatch(postOrder(userLoged.id, finalProducts, address, postalCode))
-                    swal({
-                        title: "Compra exitosa",
-                        input: "text",
-                        showCancelButton: true,
-                        confirmButtonText: "Guardar",
-                        cancelButtonText: "Cancelar",
-                        buttons: {
-                            cancel: 'ok'
-                        }
+                    swal2.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Compra exitosa',
+                        showConfirmButton: false,
+                        timer: 1500
                     })
                     setTimeout(() => navigate('/'), 2000)
                     window.localStorage.clear();
@@ -92,7 +88,7 @@ const CheckoutForm = () => {
                 className='img-fluid'
             />
 
-            <h3 className='text-center my-2'>Precio Total: {totalPrice} $</h3>
+            <h3 className='text-center my-2'>Precio Total: $ {totalPrice}</h3>
 
             <div className='form-group'>
                 <CardElement className='form-control' disabled={!stripe}/>

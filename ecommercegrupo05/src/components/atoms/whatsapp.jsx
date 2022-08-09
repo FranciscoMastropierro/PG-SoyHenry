@@ -10,7 +10,7 @@ export function Whatsapp() {
 
     return (
         <a target='_blank' href={urlWhatsapp + contactNumber + mensaje}>
-                <img className={style.after} src={whatsapp} alt='whatsapp'/>            
+            <img className={style.after} src={whatsapp} alt='whatsapp' />
         </a>
     )
 }
