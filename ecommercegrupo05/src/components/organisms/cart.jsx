@@ -27,7 +27,7 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getProductCart(products))
-  }, [dispatch])
+  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
 
   const handleComprar = () => {
     if (!address || !postalCode) {
@@ -58,7 +58,7 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getTotalPrice(totalPrice))
-  }, [dispatch])
+  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
 
   const handleItemToCart = (product) => () => addItemToCart(product);
 
@@ -121,7 +121,7 @@ export default function Cart() {
                     </div>
                     <div className={style.btnTrash}>
                       <button onClick={handleItemToDeleteAll(product)}>
-                        <img src={trash} className={style.trash} />
+                        <img src={trash} className={style.trash} alt='imagen' />
                       </button>
                     </div>
                   </div>

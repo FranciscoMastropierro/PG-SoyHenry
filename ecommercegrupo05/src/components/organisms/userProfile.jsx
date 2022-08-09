@@ -1,19 +1,15 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeProfile, token } from '../../redux/actions'
-import { useAuth0 } from "@auth0/auth0-react";
-import swal from 'sweetalert';
-import user from '../../assets/user.png'
+import { changeProfile } from '../../redux/actions'
+import Swal from 'sweetalert2';
 import style from '../../styles/userProfile.module.css'
 
 export default function UserProfile() {
 
-    const u = useAuth0().user
     const dispatch = useDispatch()
     const userLoged = useSelector((state) => state.userLoged)
     const [user, setUser] = useState(null)
-    const { isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0()
 
     function handleChange(e) {
         setUser({
@@ -24,31 +20,35 @@ export default function UserProfile() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        dispatch(changeProfile(userLoged.id, user))
 
-        swal({
-            title: "Tu Perfil fue actualizado con exito",
-            input: "text",
-            showCancelButton: true,
-            confirmButtonText: "Guardar",
-            cancelButtonText: "Cancelar",
-            buttons: {
-                cancel: 'ok'
-            }
+        dispatch(changeProfile(userLoged.id, user))
+        Swal.fire({
+            title: 'Los cambios fueron guardados',
+            confirmButtonText: 'Guardar',
+        }).then(() => {
+            Swal.fire({
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000);
+            })
         })
-        window.location.reload()
+
     }
 
     useEffect(() => {
         if (userLoged) {
             Object.keys(userLoged).length > 0 && setUser(userLoged)
         }
-    }, [Object.keys(userLoged).length])
+    }, [Object.keys(userLoged).length]) //eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={style.ProfileContainer}>
             <h1>Tu Perfil</h1>
-            <img src={userLoged.profileImage || user} alt='profile-photo' className={style.profilePhoto} />
+            <img src={userLoged.profileImage || user} alt='profile' className={style.profilePhoto} />
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div className={style.infoContainer}>
                     <label>Nombre</label>
@@ -74,51 +74,3 @@ export default function UserProfile() {
         </div>
     )
 }
-
-
-// {user && inputs.map(input => {return (
-//     <div className={style.labelInput}>
-//         <label>{input.placeholder}</label>
-//         <input key={input.name} placeholder={input.placeholder} value={input.value || ''} type={input.type} disabled={input.disabled} onChange={(e) => handleChange(e)}/>
-//     </div>
-// )})}
-
-    // const inputs = [
-    //     {
-    //         name: 'firstname',
-    //         placeholder:'Nombre *',
-    //         type: 'text',
-    //         disabled: false,
-    //     },
-    //     {
-    //         name: 'lastname',
-    //         placeholder:'Apellido *',
-    //         type:'text',
-    //         disabled: false,
-    //     },
-    //     {
-    //         name:'username',
-    //         placeholder:'Nombre de usuario',
-    //         type: 'text',
-    //         disabled: false,
-    //     },
-    //     {
-    //         name: 'email',
-    //         placeholder:'Email',
-    //         type: 'text',
-    //         disabled: true,
-    //     },
-    //     {
-    //         name: 'address',
-    //         placeholder: 'Direccion',
-    //         type: 'text',
-    //         disabled: false,
-    //     },
-    //     {
-    //         name: 'postalCode',
-    //         placeholder: 'Codigo postal',
-    //         value: user.postalCode,
-    //         type: 'text',
-    //         disabled: false,
-    //     },
-    // ]
