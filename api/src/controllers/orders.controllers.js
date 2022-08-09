@@ -20,6 +20,7 @@ module.exports = {
       res.send(order);
     } catch (error) {
       console.log(error);
+      res.status(404).send({ error });
     }
   },
   getAllOrder: async (req, res) => {
@@ -35,6 +36,7 @@ module.exports = {
       res.send(order);
     } catch (error) {
       console.log(error);
+      res.status(404).send({ error });
     }
 
   },
@@ -54,6 +56,7 @@ module.exports = {
       res.send(order);
     } catch (error) {
       console.log(error);
+      res.status(404).send({ error });
     }
 
   },
