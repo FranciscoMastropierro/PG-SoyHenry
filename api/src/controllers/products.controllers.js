@@ -62,12 +62,12 @@ module.exports = {
     })
     arr?.length>0 && (auxproductsBd= arr.reduce(reducer));
     arr=[]
-    categorie?.length>0 && categorie.map(e=>{
-      if(e){
-      arr.push(auxproductsBd.filter(elemt => elemt.Categories?.map(elemt => elemt.name.toLowerCase()) == e.toLowerCase() ))
-      } 
-    })
-     arr?.length>0 && (auxproductsBd= arr.reduce(reducer));
+    // categorie?.length>0 && categorie.map(e=>{
+    //   if(e){
+    //   arr.push(auxproductsBd.filter(elemt => elemt.Categories?.map(elemt => elemt.name.toLowerCase()) == e.toLowerCase() ))
+    //   } 
+    // })
+    arr?.length>0 && (auxproductsBd= arr.reduce(reducer));
     if(!!order && order=="minor"){
       auxproductsBd.sort(function(a, b) {
       if (Number(a.price) > Number(b.price)) {
