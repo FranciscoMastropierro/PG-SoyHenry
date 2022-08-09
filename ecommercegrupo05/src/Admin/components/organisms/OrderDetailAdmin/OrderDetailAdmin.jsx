@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux"
 import { getOrderById } from "../../../../redux/actions";
 import {  useParams } from "react-router-dom";
 import style from "./OrderDetailAdmin.module.css"
-import swal from "sweetalert";
 
 export default function OrderDetailAdmin (){
     const dispatch = useDispatch()
@@ -11,29 +10,12 @@ export default function OrderDetailAdmin (){
 
 useEffect(() => {
     dispatch(getOrderById(id))
-    }, [])
+    }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
+
     
     const allorder = useSelector((state)=> state.allOrders)
     const order = allorder.filter((e)=>(e.id===id))
     console.log(order)
-
-const [state, setState] = useState("")
-    
-
-    function handleSelect(e){
-    e.preventDefault()
-    setState(e.target.value) 
-
-    console.log(state)   
-    }
-    function handleClick(e){
-        e.preventDefault()  
-
-        swal("Order status has been changed")
-        setTimeout(() => {
-            window.location.reload()
-            }, 1000);
-    }
 
     return(
         <div className={style.container}>
@@ -49,7 +31,7 @@ const [state, setState] = useState("")
                         {order[0].Products.map((products)=>{
                             return(<div className={style.divListItem}>
                                         <div>
-                                        <img className={style.image} src={products.image} alt="image not found" ></img>
+                                        <img className={style.image} src={products.image} alt="Not found" ></img>
                                         </div>
                                         <div className={style.itemcont}>
                                         <h1 className={style.itemText}>{products.name}</h1>
@@ -70,12 +52,3 @@ const [state, setState] = useState("")
         </div>
         )
 }
-                                   //<select className={style.select} onChange={e=>handleSelect(e)} name="OrderState" id={order.id}  >
-                                   //     <option className={style.option} value="none" selected disabled>Cambiar estado</option>     
-                                   //     <option className={style.option} value="Created">Creado</option>     
-                                   //     <option className={style.option} value="processing">En proceso</option>     
-                                   //     <option className={style.option} value="completed">Completado</option>     
-                                   //     <option className={style.option} value="Cancelled">Cancelado</option>   
-//
-//
-                                   //</select> 
