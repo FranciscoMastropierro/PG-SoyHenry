@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
 import {
@@ -36,12 +36,10 @@ export function validate(newProduct) {
   }
   return errors;
 };
-function redirect() {
-  window.location.href = "/";
-}
+
 export default function CreateForm() {
   const dispatch = useDispatch();
-  const nav = useNavigate();
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -113,36 +111,8 @@ export default function CreateForm() {
       alert("Rellene todos los campos del formulario")
     }
   }
-  //useEffect(() => {
-  //  dispatch(getAllProducts());
-  // }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(getAllCategories());
-  // }, [dispatch]);
-  const handleInputBrand = function (e) {
-    e.preventDefault();
-    if (Object.values(newProduct.brand).includes(e.target.value)) {
-      alert("Esta marca ya se encuentra en la lista")
-    }
-    else if (!e.target.value) {
 
-    }
-    else {
-      setProduct({
-        ...newProduct, brand: [...newProduct.brand, e.target.value]
-      });
-      let objError = validate({ ...newProduct, [e.target.name]: e.target.value });
-      setErrors(objError)
-    }
-  }
-  const handleDeleteBrand = function (e) {
-    if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
-      setProduct({
-        ...newProduct,
-        brand: newProduct.brand.filter(k => k !== e)
-      })
-    }
-  }
+
   const handleDeleteCategories = function (e) {
     if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
       setProduct({

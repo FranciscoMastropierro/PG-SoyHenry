@@ -48,7 +48,18 @@
     color: #01F603;
 }
 .brandss{
-    display: flex;
+    display: inline-grid;
+    justify-content: center;   
+    margin: 5px;
+    padding: 2px;  
+    border-radius: 9px;
+    width: auto;
+    height: auto;
+    
+  }
+  .brandss2{
+    display: inline-grid;
+    grid: auto / auto auto;
     justify-content: center;   
     margin: 5px;
     padding: 2px;  
@@ -67,6 +78,7 @@
     margin: 5px;  
     width: auto;
     height: auto;
+    justify-content: space-between;
     
   }
 .botnX {
