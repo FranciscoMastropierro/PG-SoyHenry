@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, paginacion, getUsersFavorite } from "../../redux/actions";
+import { paginacion, getUsersFavorite } from "../../redux/actions";
 import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
 import Filters from "../atoms/Filters";
 import FiltersResponsive from "../atoms/FiltersResponsive";
-import FilterAcordion from "../atoms/FilterAcordion";
 
 export default function AllProducts() {
 
