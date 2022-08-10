@@ -26,7 +26,6 @@
 .row {
     display: flex;
     flex-direction: column;
-    /* color: #01F603; */
 }
 .titleColor {
     color: #01F603;
@@ -97,6 +96,18 @@
         display: none
     }
     .filtersResponsive {
-        display: block
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .filtersResponsive {
+        /* width: 100%; */
+        flex-wrap: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

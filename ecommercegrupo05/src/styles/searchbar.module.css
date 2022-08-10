@@ -63,6 +63,7 @@
 
 @media only screen and (max-width: 650px) {
     .searchbarGeneralContainer {
+        top: 13px;
         left: 7%;
         right: 20px;
     }

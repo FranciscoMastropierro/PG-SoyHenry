@@ -6,6 +6,7 @@ import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
 import Filters from "../atoms/Filters";
 import FiltersResponsive from "../atoms/FiltersResponsive";
+import FilterAcordion from "../atoms/FilterAcordion";
 
 export default function AllProducts() {
 
