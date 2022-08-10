@@ -39,7 +39,9 @@ export default function Navbar() {
                 <Link to='/'>
                     <img src={logo} alt='logo' className={style.logo} />
                 </Link>
-                <SearchBar />
+                <div className={style.searchbar}>
+                    <SearchBar />
+                </div>
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
             <div className={style.sidebarToggle} id={userLoged.id}>

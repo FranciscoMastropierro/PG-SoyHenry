@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import SearchBar from './seacrbar';
+import { useSelector } from 'react-redux';
 import {
     Drawer,
     DrawerBody,
@@ -21,7 +23,6 @@ import {
     MenuItem,
     IconButton,
 } from '@chakra-ui/react'
-import { useSelector } from 'react-redux';
 
 export default function DrawerExample() {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -78,7 +79,7 @@ export default function DrawerExample() {
                 finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
-                <DrawerContent bg="brand.gray">
+                <DrawerContent bg="gray.900">
                     <DrawerCloseButton color="white"/>
 
                     <DrawerHeader color="brand.lightGray">
@@ -86,6 +87,10 @@ export default function DrawerExample() {
                     </DrawerHeader>
 
                     <DrawerBody display='flex' flexDir='column' justifyContent='flex-start' overflow="hidden" >
+                        
+                        <div className={style.searchbar}>
+                            <SearchBar/>
+                        </div>
 
                         {links.map(({ to, name }) => (
                             <Link to={to} key={name}>
