@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getCate, getFilterBrand, getFilters, getProducts, numberPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import style from "../../styles/allProducts.module.css";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Filters() {

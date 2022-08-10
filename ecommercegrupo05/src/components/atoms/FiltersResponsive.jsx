@@ -115,10 +115,12 @@ export default function FiltersResponsive () {
     }
 
     return (
+        <div>
         <div className={style.filterContainer}>
+
             {/* ----------- filtro de categorias---------- */}
-            <select className={style.select} onChange={(e) => handleCategory(e)}>
-                    <option value=""  default="true" disabled>---</option>
+                <select className={style.select} onChange={(e) => handleCategory(e)}>
+                    <option value=""  default="true" disabled>Categorias</option>
                     {
                         allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
@@ -132,7 +134,7 @@ export default function FiltersResponsive () {
             {/* ----------- filtro de marcas ---------- */}
 
             <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
-                <option value="" default="true" disabled>---</option>
+                <option value="" default="true" disabled>Marcas</option>
                 {
                     brands && brands.map((item, index) => (
                         <option key={index} value={item}>
@@ -166,5 +168,33 @@ export default function FiltersResponsive () {
                 <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>
                 <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
         </div>
+        <div className={style.filters}>
+            <div className={style.brandss}>
+                    {input.categorie.map(c => {
+
+                        return (
+                            <div key={c} >
+                                <div className={style.brands2}>
+                                    <p >{c}</p>
+                                    <button className={style.botnX} onClick={() => handleDeleteCategorie(c)} >✖</button>
+                                </div>
+                            </div>
+                        )
+                    }
+                    )}
+            </div>  
+            <div className={style.brandss}>
+                {input.brand.map(c => {
+                    return (
+                        <div key={c} >
+                            <div className={style.brands2}>
+                                <p>{c}</p>
+                                <button className={style.botnX} onClick={() => handleDeleteBrand(c)} >✖</button>
+                            </div>
+                        </div>
+                )})}
+            </div>
+        </div>
+    </div>
     )
 }
