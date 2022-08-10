@@ -1,5 +1,4 @@
 import React from 'react';
-import UserMenu from './UserMenu';
 import menu from '../../assets/menu.png'
 import style from '../../styles/toggleMenu.module.css'
 import { Link } from 'react-router-dom';
@@ -67,7 +66,7 @@ export default function DrawerExample() {
             <div className={style.menuButton}>
                 <span>Menu</span>
                 <Button ref={btnRef} colorScheme='transparent' onClick={onOpen}>
-                    <img src={menu} alt='menu' />
+                    <img src={menu} alt='menu'/>
                 </Button>
             </div>
 
@@ -79,7 +78,7 @@ export default function DrawerExample() {
             >
                 <DrawerOverlay />
                 <DrawerContent bg="brand.gray">
-                    <DrawerCloseButton color="white" />
+                    <DrawerCloseButton color="white"/>
 
                     <DrawerHeader color="brand.lightGray">
                         Menu

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import style from '../../styles/cardProducts.module.css'
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartItem';
@@ -7,17 +7,14 @@ import Fav from "./Fav"
 //favorites
 
 export default function CardProducts() {
-    const dispatch = useDispatch();
     const superState = useCartContext()
 
     const { addItemToCart } = superState.effects
 
-    const { products } = superState.state
-
     const productsToRender = useSelector((state) => state.productsToRender)
 
-    // if (!productsToRender.length) return <div className={style.loader}></div>
-    if (!productsToRender.length) return <h1>no hemos encontrado los productos que buscaste</h1>
+    if (!productsToRender.length) return <div className={style.loader}></div>
+    // if (!productsToRender.length) return <h1>no hemos encontrado los productos que buscaste</h1>
 
     const handleItemToCart = (product) => () => addItemToCart(product)
 
@@ -28,7 +25,9 @@ export default function CardProducts() {
                     const { id, image, name, price } = product
                     return (
                         <div className={style.card} key={index}>
-                            <Fav id={id} />
+                            <Fav id={id}/>
+                                
+
                             <div className={style.imgDiv}>
                                 <img className={style.img} src={image} alt="imagen de producto" />
                             </div>

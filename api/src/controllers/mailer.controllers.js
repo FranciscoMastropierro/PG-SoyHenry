@@ -48,6 +48,7 @@ async function sendMail(email, template) {
 
     } catch (error) {
         console.log(error)
+        res.status(404).send({ error });
     }
 }
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { crateComment, getAllByidUser, getProducts } from "../../redux/actions";
 import style from "../../styles/UserOrders.module.css";
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import {
   Modal,
   ModalOverlay,
@@ -77,16 +77,13 @@ const UserOrders = () => {
       userId: idUser
     })
     setOption(true)
-    swal({
-      title: "Gracias por su comentario.",
-      input: "text",
-      showCancelButton: true,
-      confirmButtonText: "Guardar",
-      cancelButtonText: "Cancelar",
-      buttons: {
-        cancel: 'ok'
-      }
-    })
+    swal2.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Gracias por su comentario',
+      showConfirmButton: false,
+      timer: 1500
+  })
     onClose()
   }
 
@@ -198,10 +195,3 @@ const UserOrders = () => {
 };
 
 export default UserOrders;
-//<h3 className={style.info}>{e.paymentMethod}</h3>
-//                <h3 className={style.info}>{e.state}</h3>
-//                <h3 className={style.info}>{e.shipmentAddress}</h3>
-//                <h3 className={style.info}>{e.postalCode}</h3>
-//                <NavLink to={`/orderdetail/${e.id}`}>
-//                  <button className={style.cardbtn}>Detalle</button>
-//                </NavLink>
