@@ -32,7 +32,12 @@ export default function Favorites() {
                 />
               ))
             ) : (
-              <p>Favoritos Vacio</p>
+              <div className={style.container5}>
+                <h2 className={style.h9}>
+                  <span className={style.span1}>FAVORITOS </span>
+                  <span className={style.span1}>VACIO</span>
+                </h2>
+              </div>
             )}
           </div>
         }
