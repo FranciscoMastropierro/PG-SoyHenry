@@ -15,7 +15,7 @@ function SlideBestNotebooks() {
   const dispatch = useDispatch();
   const [category,] = useState({
     brand: "",
-    categorie: "Laptops",
+    categorie: ["Laptops"],
     order: "",
     praice: {
       min: 0,

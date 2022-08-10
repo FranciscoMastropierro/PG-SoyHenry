@@ -1,7 +1,7 @@
 import React from "react";
 import rogelio from '../../assets/rogelio.jpeg';
 import bayron from '../../assets/bayron.jpg';
-import cris from '../../assets/cris.jpg';
+import cris from '../../assets/cristina.jpeg';
 import martin from '../../assets/martin.jpg';
 import fran from '../../assets/fran.jpg';
 import gaston from '../../assets/gaston.jpg';
@@ -27,9 +27,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Cristina Vlassov<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="https://github.com/crisvlasova" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="https://www.linkedin.com/in/cristina-mikaela-vlassov-rodiguina-42a0a1236/" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="https://www.instagram.com/crisvlasova/" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,9 +40,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Bayron Murieles<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,9 +53,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Martin Ojeda<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -90,9 +90,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Francisco Mastropierro<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="https://github.com/FranciscoMastropierro" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="https://www.linkedin.com/in/francisco-mastropierro-83808633/" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="https://www.instagram.com/franmastropierro/" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,9 +103,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Gaston Gonzalez<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -116,9 +116,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Cesar Villanueva<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="#" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -129,9 +129,9 @@ export default function AboutUs() {
                     <div className={style.content}>
                         <h3 className={style.h3}>Rodrigo Perez Yonez<br /><span className={style.span}>FullStack Developer</span></h3>
                         <ul className={style.sci}>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-github"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-linkedin"></i></a></li>
-                            <li className={style.li}><a href="#" className={style.a}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li className={style.li}><a href="https://github.com/Yonesxt" className={style.a} target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li className={style.li}><a href="https://www.linkedin.com/in/rodrigo-perez-yones/" className={style.a} target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li className={style.li}><a href="https://www.instagram.com/rodrigoperezyones/" className={style.a} target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>

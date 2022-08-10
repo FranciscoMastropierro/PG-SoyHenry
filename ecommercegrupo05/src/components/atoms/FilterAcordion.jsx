@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { getCate, getFilterBrand, getFilters, getProducts, numberPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from '../../styles/FiltersResponsive.module.css'
+import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Box
+  } from '@chakra-ui/react'
 
-export default function FiltersResponsive () {
+export default function FilterAcordion () {
+
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         "brand": [],
@@ -95,59 +104,19 @@ export default function FiltersResponsive () {
         });
     }
 
-
-    function handleSubmit(e) {
-        e.preventDefault(e);
-        dispatch(getFilters(input));
-        dispatch(numberPage(1))    
-    }
     return (
-        <div className={style.filterContainer}>
-            {/* ----------- filtro de categorias---------- */}
-                <select onChange={(e) => handleCategory(e)}>
-                    <option value="" >Categorias</option>
-                    {allCategories && allCategories.map((item, index) => (
-                            <option key={index} value={item} >
-                                {item}
-                            </option>
-                    ))}
-                </select>
-            <br />
-
-            {/* ----------- filtro de marcas ---------- */}
-
-            <select onChange={(e) => handleOrderBrand(e)} >
-                <option value="">Marcas</option>
-                {brands && brands.map((item, index) => (
-                        <option key={index} value={item}>
-                            {item}
-                        </option>
-                ))}
-            </select>
-            <br />
-
-            {/* ----------- filtro de precio ---------- */}
-                <input
-                    type="number"
-                    name="min"
-                    min="0"
-                    value={input.praice.min}
-                    placeholder='Min'
-                    onChange={(e) => handleFilterMin(e)}
-                />
-
-                <input
-                    type="number"
-                    name="max"
-                    max="200000"
-                    value={input.praice.max}
-                    placeholder='Max'
-                    onChange={(e) => handleFilterMax(e)}
-                />
-                <br />
-
-                    <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
-                    <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar filtros</button>
-        </div>
+        <Accordion allowToggle bg='brand.greenYellow'>
+            <AccordionItem>
+                <h2>
+                <AccordionButton color='brand.gray'>
+                        Filtro
+                    <AccordionIcon />
+                </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                    
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
     )
 }

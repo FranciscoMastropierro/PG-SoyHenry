@@ -98,7 +98,7 @@ export default function Cart() {
                   />
                 </div>
 
-                <div>
+                <div className={style.infoCont}>
                   <h2 className={style.h2}>{name}</h2>
                   <div className={style.addinfo}>
                     <button
