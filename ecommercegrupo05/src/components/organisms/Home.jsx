@@ -9,16 +9,16 @@ import Footer from '../molecules/footer/Footer'
 // import { useAuth0 } from "@auth0/auth0-react";
 // import { useDispatch, useSelector } from 'react-redux';
 
-export function Home () {
+export function Home() {
 
     return (
         <div>
             <SliderNews />
             <SlidePopularProducts />
-            <SlideBestNotebooks />                      
+            <SlideBestNotebooks />
             <BrandBar />
             <Slider />
-            <Footer/>
+            <Footer />
         </div>
     )
 }

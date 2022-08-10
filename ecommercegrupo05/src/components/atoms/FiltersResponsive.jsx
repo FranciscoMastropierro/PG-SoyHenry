@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getCate, getFilterBrand, getFilters, getProducts, numberPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import style from "../../styles/allProducts.module.css";
 import { useNavigate } from "react-router-dom";
+import style from '../../styles/FiltersResponsive.module.css'
 
-
-export default function Filters() {
+export default function FiltersResponsive () {
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         "brand": [],
-        "categorie": [],
+        "categorie": "",
         "order": "minor",
         "praice": {
             "min": "",
@@ -22,7 +21,6 @@ export default function Filters() {
     const brandRepeat = data.map(e => e).sort()
     const brands = [...new Set(brandRepeat)]
     const allCategories = cate.map(e => e.name).sort()
-
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -31,7 +29,7 @@ export default function Filters() {
         dispatch(getFilterBrand())
     }, [dispatch])
 
-    function handleCLickRecharge(e) {
+    function handleCLickRecharge(e) {  
         window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
@@ -39,7 +37,7 @@ export default function Filters() {
         navigate('/allProducts')
         setInput({
             "brand": [],
-            "categorie": [],
+            "categorie": "",
             "order": "minor",
             "praice": {
                 "min": "",
@@ -50,14 +48,10 @@ export default function Filters() {
 
     function handleCategory(e) {
         e.preventDefault(e);
-        if (input.categorie.includes(e.target.value)) {
-            return
-        } else {
-            setInput({
-                ...input,
-                categorie: [...input.categorie, e.target.value]
-            })
-        }
+        setInput({
+            ...input,
+            categorie: e.target.value
+        });
     }
 
     function handleOrderBrand(e) {
@@ -72,17 +66,10 @@ export default function Filters() {
         }
     }
 
-    function handleDeleteBrand(e) {
+    function handleDelete(e) {
         setInput({
             ...input,
             brand: input.brand.filter(c => c !== e)
-        })
-    }
-
-    function handleDeleteCategorie(e) {
-        setInput({
-            ...input,
-            categorie: input.categorie.filter(c => c !== e)
         })
     }
 
@@ -112,111 +99,68 @@ export default function Filters() {
     function handleSubmit(e) {
         e.preventDefault(e);
         dispatch(getFilters(input));
-        dispatch(numberPage(1))
+        dispatch(numberPage(1))    
     }
-
     return (
         <div>
-            <div className={style.brandss}>
-                {input.categorie.map(c => {
-
-                    return (
-                        <div key={c} >
-                            <div className={style.brands2}>
-                                <p >{c}</p>
-                                <button className={style.botnX} onClick={() => handleDeleteCategorie(c)} >x</button>
-                            </div>
-                        </div>
-                    )
-                }
-                )}
-            </div>  
-            <div className={style.brandss}>
-                    {input.brand.map(c => {
-
-                        return (
-                            <div key={c} >
-                                <div className={style.brands2}>
-                                    <p >{c}</p>
-                                    <button className={style.botnX} onClick={() => handleDeleteBrand(c)} >x</button>
-                                </div>
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
-                <br />
-
             {/* ----------- filtro de categorias---------- */}
-            <label className={style.row}>
-                <p className={style.title}>Categoria</p>
-                <select className={style.select} onChange={(e) => handleCategory(e)}>
-                    <option value=""  default="true" disabled>---</option>
-                    {
-                        allCategories && allCategories.map((item, index) => (
+                <select onChange={(e) => handleCategory(e)}>
+                    <option value="" >Elige una categoria</option>
+                    {allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
                                 {item}
                             </option>
-                        ))
-                    }
+                    ))}
                 </select>
-            </label>
             <br />
 
             {/* ----------- filtro de marcas ---------- */}
 
-            <label className={style.row}>
-                <p className={style.title}>Marca</p>
-            </label>
-            <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
-                <option value="" default="true" disabled>---</option>
-                {
-                    brands && brands.map((item, index) => (
+            <select onChange={(e) => handleOrderBrand(e)} >
+                <option value="">Elige una marca</option>
+                {brands && brands.map((item, index) => (
                         <option key={index} value={item}>
                             {item}
                         </option>
-                    ))
-                }
+                ))}
             </select>
             <br />
 
             {/* ----------- filtro de precio ---------- */}
-            <label className={style.titleColor}>
-                Precio:
-                <br />
-                <label className={style.row}>
-                    Min $
-                </label>
+
                 <input
                     type="number"
                     name="min"
                     min="0"
                     value={input.praice.min}
-                    placeholder='0'
+                    placeholder='Minimo'
                     onChange={(e) => handleFilterMin(e)}
                 />
 
-                <label className={style.row}>
-                    Max $
-                </label>
                 <input
                     type="number"
                     name="max"
                     max="200000"
                     value={input.praice.max}
-                    placeholder='200000'
+                    placeholder='Maximo'
                     onChange={(e) => handleFilterMax(e)}
                 />
                 <br />
-                
-
-
-
-                <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>
-                <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
-            </label>
+                {/* <div> */}
+                    {input.brand.map(c => {return (
+                            <div key={c} >
+                                <div>
+                                    <p >{c}</p>
+                                    <button onClick={() => handleDelete(c)} >✖</button>
+                                </div>
+                            </div>
+                    )})}
+                {/* </div> */}
+                <div>
+                    <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
+                    <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
+                </div>
 
         </div>
     )
 }
-

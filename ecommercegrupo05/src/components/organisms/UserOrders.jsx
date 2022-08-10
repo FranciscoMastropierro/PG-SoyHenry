@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { crateComment, getAllByidUser, getProducts } from "../../redux/actions";
 import style from "../../styles/UserOrders.module.css";
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import {
   Modal,
   ModalOverlay,
@@ -21,7 +21,6 @@ const UserOrders = () => {
   const { id } = useParams()
   useEffect(() => {
     dispatch(getAllByidUser(id))
-
   }, [])
 
   const allOrders = useSelector((state) => state.UserOrders)
@@ -36,14 +35,11 @@ const UserOrders = () => {
     userId: idUser
   })
 
-  const myOrders = allOrders.filter((e)=>e.UserId===idUser)
+  const myOrders = allOrders.filter((e) => e.UserId === idUser)
 
   const [option, setOption] = useState(true)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-
-
 
   function handleOption(e) {
     e.preventDefault(e)
@@ -81,16 +77,13 @@ const UserOrders = () => {
       userId: idUser
     })
     setOption(true)
-    swal({
-      title: "Gracias por su comentario.",
-      input: "text",
-      showCancelButton: true,
-      confirmButtonText: "Guardar",
-      cancelButtonText: "Cancelar",
-      buttons: {
-        cancel: 'ok'
-      }
-    })
+    swal2.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Gracias por su comentario',
+      showConfirmButton: false,
+      timer: 1500
+  })
     onClose()
   }
 
@@ -115,8 +108,6 @@ const UserOrders = () => {
   return (
     <div className={style.container}>
       <h2 className={style.Title}> Mis ordenes</h2>
-
-
 
       {myOrders && myOrders.length ? (
         <>

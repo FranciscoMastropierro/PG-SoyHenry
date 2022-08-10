@@ -4,13 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
 import {
   getProducts,
-  createProduct,
-  getAllCategories,
+  createProduct
 
 } from "../../../../redux/actions";
 
 import style from './ProductCreateAdmin.module.css'
-
 
 export function validate(newProduct) {
   let errors = {};
@@ -96,7 +94,6 @@ export default function CreateForm() {
     }
   }
 
-
   const handleSubmit = function (e) {
     e.preventDefault();
     setErrors(validate(setProduct))
@@ -111,7 +108,6 @@ export default function CreateForm() {
         stock: "",
         description: "",
       })
-      redirect()
     }
     else {
       alert("Rellene todos los campos del formulario")
@@ -170,9 +166,7 @@ export default function CreateForm() {
         });
         setErrors(validate(newProduct))
       });
-
   }
-
   function handleDeleteImage(e) {
     e.preventDefault();
     setProduct({
@@ -241,7 +235,6 @@ export default function CreateForm() {
               />
               {errors.stock}
             </div>
-
             <div className={style.divcell}>
               <label className={style.label1}>Imagen: </label>
               <input

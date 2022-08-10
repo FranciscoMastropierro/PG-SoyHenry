@@ -3,7 +3,7 @@ import style from '../../styles/comments.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteComment, getComments } from '../../redux/actions';
 import { useParams } from 'react-router-dom';
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 
 
 function Comments() {
@@ -22,16 +22,15 @@ function Comments() {
     e.preventDefault();
     const idDel = e.target.value
     dispatch(deleteComment(idDel));
-    swal({
-      title: "Comentario eliminado.",
-      input: "text",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
-    })
+    swal2.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Comentario eliminado del producto',
+      showConfirmButton: false,
+      timer: 1500
+  })
     dispatch(getComments(idProductCurrent))
-    setTimeout(() => window.location.reload(), 1000)
+    setTimeout(() => window.location.reload(), 2000)
   }
 
   return (

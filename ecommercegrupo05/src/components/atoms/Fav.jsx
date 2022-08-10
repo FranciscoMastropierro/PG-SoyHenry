@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { favoritePost, deleteFavorite, getUsersFavorite } from '../../redux/actions'
 import style from '../../styles/Fav.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import swal from 'sweetalert'; 
+import swal from 'sweetalert';
 const Fav = (props) => {
 
  const Favorites = useSelector((state) => state.UserFavs)
@@ -27,7 +27,7 @@ const Fav = (props) => {
     const dispatch = useDispatch()
 
 
-    function handleClickPost (e) {
+    function handleClickPost(e) {
         e.preventDefault();
         dispatch(favoritePost(props.id, userLoged.id))   
     //    setFav(true)
@@ -44,7 +44,7 @@ const Fav = (props) => {
         swal("producto removido de favoritos")
         window.location.reload()
     }
-    
+
 
 
        //function HandleFavorite(e){
@@ -52,19 +52,18 @@ const Fav = (props) => {
    //    dispatch(favoritePost(e.id, user.id))
    //}
 
-  return (
-    <div>
-        
-        {user? !isFav? <button className={style.favButton} id={props.id} onClick={(e)=>handleClickPost(e)}>
-                     <AiOutlineHeart
-                     className={style.favicon}/>
-               </button> :
-               <button className={style.favButton} id={props.id} onClick={(e)=>handleClickDelete(e)}>
-                      <AiFillHeart
-                      className={style.favicon}/>
-         </button> :<></>}   
-    </div>
-  )
+    return (
+        <div>
+            {user ? !fav ? <button className={style.favButton} id={props.id} onClick={(e) => handleClickPost(e)}>
+                <AiOutlineHeart
+                    className={style.favicon} />
+            </button> :
+                <button className={style.favButton} id={props.id} onClick={(e) => handleClickDelete(e)}>
+                    <AiFillHeart
+                        className={style.favicon} />
+                </button> : <></>}
+        </div>
+    )
 }
 
 export default Fav
