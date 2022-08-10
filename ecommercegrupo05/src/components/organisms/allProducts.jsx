@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, paginacion } from "../../redux/actions";
+import { getProducts, paginacion, getUsersFavorite } from "../../redux/actions";
 import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
@@ -19,7 +19,7 @@ export default function AllProducts() {
 
   const productsToRender = products.slice(indexFirstProduct, indexLastProduct)
 
-
+  const userLoged = useSelector((state) => state.userLoged)
   // const loc = useLocation()
   // let loc2 = loc.search.slice(6)
 
@@ -29,6 +29,9 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(paginacion(productsToRender));
+    if (userLoged) {
+      Object.keys(userLoged).length > 0 && dispatch(getUsersFavorite(userLoged.id));
+    }
   }, [dispatch, products, pages]);
 
   return (

@@ -22,7 +22,7 @@ export default function Favorites() {
         <h1 className={style.title}>Favoritos</h1>
 
         <div className={style.cardgrid}>
-          {UserFavorite[0] ? (
+          {UserFavorite[0].Products.lenght ? (
             UserFavorite[0].Products.map((fav) => {
               return (
                 <FavCard
@@ -34,7 +34,7 @@ export default function Favorites() {
               );
             })
           ) : (
-            <></>
+           <></>
           )}
         </div>
       </div>
