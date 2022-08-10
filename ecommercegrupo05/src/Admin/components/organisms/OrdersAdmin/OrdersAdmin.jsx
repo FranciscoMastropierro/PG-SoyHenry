@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOrder } from "../../../../redux/actions"
 import { NavLink } from "react-router-dom";
 import style from "./OrdersAdmin.module.css";
-import { ImCross } from "react-icons/im"
 
 function OrdersAdmin() {
 
@@ -51,4 +50,3 @@ function OrdersAdmin() {
 }
 
 export default OrdersAdmin;
-//<h3 className={style.info}>{e.Products?.map((e)=> {return e.Products_Orders.quantity}).reduce((previousValue, currentValue) => previousValue + currentValue)} products</h3> 

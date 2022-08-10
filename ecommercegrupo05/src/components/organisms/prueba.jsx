@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getProducts } from "../../redux/actions";
 import axios from "axios";
 
 const Prueba = () => {
-
-    const products = useSelector((state) => state.data)
 
     const [call, setCall] = useState(null)
 
@@ -21,10 +18,6 @@ const Prueba = () => {
     useEffect(() => {
         callApi()
     }, []) //eslint-disable-line react-hooks/exhaustive-deps
-
-    // useEffect(() => {
-    //     getProducts()
-    // }, [products])
 
     return (
         <div>

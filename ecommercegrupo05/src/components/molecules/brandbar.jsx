@@ -57,7 +57,6 @@ const Brandbar = () => {
     ]
 
     return (
-
         <div>
             <h1 className={style.title}>Mejores Marcas</h1>
             <div className={style.main}>
