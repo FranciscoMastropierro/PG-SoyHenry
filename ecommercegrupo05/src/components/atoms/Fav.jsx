@@ -4,7 +4,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { favoritePost, deleteFavorite} from "../../redux/actions";
 import style from "../../styles/Fav.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import swal from "sweetalert";
+import swal2 from 'sweetalert2';
+
 const Fav = (props) => {
   const Favorites = useSelector((state) => state.UserFavs);
   console.log(Favorites);
@@ -13,22 +14,34 @@ const Fav = (props) => {
   );
   const userLoged = useSelector((state) => state.userLoged);
 
-  let { user, loginWithRedirect } = useAuth0();
+  let { user } = useAuth0();
   const dispatch = useDispatch();
 
   function handleClickPost(e) {
     e.preventDefault();
     dispatch(favoritePost(props.id, userLoged.id));
 
-    swal("producto añadido a favoritos");
-
+    swal2.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Producto agregado a favoritos',
+      showConfirmButton: false,
+      timer: 1500
+  })
     window.location.reload();
   }
   function handleClickDelete(e) {
     e.preventDefault();
     dispatch(deleteFavorite(props.id, userLoged.id));
 
-    swal("producto removido de favoritos");
+    swal2.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Producto eliminado de favoritos',
+      showConfirmButton: false,
+      timer: 1500
+  })
+  window.location.reload();
   }
 
   return (

@@ -195,10 +195,3 @@ const UserOrders = () => {
 };
 
 export default UserOrders;
-//<h3 className={style.info}>{e.paymentMethod}</h3>
-//                <h3 className={style.info}>{e.state}</h3>
-//                <h3 className={style.info}>{e.shipmentAddress}</h3>
-//                <h3 className={style.info}>{e.postalCode}</h3>
-//                <NavLink to={`/orderdetail/${e.id}`}>
-//                  <button className={style.cardbtn}>Detalle</button>
-//                </NavLink>

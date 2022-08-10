@@ -195,7 +195,6 @@ export default function Filters() {
                     placeholder='0'
                     onChange={(e) => handleFilterMin(e)}
                 />
-
                 <label className={style.row}>
                     Max $
                 </label>
@@ -208,10 +207,6 @@ export default function Filters() {
                     onChange={(e) => handleFilterMax(e)}
                 />
                 <br />
-                
-
-
-
                 <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>
                 <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
             </label>

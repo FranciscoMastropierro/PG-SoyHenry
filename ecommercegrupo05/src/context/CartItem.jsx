@@ -133,7 +133,6 @@ export const CartProvider = ({ children }) => {
             addItemToCart,
             deleteItemToCart,
             deleteAll
-            // deleteAllCart
         }
     }
 

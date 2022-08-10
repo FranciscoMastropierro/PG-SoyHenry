@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
 import {
@@ -43,7 +43,6 @@ function redirect() {
 }
 export default function CreateForm() {
   const dispatch = useDispatch();
-  const nav = useNavigate();
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -108,36 +107,7 @@ export default function CreateForm() {
       alert("Rellene todos los campos del formulario")
     }
   }
-  //useEffect(() => {
-  //  dispatch(getAllProducts());
-  // }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(getAllCategories());
-  // }, [dispatch]);
-  const handleInputBrand = function (e) {
-    e.preventDefault();
-    if (Object.values(update.brand).includes(e.target.value)) {
-      alert("Esta marca ya se encuentra en la lista")
-    }
-    else if (!e.target.value) {
 
-    }
-    else {
-      setProduct({
-        ...update, brand: [...update.brand, e.target.value]
-      });
-      let objError = validate({ ...update, [e.target.name]: e.target.value });
-      setErrors(objError)
-    }
-  }
-  const handleDeleteBrand = function (e) {
-    if (window.confirm(`¿Quiere eliminar la marca: ${e} de la Lista?`)) {
-      setProduct({
-        ...update,
-        brand: update.brand.filter(k => k !== e)
-      })
-    }
-  }
 
   const uploadImage = (files) => {
     const formData = new FormData();
