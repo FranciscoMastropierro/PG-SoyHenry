@@ -27,24 +27,24 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getProductCart(products))
-  }, [dispatch])
+  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
 
   const handleComprar = () => {
-    if(!address || !postalCode){
+    if (!address || !postalCode) {
       swal({
-          title: "Es necesario completar tu perfil",
-          input: "text",
-          showCancelButton: true,
-          confirmButtonText: "Guardar",
-          cancelButtonText: "Cancelar",
-          buttons: {
-              cancel: 'ok'
-          }
+        title: "Es necesario completar tu perfil",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Guardar",
+        cancelButtonText: "Cancelar",
+        buttons: {
+          cancel: 'ok'
+        }
       })
       setTimeout(() => navigate('/userprofile'), 3000)
-  }else {
-    navigate('/TestAddresForm')
-  }
+    } else {
+      navigate('/TestAddresForm')
+    }
   }
 
   const totalPricePerProducts = products.map(
@@ -58,7 +58,7 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getTotalPrice(totalPrice))
-  }, [dispatch])
+  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
 
   const handleItemToCart = (product) => () => addItemToCart(product);
 
@@ -104,11 +104,11 @@ export default function Cart() {
                     <button
                       className={style.btn}
                       onClick={handleItemToDelete(product)}
-                      >
+                    >
                       {" "}
                       -{" "}
                     </button>
-                        <p>{amount}</p>
+                    <p>{amount}</p>
                     <button
                       className={style.btn}
                       onClick={handleItemToCart(product)}
@@ -121,7 +121,7 @@ export default function Cart() {
                     </div>
                     <div className={style.btnTrash}>
                       <button onClick={handleItemToDeleteAll(product)}>
-                        <img src={trash} className={style.trash} />
+                        <img src={trash} className={style.trash} alt='imagen' />
                       </button>
                     </div>
                   </div>

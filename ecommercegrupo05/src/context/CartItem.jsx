@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import swal from 'sweetalert';
-import { useSelector } from 'react-redux'
+import swal2 from 'sweetalert2';
 
 const CartContext = createContext();
 
@@ -12,8 +11,6 @@ export const CartProvider = ({ children }) => {
         products: []
     }
 
-    const mensaje = useSelector((state) => state.msgCart)
-
     const [state, setState] = useState(() => {
         try {
             const productInLocalStorage = localStorage.getItem('cartState');
@@ -24,7 +21,7 @@ export const CartProvider = ({ children }) => {
             return initialState
         }
     });
-    
+
     useEffect(() => {
         localStorage.setItem('cartState', JSON.stringify(state))
     }, [state]);
@@ -46,40 +43,32 @@ export const CartProvider = ({ children }) => {
         if (inCart) {
             newItems = cartItems.map((productInCart) => {
                 if (productInCart.id === itemToAdd.id) {
-                    if(inCart.amount === inCart.stock){
-                        swal({
-                            title: "No hay suficientes productos en el stock",
-                            input: "text",
-                            showCancelButton: true,
-                            confirmButtonText: "Guardar",
-                            cancelButtonText: "Cancelar",
-                            buttons: {
-                                cancel: 'ok'
-                            }
+                    if (inCart.amount === inCart.stock) {
+                        swal2.fire({
+                            position: 'center',
+                            icon: 'warning',
+                            title: 'No hay suficientes productos en el stock',
+                            showConfirmButton: false,
+                            timer: 1500
                         })
                         return productInCart;
-                    }else {
-                        return { ...inCart, amount: inCart.amount + 1};
+                    } else {
+                        return { ...inCart, amount: inCart.amount + 1 };
                     }
                 } else return productInCart;
             })
 
         } else {
             newItems = [...cartItems, { ...itemToAdd, amount: 1 }]
-            swal({
-                title: "Producto añadido al carrito",
-                input: "text",
-                showCancelButton: true,
-                confirmButtonText: "Guardar",
-                cancelButtonText: "Cancelar",
-                buttons: {
-                    cancel: 'ok'
-                }
+            swal2.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Producto agregado a tu carrito',
+                showConfirmButton: false,
+                timer: 1500
             })
         }
 
-        
-        
         updateState({ products: newItems });
     };
 
@@ -90,19 +79,16 @@ export const CartProvider = ({ children }) => {
 
         let itemDelete
 
-        if(inCart){
+        if (inCart) {
             itemDelete = cartItems.filter(({ id }) => id !== itemToDelete.id)
         }
 
-        swal({
-            title: "Producto eliminado del carrito",
-            input: "text",
-            showCancelButton: true,
-            confirmButtonText: "Guardar",
-            cancelButtonText: "Cancelar",
-            buttons: {
-                cancel: 'ok'
-            }
+        swal2.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Producto eliminado de tu carrito',
+            showConfirmButton: false,
+            timer: 1500
         })
 
         updateState({ products: itemDelete });
@@ -118,16 +104,13 @@ export const CartProvider = ({ children }) => {
         if (inCart.amount === 1) {
 
             itemDelete = cartItems.filter(({ id }) => id !== itemToDelete.id)
-            
-            swal({
-                title: "Producto eliminado del carrito",
-                input: "text",
-                showCancelButton: true,
-                confirmButtonText: "Guardar",
-                cancelButtonText: "Cancelar",
-                buttons: {
-                    cancel: 'ok'
-                }
+
+            swal2.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Producto eliminado de tu carrito',
+                showConfirmButton: false,
+                timer: 1500
             })
 
             updateState({ products: itemDelete });
@@ -162,68 +145,3 @@ export const CartProvider = ({ children }) => {
         </CartContext.Provider>
     )
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // if (inCart) {
-        //     newItems = cartItems.map((productInCart) => {
-        //         if (productInCart.id === itemToAdd.id) {
-        //             return { ...inCart, amount: inCart.amount + 1};
-        //         } else return productInCart;
-        //     })
-
-        // } else {
-        //     newItems = [...cartItems, { ...itemToAdd, amount: 1 }]
-        //     swal({
-        //         title: "Producto añadido al carrito",
-        //         input: "text",
-        //         showCancelButton: true,
-        //         confirmButtonText: "Guardar",
-        //         cancelButtonText: "Cancelar",
-        //         buttons: {
-        //             cancel: 'ok'
-        //         }
-        //     })
-        // }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import swal from 'sweetalert';
 import { FaInstagram, FaPinterestP, FaTiktok, FaFacebookF } from "react-icons/fa";
 
-export default function Footer () {
+export default function Footer() {
 
    const footer = [
     {

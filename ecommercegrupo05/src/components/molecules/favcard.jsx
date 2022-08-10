@@ -1,21 +1,32 @@
 import React from "react";
 import style from "../../styles/favcard.module.css";
+import { ImCross } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFavorite } from "../../redux/actions";
+import { Link } from "react-router-dom";
 
-import favorites from '../../assets/favourites.png'
-import click from '../../assets/favourites-click.png'
+const Favcard = ({id, img, price, name, setItemToDelete}) => {
+  const userLoged = useSelector((state) => state.userLoged);
+  const dispatch = useDispatch();
+  const handleClickDelete = () => {
 
-const Favcard = (props) => {
+    setTimeout(()=> {
+      setItemToDelete(id)
+    },200)
+    dispatch(deleteFavorite(id, userLoged.id))
+  };
+
   return (
     <div className={style.Cardcontainer}>
-      <button
-        className={style.favButton}
-        
-      >
-        <img className={style.favEmpty} src={favorites} alt="favorites" />
+      <button className={style.favButton} onClick={handleClickDelete}>
+        <ImCross />
       </button>
-      <img className={style.img} src={props.img} alt={props.name} />
-      <p className={style.name}>{props.name}</p>
-      <p className={style.price}>${props.price}</p>
+      <img className={style.img} src={img} alt={name} />
+      <p className={style.name}>{name}</p>
+      <p className={style.price}>${price}</p>
+      <Link to={`/details/${id}`}>
+        <button className={style.btn}> Ver Producto</button>
+      </Link>
     </div>
   );
 };

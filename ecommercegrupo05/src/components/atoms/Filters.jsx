@@ -9,7 +9,7 @@ export default function Filters() {
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         "brand": [],
-        "categorie": "",
+        "categorie": [],
         "order": "minor",
         "praice": {
             "min": "",
@@ -22,6 +22,7 @@ export default function Filters() {
     const brandRepeat = data.map(e => e).sort()
     const brands = [...new Set(brandRepeat)]
     const allCategories = cate.map(e => e.name).sort()
+
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -30,7 +31,7 @@ export default function Filters() {
         dispatch(getFilterBrand())
     }, [dispatch])
 
-    function handleCLickRecharge(e) {  
+    function handleCLickRecharge(e) {
         window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
@@ -38,7 +39,7 @@ export default function Filters() {
         navigate('/allProducts')
         setInput({
             "brand": [],
-            "categorie": "",
+            "categorie": [],
             "order": "minor",
             "praice": {
                 "min": "",
@@ -49,10 +50,14 @@ export default function Filters() {
 
     function handleCategory(e) {
         e.preventDefault(e);
-        setInput({
-            ...input,
-            categorie: e.target.value
-        });
+        if (input.categorie.includes(e.target.value)) {
+            return
+        } else {
+            setInput({
+                ...input,
+                categorie: [...input.categorie, e.target.value]
+            })
+        }
     }
 
     function handleOrderBrand(e) {
@@ -67,10 +72,17 @@ export default function Filters() {
         }
     }
 
-    function handleDelete(e) {
+    function handleDeleteBrand(e) {
         setInput({
             ...input,
             brand: input.brand.filter(c => c !== e)
+        })
+    }
+
+    function handleDeleteCategorie(e) {
+        setInput({
+            ...input,
+            categorie: input.categorie.filter(c => c !== e)
         })
     }
 
@@ -100,16 +112,46 @@ export default function Filters() {
     function handleSubmit(e) {
         e.preventDefault(e);
         dispatch(getFilters(input));
-        dispatch(numberPage(1))    
+        dispatch(numberPage(1))
     }
 
     return (
         <div>
+            <div className={style.brandss}>
+                {input.categorie.map(c => {
+
+                    return (
+                        <div key={c} >
+                            <div className={style.brands2}>
+                                <p >{c}</p>
+                                <button className={style.botnX} onClick={() => handleDeleteCategorie(c)} >x</button>
+                            </div>
+                        </div>
+                    )
+                }
+                )}
+            </div>  
+            <div className={style.brandss}>
+                    {input.brand.map(c => {
+
+                        return (
+                            <div key={c} >
+                                <div className={style.brands2}>
+                                    <p >{c}</p>
+                                    <button className={style.botnX} onClick={() => handleDeleteBrand(c)} >x</button>
+                                </div>
+                            </div>
+                        )
+                    }
+                    )}
+                </div>
+                <br />
+
             {/* ----------- filtro de categorias---------- */}
             <label className={style.row}>
                 <p className={style.title}>Categoria</p>
                 <select className={style.select} onChange={(e) => handleCategory(e)}>
-                    <option value="" >---</option>
+                    <option value=""  default="true" disabled>---</option>
                     {
                         allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
@@ -127,7 +169,7 @@ export default function Filters() {
                 <p className={style.title}>Marca</p>
             </label>
             <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
-                <option value="">---</option>
+                <option value="" default="true" disabled>---</option>
                 {
                     brands && brands.map((item, index) => (
                         <option key={index} value={item}>
@@ -166,20 +208,9 @@ export default function Filters() {
                     onChange={(e) => handleFilterMax(e)}
                 />
                 <br />
-                <div className={style.brandss}>
-                    {input.brand.map(c => {
+                
 
-                        return (
-                            <div key={c} >
-                                <div className={style.brands2}>
-                                    <p >{c}</p>
-                                    <button className={style.botnX }onClick={() => handleDelete(c)} >x</button>
-                                </div>
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
+
 
                 <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>
                 <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>

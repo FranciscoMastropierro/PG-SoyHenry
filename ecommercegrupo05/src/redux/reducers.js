@@ -29,6 +29,9 @@ import {
     NUMBER_PAGE,
     GET_ALL_ORDERS,
     GET_ORDER_BY_ID,
+    GET_ALL_COMMENTS,
+    DELETE_FAVORITE,
+    GET_USER_FAVORITES,
 } from './actions'
 
 const initialState = {
@@ -60,6 +63,8 @@ const initialState = {
     UserOrders:[],
     allOrders:[],
     currentOrder:[],
+    allComments:[],
+    UserFavs:[],
     
 }
 
@@ -81,6 +86,21 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 UserOrders: payload
             }
+            case GET_ALL_COMMENTS:
+                return {
+                ...state,
+                allComments: payload
+            }
+            case GET_ORDER_BY_ID:
+                return {
+                ...state,
+                currentOrder: payload
+            }
+            case GET_USER_FAVORITES:
+                return {
+                ...state,
+                UserFavs: payload
+            }
         case GET_ALL_ORDERS:
             return {
                 ...state,
@@ -95,6 +115,10 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
             }
         case POST_FAVORITE:
+            return {
+                ...state,
+            }
+        case DELETE_FAVORITE:
             return {
                 ...state,
             }
