@@ -3,6 +3,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    width: 100vw;
 }
 .filterContainer select{
     width: 120px;

@@ -105,7 +105,8 @@
 
 @media only screen and (max-width: 850px) {
     .filtersResponsive {
-        flex-wrap: wrap;
+        /* width: 100%; */
+        flex-wrap: flex;
         justify-content: center;
         align-items: center;
     }
