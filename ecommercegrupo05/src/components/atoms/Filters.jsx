@@ -52,7 +52,7 @@ export default function Filters() {
         e.preventDefault(e);
         if (input.categorie.includes(e.target.value)) {
             return
-        } else {
+        } else if(e.target.value) {
             setInput({
                 ...input,
                 categorie: [...input.categorie, e.target.value]
@@ -64,7 +64,7 @@ export default function Filters() {
         e.preventDefault(e);
         if (input.brand.includes(e.target.value)) {
             return
-        } else {
+        } else if(e.target.value) {
             setInput({
                 ...input,
                 brand: [...input.brand, e.target.value]
@@ -131,7 +131,7 @@ export default function Filters() {
                 }
                 )}
             </div>  
-            <div className={style.brandss}>
+            <div className={style.brandss2}>
                     {input.brand.map(c => {
 
                         return (
@@ -151,7 +151,7 @@ export default function Filters() {
             <label className={style.row}>
                 <p className={style.title}>Categoria</p>
                 <select className={style.select} onChange={(e) => handleCategory(e)}>
-                    <option value=""  default="true" disabled>---</option>
+                    <option value="">---</option>
                     {
                         allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
@@ -168,8 +168,8 @@ export default function Filters() {
             <label className={style.row}>
                 <p className={style.title}>Marca</p>
             </label>
-            <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
-                <option value="" default="true" disabled>---</option>
+            <select className={style.select } onChange={(e) => handleOrderBrand(e)} >
+                <option value="">---</option>
                 {
                     brands && brands.map((item, index) => (
                         <option key={index} value={item}>
