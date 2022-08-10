@@ -48,7 +48,6 @@ async function sendMail(email, template) {
 
     } catch (error) {
         console.log(error)
-       
     }
 }
 
