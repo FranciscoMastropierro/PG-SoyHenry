@@ -130,9 +130,7 @@ export default function Filters() {
                     )
                 }
                 )}
-            </div>
-            <br />
-
+            </div>  
             <div className={style.brandss}>
                     {input.brand.map(c => {
 
@@ -153,7 +151,7 @@ export default function Filters() {
             <label className={style.row}>
                 <p className={style.title}>Categoria</p>
                 <select className={style.select} onChange={(e) => handleCategory(e)}>
-                    <option value="" >---</option>
+                    <option value=""  default="true" disabled>---</option>
                     {
                         allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
@@ -171,7 +169,7 @@ export default function Filters() {
                 <p className={style.title}>Marca</p>
             </label>
             <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
-                <option value="">---</option>
+                <option value="" default="true" disabled>---</option>
                 {
                     brands && brands.map((item, index) => (
                         <option key={index} value={item}>

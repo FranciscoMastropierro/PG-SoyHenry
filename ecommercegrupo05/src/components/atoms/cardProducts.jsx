@@ -28,7 +28,9 @@ export default function CardProducts() {
                     const { id, image, name, price } = product
                     return (
                         <div className={style.card} key={index}>
-                            <Fav id={id} />
+                            <Fav id={id}/>
+                                
+
                             <div className={style.imgDiv}>
                                 <img className={style.img} src={image} alt="imagen de producto" />
                             </div>

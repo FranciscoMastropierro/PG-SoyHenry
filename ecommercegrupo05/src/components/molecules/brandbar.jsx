@@ -59,7 +59,7 @@ const Brandbar = () => {
     return (
 
         <div>
-            <h1 className={style.title}>Best Brands</h1>
+            <h1 className={style.title}>Mejores Marcas</h1>
             <div className={style.main}>
                 {links.map(({ to, src, value }) => (
                     <Link as={ReactLink} to={to} key={value}>
