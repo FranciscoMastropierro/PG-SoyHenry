@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import rogelio from '../../assets/rogelio.jpeg';
 import bayron from '../../assets/bayron.jpg';
 import cris from '../../assets/cristina.jpeg';
@@ -10,6 +10,10 @@ import rodrigo from '../../assets/rodrigoz.jpg';
 import style from '../../styles/aboutUs.module.css'
 
 export default function AboutUs() {
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
 
     return (
         <>

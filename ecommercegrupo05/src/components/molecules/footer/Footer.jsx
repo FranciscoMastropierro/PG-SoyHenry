@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from '../../../styles/footerOne.module.css';
 import { Link } from "react-router-dom";
 import { FaInstagram, FaPinterestP, FaTiktok, FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
 
     const footer = [
         {
