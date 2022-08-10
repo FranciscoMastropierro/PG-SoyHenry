@@ -2,7 +2,7 @@
 
 
 
-let OrderSuccess =  `<html lang="en">
+let OrderSuccess = (email,orderId) => { `<html lang="en">
 <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -15,7 +15,7 @@ let OrderSuccess =  `<html lang="en">
             <img src="https://res.cloudinary.com/deaf0qceq/image/upload/v1660152759/ecommercegrupo05/vwyl10txtetsqgf2jbq1.png" alt= "Imagen de unknow Coder" style="width:100px" />
             <h1 style="color: #000000;margin: .2em; font-size: 2em; font-weight: 100;">Tech Store</h1>
             <p style="color: #ffffff;font-weight: 800;font-size:3rem;background-color: #507b00;margin-bottom: 0;padding:1em;">
-                Hola ${user.name} ${user.surname} Your order #${user.orderId} from ${user.orderDate} has been shipped succefully </p>
+                Hola ${email} Your order #${orderId} from ${user.orderDate} has been shipped succefully </p>
             <p> Thanks for choosing us!</p>
             <p> Tech Store Team </p>
         </div>
@@ -23,6 +23,7 @@ let OrderSuccess =  `<html lang="en">
 
 </body>
 </html>`
+}
 
 
 module.exports = {
