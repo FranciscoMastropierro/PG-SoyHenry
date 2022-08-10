@@ -8,7 +8,7 @@ export default function FiltersResponsive () {
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         "brand": [],
-        "categorie": "",
+        "categorie": [],
         "order": "minor",
         "praice": {
             "min": "",
@@ -21,6 +21,7 @@ export default function FiltersResponsive () {
     const brandRepeat = data.map(e => e).sort()
     const brands = [...new Set(brandRepeat)]
     const allCategories = cate.map(e => e.name).sort()
+
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export default function FiltersResponsive () {
         dispatch(getFilterBrand())
     }, [dispatch])
 
-    function handleCLickRecharge(e) {  
+    function handleCLickRecharge(e) {
         window.location.reload()
         dispatch(getProducts())
         dispatch(getCate())
@@ -37,7 +38,7 @@ export default function FiltersResponsive () {
         navigate('/allProducts')
         setInput({
             "brand": [],
-            "categorie": "",
+            "categorie": [],
             "order": "minor",
             "praice": {
                 "min": "",
@@ -48,10 +49,14 @@ export default function FiltersResponsive () {
 
     function handleCategory(e) {
         e.preventDefault(e);
-        setInput({
-            ...input,
-            categorie: e.target.value
-        });
+        if (input.categorie.includes(e.target.value)) {
+            return
+        } else {
+            setInput({
+                ...input,
+                categorie: [...input.categorie, e.target.value]
+            })
+        }
     }
 
     function handleOrderBrand(e) {
@@ -66,10 +71,17 @@ export default function FiltersResponsive () {
         }
     }
 
-    function handleDelete(e) {
+    function handleDeleteBrand(e) {
         setInput({
             ...input,
             brand: input.brand.filter(c => c !== e)
+        })
+    }
+
+    function handleDeleteCategorie(e) {
+        setInput({
+            ...input,
+            categorie: input.categorie.filter(c => c !== e)
         })
     }
 
@@ -99,30 +111,35 @@ export default function FiltersResponsive () {
     function handleSubmit(e) {
         e.preventDefault(e);
         dispatch(getFilters(input));
-        dispatch(numberPage(1))    
+        dispatch(numberPage(1))
     }
+
     return (
         <div className={style.filterContainer}>
             {/* ----------- filtro de categorias---------- */}
-                <select onChange={(e) => handleCategory(e)}>
-                    <option value="" >Categorias</option>
-                    {allCategories && allCategories.map((item, index) => (
+            <select className={style.select} onChange={(e) => handleCategory(e)}>
+                    <option value=""  default="true" disabled>---</option>
+                    {
+                        allCategories && allCategories.map((item, index) => (
                             <option key={index} value={item} >
                                 {item}
                             </option>
-                    ))}
+                        ))
+                    }
                 </select>
             <br />
 
             {/* ----------- filtro de marcas ---------- */}
 
-            <select onChange={(e) => handleOrderBrand(e)} >
-                <option value="">Marcas</option>
-                {brands && brands.map((item, index) => (
+            <select className={style.select} onChange={(e) => handleOrderBrand(e)} >
+                <option value="" default="true" disabled>---</option>
+                {
+                    brands && brands.map((item, index) => (
                         <option key={index} value={item}>
                             {item}
                         </option>
-                ))}
+                    ))
+                }
             </select>
             <br />
 
@@ -146,8 +163,8 @@ export default function FiltersResponsive () {
                 />
                 <br />
 
-                    <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
-                    <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar filtros</button>
+                <button className={style.btn} onClick={(e) => handleSubmit(e)}>Filtrar </button>
+                <button className={style.btn} onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
         </div>
     )
 }
