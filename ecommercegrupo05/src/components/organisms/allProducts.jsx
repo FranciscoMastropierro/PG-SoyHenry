@@ -30,7 +30,6 @@ export default function AllProducts() {
   return (
     <>
       <div className={style.filtersResponsive}><FiltersResponsive /></div>
-      <div className={style.filtersAcordion}><FilterAcordion /></div>
       <Pagination />
       <div className={style.container}>
           <div className={style.div}><Filters /></div>

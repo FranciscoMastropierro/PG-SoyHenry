@@ -132,7 +132,7 @@ export default function FiltersResponsive () {
                     name="min"
                     min="0"
                     value={input.praice.min}
-                    placeholder='Minimo'
+                    placeholder='Min'
                     onChange={(e) => handleFilterMin(e)}
                 />
 
@@ -141,22 +141,13 @@ export default function FiltersResponsive () {
                     name="max"
                     max="200000"
                     value={input.praice.max}
-                    placeholder='Maximo'
+                    placeholder='Max'
                     onChange={(e) => handleFilterMax(e)}
                 />
                 <br />
 
-                    {/* {input.brand.map(c => {return (
-                            <div key={c} >
-                                <div>
-                                    <p >{c}</p>
-                                    <button onClick={() => handleDelete(c)} >✖</button>
-                                </div>
-                            </div>
-                    )})} */}
-
                     <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
-                    <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
+                    <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar filtros</button>
         </div>
     )
 }
