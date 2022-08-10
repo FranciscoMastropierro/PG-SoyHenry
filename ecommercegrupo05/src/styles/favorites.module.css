@@ -7,9 +7,6 @@
     padding-top: 4rem;
     background-color: #808080;
     border-radius: 0.5rem;
-    
-
-
 }
 .title{
     padding: 1rem;
@@ -23,7 +20,7 @@
 
 }
 .cardgrid{
-    
+    justify-items: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
@@ -32,8 +29,6 @@
     margin: 0 auto;
     padding-top: 1rem;
     font-family: 'Share Tech', sans-serif;
-    
-    
 }
 .container1
 {
@@ -79,5 +74,12 @@
         0 0 80px #03bcf4,
         0 0 160px #03bcf4,
         0 0 400px #03bcf4;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .cardgrid{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
     }
 }
