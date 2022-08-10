@@ -23,7 +23,7 @@ const CheckoutForm = () => {
 
     const { address, postalCode } = userLoged
 
-    const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
+    const finalProducts = totalProducts?.map(({ id, stock, amount, price }) => {
         return {
             id,
             stock,
@@ -91,7 +91,7 @@ const CheckoutForm = () => {
             <h3 className='text-center my-2'>Precio Total: $ {totalPrice}</h3>
 
             <div className='form-group'>
-                <CardElement className='form-control' disabled={!stripe}/>
+                <CardElement className='form-control' disabled={!stripe} />
             </div>
 
             <button className='btn btn-success'>

@@ -4,7 +4,7 @@ import style from "../../styles/cart.module.css";
 import { useCartContext } from "../../context/CartItem";
 import { getProductCart, getTotalPrice } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
@@ -31,16 +31,13 @@ export default function Cart() {
 
   const handleComprar = () => {
     if (!address || !postalCode) {
-      swal({
-        title: "Es necesario completar tu perfil",
-        input: "text",
-        showCancelButton: true,
-        confirmButtonText: "Guardar",
-        cancelButtonText: "Cancelar",
-        buttons: {
-          cancel: 'ok'
-        }
-      })
+      swal2.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Es necesario completar tu perfil',
+        showConfirmButton: false,
+        timer: 1500
+    })
       setTimeout(() => navigate('/userprofile'), 3000)
     } else {
       navigate('/TestAddresForm')
