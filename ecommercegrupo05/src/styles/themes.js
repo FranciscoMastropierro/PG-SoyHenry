@@ -6,6 +6,7 @@ export const themes = extendTheme({
     colors: {
       brand: {
         green: "#01f603",
+        greenYelow: '#adff2f',
         darkGreen: "#00b800",
         gray: "#464646",
         lightGray: "#dcdcdc",

@@ -85,6 +85,9 @@
 .filtersResponsive {
     display: none;
 }
+.filtersAcordion {
+    display: none
+}
 
 @media only screen and (max-width: 1350px) {
     .container {
@@ -98,5 +101,17 @@
     }
     .filtersResponsive {
         display: block
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .filtersResponsive {
+        display: none;
+    }
+    .filtersAcordion {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
     }
 }

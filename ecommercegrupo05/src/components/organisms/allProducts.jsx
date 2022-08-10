@@ -7,6 +7,7 @@ import CardProducts from "../atoms/cardProducts";
 import { useLocation } from "react-router-dom";
 import Filters from "../atoms/Filters";
 import FiltersResponsive from "../atoms/FiltersResponsive";
+import FilterAcordion from "../atoms/FilterAcordion";
 
 export default function AllProducts() {
 
@@ -35,6 +36,7 @@ export default function AllProducts() {
   return (
     <>
       <div className={style.filtersResponsive}><FiltersResponsive /></div>
+      <div className={style.filtersAcordion}><FilterAcordion /></div>
       <Pagination />
       <div className={style.container}>
           <div className={style.div}><Filters /></div>

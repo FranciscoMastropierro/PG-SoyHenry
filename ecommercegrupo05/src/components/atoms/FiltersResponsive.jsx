@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import FilterAcordion from "./FilterAcordion";
 import { getCate, getFilterBrand, getFilters, getProducts, numberPage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -158,8 +157,6 @@ export default function FiltersResponsive () {
 
                     <button onClick={(e) => handleSubmit(e)}>Filtrar</button>
                     <button onClick={(e) => { handleCLickRecharge(e) }}>Limpiar Filtros</button>
-
-                <FilterAcordion/>
         </div>
     )
 }

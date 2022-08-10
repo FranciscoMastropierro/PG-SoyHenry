@@ -28,9 +28,3 @@
     background: rgb(26, 26, 26);
     color: greenyellow;
 }
-
-@media only screen and (max-width: 850px) {
-    .filterContainer {
-        background: pink;
-    }
-}

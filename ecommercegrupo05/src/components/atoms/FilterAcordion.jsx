@@ -12,10 +12,10 @@ export default function FilterAcordion () {
 
     return (
         <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} bg='brand.green' color='gray.700' _active={{bg:'brand.lightGray'}}>
                 Actions
             </MenuButton>
-            <MenuList>
+            <MenuList bg='brand.green' color='gray.700'>
                 <MenuItem>Download</MenuItem>
                 <MenuItem>Create a Copy</MenuItem>
                 <MenuItem>Mark as Draft</MenuItem>
