@@ -84,6 +84,7 @@ module.exports = {
             Products.update({stock:(Number(p.stock)-Number(p.amount))},{where:{id:p.id}})
       };
       res.send({msj: 'Order Created', arr})
+      //Colocar sendMail(user, template)
     });
       })
     } catch (error) {
