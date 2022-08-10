@@ -4,7 +4,6 @@ import { getProducts, paginacion, getUsersFavorite } from "../../redux/actions";
 import style from "../../styles/allProducts.module.css";
 import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
-import { useLocation } from "react-router-dom";
 import Filters from "../atoms/Filters";
 
 export default function AllProducts() {
@@ -13,12 +12,9 @@ export default function AllProducts() {
   const pages = useSelector((state) => state.pages)
   const products = useSelector((state) => state.data)
   const productsPerPage = useSelector((state) => state.productsPerPage)
-  
   const indexLastProduct = pages * productsPerPage
   const indexFirstProduct = indexLastProduct - productsPerPage
-
   const productsToRender = products.slice(indexFirstProduct, indexLastProduct)
-
   const userLoged = useSelector((state) => state.userLoged)
   // const loc = useLocation()
   // let loc2 = loc.search.slice(6)
@@ -29,9 +25,9 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(paginacion(productsToRender));
-    if (userLoged) {
+    
       Object.keys(userLoged).length > 0 && dispatch(getUsersFavorite(userLoged.id));
-    }
+    
   }, [dispatch, products, pages]);
 
   return (

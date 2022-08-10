@@ -21,6 +21,7 @@
     border-radius: 8px;
     box-shadow: 1px 1px 10px #111;
     background: white;
+    object-fit: contain;
 
 }
 .name{

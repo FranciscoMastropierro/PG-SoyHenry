@@ -24,6 +24,9 @@ export default function Navbar () {
                 dispatch(token(tok, user))
                     
             })
+            if (userLoged) {
+                Object.keys(userLoged).length > 0 && dispatch(getUsersFavorite(userLoged.id));
+              }
         }
         // console.log('usuario logueado', userLoged)
         // console.log('no hay token :(')

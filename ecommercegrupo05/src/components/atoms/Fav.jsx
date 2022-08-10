@@ -6,25 +6,23 @@ import style from '../../styles/Fav.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert'; 
 const Fav = (props) => {
-    const userLoged = useSelector((state) => state.userLoged)
-
 
  const Favorites = useSelector((state) => state.UserFavs)
  console.log(Favorites)
+ const isFav = Favorites[0]?.Products.find((e)=> e.Favorites.ProductId === props.id)
+ const userLoged = useSelector((state) => state.userLoged);
 
- //const isFav = Favorites[0]?.find((e)=> e.Products.Favorites.ProductId === props.id)
- const isFav = Favorites[0].Products.find((e)=> e.Favorites.ProductId === props.id)
-
- // : console.log("nope")
-// 
-// console.log(isFav)
 // //let [fav, setFav] = useState(false)
 
 
-    let [estado, setEstado] = useState({
-        idProducts:"",
-        idUser:userLoged
-    })
+  // useEffect(() => {
+  //     Favorites
+  // }, [])
+    
+//    let [estado, setEstado] = useState({
+//        idProducts:"",
+//        idUser:userLoged
+//    })
     let {user, loginWithRedirect,} = useAuth0()
     const dispatch = useDispatch()
 
@@ -34,6 +32,9 @@ const Fav = (props) => {
         dispatch(favoritePost(props.id, userLoged.id))   
     //    setFav(true)
         swal("producto añadido a favoritos")
+
+        window.location.reload()
+
     }
 
     function handleClickDelete (e) {
@@ -41,6 +42,7 @@ const Fav = (props) => {
         dispatch(deleteFavorite(props.id, userLoged.id))   
     //    setFav(false)
         swal("producto removido de favoritos")
+        window.location.reload()
     }
     
 
@@ -52,15 +54,15 @@ const Fav = (props) => {
 
   return (
     <div>
-        hi
-        {/*user? !fav? <button className={style.favButton} id={props.id} onClick={(e)=>handleClickPost(e)}>
+        
+        {user? !isFav? <button className={style.favButton} id={props.id} onClick={(e)=>handleClickPost(e)}>
                      <AiOutlineHeart
                      className={style.favicon}/>
                </button> :
                <button className={style.favButton} id={props.id} onClick={(e)=>handleClickDelete(e)}>
                       <AiFillHeart
                       className={style.favicon}/>
-         </button> :<></>*/ }   
+         </button> :<></>}   
     </div>
   )
 }
