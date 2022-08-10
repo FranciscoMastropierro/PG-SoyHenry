@@ -130,9 +130,7 @@ export default function Filters() {
                     )
                 }
                 )}
-            </div>
-            <br />
-
+            </div>  
             <div className={style.brandss}>
                     {input.brand.map(c => {
 
