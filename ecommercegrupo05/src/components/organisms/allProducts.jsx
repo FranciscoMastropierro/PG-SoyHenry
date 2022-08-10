@@ -17,13 +17,8 @@ export default function AllProducts() {
   const indexFirstProduct = indexLastProduct - productsPerPage
   const productsToRender = products.slice(indexFirstProduct, indexLastProduct)
   const userLoged = useSelector((state) => state.userLoged)
-  // const loc = useLocation()
-  // let loc2 = loc.search.slice(6)
-
-  useEffect(() => {
-    dispatch(getProducts(loc2))
-  }, [loc]) //eslint-disable-line react-hooks/exhaustive-deps
-
+ 
+ 
   useEffect(() => {
     dispatch(paginacion(productsToRender));
     
