@@ -15,7 +15,7 @@ export default function Returns() {
             <p className={styles.aboutText}>
                 Estamos comprometidos a proporcionar productos de calidad a nuestros clientes. Si recibe los productos <br />
                 que no cumplan con sus expectativas, devuelva los productos usados ​​en buen estado dentro de los 30 días posteriores a la recepción. <br />
-                Actualmente, no podemos ofrecer intercambios. Los artículos comprados en NewHard.com no se pueden devolver o  <br />
+                Actualmente, no podemos ofrecer intercambios. Los artículos comprados en UnknownCoder.com no se pueden devolver o  <br />
                 intercambiado en los minoristas que venden nuestros productos.
             </p>
             <br />
