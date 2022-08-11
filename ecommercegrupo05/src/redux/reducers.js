@@ -79,6 +79,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case GET_PRODUCT_BY_NAME:
             return {
                 ...state,
+                // productsToRender: payload,
                 searchedProducts: payload
             }
             case GET_ALL_USERS_ORDER:
