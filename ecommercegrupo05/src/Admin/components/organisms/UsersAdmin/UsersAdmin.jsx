@@ -19,7 +19,6 @@ function UsersAdmin() {
 
   const users = useSelector((state) => state.allUsers);
   const searchedUsers = useSelector((state) => state.searchedUser);
-  console.log("sds", searchedUsers);
 
   async function handleBan(e) {
     swal({

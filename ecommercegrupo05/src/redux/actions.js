@@ -318,7 +318,6 @@ export function getUsersFavorite(id) {
     return async function (dispatch) {
         const json = await axios(`http://localhost:3001/api/favorite/${id}`)
         const data = json.data
-        console.log(data)
         return dispatch({
             type: GET_USER_FAVORITES,
             payload: data
