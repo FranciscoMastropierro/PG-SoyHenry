@@ -37,10 +37,7 @@ function SlidePopularProducts() {
           spaceBetween={80}
           slidesPerView={innerWidth}
           navigation
-        // pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
-        // onSlideChange={() => console.log('slide change')}
-        // onSwiper={(swiper) => console.log(swiper)}
+       
         >
           {
             infoData ? productsToSee.map(({ id, image, name, price, rating }) => {

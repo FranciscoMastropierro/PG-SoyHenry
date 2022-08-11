@@ -231,7 +231,7 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 msgCart: payload
             }
-        default: return state;
+        default: return {...state};
     }
 }
 

@@ -8,7 +8,6 @@ module.exports = {
         const {id} = req.params;
        
             try {
-                // console.log(Genre.__proto__)
                 const product = await Products.findOne({
                     where: {id},
                     include : {
@@ -19,7 +18,6 @@ module.exports = {
                  res.send(product);
 
             } catch (error) {
-                console.log(error);
                 res.status(404).send('Product not found');
             }
         
@@ -27,7 +25,6 @@ module.exports = {
 
     deleteProduct : async (req, res) =>{
         const {id} = req.params;
-        console.log(id)
         try {
            
             await Products.update({disable: true},{              
@@ -39,7 +36,6 @@ module.exports = {
             res.status(200).send('Product deleted!')
 
         } catch (error) {
-            console.log(error);
             res.status(404).send(error);
         }
 

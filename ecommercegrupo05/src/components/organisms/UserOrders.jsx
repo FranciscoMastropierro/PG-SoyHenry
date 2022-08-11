@@ -118,9 +118,9 @@ const UserOrders = () => {
                 <div>
                   <h4 className={style.firstInfo}> {order.date.slice(0, 10)} </h4>
                 </div>
-                {order.Products.map((item) => {
+                {order.Products.map((item, index) => {
                   return (
-                    <div className={style.productDiv}>
+                    <div className={style.productDiv} key={index}>
                       <div className={style.divImg}>
                         <img src={item.image} alt="item" />
                       </div>

@@ -45,10 +45,7 @@ function SlideBestNotebooks() {
           spaceBetween={80}
           slidesPerView={innerWidth}
           navigation
-        // pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
-        // onSlideChange={() => console.log('slide change')}
-        // onSwiper={(swiper) => console.log(swiper)}
+    
         >
           {
             infoBestNotebooks ? productsToSee.map(({ id, image, name, price, rating }) => {

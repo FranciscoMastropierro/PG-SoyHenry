@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import swal2 from 'sweetalert2';
 import { loadStripe } from '@stripe/stripe-js';
-import { getMsgCart, postOrder } from '../../../redux/actions';
+import { getMsgCart, postOrder, URL_BACK } from '../../../redux/actions';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
-import style from '../../../styles/testCheckout.module.css'
-
+import style from '../../../styles/testCheckout.module.css' 
 
 const stripePromise = loadStripe("pk_test_51LPdB5H9O09Vk58eN5dLZfEZTY7pil4bPkqlWiYchUAjx82DR52o26b4bm8aUoEtqfJuF7BFFcS01wKLUpSJ22d900UhCklx09")
 
@@ -19,7 +18,6 @@ const CheckoutForm = () => {
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
-    console.log("🚀 ~ file: TestCheckout.jsx ~ line 22 ~ CheckoutForm ~ totalProducts", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const { address, postalCode } = userLoged
@@ -50,11 +48,11 @@ const CheckoutForm = () => {
             const { id } = paymentMethod
 
             try {
-                const { data } = await axios.post('http://localhost:3001/api/stripe/api/checkout', {
+                const { data } = await axios.post(`${URL_BACK}/stripe/api/checkout`, {
                     id,
                     amount: totalPrice
                 })
-                console.log(data.msg)
+           
 
                 dispatch(getMsgCart(data.msg))
 
