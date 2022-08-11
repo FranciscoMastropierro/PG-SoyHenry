@@ -6,9 +6,9 @@ import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
 import Filters from "../atoms/Filters";
 import FiltersResponsive from "../atoms/FiltersResponsive";
+import { useLocation } from "react-router-dom";
 
 export default function AllProducts() {
-
   const dispatch = useDispatch()
   const pages = useSelector((state) => state.pages)
   const products = useSelector((state) => state.data)
@@ -17,7 +17,6 @@ export default function AllProducts() {
   const indexFirstProduct = indexLastProduct - productsPerPage
   const productsToRender = products.slice(indexFirstProduct, indexLastProduct)
   const userLoged = useSelector((state) => state.userLoged)
- 
  
   useEffect(() => {
     dispatch(paginacion(productsToRender));

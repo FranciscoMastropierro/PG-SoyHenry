@@ -43,11 +43,9 @@ export const GET_USER_FAVORITES = 'GET_USER_FAVORITES'
 
 
 
-export function getProducts(loc) {
+export function getProducts() {
     return async function (dispatch) {
-        let json = '';
-        loc ? json = await axios(`http://localhost:3001/api/products?name=${loc}`) :
-            json = await axios('http://localhost:3001/api/products');
+        let json = await axios('http://localhost:3001/api/products');
         const data = await json.data;
         return dispatch({
             type: GET_PRODUCTS,
