@@ -1,6 +1,5 @@
 import axios from 'axios';
 import swal2 from 'sweetalert2';
-import swal from 'sweetalert';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
@@ -137,15 +136,12 @@ export function getFilters(category) {
             return dispatch({ type: GET_FILTERS, payload: data })
         }
         catch (error) {
-            return swal({
-                title: "No existen resultados para este filtro.",
-                input: "text",
-                showCancelButton: true,
-                confirmButtonText: "Guardar",
-                cancelButtonText: "Cancelar",
-                buttons: {
-                    cancel: 'ok'
-                }
+            return swal2.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'No hay filtros para este producto',
+                showConfirmButton: false,
+                timer: 1500
             })
         }
     }
@@ -392,8 +388,8 @@ export function postOrder(id, products, shipmentAddress, postalCode) {
 export function changeProfile(id, user) {
     return async function (dispatch) {
         const { data } = await axios.put(`http://localhost:3001/api/users/edit/${id}`, user);
-        console.log("🚀 ~ file: actions.js ~ line 394 ~ data", data)
-        console.log('aqui en action para el put', user)
+        // console.log("🚀 ~ file: actions.js ~ line 394 ~ data", data)
+        // console.log('aqui en action para el put', user)
         // return dispatch({
         //     type: TOKEN,
         //     payload: user

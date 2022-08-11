@@ -19,6 +19,7 @@ const CheckoutForm = () => {
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
+    console.log("🚀 ~ file: TestCheckout.jsx ~ line 22 ~ CheckoutForm ~ totalProducts", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const { address, postalCode } = userLoged
