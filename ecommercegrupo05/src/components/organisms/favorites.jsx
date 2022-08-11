@@ -13,7 +13,7 @@ export default function Favorites() {
 
   useEffect(() => {
     Object.keys(userL).length > 0 && dispatch(getUsersFavorite(userL.id));
-  }, [itemToDelete]);
+  }, [itemToDelete]); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={style.container}>
@@ -32,7 +32,12 @@ export default function Favorites() {
                 />
               ))
             ) : (
-              <p>Favoritos Vacio</p>
+              <div className={style.container5}>
+                <h2 className={style.h9}>
+                  <span className={style.span1}>FAVORITOS </span>
+                  <span className={style.span1}>VACIO</span>
+                </h2>
+              </div>
             )}
           </div>
         }

@@ -6,7 +6,7 @@ import Pagination from "../atoms/paginacion";
 import CardProducts from "../atoms/cardProducts";
 import Filters from "../atoms/Filters";
 import FiltersResponsive from "../atoms/FiltersResponsive";
-import { useLocation } from "react-router-dom";
+
 
 export default function AllProducts() {
   const dispatch = useDispatch()
@@ -17,13 +17,18 @@ export default function AllProducts() {
   const indexFirstProduct = indexLastProduct - productsPerPage
   const productsToRender = products.slice(indexFirstProduct, indexLastProduct)
   const userLoged = useSelector((state) => state.userLoged)
- 
+
+
   useEffect(() => {
     dispatch(paginacion(productsToRender));
-    
+
       Object.keys(userLoged).length > 0 && dispatch(getUsersFavorite(userLoged.id));
-    
-  }, [dispatch, products, pages]);
+
+  }, [dispatch, products, pages]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+}, [])
 
   return (
     <>

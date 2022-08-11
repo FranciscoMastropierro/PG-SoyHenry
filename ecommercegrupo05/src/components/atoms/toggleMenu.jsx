@@ -1,5 +1,4 @@
 import React from 'react';
-import UserMenu from './UserMenu';
 import menu from '../../assets/menu.png'
 import style from '../../styles/toggleMenu.module.css'
 import { Link } from 'react-router-dom';

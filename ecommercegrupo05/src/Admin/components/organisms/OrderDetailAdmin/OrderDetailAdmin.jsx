@@ -12,7 +12,6 @@ useEffect(() => {
     dispatch(getOrderById(id))
     }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
 
-    
     const allorder = useSelector((state)=> state.allOrders)
     const order = allorder.filter((e)=>(e.id===id))
     console.log(order)

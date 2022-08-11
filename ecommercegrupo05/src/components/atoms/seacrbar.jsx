@@ -3,12 +3,12 @@ import { useState } from 'react';
 import search from '../../assets/search.jpg'
 import { getProductByName, paginacion } from '../../redux/actions';
 import style from '../../styles/searchbar.module.css'
-import {connect} from 'react-redux'
+import {connect } from 'react-redux'
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export function SearchBar ({productsToRender, searchedProducts, getProductByName, paginacion}) {
+export function SearchBar ({searchedProducts, getProductByName, paginacion}) {
 
     const [products, setProducts] = useState('')
     const [value, setValue] = useState('')
@@ -33,8 +33,8 @@ export function SearchBar ({productsToRender, searchedProducts, getProductByName
                 <button type='submit'><img src={search} alt='search-button'/></button>
             </form>
             <div className={style.productsBox}>
-                {value && productsToRender.map(p => { return (
-                    <Link to={`/details/${p.id}`}>
+                {value && searchedProducts.map((p, index) => { return (
+                    <Link to={`/details/${p.id}`} key={index}>
                         <li onClick={() => setValue('')}>{p.name}</li>
                     </Link>
                 )})}

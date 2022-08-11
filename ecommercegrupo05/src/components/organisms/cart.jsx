@@ -4,7 +4,7 @@ import style from "../../styles/cart.module.css";
 import { useCartContext } from "../../context/CartItem";
 import { getProductCart, getTotalPrice } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
@@ -27,22 +27,20 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getProductCart(products))
-  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch, products])
 
   const handleComprar = () => {
     if (!address || !postalCode) {
-      swal({
-        title: "Es necesario completar tu perfil",
-        input: "text",
-        showCancelButton: true,
-        confirmButtonText: "Guardar",
-        cancelButtonText: "Cancelar",
-        buttons: {
-          cancel: 'ok'
-        }
-      })
+      swal2.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Es necesario completar tu perfil',
+        showConfirmButton: false,
+        timer: 1500
+    })
       setTimeout(() => navigate('/userprofile'), 3000)
     } else {
+      // window.location.reload()
       navigate('/TestAddresForm')
     }
   }
@@ -58,7 +56,7 @@ export default function Cart() {
 
   useEffect(() => {
     dispatch(getTotalPrice(totalPrice))
-  }, [dispatch]) //eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch, totalPrice]) 
 
   const handleItemToCart = (product) => () => addItemToCart(product);
 
