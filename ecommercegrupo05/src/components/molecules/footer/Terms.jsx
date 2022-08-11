@@ -12,7 +12,7 @@ export default function Terms() {
     return (
         <>
 
-            <div className={styles.aboutTitle} >Terms and Conditions</div>
+            <div className={styles.aboutTitle} >Terminos y condiciones</div>
             <p className={styles.aboutText}>
                 UnknownCoder proporciona el contenido y los servicios disponibles en el sitio web sujeto a lo siguiente <br />
                 términos y condiciones (“Términos y Condiciones”). Lea atentamente estos Términos y condiciones <br />

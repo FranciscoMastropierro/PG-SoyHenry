@@ -27,7 +27,7 @@ export default function Faq (){
         <p className={styles.aboutText}>
         Las compras realizadas en nuestra web pueden ser devueltas por cualquier motivo hasta 30 días después de la entrega. <br/>
         Lleve el artículo y un recibo válido a cualquier tienda, o comuníquese con <br/>
-        info@newhard.com para iniciar el proceso de devolucion.
+        info@unknowncoder.com para iniciar el proceso de devolucion.
         </p>
         <br/>
         <p className={styles.aboutText}>
