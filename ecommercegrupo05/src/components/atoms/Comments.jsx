@@ -61,7 +61,7 @@ function Comments() {
                 </div>
               )
             })
-            : <p>'Sin Comentarios'</p>
+            : <p className={style.NoComments}>reseñas:</p>
         }
       </div>
     </div>
