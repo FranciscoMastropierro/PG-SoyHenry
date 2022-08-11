@@ -88,14 +88,15 @@ function ProductsAdmin() {
             >
               Deshabilitar
             </button>
-            <button className={style.ModBtn}>
+            <div className={style.ModBtndiv}>
               <Link
+                className={style.ModBtnl}
                 style={{ textDecoration: "none" }}
                 to={`/admin/products/modify/${e.id}`}
-              >
-                Modificar
+              ><button className={style.ModBtn}>
+                Modificar</button>
               </Link>
-            </button>
+            </div>
             <div className={style.stockdiv}>
               <button
                 className={style.stockBtn}

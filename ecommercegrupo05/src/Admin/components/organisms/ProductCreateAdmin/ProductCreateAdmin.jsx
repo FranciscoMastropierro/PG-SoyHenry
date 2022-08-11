@@ -9,6 +9,7 @@ import {
 } from "../../../../redux/actions";
 
 import style from './ProductCreateAdmin.module.css'
+import swal from "sweetalert";
 
 export function validate(newProduct) {
   let errors = {};
@@ -22,9 +23,9 @@ export function validate(newProduct) {
   } if (newProduct.price <= 0) {
     errors.price = `El precio no puede ser nulo`;
   } if (!newProduct.brand) {
-    errors.brand = 'Seleccione un brand';
+    errors.brand = 'Seleccione una Marca';
   } if (!newProduct.categories) {
-    errors.categories = 'Seleccione una categoria';
+    errors.categories = 'Seleccione al menos una categoria';
   } if (newProduct.image === "") {
     errors.image = 'Inserte imagen';
   } if (newProduct.stock < 0) {
@@ -106,6 +107,7 @@ export default function CreateForm() {
         stock: "",
         description: "",
       })
+      swal("Producto Creado")
     }
     else {
       alert("Rellene todos los campos del formulario")
@@ -231,7 +233,7 @@ export default function CreateForm() {
             <div>
               <div>
                 <label className={style.label1}>Marca: </label>
-                <select required="required" className={style.input1} defaultValue="" name="brand" onChange={(e) => handleInputChange(e)}>
+                <select required="required" className={style.input1} value={newProduct.brand} name="brand" onChange={(e) => handleInputChange(e)}>
                   <option value=""   > Seleccionar Marca</option>
                   {
                     allBrand?.map((e, i) =>
@@ -242,8 +244,8 @@ export default function CreateForm() {
               </div>
               <div>
                 <label className={style.label1}>Categoria: </label>
-                <select className={style.input1} name="categories" defaultValue="" onChange={(e) => handleSelectCat(e)}>
-                  <option value="" > Seleccionar categoria</option>
+                <select className={style.input1} name="categories"  value={newProduct.categories} onChange={(e) => handleSelectCat(e)}>
+                  <option className={style.input1} value="" selected disabled> Seleccionar categoria</option>
                   {setCat?.map((e, i) => (
                     <option className={style.input1} key={i} value={e}>
                       {e}

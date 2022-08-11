@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteComment, getComments } from '../../redux/actions';
 import { useParams } from 'react-router-dom';
 import swal2 from 'sweetalert2';
+import {BsFillTrashFill} from 'react-icons/bs'
 
 
 function Comments() {
@@ -32,32 +33,44 @@ function Comments() {
     dispatch(getComments(idProductCurrent))
     setTimeout(() => window.location.reload(), 2000)
   }
+ 
+ 
 
   return (
     <div className={style.div}>
       <div>
         {Array.isArray(commentProduct) ? (commentProduct.length === 1
-          ? <h2> {commentProduct.length} Comentario</h2>
-          : <h2> {commentProduct.length} Comentarios</h2>)
+          ? <h2 className={style.numberOfComments}> {commentProduct.length} Comentario :</h2>
+          : <h2 className={style.numberOfComments}>  {commentProduct.length} Comentarios :</h2>)
           : ''
         }
         {
           Array.isArray(commentProduct) ?
             commentProduct.map(({ id, UserId, userInfo, text, rating }) => {
-              return (
+                let estrella = "";
+                for (let index = 0; index < rating; index++) {
+                  estrella+="⭐";
+                }return (
                 <div key={id} className={style.allComments}>
-                  <div>
-                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']}</h3>
-                    <h5>{rating} ⭐</h5>
+                  <div className={style.userRating}>
+                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']} : </h3>
+                    <h5 className={style.titleUser2}> {estrella}</h5>
+                  </div>
+
+                  <div className={style.division}>
+                    <div>
                     <p className={style.text}>{text}</p>
                   </div>
+                  <div className={style.divDelete}>
                   {
                     UserId === idUser
                       ?
-                      <button className={style.btnDelete} value={id} onClick={e => handleBtnDelete(e)}>Borrar</button>
+                      <button className={style.btnDelete} value={id} onClick={e => handleBtnDelete(e)}><BsFillTrashFill className={style.iconDelete}/></button>
                       :
                       ''
                   }
+                  </div>
+                </div>
                 </div>
               )
             })
