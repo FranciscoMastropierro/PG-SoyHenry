@@ -1,8 +1,14 @@
+import React, { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import styles from '../../../styles/footer.module.css';
 
 
 export default function Returns() {
+
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
+
     return (
         <>
             <div className={styles.aboutTitle} >Devoluciones</div>

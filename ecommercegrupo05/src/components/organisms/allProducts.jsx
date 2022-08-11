@@ -26,6 +26,10 @@ export default function AllProducts() {
 
   }, [dispatch, products, pages]); //eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    window.scrollTo(0,0)
+}, [])
+
   return (
     <>
       <div className={style.filtersResponsive}><FiltersResponsive /></div>
