@@ -1,14 +1,20 @@
+import React, { useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import styles from '../../../styles/footer.module.css';
 
 
 export default function Terms() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <>
 
-            <div className={styles.aboutTitle} >Terms and Conditions</div>
+            <div className={styles.aboutTitle} >Terminos y condiciones</div>
             <p className={styles.aboutText}>
-                NewHard proporciona el contenido y los servicios disponibles en el sitio web sujeto a lo siguiente <br />
+                UnknownCoder proporciona el contenido y los servicios disponibles en el sitio web sujeto a lo siguiente <br />
                 términos y condiciones (“Términos y Condiciones”). Lea atentamente estos Términos y condiciones <br />
                 antes de usar el sitio web. Si no está de acuerdo con estos Términos y condiciones, no utilice nuestro sitio web.<br />
             </p>

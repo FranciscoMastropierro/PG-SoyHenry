@@ -17,6 +17,9 @@
 .span {
     margin: 5px
 }
+.searchbar {
+    display: none;
+}
 
 @media only screen and (min-width: 960px) {
     .toggleMenu {
@@ -27,5 +30,11 @@
 @media only screen and (max-width: 500px) {
     .menuButton span {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .searchbar {
+        display: flex;
     }
 }

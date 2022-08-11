@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from '../../../styles/footerOne.module.css';
 import { Link } from "react-router-dom";
 import { FaInstagram, FaPinterestP, FaTiktok, FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
 
+    useEffect(() => {
+        window.scrollTo(0,0)
+    }, [])
+
     const footer = [
-        {
-            to: '/aboutus',
-            name: 'Compañia',
-        },
         {
             to: '/faq',
             name: 'FAQ',
@@ -17,9 +17,6 @@ export default function Footer() {
         {
             to: '/returns',
             name: 'Devoluciones',
-        }, {
-            to: '/aboutus',
-            name: 'Legal',
         },
         {
             to: '/termsandconditions',
@@ -53,12 +50,12 @@ export default function Footer() {
                         Contactanos via:
                     </div>
                     <a href='mailto:info@hardwere.com' target='_blank' rel='noopener' className={style.texttitle2}>
-                        Mail
+                        WhatsApp
                     </a>
 
-                    <a href="tel:+05890000111" className={style.texttitle2}>+541137699590</a>
+                    <a href="tel:+05890000111" className={style.texttitle2}>+57 3004077114</a>
 
-                    <Link to='/aboutus' className={style.textTitleFooter}>
+                    <Link to='/aboutus' className={style.textTitleFooter3}>
                         Sobre Nosotros
                     </Link>
 
@@ -88,7 +85,7 @@ export default function Footer() {
                 </div>
 
                 <p className={style.textTitleFooterinfoSize}>
-                    Al subscribirte a NewHard <br></br>
+                    Al subscribirte a Unknown Coder <br></br>
                     aceptas recibir promociones <br></br>
                     y mensajes personalizados<br></br>
                     automatizados via e-mail</p>

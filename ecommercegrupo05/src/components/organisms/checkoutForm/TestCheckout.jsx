@@ -19,11 +19,12 @@ const CheckoutForm = () => {
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
+    console.log("🚀 ~ file: TestCheckout.jsx ~ line 22 ~ CheckoutForm ~ totalProducts", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const { address, postalCode } = userLoged
 
-    const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
+    const finalProducts = totalProducts?.map(({ id, stock, amount, price }) => {
         return {
             id,
             stock,
@@ -64,9 +65,9 @@ const CheckoutForm = () => {
                     swal2.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Compra exitosa',
+                        title: 'Compra exitosa, recibiras un e-mail con detalles de tu compra',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000
                     })
                     setTimeout(() => navigate('/'), 2000)
                     window.localStorage.clear();
@@ -91,7 +92,7 @@ const CheckoutForm = () => {
             <h3 className='text-center my-2'>Precio Total: $ {totalPrice}</h3>
 
             <div className='form-group'>
-                <CardElement className='form-control' disabled={!stripe}/>
+                <CardElement className='form-control' disabled={!stripe} />
             </div>
 
             <button className='btn btn-success'>

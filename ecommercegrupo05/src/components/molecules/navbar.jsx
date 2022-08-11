@@ -27,7 +27,7 @@ export default function Navbar() {
                 Object.keys(userLoged).length > 0 && dispatch(getUsersFavorite(userLoged.id));
             }
         }
-    }, [isLoading, isAuthenticated, Object.keys(userLoged).length])
+    }, [isLoading, isAuthenticated, Object.keys(userLoged).length]) //eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (
@@ -36,7 +36,9 @@ export default function Navbar() {
                 <Link to='/'>
                     <img src={logo} alt='logo' className={style.logo} />
                 </Link>
-                <SearchBar />
+                <div className={style.searchbar}>
+                    <SearchBar />
+                </div>
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
             <div className={style.sidebarToggle} id={userLoged.id}>

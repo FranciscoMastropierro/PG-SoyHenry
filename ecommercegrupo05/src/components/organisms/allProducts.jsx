@@ -21,10 +21,14 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(paginacion(productsToRender));
-    
+
       Object.keys(userLoged).length > 0 && dispatch(getUsersFavorite(userLoged.id));
-    
+
   }, [dispatch, products, pages]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+}, [])
 
   return (
     <>
