@@ -22,7 +22,7 @@ const UserOrders = () => {
   
   useEffect(() => {
     dispatch(getAllByidUser(id))
-  }, []) //eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch, id]) 
 
   const allOrders = useSelector((state) => state.UserOrders)
 
