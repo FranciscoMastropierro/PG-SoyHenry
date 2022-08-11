@@ -124,3 +124,19 @@
 .secondaryBar {
   margin: 2rem;
 }
+
+@media only screen and (max-width: 1500px) {
+    .card {
+        width: 1040px
+    }
+}
+@media only screen and (max-width: 1340px) {
+    .container {
+      margin: 0;
+      padding: 0;
+      background-color:transparent;
+      box-shadow: none;
+    }
+}
+@media only screen and (max-width: 1100px) {
+}
