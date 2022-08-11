@@ -19,6 +19,7 @@ const CheckoutForm = () => {
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
+    console.log("🚀 ~ file: TestCheckout.jsx ~ line 22 ~ CheckoutForm ~ totalProducts", totalProducts)
     const userLoged = useSelector((state) => state.userLoged)
 
     const { address, postalCode } = userLoged
@@ -64,9 +65,9 @@ const CheckoutForm = () => {
                     swal2.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Compra exitosa',
+                        title: 'Compra exitosa, recibiras un e-mail con detalles de tu compra',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000
                     })
                     setTimeout(() => navigate('/'), 2000)
                     window.localStorage.clear();
