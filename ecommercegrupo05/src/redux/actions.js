@@ -1,5 +1,6 @@
 import axios from 'axios';
 import swal2 from 'sweetalert2';
+import swal from 'sweetalert';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_NAME = 'GET_PRODUCT_BY_NAME'
@@ -136,12 +137,15 @@ export function getFilters(category) {
             return dispatch({ type: GET_FILTERS, payload: data })
         }
         catch (error) {
-            return swal2.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'No hay resultados para este filtro',
-                showConfirmButton: false,
-                timer: 1500
+            return swal({
+                title: "No existen resultados para este filtro.",
+                input: "text",
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                cancelButtonText: "Cancelar",
+                buttons: {
+                    cancel: 'ok'
+                }
             })
         }
     }
