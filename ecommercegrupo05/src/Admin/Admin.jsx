@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import style from './Admin.module.css'
 
 
 import ProductsAdmin from "./components/organisms/ProductsAdmin/ProductsAdmin";
@@ -19,7 +20,7 @@ function Admin() {
     return (
         <div>
             <NavBarAdmin />
-            <div >
+            <div className={style.adminContainer}>
                 <Routes>
                     <Route exact path={"/"} element={<DashBoardAdmin />} />
                     <Route exact path={"/users"} element={<UsersAdmin />} />
