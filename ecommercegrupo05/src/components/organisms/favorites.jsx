@@ -29,6 +29,7 @@ export default function Favorites() {
                   name={name}
                   id={id}
                   price={price}
+                  key={id}
                 />
               ))
             ) : (

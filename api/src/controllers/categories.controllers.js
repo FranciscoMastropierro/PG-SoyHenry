@@ -1,9 +1,6 @@
 require('dotenv').config();
-const productList = require('../asset/productList');
 const { Categories } = require('../db.js');
 
-
- 
 
 module.exports = {
     
@@ -23,9 +20,10 @@ module.exports = {
     
     preLoadCategories : async (req, res) => {
         try {
-    
+            const {data}=await axios("https://api.jsonstorage.net/v1/json/19873e5d-80e0-40cc-a575-5723cc2e4084/62a6ce49-696b-4e87-87e4-c9b7c74fbc7c")
+            
             let cateArr = [];
-            productList.map((el) => {
+            data.map((el) => {
                 let cate = el.categories; 
                 
                 cateArr.push(cate)
@@ -45,7 +43,6 @@ module.exports = {
     
     
         } catch (error) {
-            console.log(error)
             res.status(404).send({ error });
         }
     
