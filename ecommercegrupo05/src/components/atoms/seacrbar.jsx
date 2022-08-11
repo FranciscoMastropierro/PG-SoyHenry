@@ -24,7 +24,7 @@ export function SearchBar ({searchedProducts, getProductByName}) {
     function handleClick (e) {
         e.preventDefault()
         setValue('')
-        navigate(`api/allProducts?name=${value}`)
+        navigate(`allProducts?name=${value}`)
     }
 
     return (
