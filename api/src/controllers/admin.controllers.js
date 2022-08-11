@@ -1,4 +1,3 @@
-const axios = require('axios');
 require("dotenv").config();
 const { User } = require('../db.js');
 
@@ -21,7 +20,7 @@ module.exports = {
                 res.status(400).send('User not found.')
             }
         }catch(error){ 
-            console.log(error)
+            res.status(404).send({ error });
         }
     },
     
@@ -43,7 +42,7 @@ module.exports = {
             res.status(400).send("User not found.")
         }
     }catch(error){
-        console.log(error);
+        res.status(404).send({ error });
     }
     },
 

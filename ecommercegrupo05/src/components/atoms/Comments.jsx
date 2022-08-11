@@ -1,41 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { Textarea } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 import style from '../../styles/comments.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { crateComment, getComments } from '../../redux/actions';
+import { deleteComment, getComments } from '../../redux/actions';
+import { useParams } from 'react-router-dom';
+import swal2 from 'sweetalert2';
+
 
 function Comments() {
   const dispatch = useDispatch();
-  const commentUsers = useSelector(state => state.commentsUser)
-
-  // -------- estado para enviar comentarios
-  const [input, setInput] = useState({
-    text: '',
-    productId: 'ff5f4fbe-88fe-4501-8a97-abed261aeff5',
-    userId: 'c2fcac02-9259-4047-b4ab-dd68ab6711b8'
-  })
+  let commentProduct = useSelector(state => state.commentsUserXProduct)
+  const idProductCurrent = useParams().id;
+  const usercurrent = useSelector(state => state.userLoged)
+  const idUser = usercurrent.id
 
   useEffect(() => {
-    dispatch(getComments(input.productId))
+    window.scrollTo(0, 0)
   }, [])
 
-  function handleText(e) {
-    e.preventDefault(e);
-    setInput({
-      ...input,
-      text: e.target.value
-    });
-  }
+  useEffect(() => {
+    dispatch(getComments(idProductCurrent))
+  }, [dispatch, idProductCurrent])
 
-  function handleSubmit(e) {
-    e.preventDefault(e);
-    dispatch(crateComment(input));
-    alert('gracias por su comentario.')
-    setInput({
-      ...input,
-      text: ''
+
+  function handleBtnDelete(e) {
+    e.preventDefault();
+    const idDel = e.target.value
+    dispatch(deleteComment(idDel));
+    swal2.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Comentario eliminado del producto',
+      showConfirmButton: false,
+      timer: 1500
     })
-    dispatch(getComments(input.productId))
+    dispatch(getComments(idProductCurrent))
+    setTimeout(() => window.location.reload(), 2000)
   }
 
 
@@ -43,27 +42,44 @@ function Comments() {
   return (
     <div className={style.div}>
       <div>
-        <label>Dejar comentario del producto
-          <Textarea placeholder='Escribe tu comentario aqui...' value={input.text} onChange={e => handleText(e)} />
-        </label>
-        <button onClick={(e) => handleSubmit(e)}>Enviar</button>
-      </div>
-      <div>
-        <h2>{commentUsers.length} Comentarios</h2>
+        {Array.isArray(commentProduct) ? (commentProduct.length === 1
+          ? <h2 className={style.numberOfComments}> {commentProduct.length} Comentario :</h2>
+          : <h2 className={style.numberOfComments}>  {commentProduct.length} Comentarios :</h2>)
+          : ''
+        }
         {
-          commentUsers ?
-          commentUsers.map(c => {
-            return(
-            <div key={c.id}>
-              <h3>{c.userInfo['firstname']}</h3>
-              <p>{c.text}</p>
-            </div>
-            )
-          })
-          : commentUsers
+          Array.isArray(commentProduct) ?
+            commentProduct.map(({ id, UserId, userInfo, text, rating }) => {
+              let estrella = "";
+              for (let index = 0; index < rating; index++) {
+                estrella += "⭐";
+              } return (
+                <div key={id} className={style.allComments}>
+                  <div className={style.userRating}>
+                    <h3 className={style.titleUser} >{userInfo['firstname']} {userInfo['lastname']} : </h3>
+                    <h5 className={style.titleUser2}> {estrella}</h5>
+                  </div>
+
+                  <div className={style.division}>
+                    <div>
+                      <p className={style.text}>{text}</p>
+                    </div>
+                    <div className={style.divDelete}>
+                      {
+                        UserId === idUser
+                          ?
+                          <button className={style.btnDelete} value={id} onClick={e => handleBtnDelete(e)}>Borrar</button>
+                          :
+                          ''
+                      }
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+            : <p className={style.NoComments}>reseñas:</p>
         }
       </div>
-
     </div>
   )
 }

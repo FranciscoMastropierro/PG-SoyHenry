@@ -1,4 +1,3 @@
-const axios = require("axios");
 require("dotenv").config();
 const { Users } = require("../db.js");
 
@@ -32,7 +31,6 @@ module.exports = {
       const user = await Users.findOne({ where: { id } });
       res.send(user);
     } catch (error) {
-      // console.log(error)
       res.status(404).send(error);
     }
   },
@@ -50,7 +48,7 @@ module.exports = {
         return res.status(404).send({
           error: `User ${backUser.username} Disable`,
         });
-      const aux = await Users.update(user, { where: { id } });
+      await Users.update(user, { where: { id } });
 
       res.status(200).send({ msj: `User update` });
     } catch (error) {
@@ -74,7 +72,6 @@ module.exports = {
 
       res.send({ msg: "User Created", user });
     } catch (error) {
-      console.log(error);
       res.status(404).send({ error: "Can not post user", error });
     }
   },

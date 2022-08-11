@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const {  infoProfile } = require('../controllers/auth0.controllers');
-const {Users} = require('../db');
 const {expressjwt} = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
 const {
@@ -26,9 +25,7 @@ const authorizationAccess = expressjwt({
 });
 
 
-// router.get('/', authenthincateUser);
 
-// console.log(typeof expressjwt)
 router.post("/profile", authorizationAccess  ,infoProfile);
 
 module.exports = router;

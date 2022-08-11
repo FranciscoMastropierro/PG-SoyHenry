@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
 import { loadStripe } from '@stripe/stripe-js';
-import { useCartContext } from "../../../context/CartItem";
-import { getMsgCart, postOrder } from '../../../redux/actions';
+import { getMsgCart, postOrder, URL_BACK } from '../../../redux/actions';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/cyborg/bootstrap.min.css";
-import style from '../../../styles/testCheckout.module.css'
-
+import style from '../../../styles/testCheckout.module.css' 
 
 const stripePromise = loadStripe("pk_test_51LPdB5H9O09Vk58eN5dLZfEZTY7pil4bPkqlWiYchUAjx82DR52o26b4bm8aUoEtqfJuF7BFFcS01wKLUpSJ22d900UhCklx09")
 
@@ -17,18 +15,14 @@ const CheckoutForm = () => {
 
     const dispatch = useDispatch()
 
-    const superState = useCartContext();
-
-    const { deleteAllCart } = superState.effects;
-
-    // const [disable, setDisable] = useState(true)
-    const [loading, setLoading] = useState(false)
 
     const totalPrice = useSelector((state) => state.totalPrice)
     const totalProducts = useSelector((state) => state.productsCart)
     const userLoged = useSelector((state) => state.userLoged)
 
-    const finalProducts = totalProducts?.map(({id, stock, amount, price}) => {
+    const { address, postalCode } = userLoged
+
+    const finalProducts = totalProducts?.map(({ id, stock, amount, price }) => {
         return {
             id,
             stock,
@@ -41,8 +35,6 @@ const CheckoutForm = () => {
     const elements = useElements()
     const navigate = useNavigate()
 
-    const handleItemToDeleteAll = (totalProducts) => () => deleteAllCart(totalProducts);
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -51,61 +43,43 @@ const CheckoutForm = () => {
             card: elements.getElement(CardElement)
         })
 
-        setLoading(true)
 
         if (!error) {
             const { id } = paymentMethod
 
             try {
-                const { data } = await axios.post('http://localhost:3001/api/stripe/api/checkout', {
+                const { data } = await axios.post(`${URL_BACK}/stripe/api/checkout`, {
                     id,
                     amount: totalPrice
                 })
-                // console.log(data.msg)
+           
 
                 dispatch(getMsgCart(data.msg))
 
                 elements.getElement(CardElement).clear()
 
                 if (data.msg === 'Successful payment') {
-                    dispatch(postOrder(userLoged.id, finalProducts))
-                    swal({
-                        title: "Compra exitosa",
-                        input: "text",
-                        showCancelButton: true,
-                        confirmButtonText: "Guardar",
-                        cancelButtonText: "Cancelar",
-                        buttons: {
-                            cancel: 'ok'
-                        }
+                    dispatch(postOrder(userLoged.id, finalProducts, address, postalCode))
+                    swal2.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Compra exitosa, recibiras un e-mail con detalles de tu compra',
+                        showConfirmButton: false,
+                        timer: 2000
                     })
-                    setTimeout(() => navigate('/'), 3000)
-                    localStorage.removeItem(totalProducts);
+                    setTimeout(() => navigate('/'), 2000)
+                    window.localStorage.clear();
+                    setTimeout(() => window.location.reload(), 2000)
                 }
 
             } catch (error) {
                 console.log(error)
             }
-            setLoading(false)
         }
     }
 
-
-    // useEffect(() => {
-    //   if(!stripe) {
-    //     setDisable(false)
-    //   }else{
-    //     setDisable(true)
-    //   }
-    // }, [stripe])
-
-    // pendiente, tengo que verificar que valor es el que toma en cuenta stripe para poder pegarme a esa propiedad
-
-
-
-
     return (
-        <form onSubmit={handleSubmit} className='card card-body' onClick={handleItemToDeleteAll(totalProducts)}>
+        <form onSubmit={handleSubmit} className='card card-body'>
 
             <img
                 src='https://idahonews.com/resources/media/54376d60-a84a-48cf-bdac-03a3d32fbccb-full36x25_GettyImages1182622625.jpg?1595459846300'
@@ -113,20 +87,14 @@ const CheckoutForm = () => {
                 className='img-fluid'
             />
 
-            <h3 className='text-center my-2'>Precio Total: {totalPrice} $</h3>
+            <h3 className='text-center my-2'>Precio Total: $ {totalPrice}</h3>
 
             <div className='form-group'>
-                <CardElement className='form-control' />
+                <CardElement className='form-control' disabled={!stripe} />
             </div>
 
-            <button className='btn btn-success' >
-                {
-                    loading
-                        ? <div className="spinner-border text-dark" role="status">
-                            <span className="sr-only"></span>
-                        </div>
-                        : 'Buy'
-                }
+            <button className='btn btn-success'>
+                Comprar/Pagar
             </button>
         </form>
     )

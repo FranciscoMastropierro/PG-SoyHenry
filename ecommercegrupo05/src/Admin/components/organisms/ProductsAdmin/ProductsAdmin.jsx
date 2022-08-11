@@ -46,7 +46,6 @@ function ProductsAdmin() {
   }
 
   function deleteHandler(e) {
-    console.log(e.id);
     swal({
       title: "Are you sure?",
       text: "Once hidden, you will not be able to recover this product!",
@@ -78,7 +77,6 @@ function ProductsAdmin() {
           </button>
         </Link>
       </div>
-
       {products.map((e) => {
         return (
           <div className={style.card} key={e.id}>
@@ -89,15 +87,15 @@ function ProductsAdmin() {
             >
               Deshabilitar
             </button>
-
-            <button className={style.ModBtn}>
+            <div className={style.ModBtndiv}>
               <Link
+                className={style.ModBtnl}
                 style={{ textDecoration: "none" }}
                 to={`/admin/products/modify/${e.id}`}
-              >
-                Modificar
+              ><button className={style.ModBtn}>
+                Modificar</button>
               </Link>
-            </button>
+            </div>
             <div className={style.stockdiv}>
               <button
                 className={style.stockBtn}
@@ -113,14 +111,12 @@ function ProductsAdmin() {
                 onChange={(e) => handleChange(e)}
               />
             </div>
-
-            <p className={style.element}>{e.name.slice(0,80)}</p>
+            <p className={style.element}>{e.name.slice(0, 80)}</p>
             <p className={style.element}>{e.brand}</p>
             <p className={style.element}>
               <img className={style.img} src={e.image} alt={e.id} />
             </p>
             <p className={style.element}>${e.price}</p>
-
             <p className={style.element}> stock: {e.stock}</p>
           </div>
         );

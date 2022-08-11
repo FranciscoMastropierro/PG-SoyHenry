@@ -3,10 +3,18 @@ import trash from "../../assets/trash2.png";
 import style from "../../styles/cart.module.css";
 import { useCartContext } from "../../context/CartItem";
 import { getProductCart, getTotalPrice } from "../../redux/actions";
-import { useDispatch } from 'react-redux';
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import swal2 from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
-export default function NotFound() {
+export default function Cart() {
+
+  const userLoged = useSelector((state) => state.userLoged)
+
+  const { address, postalCode } = userLoged
+
+  const navigate = useNavigate()
+
   const superState = useCartContext();
 
   const dispatch = useDispatch()
@@ -19,7 +27,23 @@ export default function NotFound() {
 
   useEffect(() => {
     dispatch(getProductCart(products))
-  }, [dispatch])
+  }, [dispatch, products])
+
+  const handleComprar = () => {
+    if (!address || !postalCode) {
+      swal2.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Es necesario completar tu perfil',
+        showConfirmButton: false,
+        timer: 1500
+    })
+      setTimeout(() => navigate('/userprofile'), 3000)
+    } else {
+      // window.location.reload()
+      navigate('/TestAddresForm')
+    }
+  }
 
   const totalPricePerProducts = products.map(
     ({ amount, price }) => amount * price
@@ -32,7 +56,7 @@ export default function NotFound() {
 
   useEffect(() => {
     dispatch(getTotalPrice(totalPrice))
-  }, [dispatch])
+  }, [dispatch, totalPrice]) 
 
   const handleItemToCart = (product) => () => addItemToCart(product);
 
@@ -72,17 +96,17 @@ export default function NotFound() {
                   />
                 </div>
 
-                <div>
+                <div className={style.infoCont}>
                   <h2 className={style.h2}>{name}</h2>
                   <div className={style.addinfo}>
                     <button
                       className={style.btn}
                       onClick={handleItemToDelete(product)}
-                      >
+                    >
                       {" "}
                       -{" "}
                     </button>
-                        <p>{amount}</p>
+                    <p>{amount}</p>
                     <button
                       className={style.btn}
                       onClick={handleItemToCart(product)}
@@ -95,7 +119,7 @@ export default function NotFound() {
                     </div>
                     <div className={style.btnTrash}>
                       <button onClick={handleItemToDeleteAll(product)}>
-                        <img src={trash} className={style.trash} />
+                        <img src={trash} className={style.trash} alt='imagen' />
                       </button>
                     </div>
                   </div>
@@ -108,9 +132,7 @@ export default function NotFound() {
               <p >Precio Total: ${precio}</p>
             </div>
             <div className={style.space}>
-              <Link to='/TestAddresForm'>
-                <button className={style.total}>COMPRAR</button>
-              </Link>
+              <button className={style.total} onClick={handleComprar}>COMPRAR</button>
             </div>
           </div>
         </div>

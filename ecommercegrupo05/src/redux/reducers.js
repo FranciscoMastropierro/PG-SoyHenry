@@ -14,17 +14,24 @@ import {
     GET_FILTERS,
     GET_CATE,
     GET_ALL_USERS,
-    //SET_PROFILE,
-    CHANGE_PROFILE,
+    GET_ALL_USERS_ORDER,
     TOKEN,
     UPDATE_PRODUCT,
     TOTAL_PRICE,
     GET_PRODUCTS_CART,
+    GET_FILTER_BRAND,
+    GET_COMMENTS_ID,
+    CREATE_COMMENT,
+    DELETE_COMMENT,
     DELETE_PRODUCT,
     UPDATE_ROL,
-    GET_COMMENTS,
-    GET_FILTER_BRAND,
-    GET_MSG_CART
+    GET_MSG_CART,
+    NUMBER_PAGE,
+    GET_ALL_ORDERS,
+    GET_ORDER_BY_ID,
+    GET_ALL_COMMENTS,
+    DELETE_FAVORITE,
+    GET_USER_FAVORITES,
 } from './actions'
 
 const initialState = {
@@ -34,7 +41,7 @@ const initialState = {
     detail: [],
     clean: [],
     productsPerPage: 15,
-    pages: 0,
+    pages: 1,
     productsToRender: [],
     filterPrice: [],
     categories: [],
@@ -48,9 +55,17 @@ const initialState = {
     token: [],
     totalPrice: 0,
     productsCart: [],
-    commentsUser: [],
     userLoged: {},
-    msgCart: ''
+    commentsUserXProduct: [],
+    commentsCreateXProduct: [],
+    msgCart: '',
+    commentsUser: [],
+    UserOrders:[],
+    allOrders:[],
+    currentOrder:[],
+    allComments:[],
+    UserFavs:[],
+    
 }
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -64,13 +79,39 @@ function rootReducer(state = initialState, { type, payload }) {
         case GET_PRODUCT_BY_NAME:
             return {
                 ...state,
+                // productsToRender: payload,
                 searchedProducts: payload
+            }
+            case GET_ALL_USERS_ORDER:
+                return {
+                ...state,
+                UserOrders: payload
+            }
+            case GET_ALL_COMMENTS:
+                return {
+                ...state,
+                allComments: payload
+            }
+            case GET_ORDER_BY_ID:
+                return {
+                ...state,
+                currentOrder: payload
+            }
+            case GET_USER_FAVORITES:
+                return {
+                ...state,
+                UserFavs: payload
+            }
+        case GET_ALL_ORDERS:
+            return {
+                ...state,
+                allOrders: payload
             }
         case CREATE_PRODUCT:
             return {
                 ...state,
             }
-        case UPDATE_STOCK:
+            case UPDATE_STOCK:
             return {
                 ...state,
             }
@@ -78,7 +119,11 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
-        case BAN_USER:
+        case DELETE_FAVORITE:
+            return {
+                ...state,
+            }
+            case BAN_USER:
             return {
                 ...state,
             }
@@ -86,25 +131,25 @@ function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
             }
-        case UPGRADE_USER:
+            case UPGRADE_USER:
             return {
                 ...state,
             }
-        case DELETE_PRODUCT:
+            case DELETE_PRODUCT:
             return {
                 ...state,
             }
 
-        case GET_DETAIL:
-            return {
+            case GET_DETAIL:
+                return {
                 ...state,
                 detail: payload
             }
-        case UPDATE_PRODUCT:
-            return {
+            case UPDATE_PRODUCT:
+                return {
                 ...state,
             }
-        case GET_USER_BY_EMAIL:
+            case GET_USER_BY_EMAIL:
             return {
                 ...state,
                 searchedUser: payload,
@@ -119,13 +164,18 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 detail: []
             }
-        case PAGINACION:
+            case PAGINACION:
             return {
                 ...state,
-                productsToRender: state.data.slice(payload, payload + state.productsPerPage)
+                productsToRender: payload   //state.data.slice(payload, payload + state.productsPerPage)
             }
-        case GET_FILTERS:
-            return {
+            case NUMBER_PAGE:
+                return {
+                    ...state,
+                    pages: payload
+                }
+                case GET_FILTERS:
+                    return {
                 ...state,
                 data: payload,
                 filters: payload,
@@ -146,11 +196,6 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 allCategories: payload,
             }
-        // case SET_PROFILE:
-        //     return {
-        //         ...state,
-        //         profile: payload
-        //     }
         case TOKEN:
             return {
                 ...state,
@@ -166,17 +211,27 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 productsCart: payload
             }
-        case GET_COMMENTS:
+        case GET_COMMENTS_ID:
             return {
                 ...state,
-                commentsUser: payload
+                commentsUserXProduct: payload
+            }
+        case CREATE_COMMENT:
+            return {
+                ...state,
+                commentsCreateXProduct: payload
+            }
+        case DELETE_COMMENT:
+            return {
+                ...state,
+                // commentsCreateXProduct: payload
             }
         case GET_MSG_CART:
             return {
                 ...state,
                 msgCart: payload
             }
-        default: return state;
+        default: return {...state};
     }
 }
 
