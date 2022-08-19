@@ -21,10 +21,10 @@ useEffect(() => {
                 {order && (
                     <div className={style.card}>
                         <h1 className={style.title}> Detalle Orden </h1>
-                        <h4 className={style.littleinfo}>{order[0].date.slice(0,10)} | #{order[0].id}</h4>  
+                        <h4 className={style.littleinfo}>{order[0].date.slice(0,10)} | #{order[0].id}</h4>
                         <div className={style.infocontainer}> 
-                            <h3 className={style.info}>Direccion de envio: Direccion: {order[0].User.address}</h3>                
-                            <h3 className={style.info}>Email del usuario: {order[0].User.email}</h3>                
+                            <h3 className={style.info}>Direccion de envio: Direccion: {order[0].User.address}</h3>
+                            <h3 className={style.info}>Email del usuario: {order[0].User.email}</h3>
                             <h3 className={style.info}>Productos totales: {order[0].Products.map((e)=> {return e.Products_Orders.quantity}).reduce((previousValue, currentValue) => previousValue + currentValue)}</h3>
                         </div>
                         {order[0].Products.map((products)=>{
@@ -34,7 +34,7 @@ useEffect(() => {
                                         </div>
                                         <div className={style.itemcont}>
                                         <h1 className={style.itemText}>{products.name}</h1>
-                                        <h1 className={style.itemText}>{products.brand}</h1>    
+                                        <h1 className={style.itemText}>{products.brand}</h1>
                                         </div>
                                         <div className={style.billingInfo}>
                                         <h1 className={style.billingText}> Precio unitario: ${products.Products_Orders.unitPrice}</h1>
@@ -43,7 +43,6 @@ useEffect(() => {
                                         </div>
                                 </div>
                             )
-                            
                         })}
                         <h2 className={style.totalPrice}>Precio Total: ${order[0].amount}</h2>
                     </div>

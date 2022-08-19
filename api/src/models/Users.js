@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  
+
   sequelize.define('Users', {
     id: {
       type: DataTypes.UUID,
@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
     },
     lastname: {
       type: DataTypes.STRING,
-      allowNull: false, 
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -24,11 +24,9 @@ module.exports = (sequelize) => {
     },
     address:{
       type :DataTypes.STRING,
-     
     },
     postalCode : {
       type: DataTypes.INTEGER,
-     
     },
     username: {
       type :DataTypes.STRING,
@@ -48,7 +46,6 @@ module.exports = (sequelize) => {
   },
   {
     timestamps: false ,
-    
   }
   );
 };

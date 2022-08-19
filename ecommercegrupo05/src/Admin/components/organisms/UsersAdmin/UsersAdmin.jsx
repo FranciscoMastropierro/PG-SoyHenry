@@ -8,17 +8,15 @@ import swal from "sweetalert";
 
 function UsersAdmin() {
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState({
-    email: "",
-  });
+  const users = useSelector((state) => state.allUsers);
+  const [reload, setReload] = useState(false)
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [dispatch, email]);
+    setReload(false)
+  }, [reload]);
 
-  const users = useSelector((state) => state.allUsers);
-  const searchedUsers = useSelector((state) => state.searchedUser);
+
 
   async function handleBan(e) {
     swal({
@@ -32,9 +30,10 @@ function UsersAdmin() {
         swal("the user has changed successfully!", {
           icon: "success",
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        setReload(true)
+//        setTimeout(() => {
+//          window.location.reload();
+//        }, 1000);
       } else {
         swal("the user remains safe");
       }
@@ -53,9 +52,10 @@ function UsersAdmin() {
         swal("the user has changed successfully!", {
           icon: "success",
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        setReload(true)
+       //setTimeout(() => {
+       //  window.location.reload();
+       //}, 1000);
       } else {
         swal("the user remains the same!");
       }

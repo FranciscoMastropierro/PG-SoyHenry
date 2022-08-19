@@ -4,14 +4,17 @@ import { GetAllReviews, deleteComment } from "../../../../redux/actions"
 import style from "./ReviewsAdmin.module.css";
 import { ImCross } from "react-icons/im"
 import swal from 'sweetalert'
+import { useState } from "react";
 
 function ReviewsAdmin() {
 
   const dispatch = useDispatch()
+  const [reload, setReload]=useState(false)
 
   useEffect(() => {
     dispatch(GetAllReviews());
-  }, []);
+    setReload(false)
+  }, [reload]);
 
   const allreviews = useSelector((state) => state.allComments)
 
@@ -30,9 +33,10 @@ function ReviewsAdmin() {
           swal("the review has been deleted!", {
             icon: "success",
           });
-          setTimeout(() => {
-            window.location.reload()
-          }, 1000);
+          setReload(true)
+          //setTimeout(() => {
+          //  window.location.reload()
+          //}, 1000);
         } else {
           swal("Your review is safe!");
         }

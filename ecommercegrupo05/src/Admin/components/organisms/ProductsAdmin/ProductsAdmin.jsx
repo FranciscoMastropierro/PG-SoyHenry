@@ -11,13 +11,15 @@ import style from "./ProductsAdmin.module.css";
 
 function ProductsAdmin() {
   const dispatch = useDispatch();
+  const [reload, setReload]=useState(false)
   const [estado, setEstado] = useState({
     stock: "0",
   });
 
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
+    setReload(false)
+  }, [dispatch, reload]);
 
   const products = useSelector((state) => state.data);
 
@@ -34,9 +36,10 @@ function ProductsAdmin() {
       if (estado.stock > 0 && estado.stock < 1000) {
         await dispatch(updateStock(e.id, estado));
         swal("stock has been changed");
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        setReload(true)
+        //setTimeout(() => {
+        //  window.location.reload();
+        //}, 500);
       } else {
         swal("Invalid Stock Number!");
       }
@@ -59,10 +62,7 @@ function ProductsAdmin() {
         swal("the product has been deleted!", {
           icon: "success",
         });
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        setReload(true)
       } else {
         swal("Your product is safe!");
       }

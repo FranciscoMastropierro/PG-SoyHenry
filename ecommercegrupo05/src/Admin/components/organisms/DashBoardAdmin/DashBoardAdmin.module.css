@@ -17,11 +17,13 @@
 
 }
 .text{
+    color: #2ecc36;
     font-family: "Share Tech", sans-serif;
     font-size: 40px;
     font-weight: 700;
 }
 .subtext{
+    color: #2ecc36;
     font-family: "Share Tech", sans-serif;
     font-size: 25px;
 }

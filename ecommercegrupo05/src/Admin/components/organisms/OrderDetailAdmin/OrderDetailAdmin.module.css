@@ -11,22 +11,22 @@
     color: white;
     text-align: center;
     font-size: xx-large;
-    font-family: "Share Tech", sans-serif;  
-    font-weight: 700;    
+    font-family: "Share Tech", sans-serif;
+    font-weight: 700;
     justify-content: center;
     padding: 30px;
     height: 100px;
 }
 .littleinfo{
-    text-align: center;    
-    font-family: "Share Tech", sans-serif;  
+    text-align: center;
+    font-family: "Share Tech", sans-serif;
     font-size: 15px;
     margin-bottom: 100px;
 }
 .info{
 
-    text-align:start;    
-    font-family: "Share Tech", sans-serif;  
+    text-align:start;
+    font-family: "Share Tech", sans-serif;
     font-size: 25px;
     margin: 20px 0px 20px 0px;
 }
@@ -34,12 +34,13 @@
     margin: 30px 0px 30px 25px;
 }
 .divListItem{
+    width: 100%;
+
     padding: 25px;
     display: flex;
     flex-direction: row;
     align-items:center;
-    justify-content: space-between; 
-    
+    justify-content: space-between;
     border-radius: 0.5rem;
     margin: 1rem;
     background-color: #424242;
@@ -47,29 +48,29 @@
     font-family: "Share Tech", sans-serif;
     height: auto;
     overflow: hidden;
-    text-overflow: ellipsis;   
+    text-overflow: ellipsis;
 }
 .billingInfo{
-    margin-left: 100px;   
+    margin-left: 100px;
 }
 .billingText{
     font-size: larger;
-    font-family: "Share Tech", sans-serif;  
+    font-family: "Share Tech", sans-serif;
     text-align: end;
 }
 .itemText{
     font-size: x-large;
-    font-family: "Share Tech", sans-serif;  
-    
+    font-family: "Share Tech", sans-serif;
 }
 .image{
-    width: 120px;
+    width: 130px;
     height: 120px;
+    border-radius: 0.5rem;
 }
 .totalPrice{
     text-align: end;
     font-size: 40px;
-    font-family: "Share Tech", sans-serif;  
+    font-family: "Share Tech", sans-serif;
     padding: 25px;
 }
 .itemcont{
@@ -81,35 +82,28 @@
     font-family: 'Cantarell', sans-serif;
     border-color: rgba(240, 248, 255, 0);
     font-size: 25px;
-    
 }
 .ModBtn:hover{
-    color: rgba(104, 245, 39, 0.747);    
+    color: rgba(104, 245, 39, 0.747);
     font-family: 'Cantarell', sans-serif;
     transform: scale(1.2);
 }
 .orderState{
     display: flex;
     flex-direction: row;
-    
-
-
 }
 .option{
-    font-family: "Share Tech", sans-serif;  
+    font-family: "Share Tech", sans-serif;
     height: 30px;
     width: 150px;
     border-radius: 5px;
 
 }
 .select{
-   
-    font-family: "Share Tech", sans-serif;  
-    text-align: center;
+    font-family: "Share Tech", sans-serif;
     height:30px;
     width: 150px;
     margin: 20px 5px 20px 20px;
     border-radius: 2px;
     background-color: rgb(234, 253, 234);
-
 }
