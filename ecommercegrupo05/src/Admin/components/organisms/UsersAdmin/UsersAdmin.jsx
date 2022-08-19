@@ -30,10 +30,9 @@ function UsersAdmin() {
         swal("the user has changed successfully!", {
           icon: "success",
         });
-        setReload(true)
-//        setTimeout(() => {
-//          window.location.reload();
-//        }, 1000);
+        setTimeout(() => {
+        setReload(true);
+        }, 1000);
       } else {
         swal("the user remains safe");
       }
@@ -52,10 +51,9 @@ function UsersAdmin() {
         swal("the user has changed successfully!", {
           icon: "success",
         });
-        setReload(true)
-       //setTimeout(() => {
-       //  window.location.reload();
-       //}, 1000);
+        setTimeout(() => {
+          setReload(true);
+          }, 1000);
       } else {
         swal("the user remains the same!");
       }
