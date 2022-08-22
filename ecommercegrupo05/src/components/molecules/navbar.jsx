@@ -42,7 +42,10 @@ export default function Navbar() {
                 {/* <Switch colorScheme='blackAlpha' size='lg'/> */}
             </div>
             <div className={style.sidebarToggle} id={userLoged.id}>
-                <SidebarOptions />
+                <SidebarOptions
+                id={userLoged.id}
+                isAdmin={userLoged.isAdmin}
+                />
                 <ToggleMenu />
             </div>
         </div>
